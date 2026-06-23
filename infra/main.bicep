@@ -18,55 +18,113 @@ param apiImage string = ''
 @description('Frontend container image')
 param frontendImage string = ''
 
+// ============================================================================
+// Parámetros para usar infraestructura existente (Spoke ACA de azure-demo-environment)
+// Si se proporcionan, se reutiliza la infraestructura del Hub & Spoke.
+// Si están vacíos, se crea infraestructura nueva (comportamiento original).
+// ============================================================================
+
+@description('Resource Group existente donde desplegar. Si está vacío, se crea uno nuevo.')
+param existingResourceGroupName string = ''
+
+@description('Nombre del Container Apps Environment existente. Si está vacío, se crea uno nuevo.')
+param existingContainerAppsEnvironmentName string = ''
+
+@description('Nombre del Container Registry existente. Si está vacío, se crea uno nuevo.')
+param existingContainerRegistryName string = ''
+
 var abbrs = loadJsonContent('abbreviations.json')
 var resourceToken = 'grubify'  // Fixed naming instead of random string
 var tags = { 'azd-env-name': environmentName }
 
-// Organize resources in a resource group
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+// Determinar si usar infraestructura existente
+var useExistingRg = !empty(existingResourceGroupName)
+var useExistingCae = !empty(existingContainerAppsEnvironmentName)
+var useExistingAcr = !empty(existingContainerRegistryName)
+
+// ============================================================================
+// Resource Group
+// ============================================================================
+
+// Crear nuevo RG si no se proporciona uno existente
+resource newRg 'Microsoft.Resources/resourceGroups@2021-04-01' = if (!useExistingRg) {
   name: !empty(resourceGroupName) ? resourceGroupName : 'rg-grubify-app'
   location: location
   tags: tags
 }
 
-// Container registry
-module containerRegistry 'core/host/container-registry.bicep' = {
+// Referencia a RG existente
+resource existingRg 'Microsoft.Resources/resourceGroups@2021-04-01' existing = if (useExistingRg) {
+  name: existingResourceGroupName
+}
+
+// Scope para los módulos
+var targetRgName = useExistingRg ? existingResourceGroupName : (!empty(resourceGroupName) ? resourceGroupName : 'rg-grubify-app')
+
+// ============================================================================
+// Container Registry (nuevo o existente)
+// ============================================================================
+
+module containerRegistry 'core/host/container-registry.bicep' = if (!useExistingAcr) {
   name: 'container-registry'
-  scope: rg
+  scope: resourceGroup(targetRgName)
   params: {
     name: '${abbrs.containerRegistryRegistries}${resourceToken}'
     location: location
     tags: tags
   }
+  dependsOn: useExistingRg ? [] : [newRg]
 }
 
-// Container Apps Environment
-module containerAppsEnvironment 'core/host/container-apps-environment.bicep' = {
+// ============================================================================
+// Container Apps Environment (nuevo o existente)
+// ============================================================================
+
+module containerAppsEnvironment 'core/host/container-apps-environment.bicep' = if (!useExistingCae) {
   name: 'container-apps-environment'
-  scope: rg
+  scope: resourceGroup(targetRgName)
   params: {
     name: '${abbrs.appManagedEnvironments}${resourceToken}'
     location: location
     tags: tags
   }
+  dependsOn: useExistingRg ? [] : [newRg]
 }
 
-// Container app for the API
+// Referencia al CAE existente para obtener defaultDomain
+module existingCaeRef 'core/host/container-apps-environment-ref.bicep' = if (useExistingCae) {
+  name: 'cae-reference'
+  scope: resourceGroup(targetRgName)
+  params: {
+    name: existingContainerAppsEnvironmentName
+  }
+  dependsOn: useExistingRg ? [] : [newRg]
+}
+
+// Variables derivadas
+var caeName = useExistingCae ? existingContainerAppsEnvironmentName : '${abbrs.appManagedEnvironments}${resourceToken}'
+var acrName = useExistingAcr ? existingContainerRegistryName : '${abbrs.containerRegistryRegistries}${resourceToken}'
+var caeDefaultDomain = useExistingCae ? existingCaeRef.outputs.defaultDomain : containerAppsEnvironment.outputs.defaultDomain
+
+// ============================================================================
+// Container Apps (siempre se crean, pero usan infra existente si se proporciona)
+// ============================================================================
+
 module api 'core/host/container-app.bicep' = {
   name: 'api'
-  scope: rg
+  scope: resourceGroup(targetRgName)
   params: {
     name: 'ca-grubify-api'
     location: location
     tags: union(tags, { 'azd-service-name': 'api' })
-    containerAppsEnvironmentName: containerAppsEnvironment.outputs.name
-    containerRegistryName: containerRegistry.outputs.name
+    containerAppsEnvironmentName: caeName
+    containerRegistryName: acrName
     containerName: 'grubify-api'
     containerImage: !empty(apiImage) ? apiImage : 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
     targetPort: 8080
     external: true
-    minReplicas: 1  // Always keep 1 instance running
-    maxReplicas: 1  // No autoscaling - single instance only
+    minReplicas: 1
+    maxReplicas: 1
     env: [
       {
         name: 'ASPNETCORE_ENVIRONMENT'
@@ -74,28 +132,28 @@ module api 'core/host/container-app.bicep' = {
       }
       {
         name: 'AllowedOrigins__0'
-        value: 'https://ca-grubify-frontend.${containerAppsEnvironment.outputs.defaultDomain}'
+        value: 'https://ca-grubify-frontend.${caeDefaultDomain}'
       }
     ]
   }
+  dependsOn: useExistingCae ? [existingCaeRef] : [containerAppsEnvironment, containerRegistry]
 }
 
-// Container app for the frontend
 module frontend 'core/host/container-app.bicep' = {
   name: 'frontend'
-  scope: rg
+  scope: resourceGroup(targetRgName)
   params: {
     name: 'ca-grubify-frontend'
     location: location
     tags: union(tags, { 'azd-service-name': 'frontend' })
-    containerAppsEnvironmentName: containerAppsEnvironment.outputs.name
-    containerRegistryName: containerRegistry.outputs.name
+    containerAppsEnvironmentName: caeName
+    containerRegistryName: acrName
     containerName: 'grubify-frontend'
     containerImage: !empty(frontendImage) ? frontendImage : 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
     targetPort: 80
     external: true
-    minReplicas: 1  // Always keep 1 instance running
-    maxReplicas: 1  // No autoscaling - single instance only
+    minReplicas: 1
+    maxReplicas: 1
     env: [
       {
         name: 'REACT_APP_API_BASE_URL'
@@ -103,16 +161,24 @@ module frontend 'core/host/container-app.bicep' = {
       }
     ]
   }
+  dependsOn: [api]
 }
 
-// App outputs
+// ============================================================================
+// Outputs
+// ============================================================================
+
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
-output AZURE_RESOURCE_GROUP string = rg.name
-output RESOURCE_GROUP_ID string = rg.id
+output AZURE_RESOURCE_GROUP string = targetRgName
+output RESOURCE_GROUP_ID string = useExistingRg ? existingRg.id : newRg.id
 
-output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.outputs.loginServer
-output AZURE_CONTAINER_REGISTRY_NAME string = containerRegistry.outputs.name
+output AZURE_CONTAINER_REGISTRY_ENDPOINT string = useExistingAcr ? '${acrName}.azurecr.io' : containerRegistry.outputs.loginServer
+output AZURE_CONTAINER_REGISTRY_NAME string = acrName
 
 output API_BASE_URL string = 'https://${api.outputs.fqdn}'
 output FRONTEND_URL string = 'https://${frontend.outputs.fqdn}'
+
+// Outputs adicionales para integración con azure-demo-environment
+output CONTAINER_APPS_ENVIRONMENT_NAME string = caeName
+output CONTAINER_APPS_DEFAULT_DOMAIN string = caeDefaultDomain
