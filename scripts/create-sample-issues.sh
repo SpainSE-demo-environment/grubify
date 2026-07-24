@@ -1,8 +1,8 @@
 #!/bin/bash
 # =============================================================================
-# Create Sample Customer Issues for Grubify App
+# Create Sample Patient Issues for Medify App
 #
-# Creates 5 realistic customer-reported issues with [Customer Issue] prefix.
+# Creates 5 realistic patient-reported issues with [Customer Issue] prefix.
 # These simulate real user complaints — the issue-triager will classify,
 # label, and comment on them.
 #
@@ -47,29 +47,29 @@ create_issue() {
 }
 
 echo ""
-echo "📝 Creating sample customer issues in ${REPO}..."
+echo "📝 Creating sample patient issues in ${REPO}..."
 echo ""
 
 create_issue \
-  "[Customer Issue] App crashes when adding items to cart" \
-  "Hi, I'm trying to add items to my cart on the Grubify app but it keeps crashing. I get a server error after adding about 5-6 items quickly. The page just shows a generic error message.\\n\\nThis started happening today around 3pm. Can someone look into this?"
+  "[Customer Issue] App crashes when adding services to cart" \
+  "Hola, estoy intentando añadir servicios a mi cesta de citas en la app Medify pero no deja de fallar. Recibo un error del servidor después de añadir unos 5-6 servicios rápidamente. La página solo muestra un mensaje de error genérico.\\n\\nEsto empezó a pasar hoy sobre las 15:00. ¿Alguien puede revisarlo?"
 
 create_issue \
-  "[Customer Issue] Menu page is loading very slowly" \
-  "The restaurants page is taking forever to load. It used to be instant but now it takes 10-15 seconds.\\n\\nI'm on a good internet connection so I don't think it's on my end. Is there something wrong with the server?"
+  "[Customer Issue] Clinics page is loading very slowly" \
+  "La página de centros médicos tarda una eternidad en cargar. Antes era instantánea pero ahora tarda 10-15 segundos.\\n\\nTengo buena conexión a internet así que no creo que sea cosa mía. ¿Hay algún problema con el servidor?"
 
 create_issue \
-  "[Customer Issue] Can't place an order - getting 500 error" \
-  "When I click Place Order I get an Internal Server Error. I've tried multiple times with different items. My cart has items in it but the order just won't go through.\\n\\nPlease fix this ASAP, I'm hungry!"
+  "[Customer Issue] Can't book an appointment - getting 500 error" \
+  "Cuando pulso Confirmar cita me sale un Internal Server Error. Lo he intentado varias veces con distintos servicios. Mi cesta tiene servicios pero la cita no llega a confirmarse.\\n\\nPor favor arregladlo cuanto antes, necesito ver al médico."
 
 create_issue \
-  "[Customer Issue] Feature request - add search for restaurants" \
-  "It would be great if I could search for restaurants by name or cuisine type instead of scrolling through the whole list.\\n\\nCan you add a search bar to the restaurants page?"
+  "[Customer Issue] Feature request - add search for clinics" \
+  "Estaría genial poder buscar centros médicos por nombre o especialidad en lugar de desplazarme por toda la lista.\\n\\n¿Podéis añadir una barra de búsqueda en la página de centros?"
 
 create_issue \
-  "[Customer Issue] How do I clear my cart?" \
-  "I added some items to my cart by mistake and I can't figure out how to remove them. Is there a way to clear the cart or remove individual items? I don't see a delete button anywhere."
+  "[Customer Issue] How do I clear my appointment cart?" \
+  "Añadí algunos servicios a mi cesta por error y no consigo saber cómo quitarlos. ¿Hay alguna forma de vaciar la cesta o eliminar servicios individuales? No veo ningún botón de borrar por ninguna parte."
 
 echo ""
-echo "✅ Created 5 sample customer issues in ${REPO}"
+echo "✅ Created 5 sample patient issues in ${REPO}"
 echo "   Run the triage scheduled task to classify them!"

@@ -1,6 +1,6 @@
 namespace GrubifyApi.Models
 {
-    public class Restaurant
+    public class Clinic
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -8,11 +8,10 @@ namespace GrubifyApi.Models
         public string ImageUrl { get; set; } = string.Empty;
         public double Rating { get; set; }
         public string Address { get; set; } = string.Empty;
-        public string CuisineType { get; set; } = string.Empty;
-        public string DeliveryTime { get; set; } = string.Empty; // e.g., "25-40 min"
-        public decimal DeliveryFee { get; set; }
-        public decimal MinimumOrder { get; set; }
+        public string SpecialtyType { get; set; } = string.Empty;
+        public string NextAvailable { get; set; } = string.Empty; // e.g., "Hoy 16:30"
+        public decimal ConsultationFee { get; set; } // copago base
         public bool IsOpen { get; set; }
-        public List<FoodItem> MenuItems { get; set; } = new List<FoodItem>();
+        public List<Service> Services { get; set; } = new List<Service>();
     }
 }

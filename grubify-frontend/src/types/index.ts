@@ -1,98 +1,92 @@
-export interface Restaurant {
+export interface Clinic {
   id: number;
   name: string;
   description: string;
   imageUrl: string;
-  cuisineType: string;
+  specialtyType: string;
   rating: number;
-  deliveryTime: string;
-  deliveryFee: number;
-  minimumOrder: number;
+  nextAvailable: string;
+  consultationFee: number;
   isOpen: boolean;
   address: string;
 }
 
-export interface FoodItem {
+export interface Service {
   id: number;
   name: string;
   description: string;
   price: number;
   imageUrl: string;
-  category: string;
-  isVegetarian: boolean;
-  isVegan: boolean;
-  isSpicy: boolean;
-  restaurantId: number;
+  specialty: string;
+  clinicId: number;
   isAvailable: boolean;
-  preparationTime: number;
+  durationMinutes: number;
 }
 
-export interface CartItem {
+export interface AppointmentCartItem {
   id: number;
-  foodItemId: number;
-  foodItem: FoodItem;
+  serviceId: number;
+  service: Service;
   quantity: number;
-  specialInstructions: string;
+  notes: string;
 }
 
-export interface Cart {
+export interface AppointmentCart {
   id: number;
   userId: string;
-  items: CartItem[];
+  items: AppointmentCartItem[];
   subTotal: number;
-  tax: number;
-  deliveryFee: number;
+  bookingFee: number;
   total: number;
 }
 
-export enum OrderStatus {
-  Placed = 1,
+export enum AppointmentStatus {
+  Requested = 1,
   Confirmed = 2,
-  Preparing = 3,
-  ReadyForPickup = 4,
-  OutForDelivery = 5,
-  Delivered = 6,
+  Reminded = 3,
+  CheckedIn = 4,
+  InConsultation = 5,
+  Completed = 6,
   Cancelled = 7
 }
 
-export interface Order {
+export interface Appointment {
   id: number;
   userId: string;
-  restaurantId: number;
-  restaurant: Restaurant;
-  items: CartItem[];
+  clinicId: number;
+  clinic: Clinic;
+  items: AppointmentCartItem[];
   subTotal: number;
-  tax: number;
-  deliveryFee: number;
+  bookingFee: number;
   total: number;
-  status: OrderStatus;
-  orderDate: string;
-  deliveredDate?: string;
-  deliveryTime?: string;
-  deliveryAddress: string;
-  customerName: string;
-  customerPhone: string;
+  status: AppointmentStatus;
+  createdDate: string;
+  completedDate?: string;
+  completedTime?: string;
+  clinicLocation: string;
+  patientName: string;
+  patientPhone: string;
   paymentMethod: string;
-  specialInstructions: string;
-  estimatedDeliveryTime: number;
+  notes: string;
+  estimatedWaitMinutes: number;
 }
 
-export interface AddCartItemRequest {
-  foodItemId: number;
+export interface AddAppointmentItemRequest {
+  serviceId: number;
   quantity: number;
-  specialInstructions: string;
+  notes: string;
 }
 
-export interface UpdateCartItemRequest {
+export interface UpdateAppointmentItemRequest {
   quantity: number;
-  specialInstructions: string;
+  notes: string;
 }
 
-export interface PlaceOrderRequest {
+export interface BookAppointmentRequest {
   userId: string;
-  restaurantId: number;
-  items: CartItem[];
-  deliveryAddress: string;
+  clinicId: number;
+  items: AppointmentCartItem[];
+  clinicLocation: string;
   paymentMethod: string;
-  specialInstructions: string;
+  notes: string;
 }

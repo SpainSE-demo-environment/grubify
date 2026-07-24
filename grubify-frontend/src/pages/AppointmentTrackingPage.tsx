@@ -18,104 +18,107 @@ import {
 } from '@mui/material';
 import {
   CheckCircle as CheckCircleIcon,
-  RestaurantMenu as RestaurantIcon,
-  LocalShipping as DeliveryIcon,
-  Home as HomeIcon,
+  EventAvailable as ConfirmedIcon,
+  NotificationsActive as ReminderIcon,
+  MedicalServices as ConsultationIcon,
+  TaskAlt as CompletedIcon,
 } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Order, OrderStatus } from '../types';
-import { orderService } from '../services/api';
+import { Appointment, AppointmentStatus } from '../types';
+import { appointmentService } from '../services/api';
 
-const orderSteps = [
-  { label: 'Order Placed', icon: <CheckCircleIcon />, status: OrderStatus.Placed },
-  { label: 'Order Confirmed', icon: <CheckCircleIcon />, status: OrderStatus.Confirmed },
-  { label: 'Preparing Food', icon: <RestaurantIcon />, status: OrderStatus.Preparing },
-  { label: 'Out for Delivery', icon: <DeliveryIcon />, status: OrderStatus.OutForDelivery },
-  { label: 'Delivered', icon: <HomeIcon />, status: OrderStatus.Delivered },
+const appointmentSteps = [
+  { label: 'Cita solicitada', icon: <CheckCircleIcon />, status: AppointmentStatus.Requested },
+  { label: 'Cita confirmada', icon: <ConfirmedIcon />, status: AppointmentStatus.Confirmed },
+  { label: 'Recordatorio enviado', icon: <ReminderIcon />, status: AppointmentStatus.Reminded },
+  { label: 'En consulta', icon: <ConsultationIcon />, status: AppointmentStatus.InConsultation },
+  { label: 'Completada', icon: <CompletedIcon />, status: AppointmentStatus.Completed },
 ];
 
-const getStatusColor = (status: OrderStatus) => {
+const getStatusColor = (status: AppointmentStatus) => {
   switch (status) {
-    case OrderStatus.Placed:
-    case OrderStatus.Confirmed:
+    case AppointmentStatus.Requested:
+    case AppointmentStatus.Confirmed:
       return 'info';
-    case OrderStatus.Preparing:
+    case AppointmentStatus.Reminded:
+    case AppointmentStatus.CheckedIn:
       return 'warning';
-    case OrderStatus.OutForDelivery:
+    case AppointmentStatus.InConsultation:
       return 'primary';
-    case OrderStatus.Delivered:
+    case AppointmentStatus.Completed:
       return 'success';
-    case OrderStatus.Cancelled:
+    case AppointmentStatus.Cancelled:
       return 'error';
     default:
       return 'default';
   }
 };
 
-const getStatusText = (status: OrderStatus) => {
+const getStatusText = (status: AppointmentStatus) => {
   switch (status) {
-    case OrderStatus.Placed:
-      return 'Placed';
-    case OrderStatus.Confirmed:
-      return 'Confirmed';
-    case OrderStatus.Preparing:
-      return 'Preparing';
-    case OrderStatus.ReadyForPickup:
-      return 'Ready for Pickup';
-    case OrderStatus.OutForDelivery:
-      return 'Out for Delivery';
-    case OrderStatus.Delivered:
-      return 'Delivered';
-    case OrderStatus.Cancelled:
-      return 'Cancelled';
+    case AppointmentStatus.Requested:
+      return 'Solicitada';
+    case AppointmentStatus.Confirmed:
+      return 'Confirmada';
+    case AppointmentStatus.Reminded:
+      return 'Recordatorio';
+    case AppointmentStatus.CheckedIn:
+      return 'Check-in';
+    case AppointmentStatus.InConsultation:
+      return 'En consulta';
+    case AppointmentStatus.Completed:
+      return 'Completada';
+    case AppointmentStatus.Cancelled:
+      return 'Cancelada';
     default:
-      return 'Unknown';
+      return 'Desconocido';
   }
 };
 
-const OrderTrackingPage: React.FC = () => {
-  const { orderId } = useParams<{ orderId: string }>();
+const AppointmentTrackingPage: React.FC = () => {
+  const { appointmentId } = useParams<{ appointmentId: string }>();
   const navigate = useNavigate();
-  const [order, setOrder] = useState<Order | null>(null);
+  const [appointment, setAppointment] = useState<Appointment | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (orderId) {
-      fetchOrder(parseInt(orderId));
-      // Poll for updates every 30 seconds
+    if (appointmentId) {
+      fetchAppointment(parseInt(appointmentId));
+      // Consultar actualizaciones cada 30 segundos
       const interval = setInterval(() => {
-        fetchOrder(parseInt(orderId));
+        fetchAppointment(parseInt(appointmentId));
       }, 30000);
       return () => clearInterval(interval);
     }
-  }, [orderId]);
+  }, [appointmentId]);
 
-  const fetchOrder = async (id: number) => {
+  const fetchAppointment = async (id: number) => {
     try {
-      const orderData = await orderService.getById(id);
-      setOrder(orderData);
+      const appointmentData = await appointmentService.getById(id);
+      setAppointment(appointmentData);
       setError(null);
     } catch (err) {
-      setError('Failed to load order details. Please try again later.');
-      console.error('Error fetching order:', err);
+      setError('No se pudieron cargar los datos de la cita. Inténtalo de nuevo más tarde.');
+      console.error('Error al cargar la cita:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  const getCurrentStepIndex = (status: OrderStatus) => {
-    return orderSteps.findIndex(step => step.status === status);
+  const getCurrentStepIndex = (status: AppointmentStatus) => {
+    if (status === AppointmentStatus.CheckedIn) {
+      return 2; // Entre recordatorio y consulta
+    }
+    return appointmentSteps.findIndex(step => step.status === status);
   };
 
-  const getEstimatedDeliveryTime = (order: Order) => {
-    if (order.status === OrderStatus.Delivered) {
-      return `Delivered at ${new Date(order.deliveryTime || order.orderDate).toLocaleTimeString()}`;
+  const getEstimatedWaitText = (appointment: Appointment) => {
+    if (appointment.status === AppointmentStatus.Completed) {
+      return `Completada a las ${new Date(appointment.completedTime || appointment.createdDate).toLocaleTimeString()}`;
     }
-    
-    const orderDate = new Date(order.orderDate);
-    const estimatedTime = new Date(orderDate.getTime() + order.estimatedDeliveryTime * 60000);
-    return `Estimated delivery: ${estimatedTime.toLocaleTimeString()}`;
+
+    return `Espera estimada: ${appointment.estimatedWaitMinutes} min`;
   };
 
   if (loading) {
@@ -126,50 +129,50 @@ const OrderTrackingPage: React.FC = () => {
     );
   }
 
-  if (error || !order) {
+  if (error || !appointment) {
     return (
       <Container maxWidth="md">
         <Alert severity="error" sx={{ mt: 4 }}>
-          {error || 'Order not found'}
+          {error || 'Cita no encontrada'}
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={() => navigate('/')}>
-            Back to Home
+            Volver al inicio
           </Button>
         </Box>
       </Container>
     );
   }
 
-  const currentStepIndex = getCurrentStepIndex(order.status);
+  const currentStepIndex = getCurrentStepIndex(appointment.status);
 
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Order Tracking
+        Seguimiento de la cita
       </Typography>
 
       <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', lg: 'row' } }}>
-        {/* Order Status */}
+        {/* Estado de la cita */}
         <Box sx={{ flex: 1 }}>
           <Card sx={{ mb: 4 }}>
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
                 <Typography variant="h5">
-                  Order #{order.id}
+                  Cita n.º {appointment.id}
                 </Typography>
                 <Chip
-                  label={getStatusText(order.status)}
-                  color={getStatusColor(order.status)}
+                  label={getStatusText(appointment.status)}
+                  color={getStatusColor(appointment.status)}
                 />
               </Box>
 
               <Typography variant="body1" color="text.secondary" gutterBottom>
-                {getEstimatedDeliveryTime(order)}
+                {getEstimatedWaitText(appointment)}
               </Typography>
 
               <Stepper activeStep={currentStepIndex} orientation="vertical" sx={{ mt: 3 }}>
-                {orderSteps.map((step, index) => (
+                {appointmentSteps.map((step, index) => (
                   <Step key={step.label}>
                     <StepLabel
                       StepIconComponent={() => (
@@ -193,11 +196,11 @@ const OrderTrackingPage: React.FC = () => {
                     </StepLabel>
                     <StepContent>
                       <Typography variant="body2" color="text.secondary">
-                        {index === 0 && 'Your order has been placed successfully.'}
-                        {index === 1 && 'The restaurant has confirmed your order.'}
-                        {index === 2 && 'The restaurant is preparing your food.'}
-                        {index === 3 && 'Your food is on the way!'}
-                        {index === 4 && 'Your order has been delivered. Enjoy your meal!'}
+                        {index === 0 && 'Tu solicitud de cita se ha registrado correctamente.'}
+                        {index === 1 && 'El centro ha confirmado tu cita.'}
+                        {index === 2 && 'Te hemos enviado un recordatorio de tu cita.'}
+                        {index === 3 && 'El especialista te está atendiendo.'}
+                        {index === 4 && 'Tu cita ha finalizado. ¡Cuídate!'}
                       </Typography>
                     </StepContent>
                   </Step>
@@ -206,48 +209,57 @@ const OrderTrackingPage: React.FC = () => {
             </CardContent>
           </Card>
 
-          {/* Restaurant Info */}
+          {/* Información del centro */}
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
-                Restaurant Details
+                Datos del centro
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {order.restaurant.name}
+                {appointment.clinic.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {order.restaurant.address}
+                {appointment.clinic.address}
               </Typography>
             </CardContent>
           </Card>
         </Box>
 
-        {/* Order Details */}
+        {/* Detalles de la cita */}
         <Box sx={{ width: { xs: '100%', lg: 400 } }}>
-          {/* Delivery Address */}
+          {/* Ubicación / paciente */}
           <Paper sx={{ p: 3, mb: 3 }}>
             <Typography variant="h6" gutterBottom>
-              Delivery Address
+              Paciente y ubicación
             </Typography>
-            <Typography variant="body2">
-              {order.deliveryAddress}
-            </Typography>
-            <Typography variant="body2" sx={{ mt: 1 }}>
-              Phone: {order.customerPhone}
-            </Typography>
+            {appointment.clinicLocation && (
+              <Typography variant="body2">
+                Ubicación: {appointment.clinicLocation}
+              </Typography>
+            )}
+            {appointment.patientName && (
+              <Typography variant="body2" sx={{ mt: 1 }}>
+                Paciente: {appointment.patientName}
+              </Typography>
+            )}
+            {appointment.patientPhone && (
+              <Typography variant="body2" sx={{ mt: 1 }}>
+                Teléfono: {appointment.patientPhone}
+              </Typography>
+            )}
           </Paper>
 
-          {/* Order Items */}
+          {/* Servicios de la cita */}
           <Paper sx={{ p: 3, mb: 3 }}>
             <Typography variant="h6" gutterBottom>
-              Order Items
+              Servicios reservados
             </Typography>
-            {order.items.map((item) => (
+            {appointment.items.map((item) => (
               <Box key={item.id} sx={{ display: 'flex', gap: 2, mb: 2 }}>
                 <Box
                   component="img"
-                  src={item.foodItem.imageUrl}
-                  alt={item.foodItem.name}
+                  src={item.service.imageUrl}
+                  alt={item.service.name}
                   sx={{
                     width: 50,
                     height: 50,
@@ -257,42 +269,38 @@ const OrderTrackingPage: React.FC = () => {
                 />
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="body2" fontWeight="bold">
-                    {item.quantity}x {item.foodItem.name}
+                    {item.service.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    ${item.foodItem.price.toFixed(2)} each
+                    {item.service.price.toFixed(2)} €
                   </Typography>
-                  {item.specialInstructions && (
+                  {item.notes && (
                     <Typography variant="caption" sx={{ fontStyle: 'italic' }}>
-                      Note: {item.specialInstructions}
+                      Motivo: {item.notes}
                     </Typography>
                   )}
                 </Box>
                 <Typography variant="body2" fontWeight="bold">
-                  ${(item.foodItem.price * item.quantity).toFixed(2)}
+                  {item.service.price.toFixed(2)} €
                 </Typography>
               </Box>
             ))}
           </Paper>
 
-          {/* Order Summary */}
+          {/* Resumen de la cita */}
           <Paper sx={{ p: 3 }}>
             <Typography variant="h6" gutterBottom>
-              Order Summary
+              Resumen
             </Typography>
-            
+
             <Box sx={{ space: 2 }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="body2">Subtotal</Typography>
-                <Typography variant="body2">${order.subTotal.toFixed(2)}</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="body2">Tax</Typography>
-                <Typography variant="body2">${order.tax.toFixed(2)}</Typography>
+                <Typography variant="body2">Subtotal (copagos)</Typography>
+                <Typography variant="body2">{appointment.subTotal.toFixed(2)} €</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                <Typography variant="body2">Delivery Fee</Typography>
-                <Typography variant="body2">${order.deliveryFee.toFixed(2)}</Typography>
+                <Typography variant="body2">Tasa de gestión</Typography>
+                <Typography variant="body2">{appointment.bookingFee.toFixed(2)} €</Typography>
               </Box>
               <Divider sx={{ my: 2 }} />
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
@@ -300,35 +308,35 @@ const OrderTrackingPage: React.FC = () => {
                   Total
                 </Typography>
                 <Typography variant="h6" fontWeight="bold">
-                  ${order.total.toFixed(2)}
+                  {appointment.total.toFixed(2)} €
                 </Typography>
               </Box>
               <Typography variant="body2" color="text.secondary">
-                Paid via {order.paymentMethod}
+                Pago mediante {appointment.paymentMethod}
               </Typography>
             </Box>
           </Paper>
 
-          {/* Actions */}
+          {/* Acciones */}
           <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
             <Button
               variant="outlined"
               fullWidth
               onClick={() => navigate('/')}
             >
-              Order Again
+              Reservar otra cita
             </Button>
-            {order.status !== OrderStatus.Delivered && order.status !== OrderStatus.Cancelled && (
+            {appointment.status !== AppointmentStatus.Completed && appointment.status !== AppointmentStatus.Cancelled && (
               <Button
                 variant="outlined"
                 color="error"
                 fullWidth
                 onClick={() => {
-                  // Handle order cancellation
-                  console.log('Cancel order');
+                  // Gestionar la cancelación de la cita
+                  console.log('Cancelar cita');
                 }}
               >
-                Cancel Order
+                Cancelar cita
               </Button>
             )}
           </Box>
@@ -338,4 +346,4 @@ const OrderTrackingPage: React.FC = () => {
   );
 };
 
-export default OrderTrackingPage;
+export default AppointmentTrackingPage;

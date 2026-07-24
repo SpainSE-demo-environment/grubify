@@ -1,29 +1,31 @@
-# Grubify - Food Delivery App
+# Medify - Plataforma de Reserva de Citas Médicas
 
-A modern food delivery application built with React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps using Azure Developer CLI (azd).
+Una aplicación moderna de reserva de citas médicas construida con un frontend React TypeScript y un backend .NET, diseñada para desplegarse en Azure Container Apps mediante Azure Developer CLI (azd).
 
-## 🍕 Features
+> **Nota:** La aplicación se presenta como **Medify** (dominio médico + UI en español). Los identificadores de despliegue (assembly `GrubifyApi`, carpetas, imágenes Docker `grubify-*`, grupos de recursos `*-grubify-*`, etc.) se mantienen como `grubify` a propósito, ya que el repositorio `azure-demo-environment` construye estas imágenes por IaC. Un rename profundo de infra/imágenes es un follow-up coordinado con `azure-demo-environment`.
 
-- **Modern UI**: Beautiful, responsive design inspired by popular food delivery apps
-- **Real Food Content**: Sample restaurants and food items with real images from Unsplash
-- **Complete Food Delivery Flow**: Browse restaurants → Add to cart → Checkout → Track orders
-- **Azure Container Apps**: Scalable, serverless container hosting
-- **Azure Developer CLI**: One-command deployment and management
+## 🏥 Características
 
-## 🏗️ Architecture
+- **UI moderna**: Diseño limpio y responsive con estética "health" (teal/azul clínico)
+- **Contenido médico realista**: Centros y servicios de ejemplo con imágenes reales de Unsplash
+- **Flujo completo de reserva**: Explorar centros → Añadir servicios a la cesta → Confirmar → Seguir la cita
+- **Azure Container Apps**: Hosting de contenedores escalable y serverless
+- **Azure Developer CLI**: Despliegue y gestión con un solo comando
+
+## 🏗️ Arquitectura
 
 - **Frontend**: React 18 + TypeScript + Material-UI
-- **Backend**: .NET 9 Web API with RESTful endpoints
-- **Infrastructure**: Azure Container Apps + Container Registry
-- **Deployment**: Azure Developer CLI (azd)
+- **Backend**: .NET 9 Web API con endpoints RESTful
+- **Infraestructura**: Azure Container Apps + Container Registry
+- **Despliegue**: Azure Developer CLI (azd)
 
-## 🚀 Complete Deployment Guide
+## 🚀 Guía de Despliegue Completa
 
-This guide shows how to deploy Grubify with **both backend versions** (v1 with memory leak, v2 with payment failures) for testing Azure SRE Agent scenarios.
+Esta guía muestra cómo desplegar Medify con **ambas versiones del backend** (v1 con fuga de memoria, v2 con fallos de pago) para probar los escenarios de Azure SRE Agent.
 
-## 📋 Prerequisites
+## 📋 Requisitos Previos
 
-Before deploying Grubify, ensure you have the following tools installed and running:
+Antes de desplegar Medify, asegúrate de tener las siguientes herramientas instaladas y en ejecución:
 
 ### Required Tools
 - **[Azure Developer CLI (azd)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd)** - Latest version

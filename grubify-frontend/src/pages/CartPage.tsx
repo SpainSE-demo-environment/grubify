@@ -13,18 +13,17 @@ import {
   CircularProgress,
 } from '@mui/material';
 import {
-  Add as AddIcon,
-  Remove as RemoveIcon,
   Delete as DeleteIcon,
-  ShoppingCart as CartIcon,
+  CalendarMonth as CalendarMonthIcon,
+  Timelapse as DurationIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { Cart, CartItem } from '../types';
-import { cartService } from '../services/api';
+import { AppointmentCart } from '../types';
+import { appointmentCartService } from '../services/api';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
-  const [cart, setCart] = useState<Cart | null>(null);
+  const [cart, setCart] = useState<AppointmentCart | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,28 +34,14 @@ const CartPage: React.FC = () => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const cartData = await cartService.get('user123');
+      const cartData = await appointmentCartService.get('user123');
       setCart(cartData);
       setError(null);
     } catch (err) {
-      setError('Failed to load cart. Please try again later.');
-      console.error('Error fetching cart:', err);
+      setError('No se pudo cargar la cesta. Inténtalo de nuevo más tarde.');
+      console.error('Error al cargar la cesta:', err);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const updateQuantity = async (itemId: number, newQuantity: number) => {
-    if (!cart) return;
-
-    try {
-      const updatedCart = await cartService.updateItem('user123', itemId, {
-        quantity: newQuantity,
-        specialInstructions: cart.items.find(item => item.id === itemId)?.specialInstructions || '',
-      });
-      setCart(updatedCart);
-    } catch (err) {
-      console.error('Error updating cart item:', err);
     }
   };
 
@@ -64,19 +49,19 @@ const CartPage: React.FC = () => {
     if (!cart) return;
 
     try {
-      const updatedCart = await cartService.removeItem('user123', itemId);
+      const updatedCart = await appointmentCartService.removeItem('user123', itemId);
       setCart(updatedCart);
     } catch (err) {
-      console.error('Error removing cart item:', err);
+      console.error('Error al eliminar el servicio de la cesta:', err);
     }
   };
 
   const clearCart = async () => {
     try {
-      await cartService.clear('user123');
+      await appointmentCartService.clear('user123');
       setCart({ ...cart!, items: [] });
     } catch (err) {
-      console.error('Error clearing cart:', err);
+      console.error('Error al vaciar la cesta:', err);
     }
   };
 
@@ -100,7 +85,7 @@ const CartPage: React.FC = () => {
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={fetchCart}>
-            Try Again
+            Reintentar
           </Button>
         </Box>
       </Container>
@@ -111,15 +96,15 @@ const CartPage: React.FC = () => {
     return (
       <Container maxWidth="md">
         <Box textAlign="center" py={8}>
-          <CartIcon sx={{ fontSize: 80, color: 'text.secondary', mb: 2 }} />
+          <CalendarMonthIcon sx={{ fontSize: 80, color: 'text.secondary', mb: 2 }} />
           <Typography variant="h4" gutterBottom>
-            Your cart is empty
+            Tu cesta de citas está vacía
           </Typography>
           <Typography variant="body1" color="text.secondary" gutterBottom>
-            Add some delicious food to get started!
+            ¡Añade servicios médicos para empezar a reservar!
           </Typography>
           <Button variant="contained" onClick={() => navigate('/')} sx={{ mt: 2 }}>
-            Browse Restaurants
+            Explorar centros
           </Button>
         </Box>
       </Container>
@@ -129,24 +114,24 @@ const CartPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Your Cart
+        Tu cesta de citas
       </Typography>
 
       <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', md: 'row' } }}>
-        {/* Cart Items */}
+        {/* Servicios de la cesta */}
         <Box sx={{ flex: 1 }}>
           <Card>
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                 <Typography variant="h5">
-                  Items ({cart.items.length})
+                  Servicios ({cart.items.length})
                 </Typography>
                 <Button
                   color="error"
                   onClick={clearCart}
                   disabled={cart.items.length === 0}
                 >
-                  Clear Cart
+                  Vaciar cesta
                 </Button>
               </Box>
 
@@ -155,8 +140,8 @@ const CartPage: React.FC = () => {
                   <Box sx={{ display: 'flex', gap: 2, py: 2 }}>
                     <Box
                       component="img"
-                      src={item.foodItem.imageUrl}
-                      alt={item.foodItem.name}
+                      src={item.service.imageUrl}
+                      alt={item.service.name}
                       sx={{
                         width: 80,
                         height: 80,
@@ -166,47 +151,33 @@ const CartPage: React.FC = () => {
                     />
                     <Box sx={{ flex: 1 }}>
                       <Typography variant="h6" gutterBottom>
-                        {item.foodItem.name}
+                        {item.service.name}
                       </Typography>
                       <Typography variant="body2" color="text.secondary" gutterBottom>
-                        {item.foodItem.description}
+                        {item.service.description}
                       </Typography>
-                      {item.specialInstructions && (
-                        <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'text.secondary' }}>
-                          Note: {item.specialInstructions}
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                        <DurationIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
+                        <Typography variant="body2" color="text.secondary">
+                          {item.service.durationMinutes} min
+                        </Typography>
+                      </Box>
+                      {item.notes && (
+                        <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'text.secondary', mt: 0.5 }}>
+                          Motivo: {item.notes}
                         </Typography>
                       )}
                       <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
-                        ${item.foodItem.price.toFixed(2)}
+                        {item.service.price.toFixed(2)} €
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <IconButton
-                          size="small"
-                          onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                        >
-                          <RemoveIcon />
-                        </IconButton>
-                        <Typography variant="h6" sx={{ minWidth: 30, textAlign: 'center' }}>
-                          {item.quantity}
-                        </Typography>
-                        <IconButton
-                          size="small"
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        >
-                          <AddIcon />
-                        </IconButton>
-                      </Box>
                       <IconButton
                         color="error"
                         onClick={() => removeItem(item.id)}
                       >
                         <DeleteIcon />
                       </IconButton>
-                      <Typography variant="body2" fontWeight="bold">
-                        ${(item.foodItem.price * item.quantity).toFixed(2)}
-                      </Typography>
                     </Box>
                   </Box>
                   {index < cart.items.length - 1 && <Divider />}
@@ -216,25 +187,21 @@ const CartPage: React.FC = () => {
           </Card>
         </Box>
 
-        {/* Order Summary */}
+        {/* Resumen de la reserva */}
         <Box sx={{ width: { xs: '100%', md: 350 } }}>
           <Paper sx={{ p: 3, position: 'sticky', top: 24 }}>
             <Typography variant="h5" gutterBottom>
-              Order Summary
+              Resumen de la reserva
             </Typography>
-            
+
             <Box sx={{ space: 2 }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography>Subtotal</Typography>
-                <Typography>${cart.subTotal.toFixed(2)}</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography>Tax</Typography>
-                <Typography>${cart.tax.toFixed(2)}</Typography>
+                <Typography>Subtotal (copagos)</Typography>
+                <Typography>{cart.subTotal.toFixed(2)} €</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                <Typography>Delivery Fee</Typography>
-                <Typography>${cart.deliveryFee.toFixed(2)}</Typography>
+                <Typography>Tasa de gestión</Typography>
+                <Typography>{cart.bookingFee.toFixed(2)} €</Typography>
               </Box>
               <Divider sx={{ my: 2 }} />
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
@@ -242,7 +209,7 @@ const CartPage: React.FC = () => {
                   Total
                 </Typography>
                 <Typography variant="h6" fontWeight="bold">
-                  ${cart.total.toFixed(2)}
+                  {cart.total.toFixed(2)} €
                 </Typography>
               </Box>
             </Box>
@@ -254,15 +221,15 @@ const CartPage: React.FC = () => {
               onClick={handleCheckout}
               sx={{ mb: 2 }}
             >
-              Proceed to Checkout
+              Continuar con la reserva
             </Button>
-            
+
             <Button
               variant="outlined"
               fullWidth
               onClick={() => navigate('/')}
             >
-              Continue Shopping
+              Seguir explorando
             </Button>
           </Paper>
         </Box>

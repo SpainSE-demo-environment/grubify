@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 import {
   Search as SearchIcon,
-  ShoppingCart as ShoppingCartIcon,
-  Restaurant as RestaurantIcon,
+  CalendarMonth as CalendarMonthIcon,
+  LocalHospital as LocalHospitalIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
@@ -89,7 +89,7 @@ const Navbar: React.FC = () => {
           onClick={handleLogoClick}
           sx={{ mr: 2 }}
         >
-          <RestaurantIcon sx={{ fontSize: 28 }} />
+          <LocalHospitalIcon sx={{ fontSize: 28 }} />
         </IconButton>
         
         <Typography
@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
           }}
           onClick={handleLogoClick}
         >
-          Grubify
+          Medify
         </Typography>
 
         <Box sx={{ flexGrow: 1 }} />
@@ -115,8 +115,8 @@ const Navbar: React.FC = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search restaurants, foods..."
-              inputProps={{ 'aria-label': 'search' }}
+              placeholder="Buscar centros, especialidades..."
+              inputProps={{ 'aria-label': 'buscar' }}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -124,16 +124,16 @@ const Navbar: React.FC = () => {
         </Box>
 
         <Button color="inherit" sx={{ mr: 2 }}>
-          Sign In
+          Iniciar sesión
         </Button>
 
         <IconButton
           color="inherit"
-          aria-label="shopping cart"
+          aria-label="cesta de citas"
           onClick={handleCartClick}
         >
           <Badge badgeContent={cartItemCount} color="secondary">
-            <ShoppingCartIcon />
+            <CalendarMonthIcon />
           </Badge>
         </IconButton>
       </Toolbar>

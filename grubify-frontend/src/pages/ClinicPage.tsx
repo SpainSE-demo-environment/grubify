@@ -12,7 +12,6 @@ import {
   CardActions,
   Chip,
   Rating,
-  IconButton,
   TextField,
   Dialog,
   DialogTitle,
@@ -20,82 +19,77 @@ import {
   DialogActions,
 } from '@mui/material';
 import {
-  Add as AddIcon,
-  Remove as RemoveIcon,
   AccessTime as TimeIcon,
-  DeliveryDining as DeliveryIcon,
-  Star as StarIcon,
+  PaymentsOutlined as FeeIcon,
+  Timelapse as DurationIcon,
 } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Restaurant, FoodItem } from '../types';
-import { restaurantService, foodItemService, cartService } from '../services/api';
+import { Clinic, Service } from '../types';
+import { clinicService, serviceService, appointmentCartService } from '../services/api';
 
-const RestaurantPage: React.FC = () => {
+const ClinicPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
-  const [menuItems, setMenuItems] = useState<FoodItem[]>([]);
+  const [clinic, setClinic] = useState<Clinic | null>(null);
+  const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedItem, setSelectedItem] = useState<FoodItem | null>(null);
-  const [quantity, setQuantity] = useState(1);
-  const [specialInstructions, setSpecialInstructions] = useState('');
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [notes, setNotes] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     if (id) {
-      fetchRestaurantData(parseInt(id));
+      fetchClinicData(parseInt(id));
     }
   }, [id]);
 
-  const fetchRestaurantData = async (restaurantId: number) => {
+  const fetchClinicData = async (clinicId: number) => {
     try {
       setLoading(true);
-      const [restaurantData, menuData] = await Promise.all([
-        restaurantService.getById(restaurantId),
-        foodItemService.getByRestaurant(restaurantId),
+      const [clinicData, servicesData] = await Promise.all([
+        clinicService.getById(clinicId),
+        serviceService.getByClinic(clinicId),
       ]);
-      setRestaurant(restaurantData);
-      setMenuItems(menuData);
+      setClinic(clinicData);
+      setServices(servicesData);
       setError(null);
     } catch (err) {
-      setError('Failed to load restaurant data. Please try again later.');
-      console.error('Error fetching restaurant data:', err);
+      setError('No se pudieron cargar los datos del centro. Inténtalo de nuevo más tarde.');
+      console.error('Error al cargar los datos del centro:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleAddToCart = async (item: FoodItem) => {
-    setSelectedItem(item);
-    setQuantity(1);
-    setSpecialInstructions('');
+  const handleBookService = async (service: Service) => {
+    setSelectedService(service);
+    setNotes('');
     setDialogOpen(true);
   };
 
-  const confirmAddToCart = async () => {
-    if (!selectedItem) return;
+  const confirmBookService = async () => {
+    if (!selectedService) return;
 
     try {
-      await cartService.addItem('user123', {
-        foodItemId: selectedItem.id,
-        quantity,
-        specialInstructions,
+      await appointmentCartService.addItem('user123', {
+        serviceId: selectedService.id,
+        quantity: 1,
+        notes,
       });
       setDialogOpen(false);
-      // You might want to show a success message here
     } catch (err) {
-      console.error('Error adding item to cart:', err);
+      console.error('Error al añadir el servicio a la cesta:', err);
     }
   };
 
-  const groupedMenuItems = menuItems.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = [];
+  const groupedServices = services.reduce((acc, service) => {
+    if (!acc[service.specialty]) {
+      acc[service.specialty] = [];
     }
-    acc[item.category].push(item);
+    acc[service.specialty].push(service);
     return acc;
-  }, {} as Record<string, FoodItem[]>);
+  }, {} as Record<string, Service[]>);
 
   if (loading) {
     return (
@@ -105,15 +99,15 @@ const RestaurantPage: React.FC = () => {
     );
   }
 
-  if (error || !restaurant) {
+  if (error || !clinic) {
     return (
       <Container maxWidth="md">
         <Alert severity="error" sx={{ mt: 4 }}>
-          {error || 'Restaurant not found'}
+          {error || 'Centro no encontrado'}
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={() => navigate('/')}>
-            Back to Home
+            Volver al inicio
           </Button>
         </Box>
       </Container>
@@ -122,14 +116,14 @@ const RestaurantPage: React.FC = () => {
 
   return (
     <Container maxWidth="xl">
-      {/* Restaurant Header */}
+      {/* Cabecera del centro */}
       <Card sx={{ mb: 4 }}>
         <Box sx={{ position: 'relative' }}>
           <CardMedia
             component="img"
             height="300"
-            image={restaurant.imageUrl}
-            alt={restaurant.name}
+            image={clinic.imageUrl}
+            alt={clinic.name}
             sx={{ objectFit: 'cover' }}
           />
           <Box
@@ -144,43 +138,43 @@ const RestaurantPage: React.FC = () => {
             }}
           >
             <Typography variant="h3" component="h1" gutterBottom>
-              {restaurant.name}
+              {clinic.name}
             </Typography>
             <Typography variant="h6" sx={{ opacity: 0.9 }}>
-              {restaurant.description}
+              {clinic.description}
             </Typography>
           </Box>
         </Box>
         <CardContent>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, alignItems: 'center' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Rating value={restaurant.rating} precision={0.1} readOnly />
+              <Rating value={clinic.rating} precision={0.1} readOnly />
               <Typography variant="body1" sx={{ ml: 1 }}>
-                {restaurant.rating.toFixed(1)} rating
+                {clinic.rating.toFixed(1)} de valoración
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <TimeIcon sx={{ mr: 1, color: 'text.secondary' }} />
               <Typography variant="body1">
-                {restaurant.deliveryTime}
+                {clinic.nextAvailable}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <DeliveryIcon sx={{ mr: 1, color: 'text.secondary' }} />
+              <FeeIcon sx={{ mr: 1, color: 'text.secondary' }} />
               <Typography variant="body1">
-                ${restaurant.deliveryFee.toFixed(2)} delivery
+                Copago desde {clinic.consultationFee.toFixed(2)} €
               </Typography>
             </Box>
-            <Chip label={restaurant.cuisineType} color="primary" />
+            <Chip label={clinic.specialtyType} color="primary" />
           </Box>
         </CardContent>
       </Card>
 
-      {/* Menu Items */}
-      {Object.entries(groupedMenuItems).map(([category, items]) => (
-        <Box key={category} sx={{ mb: 4 }}>
+      {/* Servicios */}
+      {Object.entries(groupedServices).map(([specialty, items]) => (
+        <Box key={specialty} sx={{ mb: 4 }}>
           <Typography variant="h4" component="h2" gutterBottom>
-            {category}
+            {specialty}
           </Typography>
           <Box
             sx={{
@@ -192,46 +186,41 @@ const RestaurantPage: React.FC = () => {
               gap: 3,
             }}
           >
-            {items.map((item) => (
-              <Card key={item.id} sx={{ display: 'flex', height: 200 }}>
+            {items.map((service) => (
+              <Card key={service.id} sx={{ display: 'flex', height: 200 }}>
                 <CardMedia
                   component="img"
                   sx={{ width: 150, objectFit: 'cover' }}
-                  image={item.imageUrl}
-                  alt={item.name}
+                  image={service.imageUrl}
+                  alt={service.name}
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
                   <CardContent sx={{ flex: 1 }}>
                     <Typography variant="h6" component="h3" gutterBottom>
-                      {item.name}
+                      {service.name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                      {item.description}
+                      {service.description}
                     </Typography>
-                    <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-                      {item.isVegetarian && (
-                        <Chip label="Vegetarian" size="small" color="success" />
-                      )}
-                      {item.isVegan && (
-                        <Chip label="Vegan" size="small" color="success" />
-                      )}
-                      {item.isSpicy && (
-                        <Chip label="Spicy" size="small" color="error" />
-                      )}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 2 }}>
+                      <DurationIcon sx={{ fontSize: 18, color: 'text.secondary' }} />
+                      <Typography variant="body2" color="text.secondary">
+                        {service.durationMinutes} min
+                      </Typography>
                     </Box>
                     <Typography variant="h6" color="primary" fontWeight="bold">
-                      ${item.price.toFixed(2)}
+                      {service.price.toFixed(2)} €
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={() => handleAddToCart(item)}
-                      disabled={!item.isAvailable}
+                      onClick={() => handleBookService(service)}
+                      disabled={!service.isAvailable}
                       fullWidth
                     >
-                      {item.isAvailable ? 'Add to Cart' : 'Unavailable'}
+                      {service.isAvailable ? 'Reservar cita' : 'No disponible'}
                     </Button>
                   </CardActions>
                 </Box>
@@ -241,49 +230,42 @@ const RestaurantPage: React.FC = () => {
         </Box>
       ))}
 
-      {/* Add to Cart Dialog */}
+      {/* Diálogo de reserva */}
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>Add to Cart</DialogTitle>
+        <DialogTitle>Reservar cita</DialogTitle>
         <DialogContent>
-          {selectedItem && (
+          {selectedService && (
             <Box>
               <Typography variant="h6" gutterBottom>
-                {selectedItem.name}
+                {selectedService.name}
               </Typography>
               <Typography variant="body2" color="text.secondary" gutterBottom>
-                {selectedItem.description}
+                {selectedService.description}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                Duración estimada: {selectedService.durationMinutes} min
               </Typography>
               <Typography variant="h6" color="primary" gutterBottom>
-                ${selectedItem.price.toFixed(2)}
+                {selectedService.price.toFixed(2)} €
               </Typography>
-              
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, my: 3 }}>
-                <Typography variant="body1">Quantity:</Typography>
-                <IconButton onClick={() => setQuantity(Math.max(1, quantity - 1))}>
-                  <RemoveIcon />
-                </IconButton>
-                <Typography variant="h6">{quantity}</Typography>
-                <IconButton onClick={() => setQuantity(quantity + 1)}>
-                  <AddIcon />
-                </IconButton>
-              </Box>
-              
+
               <TextField
                 fullWidth
-                label="Special instructions (optional)"
+                label="Motivo de consulta (opcional)"
                 multiline
                 rows={3}
-                value={specialInstructions}
-                onChange={(e) => setSpecialInstructions(e.target.value)}
-                placeholder="e.g., no onions, extra spicy, etc."
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Ej.: revisión anual, dolor de espalda, seguimiento..."
+                sx={{ mt: 2 }}
               />
             </Box>
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
-          <Button onClick={confirmAddToCart} variant="contained">
-            Add to Cart - ${selectedItem ? (selectedItem.price * quantity).toFixed(2) : '0.00'}
+          <Button onClick={() => setDialogOpen(false)}>Cancelar</Button>
+          <Button onClick={confirmBookService} variant="contained">
+            Añadir a la cesta - {selectedService ? selectedService.price.toFixed(2) : '0.00'} €
           </Button>
         </DialogActions>
       </Dialog>
@@ -291,4 +273,4 @@ const RestaurantPage: React.FC = () => {
   );
 };
 
-export default RestaurantPage;
+export default ClinicPage;

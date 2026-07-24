@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🔍 Checking Grubify Deployment Prerequisites..."
+echo "🔍 Checking Medify Deployment Prerequisites..."
 echo "============================================="
 
 EXIT_CODE=0

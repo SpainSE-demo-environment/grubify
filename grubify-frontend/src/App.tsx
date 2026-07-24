@@ -7,26 +7,26 @@ import { Container } from '@mui/material';
 // Components
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
-import RestaurantPage from './pages/RestaurantPage';
+import ClinicPage from './pages/ClinicPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
-import OrderTrackingPage from './pages/OrderTrackingPage';
+import AppointmentTrackingPage from './pages/AppointmentTrackingPage';
 import './App.css';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FF6B35', // Orange
-      light: '#FF8A65',
-      dark: '#E65100',
+      main: '#00897B', // Teal clínico
+      light: '#4DB6AC',
+      dark: '#00695C',
     },
     secondary: {
-      main: '#4CAF50', // Green
-      light: '#81C784',
-      dark: '#388E3C',
+      main: '#1976D2', // Azul clínico
+      light: '#64B5F6',
+      dark: '#0D47A1',
     },
     background: {
-      default: '#F5F5F5',
+      default: '#F4F8F7',
       paper: '#FFFFFF',
     },
   },
@@ -60,10 +60,10 @@ function App() {
           <Container maxWidth="xl" sx={{ mt: 3, mb: 3 }}>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/restaurant/:id" element={<RestaurantPage />} />
+              <Route path="/clinic/:id" element={<ClinicPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/order-tracking/:orderId" element={<OrderTrackingPage />} />
+              <Route path="/appointment-tracking/:appointmentId" element={<AppointmentTrackingPage />} />
             </Routes>
           </Container>
         </div>

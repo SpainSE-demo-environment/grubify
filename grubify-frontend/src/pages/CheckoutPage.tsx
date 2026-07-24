@@ -11,7 +11,6 @@ import {
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel,
   Paper,
   Divider,
   Alert,
@@ -22,33 +21,32 @@ import {
 } from '@mui/material';
 import {
   CreditCard as CreditCardIcon,
-  AccountBalanceWallet as WalletIcon,
+  HealthAndSafety as PolicyIcon,
   LocalAtm as CashIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { Cart, PlaceOrderRequest } from '../types';
-import { cartService, orderService } from '../services/api';
+import { AppointmentCart, BookAppointmentRequest } from '../types';
+import { appointmentCartService, appointmentService } from '../services/api';
 
-const steps = ['Delivery Info', 'Payment', 'Review & Place Order'];
+const steps = ['Datos del paciente', 'Pago', 'Revisar y confirmar'];
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
-  const [cart, setCart] = useState<Cart | null>(null);
+  const [cart, setCart] = useState<AppointmentCart | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [paymentError, setPaymentError] = useState<boolean>(false);
 
-  // Form data
-  const [deliveryInfo, setDeliveryInfo] = useState({
-    address: '',
-    city: '',
-    zipCode: '',
+  // Datos del formulario
+  const [patientInfo, setPatientInfo] = useState({
+    name: '',
     phone: '',
-    instructions: '',
+    location: '',
+    reason: '',
   });
-  const [paymentMethod, setPaymentMethod] = useState('credit-card');
+  const [paymentMethod, setPaymentMethod] = useState('poliza');
   const [paymentInfo, setPaymentInfo] = useState({
     cardNumber: '',
     expiryDate: '',
@@ -58,20 +56,21 @@ const CheckoutPage: React.FC = () => {
 
   useEffect(() => {
     fetchCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const cartData = await cartService.get('user123');
+      const cartData = await appointmentCartService.get('user123');
       setCart(cartData);
       if (cartData.items.length === 0) {
         navigate('/cart');
       }
       setError(null);
     } catch (err) {
-      setError('Failed to load cart. Please try again later.');
-      console.error('Error fetching cart:', err);
+      setError('No se pudo cargar la cesta. Inténtalo de nuevo más tarde.');
+      console.error('Error al cargar la cesta:', err);
     } finally {
       setLoading(false);
     }
@@ -85,47 +84,47 @@ const CheckoutPage: React.FC = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handlePlaceOrder = async () => {
+  const handleBookAppointment = async () => {
     if (!cart) return;
 
     try {
       setSubmitting(true);
       setError(null);
-      const orderRequest: PlaceOrderRequest = {
+      const appointmentRequest: BookAppointmentRequest = {
         userId: 'user123',
-        restaurantId: cart.items[0]?.foodItem.restaurantId || 1,
+        clinicId: cart.items[0]?.service.clinicId || 1,
         items: cart.items,
-        deliveryAddress: `${deliveryInfo.address}, ${deliveryInfo.city}, ${deliveryInfo.zipCode}`,
+        clinicLocation: patientInfo.location,
         paymentMethod,
-        specialInstructions: deliveryInfo.instructions,
+        notes: patientInfo.reason,
       };
 
-      const order = await orderService.place(orderRequest);
-      await cartService.clear('user123');
-      navigate(`/order-tracking/${order.id}`);
+      const appointment = await appointmentService.book(appointmentRequest);
+      await appointmentCartService.clear('user123');
+      navigate(`/appointment-tracking/${appointment.id}`);
     } catch (err: any) {
-      console.error('Error placing order:', err);
-      
-      // Check if it's a payment error (500 status) - show error page
+      console.error('Error al reservar la cita:', err);
+
+      // Comprobar si es un error de pago (estado 500) - mostrar página de error
       if (err.response?.status === 500) {
         const errorData = err.response?.data;
         setPaymentError(true);
-        
-        // Use backend error message if available, otherwise fallback
+
+        // Usar el mensaje de error del backend si está disponible
         if (errorData?.code === 'PAYMENT_ERROR') {
-          setError(`${errorData.message || 'Payment processing failed'}${errorData.details ? ` - ${errorData.details}` : ''}`);
+          setError(`${errorData.message || 'El procesamiento del pago ha fallado'}${errorData.details ? ` - ${errorData.details}` : ''}`);
         } else {
-          setError('Payment processing failed. Our payment system is currently experiencing technical difficulties.');
+          setError('El procesamiento del pago ha fallado. Nuestro sistema de pagos tiene dificultades técnicas en este momento.');
         }
-      } 
-      // Check for other 4xx/5xx errors
+      }
+      // Otros errores 4xx/5xx
       else if (err.response?.status >= 400) {
         const errorData = err.response?.data;
-        setError(errorData?.message || `Server error (${err.response.status}). Please try again later.`);
+        setError(errorData?.message || `Error del servidor (${err.response.status}). Inténtalo de nuevo más tarde.`);
       }
-      // Network or other errors
+      // Errores de red u otros
       else {
-        setError('Unable to connect to server. Please check your connection and try again.');
+        setError('No se pudo conectar con el servidor. Comprueba tu conexión e inténtalo de nuevo.');
       }
     } finally {
       setSubmitting(false);
@@ -135,9 +134,9 @@ const CheckoutPage: React.FC = () => {
   const isStepValid = (step: number) => {
     switch (step) {
       case 0:
-        return deliveryInfo.address && deliveryInfo.city && deliveryInfo.zipCode && deliveryInfo.phone;
+        return patientInfo.name && patientInfo.phone;
       case 1:
-        if (paymentMethod === 'credit-card') {
+        if (paymentMethod === 'tarjeta') {
           return paymentInfo.cardNumber && paymentInfo.expiryDate && paymentInfo.cvv && paymentInfo.nameOnCard;
         }
         return true;
@@ -164,14 +163,14 @@ const CheckoutPage: React.FC = () => {
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={() => navigate('/cart')}>
-            Back to Cart
+            Volver a la cesta
           </Button>
         </Box>
       </Container>
     );
   }
 
-  // Show payment error page when payment fails
+  // Mostrar página de error de pago cuando el pago falla
   if (paymentError) {
     return (
       <Container maxWidth="md">
@@ -189,27 +188,27 @@ const CheckoutPage: React.FC = () => {
           <Card sx={{ p: 4, width: '100%', maxWidth: 500, border: '1px solid #f44336' }}>
             <CreditCardIcon sx={{ fontSize: 80, color: 'error.main', mb: 2 }} />
             <Typography variant="h4" component="h1" gutterBottom color="error.main" fontWeight="bold">
-              Payment System Error
+              Error del sistema de pagos
             </Typography>
             <Typography variant="h6" gutterBottom sx={{ mb: 3, color: 'text.secondary' }}>
-              Unable to process your order
+              No se pudo procesar tu cita
             </Typography>
-            
+
             <Alert severity="error" sx={{ mb: 3, textAlign: 'left' }}>
               <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-                <strong>Error Details:</strong><br />
+                <strong>Detalles del error:</strong><br />
                 {error}
               </Typography>
             </Alert>
-            
+
             <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-              We're experiencing technical difficulties with our payment processing system. This appears to be a system configuration issue.
+              Estamos teniendo dificultades técnicas con nuestro sistema de procesamiento de pagos. Parece un problema de configuración del sistema.
             </Typography>
-            
+
             <Typography variant="body2" color="text.secondary" sx={{ mb: 4, fontStyle: 'italic' }}>
-              Reference ID: {Date.now().toString(36).toUpperCase()}-{Math.random().toString(36).substr(2, 5).toUpperCase()}
+              ID de referencia: {Date.now().toString(36).toUpperCase()}-{Math.random().toString(36).substr(2, 5).toUpperCase()}
             </Typography>
-            
+
             <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Button
                 variant="contained"
@@ -217,25 +216,25 @@ const CheckoutPage: React.FC = () => {
                 onClick={() => {
                   setPaymentError(false);
                   setError(null);
-                  setActiveStep(2); // Go back to review step
+                  setActiveStep(2); // Volver al paso de revisión
                 }}
                 sx={{ minWidth: 120 }}
               >
-                Retry Payment
+                Reintentar pago
               </Button>
               <Button
                 variant="outlined"
                 onClick={() => navigate('/cart')}
                 sx={{ minWidth: 120 }}
               >
-                Back to Cart
+                Volver a la cesta
               </Button>
               <Button
                 variant="text"
                 onClick={() => navigate('/')}
                 sx={{ minWidth: 120 }}
               >
-                Continue Shopping
+                Seguir explorando
               </Button>
             </Box>
           </Card>
@@ -250,51 +249,41 @@ const CheckoutPage: React.FC = () => {
         return (
           <Box sx={{ space: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Delivery Information
+              Datos del paciente
             </Typography>
             <TextField
               fullWidth
-              label="Street Address"
-              value={deliveryInfo.address}
-              onChange={(e) => setDeliveryInfo({ ...deliveryInfo, address: e.target.value })}
-              margin="normal"
-              required
-            />
-            <Box sx={{ display: 'flex', gap: 2 }}>
-              <TextField
-                label="City"
-                value={deliveryInfo.city}
-                onChange={(e) => setDeliveryInfo({ ...deliveryInfo, city: e.target.value })}
-                margin="normal"
-                required
-                sx={{ flex: 1 }}
-              />
-              <TextField
-                label="ZIP Code"
-                value={deliveryInfo.zipCode}
-                onChange={(e) => setDeliveryInfo({ ...deliveryInfo, zipCode: e.target.value })}
-                margin="normal"
-                required
-                sx={{ flex: 1 }}
-              />
-            </Box>
-            <TextField
-              fullWidth
-              label="Phone Number"
-              value={deliveryInfo.phone}
-              onChange={(e) => setDeliveryInfo({ ...deliveryInfo, phone: e.target.value })}
+              label="Nombre y apellidos"
+              value={patientInfo.name}
+              onChange={(e) => setPatientInfo({ ...patientInfo, name: e.target.value })}
               margin="normal"
               required
             />
             <TextField
               fullWidth
-              label="Delivery Instructions (Optional)"
-              value={deliveryInfo.instructions}
-              onChange={(e) => setDeliveryInfo({ ...deliveryInfo, instructions: e.target.value })}
+              label="Teléfono de contacto"
+              value={patientInfo.phone}
+              onChange={(e) => setPatientInfo({ ...patientInfo, phone: e.target.value })}
+              margin="normal"
+              required
+            />
+            <TextField
+              fullWidth
+              label="Sala o ubicación preferida (opcional)"
+              value={patientInfo.location}
+              onChange={(e) => setPatientInfo({ ...patientInfo, location: e.target.value })}
+              margin="normal"
+              placeholder="Ej.: Consulta 3, planta baja..."
+            />
+            <TextField
+              fullWidth
+              label="Motivo de consulta (opcional)"
+              value={patientInfo.reason}
+              onChange={(e) => setPatientInfo({ ...patientInfo, reason: e.target.value })}
               margin="normal"
               multiline
               rows={3}
-              placeholder="e.g., Leave at door, Ring doorbell twice, etc."
+              placeholder="Ej.: revisión anual, seguimiento, dolor persistente..."
             />
           </Box>
         );
@@ -303,7 +292,7 @@ const CheckoutPage: React.FC = () => {
         return (
           <Box sx={{ space: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Payment Method
+              Método de pago
             </Typography>
             <FormControl>
               <RadioGroup
@@ -311,43 +300,43 @@ const CheckoutPage: React.FC = () => {
                 onChange={(e) => setPaymentMethod(e.target.value)}
               >
                 <FormControlLabel
-                  value="credit-card"
+                  value="poliza"
+                  control={<Radio />}
+                  label={
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <PolicyIcon />
+                      Póliza / Seguro médico
+                    </Box>
+                  }
+                />
+                <FormControlLabel
+                  value="tarjeta"
                   control={<Radio />}
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                       <CreditCardIcon />
-                      Credit/Debit Card
+                      Tarjeta de crédito/débito
                     </Box>
                   }
                 />
                 <FormControlLabel
-                  value="digital-wallet"
-                  control={<Radio />}
-                  label={
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <WalletIcon />
-                      Digital Wallet
-                    </Box>
-                  }
-                />
-                <FormControlLabel
-                  value="cash-on-delivery"
+                  value="efectivo"
                   control={<Radio />}
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                       <CashIcon />
-                      Cash on Delivery
+                      Pago en el centro
                     </Box>
                   }
                 />
               </RadioGroup>
             </FormControl>
 
-            {paymentMethod === 'credit-card' && (
+            {paymentMethod === 'tarjeta' && (
               <Box sx={{ mt: 3, space: 2 }}>
                 <TextField
                   fullWidth
-                  label="Card Number"
+                  label="Número de tarjeta"
                   value={paymentInfo.cardNumber}
                   onChange={(e) => setPaymentInfo({ ...paymentInfo, cardNumber: e.target.value })}
                   margin="normal"
@@ -356,7 +345,7 @@ const CheckoutPage: React.FC = () => {
                 />
                 <TextField
                   fullWidth
-                  label="Name on Card"
+                  label="Titular de la tarjeta"
                   value={paymentInfo.nameOnCard}
                   onChange={(e) => setPaymentInfo({ ...paymentInfo, nameOnCard: e.target.value })}
                   margin="normal"
@@ -364,11 +353,11 @@ const CheckoutPage: React.FC = () => {
                 />
                 <Box sx={{ display: 'flex', gap: 2 }}>
                   <TextField
-                    label="Expiry Date"
+                    label="Caducidad"
                     value={paymentInfo.expiryDate}
                     onChange={(e) => setPaymentInfo({ ...paymentInfo, expiryDate: e.target.value })}
                     margin="normal"
-                    placeholder="MM/YY"
+                    placeholder="MM/AA"
                     required
                     sx={{ flex: 1 }}
                   />
@@ -391,54 +380,56 @@ const CheckoutPage: React.FC = () => {
         return (
           <Box sx={{ space: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Order Review
+              Revisión de la cita
             </Typography>
-            
-            {/* Delivery Info Review */}
+
+            {/* Revisión de datos del paciente */}
             <Paper sx={{ p: 2, mb: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Delivery Address
+                Paciente
               </Typography>
               <Typography variant="body2">
-                {deliveryInfo.address}
+                {patientInfo.name}
               </Typography>
               <Typography variant="body2">
-                {deliveryInfo.city}, {deliveryInfo.zipCode}
+                Teléfono: {patientInfo.phone}
               </Typography>
-              <Typography variant="body2">
-                Phone: {deliveryInfo.phone}
-              </Typography>
-              {deliveryInfo.instructions && (
+              {patientInfo.location && (
+                <Typography variant="body2">
+                  Ubicación: {patientInfo.location}
+                </Typography>
+              )}
+              {patientInfo.reason && (
                 <Typography variant="body2" sx={{ mt: 1, fontStyle: 'italic' }}>
-                  Instructions: {deliveryInfo.instructions}
+                  Motivo: {patientInfo.reason}
                 </Typography>
               )}
             </Paper>
 
-            {/* Payment Method Review */}
+            {/* Revisión del método de pago */}
             <Paper sx={{ p: 2, mb: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Payment Method
+                Método de pago
               </Typography>
               <Typography variant="body2">
-                {paymentMethod === 'credit-card' && 'Credit/Debit Card'}
-                {paymentMethod === 'digital-wallet' && 'Digital Wallet'}
-                {paymentMethod === 'cash-on-delivery' && 'Cash on Delivery'}
+                {paymentMethod === 'poliza' && 'Póliza / Seguro médico'}
+                {paymentMethod === 'tarjeta' && 'Tarjeta de crédito/débito'}
+                {paymentMethod === 'efectivo' && 'Pago en el centro'}
               </Typography>
             </Paper>
 
-            {/* Order Items Review */}
+            {/* Revisión de los servicios */}
             <Paper sx={{ p: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Order Items
+                Servicios reservados
               </Typography>
               {cart?.items.map((item) => (
                 <Box key={item.id} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                   <Typography variant="body2">
-                    {item.quantity}x {item.foodItem.name}
+                    {item.service.name}
                   </Typography>
                   <Typography variant="body2">
-                    ${(item.foodItem.price * item.quantity).toFixed(2)}
+                    {item.service.price.toFixed(2)} €
                   </Typography>
                 </Box>
               ))}
@@ -454,7 +445,7 @@ const CheckoutPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Checkout
+        Confirmar cita
       </Typography>
 
       <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
@@ -466,33 +457,33 @@ const CheckoutPage: React.FC = () => {
       </Stepper>
 
       <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', md: 'row' } }}>
-        {/* Main Content */}
+        {/* Contenido principal */}
         <Box sx={{ flex: 1 }}>
           <Card>
             <CardContent>
               {renderStepContent(activeStep)}
-              
+
               {error && (
                 <Alert severity="error" sx={{ mt: 2 }}>
                   {error}
                 </Alert>
               )}
-              
+
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
                 <Button
                   disabled={activeStep === 0}
                   onClick={handleBack}
                 >
-                  Back
+                  Atrás
                 </Button>
                 <Box>
                   {activeStep === steps.length - 1 ? (
                     <Button
                       variant="contained"
-                      onClick={handlePlaceOrder}
+                      onClick={handleBookAppointment}
                       disabled={submitting}
                     >
-                      {submitting ? <CircularProgress size={24} /> : 'Place Order'}
+                      {submitting ? <CircularProgress size={24} /> : 'Confirmar cita'}
                     </Button>
                   ) : (
                     <Button
@@ -500,7 +491,7 @@ const CheckoutPage: React.FC = () => {
                       onClick={handleNext}
                       disabled={!isStepValid(activeStep)}
                     >
-                      Next
+                      Siguiente
                     </Button>
                   )}
                 </Box>
@@ -509,26 +500,22 @@ const CheckoutPage: React.FC = () => {
           </Card>
         </Box>
 
-        {/* Order Summary */}
+        {/* Resumen de la reserva */}
         {cart && (
           <Box sx={{ width: { xs: '100%', md: 350 } }}>
             <Paper sx={{ p: 3, position: 'sticky', top: 24 }}>
               <Typography variant="h6" gutterBottom>
-                Order Summary
+                Resumen de la reserva
               </Typography>
-              
+
               <Box sx={{ space: 2 }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography>Subtotal</Typography>
-                  <Typography>${cart.subTotal.toFixed(2)}</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography>Tax</Typography>
-                  <Typography>${cart.tax.toFixed(2)}</Typography>
+                  <Typography>Subtotal (copagos)</Typography>
+                  <Typography>{cart.subTotal.toFixed(2)} €</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                  <Typography>Delivery Fee</Typography>
-                  <Typography>${cart.deliveryFee.toFixed(2)}</Typography>
+                  <Typography>Tasa de gestión</Typography>
+                  <Typography>{cart.bookingFee.toFixed(2)} €</Typography>
                 </Box>
                 <Divider sx={{ my: 2 }} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
@@ -536,7 +523,7 @@ const CheckoutPage: React.FC = () => {
                     Total
                   </Typography>
                   <Typography variant="h6" fontWeight="bold">
-                    ${cart.total.toFixed(2)}
+                    {cart.total.toFixed(2)} €
                   </Typography>
                 </Box>
               </Box>
