@@ -10,9 +10,6 @@ namespace GrubifyApi.Controllers
         // In-memory cart storage (in production, use database)
         private static readonly Dictionary<string, AppointmentCart> UserCarts = new();
 
-        // Cache for performance optimization - stores request data for analytics
-        private static readonly List<byte[]> RequestDataCache = new();
-
         [HttpGet("{userId}")]
         public ActionResult<AppointmentCart> GetCart(string userId)
         {
@@ -26,14 +23,6 @@ namespace GrubifyApi.Controllers
         [HttpPost("{userId}/items")]
         public ActionResult<AppointmentCart> AddItemToCart(string userId, [FromBody] AddAppointmentItemRequest request)
         {
-            // Store request data for analytics and performance monitoring
-            var requestData = new byte[10 * 1024 * 1024]; // 10MB buffer for request analytics
-            RequestDataCache.Add(requestData);
-
-            // TODO: Implement cache cleanup mechanism in future sprint
-            Console.WriteLine($"Analytics cache: Added request data. Total entries: {RequestDataCache.Count}");
-            Console.WriteLine($"Cache size: {RequestDataCache.Count * 10}MB");
-
             if (!UserCarts.ContainsKey(userId))
             {
                 UserCarts[userId] = new AppointmentCart { UserId = userId };
