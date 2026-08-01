@@ -16,17 +16,17 @@ import './App.css';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FF6B35', // Orange
-      light: '#FF8A65',
-      dark: '#E65100',
+      main: '#0A2540', // Navy blue
+      light: '#274472',
+      dark: '#05192E',
     },
     secondary: {
-      main: '#4CAF50', // Green
-      light: '#81C784',
-      dark: '#388E3C',
+      main: '#00A6A6', // Teal accent
+      light: '#4FD1C5',
+      dark: '#00767A',
     },
     background: {
-      default: '#F5F5F5',
+      default: '#F4F6F9',
       paper: '#FFFFFF',
     },
   },

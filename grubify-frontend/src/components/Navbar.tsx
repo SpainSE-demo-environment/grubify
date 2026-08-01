@@ -14,7 +14,7 @@ import {
 import {
   Search as SearchIcon,
   ShoppingCart as ShoppingCartIcon,
-  Restaurant as RestaurantIcon,
+  AccountBalance as AccountBalanceIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
@@ -89,7 +89,7 @@ const Navbar: React.FC = () => {
           onClick={handleLogoClick}
           sx={{ mr: 2 }}
         >
-          <RestaurantIcon sx={{ fontSize: 28 }} />
+          <AccountBalanceIcon sx={{ fontSize: 28 }} />
         </IconButton>
         
         <Typography
@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
           }}
           onClick={handleLogoClick}
         >
-          Grubify
+          Bankify
         </Typography>
 
         <Box sx={{ flexGrow: 1 }} />
@@ -115,7 +115,7 @@ const Navbar: React.FC = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search restaurants, foods..."
+              placeholder="Buscar productos, cuentas, tarjetas..."
               inputProps={{ 'aria-label': 'search' }}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -124,7 +124,7 @@ const Navbar: React.FC = () => {
         </Box>
 
         <Button color="inherit" sx={{ mr: 2 }}>
-          Sign In
+          Acceder
         </Button>
 
         <IconButton

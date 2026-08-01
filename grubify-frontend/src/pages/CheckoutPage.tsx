@@ -29,7 +29,7 @@ import { useNavigate } from 'react-router-dom';
 import { Cart, PlaceOrderRequest } from '../types';
 import { cartService, orderService } from '../services/api';
 
-const steps = ['Delivery Info', 'Payment', 'Review & Place Order'];
+const steps = ['Datos de contacto', 'Pago', 'Revisar y contratar'];
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -70,7 +70,7 @@ const CheckoutPage: React.FC = () => {
       }
       setError(null);
     } catch (err) {
-      setError('Failed to load cart. Please try again later.');
+      setError('No se pudo cargar la solicitud. Inténtalo de nuevo más tarde.');
       console.error('Error fetching cart:', err);
     } finally {
       setLoading(false);
@@ -113,19 +113,19 @@ const CheckoutPage: React.FC = () => {
         
         // Use backend error message if available, otherwise fallback
         if (errorData?.code === 'PAYMENT_ERROR') {
-          setError(`${errorData.message || 'Payment processing failed'}${errorData.details ? ` - ${errorData.details}` : ''}`);
+          setError(`${errorData.message || 'Error al procesar el pago'}${errorData.details ? ` - ${errorData.details}` : ''}`);
         } else {
-          setError('Payment processing failed. Our payment system is currently experiencing technical difficulties.');
+          setError('Error al procesar el pago. Nuestro sistema de pagos está experimentando dificultades técnicas.');
         }
       } 
       // Check for other 4xx/5xx errors
       else if (err.response?.status >= 400) {
         const errorData = err.response?.data;
-        setError(errorData?.message || `Server error (${err.response.status}). Please try again later.`);
+        setError(errorData?.message || `Error del servidor (${err.response.status}). Inténtalo de nuevo más tarde.`);
       }
       // Network or other errors
       else {
-        setError('Unable to connect to server. Please check your connection and try again.');
+        setError('No se puede conectar con el servidor. Comprueba tu conexión e inténtalo de nuevo.');
       }
     } finally {
       setSubmitting(false);
@@ -164,7 +164,7 @@ const CheckoutPage: React.FC = () => {
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={() => navigate('/cart')}>
-            Back to Cart
+            Volver a la solicitud
           </Button>
         </Box>
       </Container>
@@ -189,25 +189,25 @@ const CheckoutPage: React.FC = () => {
           <Card sx={{ p: 4, width: '100%', maxWidth: 500, border: '1px solid #f44336' }}>
             <CreditCardIcon sx={{ fontSize: 80, color: 'error.main', mb: 2 }} />
             <Typography variant="h4" component="h1" gutterBottom color="error.main" fontWeight="bold">
-              Payment System Error
+              Error en el sistema de pagos
             </Typography>
             <Typography variant="h6" gutterBottom sx={{ mb: 3, color: 'text.secondary' }}>
-              Unable to process your order
+              No se ha podido tramitar tu solicitud
             </Typography>
             
             <Alert severity="error" sx={{ mb: 3, textAlign: 'left' }}>
               <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-                <strong>Error Details:</strong><br />
+                <strong>Detalle del error:</strong><br />
                 {error}
               </Typography>
             </Alert>
             
             <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-              We're experiencing technical difficulties with our payment processing system. This appears to be a system configuration issue.
+              Estamos experimentando dificultades técnicas con nuestro sistema de procesamiento de pagos. Parece un problema de configuración del sistema.
             </Typography>
             
             <Typography variant="body2" color="text.secondary" sx={{ mb: 4, fontStyle: 'italic' }}>
-              Reference ID: {Date.now().toString(36).toUpperCase()}-{Math.random().toString(36).substr(2, 5).toUpperCase()}
+              ID de referencia: {Date.now().toString(36).toUpperCase()}-{Math.random().toString(36).substr(2, 5).toUpperCase()}
             </Typography>
             
             <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -221,21 +221,21 @@ const CheckoutPage: React.FC = () => {
                 }}
                 sx={{ minWidth: 120 }}
               >
-                Retry Payment
+                Reintentar pago
               </Button>
               <Button
                 variant="outlined"
                 onClick={() => navigate('/cart')}
                 sx={{ minWidth: 120 }}
               >
-                Back to Cart
+                Volver a la solicitud
               </Button>
               <Button
                 variant="text"
                 onClick={() => navigate('/')}
                 sx={{ minWidth: 120 }}
               >
-                Continue Shopping
+                Seguir explorando
               </Button>
             </Box>
           </Card>
@@ -250,11 +250,11 @@ const CheckoutPage: React.FC = () => {
         return (
           <Box sx={{ space: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Delivery Information
+              Datos de contacto
             </Typography>
             <TextField
               fullWidth
-              label="Street Address"
+              label="Dirección"
               value={deliveryInfo.address}
               onChange={(e) => setDeliveryInfo({ ...deliveryInfo, address: e.target.value })}
               margin="normal"
@@ -262,7 +262,7 @@ const CheckoutPage: React.FC = () => {
             />
             <Box sx={{ display: 'flex', gap: 2 }}>
               <TextField
-                label="City"
+                label="Ciudad"
                 value={deliveryInfo.city}
                 onChange={(e) => setDeliveryInfo({ ...deliveryInfo, city: e.target.value })}
                 margin="normal"
@@ -270,7 +270,7 @@ const CheckoutPage: React.FC = () => {
                 sx={{ flex: 1 }}
               />
               <TextField
-                label="ZIP Code"
+                label="Código postal"
                 value={deliveryInfo.zipCode}
                 onChange={(e) => setDeliveryInfo({ ...deliveryInfo, zipCode: e.target.value })}
                 margin="normal"
@@ -280,7 +280,7 @@ const CheckoutPage: React.FC = () => {
             </Box>
             <TextField
               fullWidth
-              label="Phone Number"
+              label="Teléfono"
               value={deliveryInfo.phone}
               onChange={(e) => setDeliveryInfo({ ...deliveryInfo, phone: e.target.value })}
               margin="normal"
@@ -288,13 +288,13 @@ const CheckoutPage: React.FC = () => {
             />
             <TextField
               fullWidth
-              label="Delivery Instructions (Optional)"
+              label="Comentarios (opcional)"
               value={deliveryInfo.instructions}
               onChange={(e) => setDeliveryInfo({ ...deliveryInfo, instructions: e.target.value })}
               margin="normal"
               multiline
               rows={3}
-              placeholder="e.g., Leave at door, Ring doorbell twice, etc."
+              placeholder="p. ej., horario de contacto preferente, dudas, etc."
             />
           </Box>
         );
@@ -303,7 +303,7 @@ const CheckoutPage: React.FC = () => {
         return (
           <Box sx={{ space: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Payment Method
+              Método de pago
             </Typography>
             <FormControl>
               <RadioGroup
@@ -316,7 +316,7 @@ const CheckoutPage: React.FC = () => {
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                       <CreditCardIcon />
-                      Credit/Debit Card
+                      Tarjeta de crédito/débito
                     </Box>
                   }
                 />
@@ -326,7 +326,7 @@ const CheckoutPage: React.FC = () => {
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                       <WalletIcon />
-                      Digital Wallet
+                      Cartera digital
                     </Box>
                   }
                 />
@@ -336,7 +336,7 @@ const CheckoutPage: React.FC = () => {
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                       <CashIcon />
-                      Cash on Delivery
+                      Domiciliación bancaria
                     </Box>
                   }
                 />
@@ -347,7 +347,7 @@ const CheckoutPage: React.FC = () => {
               <Box sx={{ mt: 3, space: 2 }}>
                 <TextField
                   fullWidth
-                  label="Card Number"
+                  label="Número de tarjeta"
                   value={paymentInfo.cardNumber}
                   onChange={(e) => setPaymentInfo({ ...paymentInfo, cardNumber: e.target.value })}
                   margin="normal"
@@ -356,7 +356,7 @@ const CheckoutPage: React.FC = () => {
                 />
                 <TextField
                   fullWidth
-                  label="Name on Card"
+                  label="Titular de la tarjeta"
                   value={paymentInfo.nameOnCard}
                   onChange={(e) => setPaymentInfo({ ...paymentInfo, nameOnCard: e.target.value })}
                   margin="normal"
@@ -364,11 +364,11 @@ const CheckoutPage: React.FC = () => {
                 />
                 <Box sx={{ display: 'flex', gap: 2 }}>
                   <TextField
-                    label="Expiry Date"
+                    label="Caducidad"
                     value={paymentInfo.expiryDate}
                     onChange={(e) => setPaymentInfo({ ...paymentInfo, expiryDate: e.target.value })}
                     margin="normal"
-                    placeholder="MM/YY"
+                    placeholder="MM/AA"
                     required
                     sx={{ flex: 1 }}
                   />
@@ -391,13 +391,13 @@ const CheckoutPage: React.FC = () => {
         return (
           <Box sx={{ space: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Order Review
+              Revisión de la solicitud
             </Typography>
             
             {/* Delivery Info Review */}
             <Paper sx={{ p: 2, mb: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Delivery Address
+                Datos de contacto
               </Typography>
               <Typography variant="body2">
                 {deliveryInfo.address}
@@ -406,11 +406,11 @@ const CheckoutPage: React.FC = () => {
                 {deliveryInfo.city}, {deliveryInfo.zipCode}
               </Typography>
               <Typography variant="body2">
-                Phone: {deliveryInfo.phone}
+                Teléfono: {deliveryInfo.phone}
               </Typography>
               {deliveryInfo.instructions && (
                 <Typography variant="body2" sx={{ mt: 1, fontStyle: 'italic' }}>
-                  Instructions: {deliveryInfo.instructions}
+                  Comentarios: {deliveryInfo.instructions}
                 </Typography>
               )}
             </Paper>
@@ -418,19 +418,19 @@ const CheckoutPage: React.FC = () => {
             {/* Payment Method Review */}
             <Paper sx={{ p: 2, mb: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Payment Method
+                Método de pago
               </Typography>
               <Typography variant="body2">
-                {paymentMethod === 'credit-card' && 'Credit/Debit Card'}
-                {paymentMethod === 'digital-wallet' && 'Digital Wallet'}
-                {paymentMethod === 'cash-on-delivery' && 'Cash on Delivery'}
+                {paymentMethod === 'credit-card' && 'Tarjeta de crédito/débito'}
+                {paymentMethod === 'digital-wallet' && 'Cartera digital'}
+                {paymentMethod === 'cash-on-delivery' && 'Domiciliación bancaria'}
               </Typography>
             </Paper>
 
             {/* Order Items Review */}
             <Paper sx={{ p: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Order Items
+                Productos seleccionados
               </Typography>
               {cart?.items.map((item) => (
                 <Box key={item.id} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
@@ -438,7 +438,7 @@ const CheckoutPage: React.FC = () => {
                     {item.quantity}x {item.foodItem.name}
                   </Typography>
                   <Typography variant="body2">
-                    ${(item.foodItem.price * item.quantity).toFixed(2)}
+                    {(item.foodItem.price * item.quantity) > 0 ? `${(item.foodItem.price * item.quantity).toFixed(2)} €` : 'Gratis'}
                   </Typography>
                 </Box>
               ))}
@@ -454,7 +454,7 @@ const CheckoutPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Checkout
+        Contratación
       </Typography>
 
       <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
@@ -483,7 +483,7 @@ const CheckoutPage: React.FC = () => {
                   disabled={activeStep === 0}
                   onClick={handleBack}
                 >
-                  Back
+                  Atrás
                 </Button>
                 <Box>
                   {activeStep === steps.length - 1 ? (
@@ -492,7 +492,7 @@ const CheckoutPage: React.FC = () => {
                       onClick={handlePlaceOrder}
                       disabled={submitting}
                     >
-                      {submitting ? <CircularProgress size={24} /> : 'Place Order'}
+                      {submitting ? <CircularProgress size={24} /> : 'Confirmar contratación'}
                     </Button>
                   ) : (
                     <Button
@@ -500,7 +500,7 @@ const CheckoutPage: React.FC = () => {
                       onClick={handleNext}
                       disabled={!isStepValid(activeStep)}
                     >
-                      Next
+                      Siguiente
                     </Button>
                   )}
                 </Box>
@@ -514,21 +514,21 @@ const CheckoutPage: React.FC = () => {
           <Box sx={{ width: { xs: '100%', md: 350 } }}>
             <Paper sx={{ p: 3, position: 'sticky', top: 24 }}>
               <Typography variant="h6" gutterBottom>
-                Order Summary
+                Resumen
               </Typography>
               
               <Box sx={{ space: 2 }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                   <Typography>Subtotal</Typography>
-                  <Typography>${cart.subTotal.toFixed(2)}</Typography>
+                  <Typography>{cart.subTotal.toFixed(2)} €</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography>Tax</Typography>
-                  <Typography>${cart.tax.toFixed(2)}</Typography>
+                  <Typography>Impuestos</Typography>
+                  <Typography>{cart.tax.toFixed(2)} €</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                  <Typography>Delivery Fee</Typography>
-                  <Typography>${cart.deliveryFee.toFixed(2)}</Typography>
+                  <Typography>Gastos de gestión</Typography>
+                  <Typography>{cart.deliveryFee > 0 ? `${cart.deliveryFee.toFixed(2)} €` : 'Gratis'}</Typography>
                 </Box>
                 <Divider sx={{ my: 2 }} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
@@ -536,7 +536,7 @@ const CheckoutPage: React.FC = () => {
                     Total
                   </Typography>
                   <Typography variant="h6" fontWeight="bold">
-                    ${cart.total.toFixed(2)}
+                    {cart.total.toFixed(2)} €
                   </Typography>
                 </Box>
               </Box>
