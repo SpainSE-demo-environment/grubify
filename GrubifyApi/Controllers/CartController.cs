@@ -135,7 +135,17 @@ namespace GrubifyApi.Controllers
                 new FoodItem { Id = 12, Name = "Plan de Pensiones", Price = 50.00m, ImageUrl = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop", RestaurantId = 4 },
                 new FoodItem { Id = 13, Name = "Seguro de Hogar", Price = 18.00m, ImageUrl = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop", RestaurantId = 5 },
                 new FoodItem { Id = 14, Name = "Seguro de Vida", Price = 12.00m, ImageUrl = "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop", RestaurantId = 5 },
-                new FoodItem { Id = 15, Name = "Seguro de Auto", Price = 30.00m, ImageUrl = "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=400&h=300&fit=crop", RestaurantId = 5 }
+                new FoodItem { Id = 15, Name = "Seguro de Auto", Price = 30.00m, ImageUrl = "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=400&h=300&fit=crop", RestaurantId = 5 },
+                new FoodItem { Id = 16, Name = "Hipoteca Tipo Variable Euríbor", Price = 780.00m, ImageUrl = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop", RestaurantId = 3 },
+                new FoodItem { Id = 17, Name = "Hipoteca Mixta 10+20", Price = 890.00m, ImageUrl = "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&h=300&fit=crop", RestaurantId = 3 },
+                new FoodItem { Id = 18, Name = "Préstamo para Estudios", Price = 150.00m, ImageUrl = "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop", RestaurantId = 3 },
+                new FoodItem { Id = 19, Name = "Préstamo Reforma Hogar", Price = 210.00m, ImageUrl = "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop", RestaurantId = 3 },
+                new FoodItem { Id = 20, Name = "Cuenta Autónomos y Negocios", Price = 0.00m, ImageUrl = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=300&fit=crop", RestaurantId = 1 },
+                new FoodItem { Id = 21, Name = "Tarjeta Prepago Recargable", Price = 0.00m, ImageUrl = "https://images.unsplash.com/photo-1613243555988-441166d4d6fd?w=400&h=300&fit=crop", RestaurantId = 2 },
+                new FoodItem { Id = 22, Name = "Cartera Gestionada Roboadvisor", Price = 200.00m, ImageUrl = "https://images.unsplash.com/photo-1642790551116-18e150f248e3?w=400&h=300&fit=crop", RestaurantId = 4 },
+                new FoodItem { Id = 23, Name = "Broker de Acciones y ETFs", Price = 0.00m, ImageUrl = "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=400&h=300&fit=crop", RestaurantId = 4 },
+                new FoodItem { Id = 24, Name = "Seguro de Salud", Price = 45.00m, ImageUrl = "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=300&fit=crop", RestaurantId = 5 },
+                new FoodItem { Id = 25, Name = "Seguro de Viaje", Price = 15.00m, ImageUrl = "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop", RestaurantId = 5 }
             };
 
             return foodItems.FirstOrDefault(f => f.Id == foodItemId) ?? new FoodItem();
