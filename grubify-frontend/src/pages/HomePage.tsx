@@ -37,6 +37,20 @@ const cuisineTypes = [
   'Seguros',
 ];
 
+const categoryColors: Record<string, string> = {
+  Cuentas: '#4F46E5',
+  Tarjetas: '#DB2777',
+  Hipotecas: '#2563EB',
+  Préstamos: '#EA580C',
+  Inversión: '#0891B2',
+  Ahorro: '#059669',
+  Pensiones: '#7C3AED',
+  Seguros: '#0D9488',
+};
+
+const getCategoryColor = (category: string): string =>
+  categoryColors[category] || '#4F46E5';
+
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -123,41 +137,80 @@ const HomePage: React.FC = () => {
       {/* Hero Section */}
       <Box
         sx={{
-          backgroundImage: 'linear-gradient(135deg, #0A2540 0%, #274472 100%)',
-          borderRadius: 3,
+          position: 'relative',
+          overflow: 'hidden',
+          background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 45%, #06B6D4 100%)',
+          borderRadius: 4,
           color: 'white',
-          p: 6,
-          mb: 4,
+          p: { xs: 4, md: 7 },
+          mb: 5,
           textAlign: 'center',
+          boxShadow: '0 20px 50px -20px rgba(79, 70, 229, 0.6)',
         }}
       >
-        <Typography variant="h2" component="h1" gutterBottom>
-          Tu banca, simple y sin comisiones
-        </Typography>
-        <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
-          Contrata cuentas, tarjetas, hipotecas e inversiones en minutos, 100% online
-        </Typography>
-        
-        {/* Search Bar */}
-        <Box maxWidth="600px" mx="auto">
-          <TextField
-            fullWidth
-            variant="outlined"
-            placeholder="Buscar productos, categorías o servicios..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-              sx: {
-                backgroundColor: 'white',
-                borderRadius: 2,
-              },
+        <Box
+          sx={{
+            position: 'absolute',
+            top: -80,
+            right: -60,
+            width: 260,
+            height: 260,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.12)',
+            filter: 'blur(4px)',
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: -100,
+            left: -40,
+            width: 220,
+            height: 220,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.08)',
+          }}
+        />
+        <Box sx={{ position: 'relative', zIndex: 1 }}>
+          <Chip
+            label="100% online · Sin comisiones"
+            sx={{
+              mb: 2,
+              color: 'white',
+              backgroundColor: 'rgba(255,255,255,0.18)',
+              backdropFilter: 'blur(6px)',
+              fontWeight: 600,
             }}
           />
+          <Typography variant="h2" component="h1" gutterBottom>
+            Tu banca, simple y sin comisiones
+          </Typography>
+          <Typography variant="h6" sx={{ mb: 4, opacity: 0.92, fontWeight: 400 }}>
+            Contrata cuentas, tarjetas, hipotecas e inversiones en minutos, 100% online
+          </Typography>
+
+          {/* Search Bar */}
+          <Box maxWidth="600px" mx="auto">
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Buscar productos, categorías o servicios..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+                sx: {
+                  backgroundColor: 'white',
+                  borderRadius: 3,
+                  '& fieldset': { border: 'none' },
+                },
+              }}
+            />
+          </Box>
         </Box>
       </Box>
 
@@ -167,17 +220,30 @@ const HomePage: React.FC = () => {
           Explora por categoría
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-          {cuisineTypes.map((cuisine) => (
-            <Chip
-              key={cuisine}
-              label={cuisine}
-              clickable
-              variant={selectedCuisine === cuisine ? 'filled' : 'outlined'}
-              color={selectedCuisine === cuisine ? 'primary' : 'default'}
-              onClick={() => setSelectedCuisine(cuisine)}
-              sx={{ mb: 1 }}
-            />
-          ))}
+          {cuisineTypes.map((cuisine) => {
+            const selected = selectedCuisine === cuisine;
+            const color = cuisine === 'Todos' ? '#4F46E5' : getCategoryColor(cuisine);
+            return (
+              <Chip
+                key={cuisine}
+                label={cuisine}
+                clickable
+                onClick={() => setSelectedCuisine(cuisine)}
+                sx={{
+                  mb: 1,
+                  px: 0.5,
+                  fontWeight: 600,
+                  color: selected ? '#fff' : color,
+                  backgroundColor: selected ? color : 'transparent',
+                  border: '1.5px solid',
+                  borderColor: color,
+                  '&:hover': {
+                    backgroundColor: selected ? color : `${color}18`,
+                  },
+                }}
+              />
+            );
+          })}
         </Box>
       </Box>
 
@@ -214,19 +280,45 @@ const HomePage: React.FC = () => {
               cursor: 'pointer',
               transition: 'all 0.3s ease-in-out',
               '&:hover': {
-                transform: 'translateY(-4px)',
-                boxShadow: 4,
+                transform: 'translateY(-6px)',
+                boxShadow: '0 22px 40px -18px rgba(79, 70, 229, 0.45)',
+              },
+              '&:hover .card-media': {
+                transform: 'scale(1.06)',
               },
             }}
             onClick={() => handleRestaurantClick(restaurant.id)}
           >
-            <CardMedia
-              component="img"
-              height="200"
-              image={restaurant.imageUrl}
-              alt={restaurant.name}
-              sx={{ objectFit: 'cover' }}
-            />
+            <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+              <CardMedia
+                component="img"
+                height="200"
+                image={restaurant.imageUrl}
+                alt={restaurant.name}
+                className="card-media"
+                sx={{ objectFit: 'cover', transition: 'transform 0.4s ease' }}
+              />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    'linear-gradient(180deg, rgba(17,24,39,0) 45%, rgba(17,24,39,0.55) 100%)',
+                }}
+              />
+              <Chip
+                label={restaurant.cuisineType}
+                size="small"
+                sx={{
+                  position: 'absolute',
+                  top: 12,
+                  left: 12,
+                  color: '#fff',
+                  fontWeight: 700,
+                  backgroundColor: getCategoryColor(restaurant.cuisineType),
+                }}
+              />
+            </Box>
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography variant="h6" component="h2" gutterBottom>
                 {restaurant.name}
@@ -256,13 +348,6 @@ const HomePage: React.FC = () => {
                   </Typography>
                 </Box>
               </Box>
-              
-              <Chip
-                label={restaurant.cuisineType}
-                size="small"
-                variant="outlined"
-                color="primary"
-              />
             </CardContent>
             <CardActions sx={{ p: 2, pt: 0 }}>
               <Button
