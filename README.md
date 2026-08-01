@@ -5,7 +5,7 @@ A modern retail banking portal built with a React TypeScript frontend and .NET b
 ## 🏦 Features
 
 - **Modern UI**: Beautiful, responsive design for a trustworthy online banking experience (Spanish UI)
-- **Real Banking Content**: Sample product families and financial products (accounts, cards, mortgages, loans, investment, insurance) with images from Unsplash
+- **Real Banking Content**: Sample product families and financial products (cuentas, tarjetas, préstamos, inversión, ahorro, seguros) with themed Material-UI iconography
 - **Complete Onboarding Flow**: Browse products → Add to selection → Contract → Track application status
 - **Azure Container Apps**: Scalable, serverless container hosting
 - **Azure Developer CLI**: One-command deployment and management
@@ -20,6 +20,14 @@ A modern retail banking portal built with a React TypeScript frontend and .NET b
 ## 🚀 Complete Deployment Guide
 
 This guide shows how to deploy Bankify with **both backend versions** (v1 with memory leak, v2 with payment failures) for testing Azure SRE Agent scenarios.
+
+> **Nota (lab / demo del SRE Agent):** en el entorno `azure-demo-environment` la app
+> **no** se despliega con `azd up` creando infraestructura nueva, sino sobre el **Spoke
+> ACA existente** (`rg-lab-spoke-aca-dev`, región `uksouth`) construyendo las imágenes
+> con `az acr build` sobre el ACR `acrgrubifyznl7cs3npn27k` y actualizando las Container
+> Apps `ca-app-api-dev` / `ca-app-frontend-dev`. Consulta el flujo real y los nombres de
+> recursos en **[docs/INTEGRATION.md](docs/INTEGRATION.md)**. La sección siguiente
+> describe el modo *standalone* (`azd up`), útil para un despliegue aislado.
 
 ## 📋 Prerequisites
 
@@ -60,8 +68,8 @@ Before starting, run our prerequisites check script:
 ### 2. Initial Azure Setup
 
 ```bash
-# Clone the repository
-git clone https://github.com/dm-chelupati/grubify.git
+# Clone the repository (this fork)
+git clone https://github.com/SpainSE-demo-environment/grubify.git
 cd grubify
 
 # ⚠️ IMPORTANT: Start Docker Desktop before proceeding
@@ -103,7 +111,7 @@ Now you have:
 
 **SRE Agent Setup:**
 1. **Create agent** - ([Azure SRE Agent Usage Guide](https://learn.microsoft.com/en-us/azure/sre-agent/usage))
-2. **Map GitHub repo** that you cloned this to: **https://github.com/dm-chelupati/grubify.git**
+2. **Map GitHub repo** that you cloned this to: **https://github.com/SpainSE-demo-environment/grubify.git**
 3. **Connect Service Now** to your SRE agent
 4. **Setup incident handler** with custom instructions for automated diagnosis and mitigation
 5. **Simulate memory leak** using the deployed application endpoints
