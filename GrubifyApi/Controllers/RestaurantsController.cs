@@ -12,9 +12,9 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 1,
-                Name = "Banca Personal",
+                Name = "Cuentas",
                 Description = "Cuentas corrientes y de ahorro sin comisiones para tu día a día",
-                ImageUrl = "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=800&h=600&fit=crop",
+                ImageUrl = "",
                 CuisineType = "Cuentas",
                 Rating = 4.8,
                 DeliveryTime = "Contratación inmediata",
@@ -26,9 +26,9 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 2,
-                Name = "Tarjetas y Pagos",
+                Name = "Tarjetas",
                 Description = "Tarjetas de débito y crédito con las mejores condiciones",
-                ImageUrl = "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+                ImageUrl = "",
                 CuisineType = "Tarjetas",
                 Rating = 4.7,
                 DeliveryTime = "Alta en 24-48h",
@@ -40,10 +40,10 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 3,
-                Name = "Hipotecas y Financiación",
-                Description = "Hipotecas y préstamos personales con asesoramiento experto",
-                ImageUrl = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-                CuisineType = "Hipotecas",
+                Name = "Préstamos",
+                Description = "Préstamos personales e hipotecas con asesoramiento experto",
+                ImageUrl = "",
+                CuisineType = "Préstamos",
                 Rating = 4.6,
                 DeliveryTime = "Estudio en 48-72h",
                 DeliveryFee = 0.00m,
@@ -54,9 +54,9 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 4,
-                Name = "Inversión y Ahorro",
-                Description = "Fondos, depósitos y planes de pensiones para hacer crecer tu dinero",
-                ImageUrl = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop",
+                Name = "Inversión",
+                Description = "Fondos, acciones y planes de pensiones para hacer crecer tu dinero",
+                ImageUrl = "",
                 CuisineType = "Inversión",
                 Rating = 4.5,
                 DeliveryTime = "Contratación inmediata",
@@ -68,9 +68,23 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 5,
-                Name = "Seguros y Pensiones",
-                Description = "Seguros de hogar, vida y auto para proteger lo que más importa",
-                ImageUrl = "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
+                Name = "Ahorro",
+                Description = "Depósitos y cuentas de ahorro para rentabilizar tu dinero con seguridad",
+                ImageUrl = "",
+                CuisineType = "Ahorro",
+                Rating = 4.6,
+                DeliveryTime = "Contratación inmediata",
+                DeliveryFee = 0.00m,
+                MinimumOrder = 0.00m,
+                IsOpen = true,
+                Address = "Oficina Central, Zaragoza"
+            },
+            new Restaurant
+            {
+                Id = 6,
+                Name = "Seguros",
+                Description = "Seguros de salud, hogar, auto y moto para proteger lo que más importa",
+                ImageUrl = "",
                 CuisineType = "Seguros",
                 Rating = 4.4,
                 DeliveryTime = "Contratación inmediata",

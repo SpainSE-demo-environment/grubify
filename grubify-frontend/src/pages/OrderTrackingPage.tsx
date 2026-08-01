@@ -25,6 +25,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { Order, OrderStatus } from '../types';
 import { orderService } from '../services/api';
+import { ProductIconBox } from '../theme/bankVisuals';
 
 const orderSteps = [
   { label: 'Solicitud recibida', icon: <CheckCircleIcon />, status: OrderStatus.Placed },
@@ -244,16 +245,12 @@ const OrderTrackingPage: React.FC = () => {
             </Typography>
             {order.items.map((item) => (
               <Box key={item.id} sx={{ display: 'flex', gap: 2, mb: 2 }}>
-                <Box
-                  component="img"
-                  src={item.foodItem.imageUrl}
-                  alt={item.foodItem.name}
-                  sx={{
-                    width: 50,
-                    height: 50,
-                    objectFit: 'cover',
-                    borderRadius: 1,
-                  }}
+                <ProductIconBox
+                  name={item.foodItem.name}
+                  category={item.foodItem.category}
+                  size={50}
+                  iconSize={26}
+                  radius={10}
                 />
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="body2" fontWeight="bold">

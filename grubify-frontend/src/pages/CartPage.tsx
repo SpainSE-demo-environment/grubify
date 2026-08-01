@@ -21,6 +21,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Cart, CartItem } from '../types';
 import { cartService } from '../services/api';
+import { ProductIconBox } from '../theme/bankVisuals';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -153,16 +154,12 @@ const CartPage: React.FC = () => {
               {cart.items.map((item, index) => (
                 <Box key={item.id}>
                   <Box sx={{ display: 'flex', gap: 2, py: 2 }}>
-                    <Box
-                      component="img"
-                      src={item.foodItem.imageUrl}
-                      alt={item.foodItem.name}
-                      sx={{
-                        width: 80,
-                        height: 80,
-                        objectFit: 'cover',
-                        borderRadius: 1,
-                      }}
+                    <ProductIconBox
+                      name={item.foodItem.name}
+                      category={item.foodItem.category}
+                      size={80}
+                      iconSize={38}
+                      radius={12}
                     />
                     <Box sx={{ flex: 1 }}>
                       <Typography variant="h6" gutterBottom>

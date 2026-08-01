@@ -80,7 +80,14 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <AppBar position="sticky" elevation={2}>
+    <AppBar
+      position="sticky"
+      elevation={0}
+      sx={{
+        background: 'linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%)',
+        boxShadow: '0 4px 20px -8px rgba(79, 70, 229, 0.5)',
+      }}
+    >
       <Toolbar>
         <IconButton
           edge="start"
@@ -123,7 +130,17 @@ const Navbar: React.FC = () => {
           </Search>
         </Box>
 
-        <Button color="inherit" sx={{ mr: 2 }}>
+        <Button
+          color="inherit"
+          sx={{
+            mr: 2,
+            px: 2.5,
+            border: '1px solid',
+            borderColor: 'rgba(255,255,255,0.5)',
+            borderRadius: 999,
+            '&:hover': { borderColor: '#fff', backgroundColor: 'rgba(255,255,255,0.12)' },
+          }}
+        >
           Acceder
         </Button>
 

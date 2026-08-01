@@ -8,7 +8,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardMedia,
   CardActions,
   Chip,
   Rating,
@@ -28,6 +27,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { Restaurant, FoodItem } from '../types';
 import { restaurantService, foodItemService, cartService } from '../services/api';
+import { getCategoryGradient, getCategoryIcon, ProductIconBox } from '../theme/bankVisuals';
 
 const RestaurantPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -124,13 +124,19 @@ const RestaurantPage: React.FC = () => {
       {/* Restaurant Header */}
       <Card sx={{ mb: 4 }}>
         <Box sx={{ position: 'relative' }}>
-          <CardMedia
-            component="img"
-            height="300"
-            image={restaurant.imageUrl}
-            alt={restaurant.name}
-            sx={{ objectFit: 'cover' }}
-          />
+          <Box
+            sx={{
+              height: 260,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: getCategoryGradient(restaurant.cuisineType),
+            }}
+          >
+            {React.createElement(getCategoryIcon(restaurant.cuisineType), {
+              sx: { fontSize: 128, color: 'rgba(255,255,255,0.95)' },
+            })}
+          </Box>
           <Box
             sx={{
               position: 'absolute',
@@ -193,11 +199,13 @@ const RestaurantPage: React.FC = () => {
           >
             {items.map((item) => (
               <Card key={item.id} sx={{ display: 'flex', height: 200 }}>
-                <CardMedia
-                  component="img"
-                  sx={{ width: 150, objectFit: 'cover' }}
-                  image={item.imageUrl}
-                  alt={item.name}
+                <ProductIconBox
+                  name={item.name}
+                  category={item.category}
+                  size={150}
+                  iconSize={64}
+                  radius={0}
+                  fullHeight
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
                   <CardContent sx={{ flex: 1 }}>
