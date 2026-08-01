@@ -1,66 +1,113 @@
-# Grubify — Integración con azure-demo-environment
+# Bankify (fork de Grubify) — Integración con el Spoke ACA de azure-demo-environment
 
-Este fork de [dm-chelupati/grubify](https://github.com/dm-chelupati/grubify) añade soporte para desplegar la aplicación en infraestructura **existente** creada por el entorno [azure-demo-environment](https://github.com/SpainSE-demo-environment/azure-demo-environment) (Hub & Spoke).
+Este fork de [dm-chelupati/grubify](https://github.com/dm-chelupati/grubify) —rebrandeado a **Bankify**, un portal de banca minorista para demos del **Azure SRE Agent**— se despliega sobre la infraestructura **existente** del Spoke ACA creado por [azure-demo-environment](https://github.com/SpainSE-demo-environment/azure-demo-environment) (topología Hub & Spoke).
 
-## Nuevos parámetros
+> Los nombres internos de clases C#, propiedades de modelo y rutas de API (`/api/restaurants`, `/api/fooditems`, `/api/cart`, `/api/orders`) se mantienen: solo cambian marca, textos y catálogo mostrados.
 
-| Parámetro | Default | Descripción |
-|-----------|---------|-------------|
-| `existingResourceGroupName` | `''` | Si se proporciona, despliega en este RG existente |
-| `existingContainerAppsEnvironmentName` | `''` | Nombre del CAE existente (ej: `cae-spoke-aca`) |
-| `existingContainerRegistryName` | `''` | Nombre del ACR existente (ej: `acrspokeaca`) |
+## Recursos reales del Spoke ACA (entorno `dev`)
 
-## Modos de despliegue
+Estos son los recursos existentes sobre los que se despliega la app (RG `rg-lab-spoke-aca-dev`, región **uksouth**):
 
-### 1. Standalone (original)
+| Recurso | Nombre real | Tipo |
+|---------|-------------|------|
+| Resource Group | `rg-lab-spoke-aca-dev` | `Microsoft.Resources/resourceGroups` |
+| Container Apps Environment | `cae-spoke-aca-dev` | `Microsoft.App/managedEnvironments` |
+| Container Registry | `acrgrubifyznl7cs3npn27k` | `Microsoft.ContainerRegistry/registries` |
+| Application Insights | `appi-spoke-aca-dev` | `Microsoft.Insights/components` |
+| VNet | `vnet-spoke-aca-dev` (`10.10.0.0/16`) | `Microsoft.Network/virtualNetworks` |
+| Container App — API | `ca-app-api-dev` | `Microsoft.App/containerApps` |
+| Container App — Frontend | `ca-app-frontend-dev` | `Microsoft.App/containerApps` |
+| Azure SRE Agent | `sre-aca-dev` | `Microsoft.App/agents` |
+| Alerta HTTP 5xx (API banca) | `alert-http5xx-banking-api` | `Microsoft.Insights/metricAlerts` |
+
+> El nombre del ACR lleva sufijo aleatorio (`acrgrubify…`); confírmalo siempre con
+> `az acr list -g rg-lab-spoke-aca-dev --query "[].name" -o tsv`.
+
+Dominio por defecto del CAE: `purpleplant-c8daeac4.uksouth.azurecontainerapps.io`
+(frontend accesible en `https://ca-app-frontend-dev.<defaultDomain>`).
+
+## Parámetros de Bicep para reutilizar el Spoke
+
+`infra/main.bicep` acepta estos parámetros; si se rellenan, reutiliza la infraestructura del Spoke en vez de crear recursos nuevos:
+
+| Parámetro | Valor en el lab `dev` | Descripción |
+|-----------|-----------------------|-------------|
+| `existingResourceGroupName` | `rg-lab-spoke-aca-dev` | RG existente donde desplegar |
+| `existingContainerAppsEnvironmentName` | `cae-spoke-aca-dev` | CAE existente |
+| `existingContainerRegistryName` | `acrgrubifyznl7cs3npn27k` | ACR existente |
+
+Si se dejan vacíos, el Bicep crea infraestructura nueva (modo standalone, ver README).
+
+## Despliegue sobre el Spoke con `az acr build` (flujo del lab)
+
+Las imágenes se construyen **en el propio ACR** del Spoke (`az acr build`, no requiere Docker local) y las Container Apps se actualizan a la nueva imagen. Repositorios de imagen en el ACR: `app-api` y `app-frontend` (existen también los legacy `grubify-api` / `grubify-frontend`).
+
 ```bash
-azd up
+RG=rg-lab-spoke-aca-dev
+ACR=acrgrubifyznl7cs3npn27k
+TAG=latest   # usa 'buggy' para la variante con el memory-leak de la demo
+
+# 1) Construir las imágenes en el ACR desde los Dockerfiles del repo
+az acr build -r $ACR -t app-api:$TAG      ./GrubifyApi
+az acr build -r $ACR -t app-frontend:$TAG ./grubify-frontend
+
+# 2) Actualizar las Container Apps a la imagen recién construida
+az containerapp update -g $RG -n ca-app-api-dev \
+  --image $ACR.azurecr.io/app-api:$TAG
+az containerapp update -g $RG -n ca-app-frontend-dev \
+  --image $ACR.azurecr.io/app-frontend:$TAG
 ```
-Crea RG + CAE + ACR + Container Apps (comportamiento original).
 
-### 2. Integrado con Hub & Spoke
-Primero despliega la infraestructura del Spoke ACA:
-```bash
-# En azure-demo-environment/lab/spokes/aca
-az deployment sub create -f main.bicep -p aca.bicepparam -l westeurope
-```
+> La API desplegada en el lab usa la etiqueta `app-api:buggy`, que contiene el
+> memory-leak intencionado de `CartController` (buffer de 10 MB por
+> `AddItemToCart` acumulado en un `static List<byte[]>`). Es el fallo central de
+> la demo: dispara `OutOfMemoryException` / HTTP 5xx y activa la alerta
+> `alert-http5xx-banking-api`, que a su vez notifica al SRE Agent `sre-aca-dev`.
 
-Luego despliega Grubify sobre esa infraestructura:
+### Alternativa: `azd up` sobre el Spoke
+
+También puedes usar `azd` pasándole los recursos existentes:
+
 ```bash
-azd env set existingResourceGroupName "rg-spoke-aca"
-azd env set existingContainerAppsEnvironmentName "cae-spoke-aca"
-azd env set existingContainerRegistryName "acrspokeaca"
+azd env set AZURE_LOCATION uksouth
+azd env set existingResourceGroupName rg-lab-spoke-aca-dev
+azd env set existingContainerAppsEnvironmentName cae-spoke-aca-dev
+azd env set existingContainerRegistryName acrgrubifyznl7cs3npn27k
 azd up
 ```
 
 ## Arquitectura integrada
 
 ```
-┌───────────────────────────────────────────────────────────┐
-│ azure-demo-environment                                    │
-│ ┌─────────────────────────────────────────────────────┐  │
-│ │ Spoke ACA (rg-spoke-aca)                            │  │
-│ │  ├─ VNet (10.10.0.0/16)                             │  │
-│ │  ├─ Container Apps Environment                      │  │
-│ │  ├─ Container Registry                              │  │
-│ │  └─ Application Insights → Hub Log Analytics       │  │
-│ └─────────────────────────────────────────────────────┘  │
-└───────────────────────────────────────────────────────────┘
-              │
-              │  existingContainerAppsEnvironmentName
-              ▼
-┌───────────────────────────────────────────────────────────┐
-│ Grubify (este repo)                                       │
-│  ├─ ca-grubify-api     (Container App, port 8080)        │
-│  └─ ca-grubify-frontend (Container App, port 80)         │
-└───────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│ azure-demo-environment · Spoke ACA (rg-lab-spoke-aca-dev, uksouth)│
+│                                                                   │
+│  VNet vnet-spoke-aca-dev (10.10.0.0/16)                           │
+│  ├─ Container Apps Environment  cae-spoke-aca-dev                 │
+│  │   ├─ ca-app-api-dev        (Bankify API,      :8080)           │
+│  │   ├─ ca-app-frontend-dev   (Bankify Frontend, :80)            │
+│  │   └─ ca-supplier-api-dev   (servicio auxiliar de la demo)      │
+│  ├─ Container Registry  acrgrubifyznl7cs3npn27k                   │
+│  │   └─ repos: app-api, app-frontend                             │
+│  ├─ Application Insights  appi-spoke-aca-dev  → Log Analytics Hub │
+│  ├─ Alerta  alert-http5xx-banking-api  (HTTP 5xx)                 │
+│  └─ Azure SRE Agent  sre-aca-dev                                 │
+└─────────────────────────────────────────────────────────────────┘
+                     │  telemetría (5xx por memory-leak)
+                     ▼
+        Alerta → SRE Agent sre-aca-dev → diagnóstico / mitigación
 ```
 
-## Cambios respecto al repo original
+## Cambios de este fork respecto al repo original
 
-1. **infra/main.bicep**: Lógica condicional para reutilizar recursos existentes
-2. **infra/core/host/container-apps-environment-ref.bicep**: Módulo auxiliar para obtener `defaultDomain` de CAE existente
+1. **Rebrand a Bankify**: UI en español y catálogo de productos financieros
+   (la iconografía es de Material-UI; ya **no** se usan imágenes de Unsplash).
+2. **infra/main.bicep**: lógica condicional para reutilizar RG/CAE/ACR existentes.
+3. **infra/core/host/container-apps-environment-ref.bicep**: módulo auxiliar para
+   obtener el `defaultDomain` de un CAE existente.
 
 ## Sincronización con upstream
 
-Este fork puede recibir PRs del repo original. Los cambios añadidos son aditivos (nuevos params con defaults vacíos), por lo que no deberían generar conflictos.
+Este fork puede recibir PRs del repo original. Los cambios de infraestructura son
+aditivos (nuevos parámetros con defaults vacíos), por lo que no deberían generar
+conflictos.
