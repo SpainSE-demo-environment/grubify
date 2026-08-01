@@ -21,7 +21,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Cart, CartItem } from '../types';
 import { cartService } from '../services/api';
-import { ProductIconBox } from '../theme/bankVisuals';
+import { ProductIconBox, getProductMeta, getCategoryColor, resolveCategory } from '../theme/bankVisuals';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -151,7 +151,10 @@ const CartPage: React.FC = () => {
                 </Button>
               </Box>
 
-              {cart.items.map((item, index) => (
+              {cart.items.map((item, index) => {
+                const meta = getProductMeta(item.foodItem.name);
+                const cat = getCategoryColor(resolveCategory(item.foodItem.name, item.foodItem.category));
+                return (
                 <Box key={item.id}>
                   <Box sx={{ display: 'flex', gap: 2, py: 2 }}>
                     <ProductIconBox
@@ -173,8 +176,8 @@ const CartPage: React.FC = () => {
                           Nota: {item.specialInstructions}
                         </Typography>
                       )}
-                      <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
-                        {item.foodItem.price > 0 ? `${item.foodItem.price.toFixed(2)} €` : 'Gratis'}
+                      <Typography variant="subtitle1" sx={{ mt: 1, color: cat, fontWeight: 700 }}>
+                        {meta.highlightLabel ? `${meta.highlightLabel}: ` : ''}{meta.highlight}
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
@@ -201,14 +204,12 @@ const CartPage: React.FC = () => {
                       >
                         <DeleteIcon />
                       </IconButton>
-                      <Typography variant="body2" fontWeight="bold">
-                        {(item.foodItem.price * item.quantity) > 0 ? `${(item.foodItem.price * item.quantity).toFixed(2)} €` : 'Gratis'}
-                      </Typography>
                     </Box>
                   </Box>
                   {index < cart.items.length - 1 && <Divider />}
                 </Box>
-              ))}
+                );
+              })}
             </CardContent>
           </Card>
         </Box>
@@ -220,28 +221,18 @@ const CartPage: React.FC = () => {
               Resumen
             </Typography>
             
-            <Box sx={{ space: 2 }}>
+            <Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography>Subtotal</Typography>
-                <Typography>{cart.subTotal.toFixed(2)} €</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography>Impuestos</Typography>
-                <Typography>{cart.tax.toFixed(2)} €</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                <Typography>Gastos de gestión</Typography>
-                <Typography>{cart.deliveryFee.toFixed(2)} €</Typography>
+                <Typography>Productos seleccionados</Typography>
+                <Typography fontWeight="bold">
+                  {cart.items.reduce((n, i) => n + i.quantity, 0)}
+                </Typography>
               </Box>
               <Divider sx={{ my: 2 }} />
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-                <Typography variant="h6" fontWeight="bold">
-                  Total
-                </Typography>
-                <Typography variant="h6" fontWeight="bold">
-                  {cart.total.toFixed(2)} €
-                </Typography>
-              </Box>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                Tramitar tu solicitud no tiene coste. Un asesor revisará los productos
+                seleccionados y te contactará para completar la contratación.
+              </Typography>
             </Box>
 
             <Button

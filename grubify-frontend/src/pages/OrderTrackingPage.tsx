@@ -25,7 +25,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { Order, OrderStatus } from '../types';
 import { orderService } from '../services/api';
-import { ProductIconBox } from '../theme/bankVisuals';
+import { ProductIconBox, getProductMeta } from '../theme/bankVisuals';
 
 const orderSteps = [
   { label: 'Solicitud recibida', icon: <CheckCircleIcon />, status: OrderStatus.Placed },
@@ -257,7 +257,7 @@ const OrderTrackingPage: React.FC = () => {
                     {item.quantity}x {item.foodItem.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {item.foodItem.price > 0 ? `${item.foodItem.price.toFixed(2)} € c/u` : 'Sin coste'}
+                    {getProductMeta(item.foodItem.name).highlight}
                   </Typography>
                   {item.specialInstructions && (
                     <Typography variant="caption" sx={{ fontStyle: 'italic' }}>
@@ -265,9 +265,6 @@ const OrderTrackingPage: React.FC = () => {
                     </Typography>
                   )}
                 </Box>
-                <Typography variant="body2" fontWeight="bold">
-                  {(item.foodItem.price * item.quantity) > 0 ? `${(item.foodItem.price * item.quantity).toFixed(2)} €` : 'Gratis'}
-                </Typography>
               </Box>
             ))}
           </Paper>
@@ -278,30 +275,17 @@ const OrderTrackingPage: React.FC = () => {
               Resumen
             </Typography>
             
-            <Box sx={{ space: 2 }}>
+            <Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="body2">Subtotal</Typography>
-                <Typography variant="body2">{order.subTotal.toFixed(2)} €</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="body2">Impuestos</Typography>
-                <Typography variant="body2">{order.tax.toFixed(2)} €</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                <Typography variant="body2">Gastos de gestión</Typography>
-                <Typography variant="body2">{order.deliveryFee > 0 ? `${order.deliveryFee.toFixed(2)} €` : 'Gratis'}</Typography>
+                <Typography variant="body2">Productos solicitados</Typography>
+                <Typography variant="body2" fontWeight="bold">
+                  {order.items.reduce((n, i) => n + i.quantity, 0)}
+                </Typography>
               </Box>
               <Divider sx={{ my: 2 }} />
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                <Typography variant="h6" fontWeight="bold">
-                  Total
-                </Typography>
-                <Typography variant="h6" fontWeight="bold">
-                  {order.total.toFixed(2)} €
-                </Typography>
-              </Box>
               <Typography variant="body2" color="text.secondary">
-                Pago mediante {order.paymentMethod}
+                Solicitud registrada. Un asesor la revisará y te contactará para
+                formalizar la contratación.
               </Typography>
             </Box>
           </Paper>

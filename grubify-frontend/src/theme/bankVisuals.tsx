@@ -93,8 +93,103 @@ const productIcons: Record<string, IconType> = {
   'Seguro de Moto': TwoWheelerRounded,
 };
 
+// Banking-appropriate headline figure and feature tags per product.
+// This replaces the food-style "price" display: a loan shows a rate,
+// a card shows a credit limit, an insurance shows a monthly premium, etc.
+export interface ProductMeta {
+  highlight: string; // headline figure (rate, amount, monthly fee, "Sin comisiones")
+  highlightLabel: string; // small caption above the headline
+  badges: string[]; // up to two relevant feature tags
+}
+
+const productMeta: Record<string, ProductMeta> = {
+  'Cuenta Personal': {
+    highlight: 'Sin comisiones',
+    highlightLabel: 'Cuenta corriente',
+    badges: ['Sin comisiones', '100% online'],
+  },
+  'Cuenta de Ahorro': {
+    highlight: '0,75%',
+    highlightLabel: 'TAE',
+    badges: ['Sin comisiones', 'Liquidez total'],
+  },
+  'Tarjeta de Débito': {
+    highlight: '0 €',
+    highlightLabel: 'Cuota anual',
+    badges: ['Sin comisiones', 'Contactless'],
+  },
+  'Tarjeta de Crédito': {
+    highlight: 'Hasta 6.000 €',
+    highlightLabel: 'Límite de crédito',
+    badges: ['Pago aplazado', 'Gratis 1er año'],
+  },
+  'Préstamo Personal': {
+    highlight: '6,95%',
+    highlightLabel: 'TIN desde',
+    badges: ['Hasta 60.000 €', 'Sin comisión de apertura'],
+  },
+  'Préstamo Personal Preconcedido': {
+    highlight: 'Hasta 30.000 €',
+    highlightLabel: 'Preconcedido',
+    badges: ['Al instante', 'Sin papeleo'],
+  },
+  Hipoteca: {
+    highlight: '2,90%',
+    highlightLabel: 'TIN fijo',
+    badges: ['Hasta 30 años', 'Cuota estable'],
+  },
+  'Plan de Pensiones': {
+    highlight: 'Desde 30 €/mes',
+    highlightLabel: 'Aportación',
+    badges: ['Ventajas fiscales', 'Aportación flexible'],
+  },
+  'Fondos de Inversión': {
+    highlight: '+5,2%',
+    highlightLabel: 'Rentab. anual*',
+    badges: ['Gestión activa', 'Diversificado'],
+  },
+  'Acciones y ETFs': {
+    highlight: '0 €',
+    highlightLabel: 'Comisión de custodia',
+    badges: ['Tiempo real', 'Bajas comisiones'],
+  },
+  Depósito: {
+    highlight: '3,00%',
+    highlightLabel: 'TAE a 12 meses',
+    badges: ['Capital garantizado'],
+  },
+  'Cuenta de Ahorro Remunerada': {
+    highlight: '2,50%',
+    highlightLabel: 'TAE',
+    badges: ['Liquidez diaria', 'Sin permanencia'],
+  },
+  'Seguro de Salud': {
+    highlight: 'Desde 45 €/mes',
+    highlightLabel: 'Prima',
+    badges: ['Sin copagos', 'Videoconsulta 24h'],
+  },
+  'Seguro de Hogar': {
+    highlight: 'Desde 18 €/mes',
+    highlightLabel: 'Prima',
+    badges: ['Cobertura integral', 'Asistencia 24h'],
+  },
+  'Seguro de Auto': {
+    highlight: 'Desde 30 €/mes',
+    highlightLabel: 'Prima',
+    badges: ['Todo riesgo', 'Asistencia en carretera'],
+  },
+  'Seguro de Moto': {
+    highlight: 'Desde 20 €/mes',
+    highlightLabel: 'Prima',
+    badges: ['Defensa jurídica', 'Asistencia 24h'],
+  },
+};
+
 export const resolveCategory = (name: string, category?: string): string =>
   (category && category.trim()) || productCategory[name] || 'Cuentas';
+
+export const getProductMeta = (name: string): ProductMeta =>
+  productMeta[name] || { highlight: 'Sin comisiones', highlightLabel: '', badges: [] };
 
 export const getCategoryColor = (category: string): string =>
   categoryColors[category] || '#4F46E5';

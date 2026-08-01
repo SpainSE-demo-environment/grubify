@@ -27,7 +27,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { Restaurant, FoodItem } from '../types';
 import { restaurantService, foodItemService, cartService } from '../services/api';
-import { getCategoryGradient, getCategoryIcon, ProductIconBox } from '../theme/bankVisuals';
+import { getCategoryColor, getCategoryGradient, getCategoryIcon, getProductMeta, resolveCategory, ProductIconBox } from '../theme/bankVisuals';
 
 const RestaurantPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -197,7 +197,10 @@ const RestaurantPage: React.FC = () => {
               gap: 3,
             }}
           >
-            {items.map((item) => (
+            {items.map((item) => {
+              const cat = getCategoryColor(resolveCategory(item.name, item.category));
+              const meta = getProductMeta(item.name);
+              return (
               <Card key={item.id} sx={{ display: 'flex', height: 200 }}>
                 <ProductIconBox
                   name={item.name}
@@ -215,19 +218,28 @@ const RestaurantPage: React.FC = () => {
                     <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                       {item.description}
                     </Typography>
-                    <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-                      {item.isVegetarian && (
-                        <Chip label="Sin comisiones" size="small" color="success" />
-                      )}
-                      {item.isVegan && (
-                        <Chip label="100% Online" size="small" color="info" />
-                      )}
-                      {item.isSpicy && (
-                        <Chip label="Oferta" size="small" color="error" />
-                      )}
+                    <Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
+                      {meta.badges.map((badge) => (
+                        <Chip
+                          key={badge}
+                          label={badge}
+                          size="small"
+                          variant="outlined"
+                          sx={{ borderColor: cat, color: cat, fontWeight: 600 }}
+                        />
+                      ))}
                     </Box>
-                    <Typography variant="h6" color="primary" fontWeight="bold">
-                      {item.price > 0 ? `${item.price.toFixed(2)} €` : 'Gratis'}
+                    {meta.highlightLabel && (
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ textTransform: 'uppercase', letterSpacing: 0.5, display: 'block' }}
+                      >
+                        {meta.highlightLabel}
+                      </Typography>
+                    )}
+                    <Typography variant="h6" fontWeight="bold" sx={{ color: cat }}>
+                      {meta.highlight}
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -243,7 +255,8 @@ const RestaurantPage: React.FC = () => {
                   </CardActions>
                 </Box>
               </Card>
-            ))}
+              );
+            })}
           </Box>
         </Box>
       ))}
@@ -260,8 +273,11 @@ const RestaurantPage: React.FC = () => {
               <Typography variant="body2" color="text.secondary" gutterBottom>
                 {selectedItem.description}
               </Typography>
-              <Typography variant="h6" color="primary" gutterBottom>
-                {selectedItem.price > 0 ? `${selectedItem.price.toFixed(2)} €` : 'Gratis'}
+              <Typography variant="caption" color="text.secondary" sx={{ textTransform: 'uppercase', letterSpacing: 0.5, display: 'block' }}>
+                {getProductMeta(selectedItem.name).highlightLabel}
+              </Typography>
+              <Typography variant="h6" gutterBottom sx={{ color: getCategoryColor(resolveCategory(selectedItem.name, selectedItem.category)), fontWeight: 'bold' }}>
+                {getProductMeta(selectedItem.name).highlight}
               </Typography>
               
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, my: 3 }}>
@@ -290,7 +306,7 @@ const RestaurantPage: React.FC = () => {
         <DialogActions>
           <Button onClick={() => setDialogOpen(false)}>Cancelar</Button>
           <Button onClick={confirmAddToCart} variant="contained">
-            Añadir a la solicitud{selectedItem && selectedItem.price > 0 ? ` - ${(selectedItem.price * quantity).toFixed(2)} €` : ''}
+            Añadir a la solicitud
           </Button>
         </DialogActions>
       </Dialog>

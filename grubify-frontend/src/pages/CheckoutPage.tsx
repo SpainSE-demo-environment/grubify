@@ -28,6 +28,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Cart, PlaceOrderRequest } from '../types';
 import { cartService, orderService } from '../services/api';
+import { getProductMeta } from '../theme/bankVisuals';
 
 const steps = ['Datos de contacto', 'Pago', 'Revisar y contratar'];
 
@@ -437,8 +438,8 @@ const CheckoutPage: React.FC = () => {
                   <Typography variant="body2">
                     {item.quantity}x {item.foodItem.name}
                   </Typography>
-                  <Typography variant="body2">
-                    {(item.foodItem.price * item.quantity) > 0 ? `${(item.foodItem.price * item.quantity).toFixed(2)} €` : 'Gratis'}
+                  <Typography variant="body2" color="text.secondary">
+                    {getProductMeta(item.foodItem.name).highlight}
                   </Typography>
                 </Box>
               ))}
@@ -517,28 +518,18 @@ const CheckoutPage: React.FC = () => {
                 Resumen
               </Typography>
               
-              <Box sx={{ space: 2 }}>
+              <Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography>Subtotal</Typography>
-                  <Typography>{cart.subTotal.toFixed(2)} €</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography>Impuestos</Typography>
-                  <Typography>{cart.tax.toFixed(2)} €</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                  <Typography>Gastos de gestión</Typography>
-                  <Typography>{cart.deliveryFee > 0 ? `${cart.deliveryFee.toFixed(2)} €` : 'Gratis'}</Typography>
+                  <Typography>Productos seleccionados</Typography>
+                  <Typography fontWeight="bold">
+                    {cart.items.reduce((n, i) => n + i.quantity, 0)}
+                  </Typography>
                 </Box>
                 <Divider sx={{ my: 2 }} />
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-                  <Typography variant="h6" fontWeight="bold">
-                    Total
-                  </Typography>
-                  <Typography variant="h6" fontWeight="bold">
-                    {cart.total.toFixed(2)} €
-                  </Typography>
-                </Box>
+                <Typography variant="body2" color="text.secondary">
+                  Sin coste por tramitar. Un asesor validará tu solicitud y te
+                  contactará para formalizar la contratación.
+                </Typography>
               </Box>
             </Paper>
           </Box>
