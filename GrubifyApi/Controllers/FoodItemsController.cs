@@ -227,6 +227,154 @@ namespace GrubifyApi.Controllers
                 IsSpicy = false,
                 RestaurantId = 5,
                 PreparationTime = 20
+            },
+
+            // Ampliación: más hipotecas y financiación
+            new FoodItem
+            {
+                Id = 16,
+                Name = "Hipoteca Tipo Variable Euríbor",
+                Description = "Hipoteca a tipo variable con diferencial reducido y bonificaciones por vinculación",
+                Price = 780.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop",
+                Category = "Hipotecas",
+                IsVegetarian = false,
+                IsVegan = false,
+                IsSpicy = false,
+                RestaurantId = 3,
+                PreparationTime = 30
+            },
+            new FoodItem
+            {
+                Id = 17,
+                Name = "Hipoteca Mixta 10+20",
+                Description = "Combina tipo fijo los primeros 10 años y variable el resto, lo mejor de ambos mundos",
+                Price = 890.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&h=300&fit=crop",
+                Category = "Hipotecas",
+                IsVegetarian = false,
+                IsVegan = false,
+                IsSpicy = true,
+                RestaurantId = 3,
+                PreparationTime = 30
+            },
+            new FoodItem
+            {
+                Id = 18,
+                Name = "Préstamo para Estudios",
+                Description = "Financia tu máster o grado con carencia hasta finalizar los estudios",
+                Price = 150.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop",
+                Category = "Préstamos",
+                IsVegetarian = true,
+                IsVegan = true,
+                IsSpicy = false,
+                RestaurantId = 3,
+                PreparationTime = 20
+            },
+            new FoodItem
+            {
+                Id = 19,
+                Name = "Préstamo Reforma Hogar",
+                Description = "Hasta 40.000€ para reformar tu vivienda con plazos de hasta 8 años",
+                Price = 210.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop",
+                Category = "Préstamos",
+                IsVegetarian = true,
+                IsVegan = false,
+                IsSpicy = false,
+                RestaurantId = 3,
+                PreparationTime = 25
+            },
+
+            // Ampliación: banca personal y tarjetas
+            new FoodItem
+            {
+                Id = 20,
+                Name = "Cuenta Autónomos y Negocios",
+                Description = "Cuenta profesional sin comisiones con TPV y gestión de recibos incluida",
+                Price = 0.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=300&fit=crop",
+                Category = "Cuentas",
+                IsVegetarian = true,
+                IsVegan = false,
+                IsSpicy = true,
+                RestaurantId = 1,
+                PreparationTime = 20
+            },
+            new FoodItem
+            {
+                Id = 21,
+                Name = "Tarjeta Prepago Recargable",
+                Description = "Controla tu gasto con una tarjeta prepago recargable, ideal para compras online",
+                Price = 0.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1613243555988-441166d4d6fd?w=400&h=300&fit=crop",
+                Category = "Tarjetas",
+                IsVegetarian = true,
+                IsVegan = true,
+                IsSpicy = false,
+                RestaurantId = 2,
+                PreparationTime = 10
+            },
+
+            // Ampliación: inversión
+            new FoodItem
+            {
+                Id = 22,
+                Name = "Cartera Gestionada Roboadvisor",
+                Description = "Cartera de fondos diversificada y gestionada automáticamente según tu perfil",
+                Price = 200.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1642790551116-18e150f248e3?w=400&h=300&fit=crop",
+                Category = "Inversión",
+                IsVegetarian = false,
+                IsVegan = false,
+                IsSpicy = true,
+                RestaurantId = 4,
+                PreparationTime = 15
+            },
+            new FoodItem
+            {
+                Id = 23,
+                Name = "Broker de Acciones y ETFs",
+                Description = "Opera en las principales bolsas mundiales con comisiones ultrarreducidas",
+                Price = 0.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=400&h=300&fit=crop",
+                Category = "Inversión",
+                IsVegetarian = false,
+                IsVegan = false,
+                IsSpicy = false,
+                RestaurantId = 4,
+                PreparationTime = 15
+            },
+
+            // Ampliación: seguros
+            new FoodItem
+            {
+                Id = 24,
+                Name = "Seguro de Salud",
+                Description = "Cuadro médico completo, sin copagos y con acceso a videoconsulta 24h",
+                Price = 45.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=300&fit=crop",
+                Category = "Seguros",
+                IsVegetarian = true,
+                IsVegan = true,
+                IsSpicy = false,
+                RestaurantId = 5,
+                PreparationTime = 15
+            },
+            new FoodItem
+            {
+                Id = 25,
+                Name = "Seguro de Viaje",
+                Description = "Cobertura mundial con asistencia médica, cancelación y equipaje incluidos",
+                Price = 15.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
+                Category = "Seguros",
+                IsVegetarian = true,
+                IsVegan = false,
+                IsSpicy = false,
+                RestaurantId = 5,
+                PreparationTime = 10
             }
         };
 
