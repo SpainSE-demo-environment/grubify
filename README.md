@@ -1,12 +1,12 @@
-# Grubify - Food Delivery App
+# Bankify - Portal de Banca Online
 
-A modern food delivery application built with React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps using Azure Developer CLI (azd).
+A modern retail banking portal built with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps using Azure Developer CLI (azd). (Originally scaffolded as a food-delivery demo; rebranded to a Spanish retail-banking experience for Azure SRE Agent demos. Internal class names, model properties and API routes are unchanged.)
 
-## 🍕 Features
+## 🏦 Features
 
-- **Modern UI**: Beautiful, responsive design inspired by popular food delivery apps
-- **Real Food Content**: Sample restaurants and food items with real images from Unsplash
-- **Complete Food Delivery Flow**: Browse restaurants → Add to cart → Checkout → Track orders
+- **Modern UI**: Beautiful, responsive design for a trustworthy online banking experience (Spanish UI)
+- **Real Banking Content**: Sample product families and financial products (accounts, cards, mortgages, loans, investment, insurance) with images from Unsplash
+- **Complete Onboarding Flow**: Browse products → Add to selection → Contract → Track application status
 - **Azure Container Apps**: Scalable, serverless container hosting
 - **Azure Developer CLI**: One-command deployment and management
 
@@ -19,11 +19,11 @@ A modern food delivery application built with React TypeScript frontend and .NET
 
 ## 🚀 Complete Deployment Guide
 
-This guide shows how to deploy Grubify with **both backend versions** (v1 with memory leak, v2 with payment failures) for testing Azure SRE Agent scenarios.
+This guide shows how to deploy Bankify with **both backend versions** (v1 with memory leak, v2 with payment failures) for testing Azure SRE Agent scenarios.
 
 ## 📋 Prerequisites
 
-Before deploying Grubify, ensure you have the following tools installed and running:
+Before deploying Bankify, ensure you have the following tools installed and running:
 
 ### Required Tools
 - **[Azure Developer CLI (azd)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd)** - Latest version
