@@ -3,7 +3,6 @@ import {
   Box,
   Typography,
   Card,
-  CardMedia,
   CardContent,
   CardActions,
   Button,
@@ -13,7 +12,6 @@ import {
   CircularProgress,
   Alert,
   TextField,
-  MenuItem,
   InputAdornment,
 } from '@mui/material';
 import {
@@ -24,32 +22,17 @@ import {
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Restaurant } from '../types';
 import { restaurantService } from '../services/api';
+import { getCategoryColor, getCategoryGradient, getCategoryIcon } from '../theme/bankVisuals';
 
 const cuisineTypes = [
   'Todos',
   'Cuentas',
   'Tarjetas',
-  'Hipotecas',
   'Préstamos',
   'Inversión',
   'Ahorro',
-  'Pensiones',
   'Seguros',
 ];
-
-const categoryColors: Record<string, string> = {
-  Cuentas: '#4F46E5',
-  Tarjetas: '#DB2777',
-  Hipotecas: '#2563EB',
-  Préstamos: '#EA580C',
-  Inversión: '#0891B2',
-  Ahorro: '#059669',
-  Pensiones: '#7C3AED',
-  Seguros: '#0D9488',
-};
-
-const getCategoryColor = (category: string): string =>
-  categoryColors[category] || '#4F46E5';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -270,7 +253,9 @@ const HomePage: React.FC = () => {
           gap: 3,
         }}
       >
-        {filteredRestaurants.map((restaurant) => (
+        {filteredRestaurants.map((restaurant) => {
+          const CategoryIcon = getCategoryIcon(restaurant.cuisineType);
+          return (
           <Card
             key={restaurant.id}
             sx={{
@@ -284,26 +269,52 @@ const HomePage: React.FC = () => {
                 boxShadow: '0 22px 40px -18px rgba(79, 70, 229, 0.45)',
               },
               '&:hover .card-media': {
-                transform: 'scale(1.06)',
+                transform: 'scale(1.12)',
               },
             }}
             onClick={() => handleRestaurantClick(restaurant.id)}
           >
-            <Box sx={{ position: 'relative', overflow: 'hidden' }}>
-              <CardMedia
-                component="img"
-                height="200"
-                image={restaurant.imageUrl}
-                alt={restaurant.name}
-                className="card-media"
-                sx={{ objectFit: 'cover', transition: 'transform 0.4s ease' }}
+            <Box
+              sx={{
+                position: 'relative',
+                height: 170,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+                background: getCategoryGradient(restaurant.cuisineType),
+              }}
+            >
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: -40,
+                  right: -30,
+                  width: 150,
+                  height: 150,
+                  borderRadius: '50%',
+                  background: 'rgba(255,255,255,0.14)',
+                }}
               />
               <Box
                 sx={{
                   position: 'absolute',
-                  inset: 0,
-                  background:
-                    'linear-gradient(180deg, rgba(17,24,39,0) 45%, rgba(17,24,39,0.55) 100%)',
+                  bottom: -50,
+                  left: -20,
+                  width: 120,
+                  height: 120,
+                  borderRadius: '50%',
+                  background: 'rgba(255,255,255,0.10)',
+                }}
+              />
+              <CategoryIcon
+                className="card-media"
+                sx={{
+                  fontSize: 78,
+                  color: 'rgba(255,255,255,0.96)',
+                  position: 'relative',
+                  zIndex: 1,
+                  transition: 'transform 0.4s ease',
                 }}
               />
               <Chip
@@ -313,9 +324,10 @@ const HomePage: React.FC = () => {
                   position: 'absolute',
                   top: 12,
                   left: 12,
-                  color: '#fff',
+                  color: getCategoryColor(restaurant.cuisineType),
                   fontWeight: 700,
-                  backgroundColor: getCategoryColor(restaurant.cuisineType),
+                  backgroundColor: '#fff',
+                  zIndex: 2,
                 }}
               />
             </Box>
@@ -363,7 +375,8 @@ const HomePage: React.FC = () => {
               </Button>
             </CardActions>
           </Card>
-        ))}
+          );
+        })}
       </Box>
 
       {filteredRestaurants.length === 0 && !loading && (
