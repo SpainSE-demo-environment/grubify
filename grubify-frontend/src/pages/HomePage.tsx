@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import {
   AccessTime as TimeIcon,
-  DeliveryDining as DeliveryIcon,
+  Payments as FeeIcon,
   Search as SearchIcon,
 } from '@mui/icons-material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -26,15 +26,15 @@ import { Restaurant } from '../types';
 import { restaurantService } from '../services/api';
 
 const cuisineTypes = [
-  'All',
-  'Italian',
-  'Japanese',
-  'Indian',
-  'American',
-  'Healthy',
-  'Chinese',
-  'Mexican',
-  'Thai',
+  'Todos',
+  'Cuentas',
+  'Tarjetas',
+  'Hipotecas',
+  'Préstamos',
+  'Inversión',
+  'Ahorro',
+  'Pensiones',
+  'Seguros',
 ];
 
 const HomePage: React.FC = () => {
@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedCuisine, setSelectedCuisine] = useState('All');
+  const [selectedCuisine, setSelectedCuisine] = useState('Todos');
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const HomePage: React.FC = () => {
       setRestaurants(data);
       setError(null);
     } catch (err) {
-      setError('Failed to load restaurants. Please try again later.');
+      setError('No se pudieron cargar los productos. Inténtalo de nuevo más tarde.');
       console.error('Error fetching restaurants:', err);
     } finally {
       setLoading(false);
@@ -73,7 +73,7 @@ const HomePage: React.FC = () => {
     let filtered = restaurants;
 
     // Filter by cuisine
-    if (selectedCuisine !== 'All') {
+    if (selectedCuisine !== 'Todos') {
       filtered = filtered.filter(restaurant => 
         restaurant.cuisineType.toLowerCase() === selectedCuisine.toLowerCase()
       );
@@ -111,7 +111,7 @@ const HomePage: React.FC = () => {
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={fetchRestaurants}>
-            Try Again
+              Reintentar
           </Button>
         </Box>
       </Container>
@@ -123,7 +123,7 @@ const HomePage: React.FC = () => {
       {/* Hero Section */}
       <Box
         sx={{
-          backgroundImage: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
+          backgroundImage: 'linear-gradient(135deg, #0A2540 0%, #274472 100%)',
           borderRadius: 3,
           color: 'white',
           p: 6,
@@ -132,10 +132,10 @@ const HomePage: React.FC = () => {
         }}
       >
         <Typography variant="h2" component="h1" gutterBottom>
-          Delicious Food, Delivered Fast
+          Tu banca, simple y sin comisiones
         </Typography>
         <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
-          Order from your favorite restaurants and get it delivered in minutes
+          Contrata cuentas, tarjetas, hipotecas e inversiones en minutos, 100% online
         </Typography>
         
         {/* Search Bar */}
@@ -143,7 +143,7 @@ const HomePage: React.FC = () => {
           <TextField
             fullWidth
             variant="outlined"
-            placeholder="Search for restaurants, cuisine, or dishes..."
+            placeholder="Buscar productos, categorías o servicios..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             InputProps={{
@@ -164,7 +164,7 @@ const HomePage: React.FC = () => {
       {/* Cuisine Filter */}
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" gutterBottom>
-          Browse by Cuisine
+          Explora por categoría
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
           {cuisineTypes.map((cuisine) => (
@@ -184,10 +184,10 @@ const HomePage: React.FC = () => {
       {/* Results Header */}
       <Box sx={{ mb: 3 }}>
         <Typography variant="h5" gutterBottom>
-          {searchQuery ? `Search Results for "${searchQuery}"` : 'Popular Restaurants'}
+          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestros productos'}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          {filteredRestaurants.length} restaurant{filteredRestaurants.length !== 1 ? 's' : ''} found
+          {filteredRestaurants.length} categoría{filteredRestaurants.length !== 1 ? 's' : ''} disponible{filteredRestaurants.length !== 1 ? 's' : ''}
         </Typography>
       </Box>
 
@@ -250,9 +250,9 @@ const HomePage: React.FC = () => {
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <DeliveryIcon sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
+                  <FeeIcon sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
                   <Typography variant="body2" color="text.secondary">
-                    ${restaurant.deliveryFee.toFixed(2)}
+                    {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} €` : 'Sin comisiones'}
                   </Typography>
                 </Box>
               </Box>
@@ -274,7 +274,7 @@ const HomePage: React.FC = () => {
                   handleRestaurantClick(restaurant.id);
                 }}
               >
-                View Menu
+                Ver productos
               </Button>
             </CardActions>
           </Card>
@@ -284,10 +284,10 @@ const HomePage: React.FC = () => {
       {filteredRestaurants.length === 0 && !loading && (
         <Box textAlign="center" py={8}>
           <Typography variant="h6" color="text.secondary" gutterBottom>
-            No restaurants found
+            No se encontraron productos
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Try adjusting your search or filter criteria
+            Prueba a ajustar la búsqueda o los filtros
           </Typography>
         </Box>
       )}

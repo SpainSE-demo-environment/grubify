@@ -12,72 +12,72 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 1,
-                Name = "Tony's Italian Bistro",
-                Description = "Authentic Italian cuisine with fresh ingredients and traditional recipes",
-                ImageUrl = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop",
-                CuisineType = "Italian",
+                Name = "Banca Personal",
+                Description = "Cuentas corrientes y de ahorro sin comisiones para tu día a día",
+                ImageUrl = "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=800&h=600&fit=crop",
+                CuisineType = "Cuentas",
                 Rating = 4.8,
-                DeliveryTime = "25-40 min",
-                DeliveryFee = 2.99m,
-                MinimumOrder = 15.00m,
+                DeliveryTime = "Contratación inmediata",
+                DeliveryFee = 0.00m,
+                MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "123 Main St, Downtown"
+                Address = "Oficina Central, Madrid"
             },
             new Restaurant
             {
                 Id = 2,
-                Name = "Sakura Sushi",
-                Description = "Fresh sushi and Japanese dishes made by expert chefs",
-                ImageUrl = "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=800&h=600&fit=crop",
-                CuisineType = "Japanese",
+                Name = "Tarjetas y Pagos",
+                Description = "Tarjetas de débito y crédito con las mejores condiciones",
+                ImageUrl = "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+                CuisineType = "Tarjetas",
                 Rating = 4.7,
-                DeliveryTime = "30-45 min",
-                DeliveryFee = 3.99m,
-                MinimumOrder = 20.00m,
+                DeliveryTime = "Alta en 24-48h",
+                DeliveryFee = 0.00m,
+                MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "456 Oak Ave, Midtown"
+                Address = "Oficina Central, Barcelona"
             },
             new Restaurant
             {
                 Id = 3,
-                Name = "Spice Garden",
-                Description = "Flavorful Indian curries and tandoor specialties",
-                ImageUrl = "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&h=600&fit=crop",
-                CuisineType = "Indian",
+                Name = "Hipotecas y Financiación",
+                Description = "Hipotecas y préstamos personales con asesoramiento experto",
+                ImageUrl = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+                CuisineType = "Hipotecas",
                 Rating = 4.6,
-                DeliveryTime = "35-50 min",
-                DeliveryFee = 2.49m,
-                MinimumOrder = 18.00m,
+                DeliveryTime = "Estudio en 48-72h",
+                DeliveryFee = 0.00m,
+                MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "789 Spice Lane, Eastside"
+                Address = "Oficina Central, Valencia"
             },
             new Restaurant
             {
                 Id = 4,
-                Name = "Burger Hub",
-                Description = "Gourmet burgers and crispy fries made to perfection",
-                ImageUrl = "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800&h=600&fit=crop",
-                CuisineType = "American",
+                Name = "Inversión y Ahorro",
+                Description = "Fondos, depósitos y planes de pensiones para hacer crecer tu dinero",
+                ImageUrl = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop",
+                CuisineType = "Inversión",
                 Rating = 4.5,
-                DeliveryTime = "20-35 min",
-                DeliveryFee = 1.99m,
-                MinimumOrder = 12.00m,
+                DeliveryTime = "Contratación inmediata",
+                DeliveryFee = 0.00m,
+                MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "321 Burger Blvd, Westside"
+                Address = "Oficina Central, Sevilla"
             },
             new Restaurant
             {
                 Id = 5,
-                Name = "Green Bowl",
-                Description = "Healthy bowls, salads, and smoothies for a balanced lifestyle",
-                ImageUrl = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=600&fit=crop",
-                CuisineType = "Healthy",
+                Name = "Seguros y Pensiones",
+                Description = "Seguros de hogar, vida y auto para proteger lo que más importa",
+                ImageUrl = "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
+                CuisineType = "Seguros",
                 Rating = 4.4,
-                DeliveryTime = "15-30 min",
-                DeliveryFee = 2.99m,
-                MinimumOrder = 10.00m,
+                DeliveryTime = "Contratación inmediata",
+                DeliveryFee = 0.00m,
+                MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "654 Health St, Northside"
+                Address = "Oficina Central, Bilbao"
             }
         };
 

@@ -39,7 +39,7 @@ const CartPage: React.FC = () => {
       setCart(cartData);
       setError(null);
     } catch (err) {
-      setError('Failed to load cart. Please try again later.');
+      setError('No se pudo cargar la solicitud. Inténtalo de nuevo más tarde.');
       console.error('Error fetching cart:', err);
     } finally {
       setLoading(false);
@@ -100,7 +100,7 @@ const CartPage: React.FC = () => {
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={fetchCart}>
-            Try Again
+            Reintentar
           </Button>
         </Box>
       </Container>
@@ -113,13 +113,13 @@ const CartPage: React.FC = () => {
         <Box textAlign="center" py={8}>
           <CartIcon sx={{ fontSize: 80, color: 'text.secondary', mb: 2 }} />
           <Typography variant="h4" gutterBottom>
-            Your cart is empty
+            No tienes productos seleccionados
           </Typography>
           <Typography variant="body1" color="text.secondary" gutterBottom>
-            Add some delicious food to get started!
+            ¡Añade productos financieros para empezar!
           </Typography>
           <Button variant="contained" onClick={() => navigate('/')} sx={{ mt: 2 }}>
-            Browse Restaurants
+            Ver productos
           </Button>
         </Box>
       </Container>
@@ -129,7 +129,7 @@ const CartPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Your Cart
+        Tu solicitud
       </Typography>
 
       <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', md: 'row' } }}>
@@ -139,14 +139,14 @@ const CartPage: React.FC = () => {
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                 <Typography variant="h5">
-                  Items ({cart.items.length})
+                  Productos ({cart.items.length})
                 </Typography>
                 <Button
                   color="error"
                   onClick={clearCart}
                   disabled={cart.items.length === 0}
                 >
-                  Clear Cart
+                  Vaciar solicitud
                 </Button>
               </Box>
 
@@ -173,11 +173,11 @@ const CartPage: React.FC = () => {
                       </Typography>
                       {item.specialInstructions && (
                         <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'text.secondary' }}>
-                          Note: {item.specialInstructions}
+                          Nota: {item.specialInstructions}
                         </Typography>
                       )}
                       <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
-                        ${item.foodItem.price.toFixed(2)}
+                        {item.foodItem.price > 0 ? `${item.foodItem.price.toFixed(2)} €` : 'Gratis'}
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
@@ -205,7 +205,7 @@ const CartPage: React.FC = () => {
                         <DeleteIcon />
                       </IconButton>
                       <Typography variant="body2" fontWeight="bold">
-                        ${(item.foodItem.price * item.quantity).toFixed(2)}
+                        {(item.foodItem.price * item.quantity) > 0 ? `${(item.foodItem.price * item.quantity).toFixed(2)} €` : 'Gratis'}
                       </Typography>
                     </Box>
                   </Box>
@@ -220,21 +220,21 @@ const CartPage: React.FC = () => {
         <Box sx={{ width: { xs: '100%', md: 350 } }}>
           <Paper sx={{ p: 3, position: 'sticky', top: 24 }}>
             <Typography variant="h5" gutterBottom>
-              Order Summary
+              Resumen
             </Typography>
             
             <Box sx={{ space: 2 }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                 <Typography>Subtotal</Typography>
-                <Typography>${cart.subTotal.toFixed(2)}</Typography>
+                <Typography>{cart.subTotal.toFixed(2)} €</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography>Tax</Typography>
-                <Typography>${cart.tax.toFixed(2)}</Typography>
+                <Typography>Impuestos</Typography>
+                <Typography>{cart.tax.toFixed(2)} €</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                <Typography>Delivery Fee</Typography>
-                <Typography>${cart.deliveryFee.toFixed(2)}</Typography>
+                <Typography>Gastos de gestión</Typography>
+                <Typography>{cart.deliveryFee.toFixed(2)} €</Typography>
               </Box>
               <Divider sx={{ my: 2 }} />
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
@@ -242,7 +242,7 @@ const CartPage: React.FC = () => {
                   Total
                 </Typography>
                 <Typography variant="h6" fontWeight="bold">
-                  ${cart.total.toFixed(2)}
+                  {cart.total.toFixed(2)} €
                 </Typography>
               </Box>
             </Box>
@@ -254,7 +254,7 @@ const CartPage: React.FC = () => {
               onClick={handleCheckout}
               sx={{ mb: 2 }}
             >
-              Proceed to Checkout
+              Tramitar solicitud
             </Button>
             
             <Button
@@ -262,7 +262,7 @@ const CartPage: React.FC = () => {
               fullWidth
               onClick={() => navigate('/')}
             >
-              Continue Shopping
+              Seguir explorando
             </Button>
           </Paper>
         </Box>

@@ -23,8 +23,7 @@ import {
   Add as AddIcon,
   Remove as RemoveIcon,
   AccessTime as TimeIcon,
-  DeliveryDining as DeliveryIcon,
-  Star as StarIcon,
+  Payments as FeeIcon,
 } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Restaurant, FoodItem } from '../types';
@@ -59,7 +58,7 @@ const RestaurantPage: React.FC = () => {
       setMenuItems(menuData);
       setError(null);
     } catch (err) {
-      setError('Failed to load restaurant data. Please try again later.');
+      setError('No se pudo cargar la información del producto. Inténtalo de nuevo más tarde.');
       console.error('Error fetching restaurant data:', err);
     } finally {
       setLoading(false);
@@ -109,11 +108,11 @@ const RestaurantPage: React.FC = () => {
     return (
       <Container maxWidth="md">
         <Alert severity="error" sx={{ mt: 4 }}>
-          {error || 'Restaurant not found'}
+          {error || 'Producto no encontrado'}
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={() => navigate('/')}>
-            Back to Home
+            Volver al inicio
           </Button>
         </Box>
       </Container>
@@ -156,7 +155,7 @@ const RestaurantPage: React.FC = () => {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Rating value={restaurant.rating} precision={0.1} readOnly />
               <Typography variant="body1" sx={{ ml: 1 }}>
-                {restaurant.rating.toFixed(1)} rating
+                {restaurant.rating.toFixed(1)} valoración
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -166,9 +165,9 @@ const RestaurantPage: React.FC = () => {
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <DeliveryIcon sx={{ mr: 1, color: 'text.secondary' }} />
+              <FeeIcon sx={{ mr: 1, color: 'text.secondary' }} />
               <Typography variant="body1">
-                ${restaurant.deliveryFee.toFixed(2)} delivery
+                {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} € comisión` : 'Sin comisiones'}
               </Typography>
             </Box>
             <Chip label={restaurant.cuisineType} color="primary" />
@@ -210,17 +209,17 @@ const RestaurantPage: React.FC = () => {
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
                       {item.isVegetarian && (
-                        <Chip label="Vegetarian" size="small" color="success" />
+                        <Chip label="Sin comisiones" size="small" color="success" />
                       )}
                       {item.isVegan && (
-                        <Chip label="Vegan" size="small" color="success" />
+                        <Chip label="100% Online" size="small" color="info" />
                       )}
                       {item.isSpicy && (
-                        <Chip label="Spicy" size="small" color="error" />
+                        <Chip label="Oferta" size="small" color="error" />
                       )}
                     </Box>
                     <Typography variant="h6" color="primary" fontWeight="bold">
-                      ${item.price.toFixed(2)}
+                      {item.price > 0 ? `${item.price.toFixed(2)} €` : 'Gratis'}
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -231,7 +230,7 @@ const RestaurantPage: React.FC = () => {
                       disabled={!item.isAvailable}
                       fullWidth
                     >
-                      {item.isAvailable ? 'Add to Cart' : 'Unavailable'}
+                      {item.isAvailable ? 'Contratar' : 'No disponible'}
                     </Button>
                   </CardActions>
                 </Box>
@@ -243,7 +242,7 @@ const RestaurantPage: React.FC = () => {
 
       {/* Add to Cart Dialog */}
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>Add to Cart</DialogTitle>
+        <DialogTitle>Contratar producto</DialogTitle>
         <DialogContent>
           {selectedItem && (
             <Box>
@@ -254,11 +253,11 @@ const RestaurantPage: React.FC = () => {
                 {selectedItem.description}
               </Typography>
               <Typography variant="h6" color="primary" gutterBottom>
-                ${selectedItem.price.toFixed(2)}
+                {selectedItem.price > 0 ? `${selectedItem.price.toFixed(2)} €` : 'Gratis'}
               </Typography>
               
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, my: 3 }}>
-                <Typography variant="body1">Quantity:</Typography>
+                <Typography variant="body1">Unidades:</Typography>
                 <IconButton onClick={() => setQuantity(Math.max(1, quantity - 1))}>
                   <RemoveIcon />
                 </IconButton>
@@ -270,20 +269,20 @@ const RestaurantPage: React.FC = () => {
               
               <TextField
                 fullWidth
-                label="Special instructions (optional)"
+                label="Comentarios (opcional)"
                 multiline
                 rows={3}
                 value={specialInstructions}
                 onChange={(e) => setSpecialInstructions(e.target.value)}
-                placeholder="e.g., no onions, extra spicy, etc."
+                placeholder="p. ej., contactar por la mañana, dudas sobre condiciones, etc."
               />
             </Box>
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
+          <Button onClick={() => setDialogOpen(false)}>Cancelar</Button>
           <Button onClick={confirmAddToCart} variant="contained">
-            Add to Cart - ${selectedItem ? (selectedItem.price * quantity).toFixed(2) : '0.00'}
+            Añadir a la solicitud{selectedItem && selectedItem.price > 0 ? ` - ${(selectedItem.price * quantity).toFixed(2)} €` : ''}
           </Button>
         </DialogActions>
       </Dialog>
