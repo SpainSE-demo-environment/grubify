@@ -9,17 +9,17 @@ namespace GrubifyApi.Controllers
     {
         private static readonly List<FoodItem> FoodItems = new()
         {
-            // Tony's Italian Bistro items
+            // Banca Personal - Cuentas
             new FoodItem
             {
                 Id = 1,
-                Name = "Margherita Pizza",
-                Description = "Classic pizza with fresh tomatoes, mozzarella, and basil",
-                Price = 16.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop",
-                Category = "Pizza",
+                Name = "Cuenta Nómina Sin Comisiones",
+                Description = "Cuenta corriente sin comisiones con tu nómina domiciliada y tarjeta gratis",
+                Price = 0.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop",
+                Category = "Cuentas",
                 IsVegetarian = true,
-                IsVegan = false,
+                IsVegan = true,
                 IsSpicy = false,
                 RestaurantId = 1,
                 PreparationTime = 20
@@ -27,42 +27,42 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 2,
-                Name = "Chicken Alfredo",
-                Description = "Creamy fettuccine pasta with grilled chicken and parmesan",
-                Price = 19.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=300&fit=crop",
-                Category = "Pasta",
-                IsVegetarian = false,
+                Name = "Cuenta Ahorro Remunerada",
+                Description = "Rentabiliza tus ahorros con un 2,5% TAE y liquidez total",
+                Price = 0.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&h=300&fit=crop",
+                Category = "Ahorro",
+                IsVegetarian = true,
                 IsVegan = false,
-                IsSpicy = false,
+                IsSpicy = true,
                 RestaurantId = 1,
                 PreparationTime = 25
             },
             new FoodItem
             {
                 Id = 3,
-                Name = "Caesar Salad",
-                Description = "Crisp romaine lettuce with caesar dressing and croutons",
-                Price = 12.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop",
-                Category = "Salad",
+                Name = "Cuenta Joven Online",
+                Description = "Cuenta 100% digital para menores de 30 años, sin comisiones ni requisitos",
+                Price = 0.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop",
+                Category = "Cuentas",
                 IsVegetarian = true,
-                IsVegan = false,
+                IsVegan = true,
                 IsSpicy = false,
                 RestaurantId = 1,
                 PreparationTime = 10
             },
 
-            // Sakura Sushi items
+            // Tarjetas y Pagos
             new FoodItem
             {
                 Id = 4,
-                Name = "California Roll",
-                Description = "Fresh avocado, cucumber, and crab meat with sesame seeds",
-                Price = 14.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop",
-                Category = "Sushi",
-                IsVegetarian = false,
+                Name = "Tarjeta de Débito Clásica",
+                Description = "Tarjeta de débito gratuita con pagos móviles y retiradas sin comisión",
+                Price = 0.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4?w=400&h=300&fit=crop",
+                Category = "Tarjetas",
+                IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = false,
                 RestaurantId = 2,
@@ -71,11 +71,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 5,
-                Name = "Spicy Tuna Roll",
-                Description = "Fresh tuna with spicy mayo and sriracha",
-                Price = 16.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=400&h=300&fit=crop",
-                Category = "Sushi",
+                Name = "Tarjeta de Crédito Oro",
+                Description = "Crédito hasta 6.000€ con seguros de viaje y programa de puntos",
+                Price = 45.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1556742393-d75f468bfcb0?w=400&h=300&fit=crop",
+                Category = "Tarjetas",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
@@ -85,11 +85,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 6,
-                Name = "Chicken Teriyaki Bowl",
-                Description = "Grilled chicken with teriyaki sauce over steamed rice",
-                Price = 18.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1546069901-eacef0df6022?w=400&h=300&fit=crop",
-                Category = "Bowl",
+                Name = "Tarjeta Revolving Flexible",
+                Description = "Aplaza tus compras y elige la cuota mensual que mejor se adapte a ti",
+                Price = 0.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=400&h=300&fit=crop",
+                Category = "Tarjetas",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = false,
@@ -97,15 +97,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 20
             },
 
-            // Spice Garden items
+            // Hipotecas y Financiación
             new FoodItem
             {
                 Id = 7,
-                Name = "Chicken Tikka Masala",
-                Description = "Tender chicken in a creamy tomato-based curry sauce",
-                Price = 17.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop",
-                Category = "Curry",
+                Name = "Hipoteca Tipo Fijo 30 años",
+                Description = "Hipoteca a tipo fijo desde el 2,90% TIN con cuota estable toda la vida del préstamo",
+                Price = 950.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=400&h=300&fit=crop",
+                Category = "Hipotecas",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
@@ -115,11 +115,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 8,
-                Name = "Vegetable Biryani",
-                Description = "Fragrant basmati rice with mixed vegetables and aromatic spices",
-                Price = 15.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1563379091339-03246963d17a?w=400&h=300&fit=crop",
-                Category = "Rice",
+                Name = "Préstamo Personal Preconcedido",
+                Description = "Hasta 30.000€ al instante sin comisión de apertura y respuesta inmediata",
+                Price = 320.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=400&h=300&fit=crop",
+                Category = "Préstamos",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
@@ -129,11 +129,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 9,
-                Name = "Garlic Naan",
-                Description = "Fresh baked bread with garlic and herbs",
-                Price = 4.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop",
-                Category = "Bread",
+                Name = "Financiación de Coche",
+                Description = "Financia tu vehículo hasta en 96 meses con las mejores condiciones",
+                Price = 280.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&h=300&fit=crop",
+                Category = "Préstamos",
                 IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = false,
@@ -141,15 +141,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 10
             },
 
-            // Burger Hub items
+            // Inversión y Ahorro
             new FoodItem
             {
                 Id = 10,
-                Name = "Classic Cheeseburger",
-                Description = "Beef patty with cheese, lettuce, tomato, and special sauce",
-                Price = 13.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
-                Category = "Burger",
+                Name = "Fondo Indexado Global",
+                Description = "Invierte en los principales mercados mundiales con bajas comisiones",
+                Price = 100.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop",
+                Category = "Inversión",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = false,
@@ -159,41 +159,41 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 11,
-                Name = "Crispy Chicken Sandwich",
-                Description = "Fried chicken breast with coleslaw and pickles",
-                Price = 15.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1606755962773-d324e9a13086?w=400&h=300&fit=crop",
-                Category = "Sandwich",
+                Name = "Depósito a Plazo 12 meses",
+                Description = "Depósito garantizado al 3% TAE a 12 meses sin sorpresas",
+                Price = 1000.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=400&h=300&fit=crop",
+                Category = "Ahorro",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = false,
                 RestaurantId = 4,
-                PreparationTime = 18
+                PreparationTime = 5
             },
             new FoodItem
             {
                 Id = 12,
-                Name = "Sweet Potato Fries",
-                Description = "Crispy sweet potato fries with sea salt",
-                Price = 6.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
-                Category = "Sides",
+                Name = "Plan de Pensiones",
+                Description = "Prepara tu jubilación con ventajas fiscales y aportaciones flexibles",
+                Price = 50.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
+                Category = "Pensiones",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
                 RestaurantId = 4,
-                PreparationTime = 12
+                PreparationTime = 20
             },
 
-            // Green Bowl items
+            // Seguros y Pensiones
             new FoodItem
             {
                 Id = 13,
-                Name = "Quinoa Buddha Bowl",
-                Description = "Quinoa with roasted vegetables, avocado, and tahini dressing",
-                Price = 14.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop",
-                Category = "Bowl",
+                Name = "Seguro de Hogar",
+                Description = "Protege tu vivienda y su contenido con cobertura integral 24/7",
+                Price = 18.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
+                Category = "Seguros",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -203,11 +203,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 14,
-                Name = "Acai Berry Smoothie",
-                Description = "Acai berries blended with banana and coconut milk",
-                Price = 8.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop",
-                Category = "Smoothie",
+                Name = "Seguro de Vida",
+                Description = "Tranquilidad para los tuyos con coberturas adaptadas a cada etapa",
+                Price = 12.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop",
+                Category = "Seguros",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -217,11 +217,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 15,
-                Name = "Grilled Salmon Salad",
-                Description = "Fresh salmon over mixed greens with lemon vinaigrette",
-                Price = 18.99m,
-                ImageUrl = "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop",
-                Category = "Salad",
+                Name = "Seguro de Auto",
+                Description = "Seguro de coche a todo riesgo con asistencia en carretera incluida",
+                Price = 30.00m,
+                ImageUrl = "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=400&h=300&fit=crop",
+                Category = "Seguros",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = false,

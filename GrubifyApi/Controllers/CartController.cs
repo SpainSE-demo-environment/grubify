@@ -121,21 +121,21 @@ namespace GrubifyApi.Controllers
             // This is a simplified version - in production, inject the FoodItems service
             var foodItems = new List<FoodItem>
             {
-                new FoodItem { Id = 1, Name = "Margherita Pizza", Price = 16.99m, ImageUrl = "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop", RestaurantId = 1 },
-                new FoodItem { Id = 2, Name = "Chicken Alfredo", Price = 19.99m, ImageUrl = "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=300&fit=crop", RestaurantId = 1 },
-                new FoodItem { Id = 3, Name = "Caesar Salad", Price = 12.99m, ImageUrl = "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop", RestaurantId = 1 },
-                new FoodItem { Id = 4, Name = "California Roll", Price = 14.99m, ImageUrl = "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop", RestaurantId = 2 },
-                new FoodItem { Id = 5, Name = "Spicy Tuna Roll", Price = 16.99m, ImageUrl = "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?w=400&h=300&fit=crop", RestaurantId = 2 },
-                new FoodItem { Id = 6, Name = "Chicken Teriyaki Bowl", Price = 18.99m, ImageUrl = "https://images.unsplash.com/photo-1546069901-eacef0df6022?w=400&h=300&fit=crop", RestaurantId = 2 },
-                new FoodItem { Id = 7, Name = "Chicken Tikka Masala", Price = 17.99m, ImageUrl = "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop", RestaurantId = 3 },
-                new FoodItem { Id = 8, Name = "Vegetable Biryani", Price = 15.99m, ImageUrl = "https://images.unsplash.com/photo-1563379091339-03246963d17a?w=400&h=300&fit=crop", RestaurantId = 3 },
-                new FoodItem { Id = 9, Name = "Garlic Naan", Price = 4.99m, ImageUrl = "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop", RestaurantId = 3 },
-                new FoodItem { Id = 10, Name = "Classic Cheeseburger", Price = 13.99m, ImageUrl = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop", RestaurantId = 4 },
-                new FoodItem { Id = 11, Name = "Crispy Chicken Sandwich", Price = 15.99m, ImageUrl = "https://images.unsplash.com/photo-1606755962773-d324e9a13086?w=400&h=300&fit=crop", RestaurantId = 4 },
-                new FoodItem { Id = 12, Name = "Sweet Potato Fries", Price = 6.99m, ImageUrl = "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop", RestaurantId = 4 },
-                new FoodItem { Id = 13, Name = "Quinoa Buddha Bowl", Price = 14.99m, ImageUrl = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop", RestaurantId = 5 },
-                new FoodItem { Id = 14, Name = "Acai Berry Smoothie", Price = 8.99m, ImageUrl = "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop", RestaurantId = 5 },
-                new FoodItem { Id = 15, Name = "Grilled Salmon Salad", Price = 18.99m, ImageUrl = "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop", RestaurantId = 5 }
+                new FoodItem { Id = 1, Name = "Cuenta Nómina Sin Comisiones", Price = 0.00m, ImageUrl = "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop", RestaurantId = 1 },
+                new FoodItem { Id = 2, Name = "Cuenta Ahorro Remunerada", Price = 0.00m, ImageUrl = "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&h=300&fit=crop", RestaurantId = 1 },
+                new FoodItem { Id = 3, Name = "Cuenta Joven Online", Price = 0.00m, ImageUrl = "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop", RestaurantId = 1 },
+                new FoodItem { Id = 4, Name = "Tarjeta de Débito Clásica", Price = 0.00m, ImageUrl = "https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4?w=400&h=300&fit=crop", RestaurantId = 2 },
+                new FoodItem { Id = 5, Name = "Tarjeta de Crédito Oro", Price = 45.00m, ImageUrl = "https://images.unsplash.com/photo-1556742393-d75f468bfcb0?w=400&h=300&fit=crop", RestaurantId = 2 },
+                new FoodItem { Id = 6, Name = "Tarjeta Revolving Flexible", Price = 0.00m, ImageUrl = "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=400&h=300&fit=crop", RestaurantId = 2 },
+                new FoodItem { Id = 7, Name = "Hipoteca Tipo Fijo 30 años", Price = 950.00m, ImageUrl = "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=400&h=300&fit=crop", RestaurantId = 3 },
+                new FoodItem { Id = 8, Name = "Préstamo Personal Preconcedido", Price = 320.00m, ImageUrl = "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=400&h=300&fit=crop", RestaurantId = 3 },
+                new FoodItem { Id = 9, Name = "Financiación de Coche", Price = 280.00m, ImageUrl = "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&h=300&fit=crop", RestaurantId = 3 },
+                new FoodItem { Id = 10, Name = "Fondo Indexado Global", Price = 100.00m, ImageUrl = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop", RestaurantId = 4 },
+                new FoodItem { Id = 11, Name = "Depósito a Plazo 12 meses", Price = 1000.00m, ImageUrl = "https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=400&h=300&fit=crop", RestaurantId = 4 },
+                new FoodItem { Id = 12, Name = "Plan de Pensiones", Price = 50.00m, ImageUrl = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop", RestaurantId = 4 },
+                new FoodItem { Id = 13, Name = "Seguro de Hogar", Price = 18.00m, ImageUrl = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop", RestaurantId = 5 },
+                new FoodItem { Id = 14, Name = "Seguro de Vida", Price = 12.00m, ImageUrl = "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop", RestaurantId = 5 },
+                new FoodItem { Id = 15, Name = "Seguro de Auto", Price = 30.00m, ImageUrl = "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=400&h=300&fit=crop", RestaurantId = 5 }
             };
 
             return foodItems.FirstOrDefault(f => f.Id == foodItemId) ?? new FoodItem();
