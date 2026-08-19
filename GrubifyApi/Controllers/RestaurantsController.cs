@@ -12,10 +12,10 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 1,
-                Name = "Cuentas",
-                Description = "Cuentas corrientes y de ahorro sin comisiones para tu día a día",
+                Name = "Auto",
+                Description = "Seguros de coche a terceros y todo riesgo con asistencia en carretera 24h",
                 ImageUrl = "",
-                CuisineType = "Cuentas",
+                CuisineType = "Auto",
                 Rating = 4.8,
                 DeliveryTime = "Contratación inmediata",
                 DeliveryFee = 0.00m,
@@ -26,12 +26,12 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 2,
-                Name = "Tarjetas",
-                Description = "Tarjetas de débito y crédito con las mejores condiciones",
+                Name = "Hogar",
+                Description = "Protege tu vivienda y su contenido con coberturas integrales y asistencia 24h",
                 ImageUrl = "",
-                CuisineType = "Tarjetas",
+                CuisineType = "Hogar",
                 Rating = 4.7,
-                DeliveryTime = "Alta en 24-48h",
+                DeliveryTime = "Contratación inmediata",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
@@ -40,12 +40,12 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 3,
-                Name = "Préstamos",
-                Description = "Préstamos personales e hipotecas con asesoramiento experto",
+                Name = "Vida",
+                Description = "Seguros de vida para proteger a los tuyos ante cualquier imprevisto",
                 ImageUrl = "",
-                CuisineType = "Préstamos",
+                CuisineType = "Vida",
                 Rating = 4.6,
-                DeliveryTime = "Estudio en 48-72h",
+                DeliveryTime = "Estudio en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
@@ -54,10 +54,10 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 4,
-                Name = "Inversión",
-                Description = "Fondos, acciones y planes de pensiones para hacer crecer tu dinero",
+                Name = "Salud",
+                Description = "Seguros de salud con cuadro médico, especialistas y videoconsulta 24h",
                 ImageUrl = "",
-                CuisineType = "Inversión",
+                CuisineType = "Salud",
                 Rating = 4.5,
                 DeliveryTime = "Contratación inmediata",
                 DeliveryFee = 0.00m,
@@ -68,10 +68,10 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 5,
-                Name = "Ahorro",
-                Description = "Depósitos y cuentas de ahorro para rentabilizar tu dinero con seguridad",
+                Name = "Moto",
+                Description = "Seguros de moto con las mejores coberturas, defensa jurídica y asistencia 24h",
                 ImageUrl = "",
-                CuisineType = "Ahorro",
+                CuisineType = "Moto",
                 Rating = 4.6,
                 DeliveryTime = "Contratación inmediata",
                 DeliveryFee = 0.00m,
@@ -82,10 +82,10 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 6,
-                Name = "Seguros",
-                Description = "Seguros de salud, hogar, auto y moto para proteger lo que más importa",
+                Name = "Viaje",
+                Description = "Seguros de viaje, mascotas, decesos y accidentes para proteger lo que más importa",
                 ImageUrl = "",
-                CuisineType = "Seguros",
+                CuisineType = "Viaje",
                 Rating = 4.4,
                 DeliveryTime = "Contratación inmediata",
                 DeliveryFee = 0.00m,

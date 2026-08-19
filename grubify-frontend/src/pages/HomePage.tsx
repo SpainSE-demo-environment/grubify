@@ -26,12 +26,12 @@ import { getCategoryColor, getCategoryGradient, getCategoryIcon } from '../theme
 
 const cuisineTypes = [
   'Todos',
-  'Cuentas',
-  'Tarjetas',
-  'Préstamos',
-  'Inversión',
-  'Ahorro',
-  'Seguros',
+  'Auto',
+  'Hogar',
+  'Vida',
+  'Salud',
+  'Moto',
+  'Viaje',
 ];
 
 const HomePage: React.FC = () => {
@@ -156,7 +156,7 @@ const HomePage: React.FC = () => {
         />
         <Box sx={{ position: 'relative', zIndex: 1 }}>
           <Chip
-            label="100% online · Sin comisiones"
+            label="100% online · Sin papeleos"
             sx={{
               mb: 2,
               color: 'white',
@@ -166,10 +166,10 @@ const HomePage: React.FC = () => {
             }}
           />
           <Typography variant="h2" component="h1" gutterBottom>
-            Tu banca, simple y sin comisiones
+            Tus seguros, claros y sin sorpresas
           </Typography>
           <Typography variant="h6" sx={{ mb: 4, opacity: 0.92, fontWeight: 400 }}>
-            Contrata cuentas, tarjetas, hipotecas e inversiones en minutos, 100% online
+            Contrata seguros de auto, hogar, vida y salud en minutos, 100% online
           </Typography>
 
           {/* Search Bar */}
@@ -233,7 +233,7 @@ const HomePage: React.FC = () => {
       {/* Results Header */}
       <Box sx={{ mb: 3 }}>
         <Typography variant="h5" gutterBottom>
-          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestros productos'}
+          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestros seguros'}
         </Typography>
         <Typography variant="body1" color="text.secondary">
           {filteredRestaurants.length} categoría{filteredRestaurants.length !== 1 ? 's' : ''} disponible{filteredRestaurants.length !== 1 ? 's' : ''}
@@ -371,7 +371,7 @@ const HomePage: React.FC = () => {
                   handleRestaurantClick(restaurant.id);
                 }}
               >
-                Ver productos
+                Ver seguros
               </Button>
             </CardActions>
           </Card>

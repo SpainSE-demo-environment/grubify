@@ -9,15 +9,15 @@ namespace GrubifyApi.Controllers
     {
         private static readonly List<FoodItem> FoodItems = new()
         {
-            // Cuentas
+            // Auto
             new FoodItem
             {
                 Id = 1,
-                Name = "Cuenta Personal",
-                Description = "Cuenta corriente sin comisiones con tarjeta gratis, Bizum y app móvil",
-                Price = 0.00m,
+                Name = "Seguro de Auto a Terceros",
+                Description = "RC obligatoria y voluntaria, asistencia en carretera 24h y defensa jurídica",
+                Price = 22.00m,
                 ImageUrl = "",
-                Category = "Cuentas",
+                Category = "Auto",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -27,71 +27,71 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 2,
-                Name = "Cuenta de Ahorro",
-                Description = "Cuenta de ahorro remunerada con liquidez total y sin comisiones de mantenimiento",
-                Price = 0.00m,
+                Name = "Seguro de Auto Terceros Ampliado",
+                Description = "Terceros con lunas, robo e incendio y asistencia 24h desde el kilómetro 0",
+                Price = 30.00m,
                 ImageUrl = "",
-                Category = "Cuentas",
+                Category = "Auto",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
                 RestaurantId = 1,
                 PreparationTime = 15
             },
-
-            // Tarjetas
             new FoodItem
             {
                 Id = 3,
-                Name = "Tarjeta de Débito",
-                Description = "Tarjeta de débito gratuita con pagos móviles y retiradas sin comisión",
-                Price = 0.00m,
+                Name = "Seguro de Auto Todo Riesgo",
+                Description = "Cobertura total con daños propios, franquicia reducida y coche de sustitución",
+                Price = 45.00m,
                 ImageUrl = "",
-                Category = "Tarjetas",
+                Category = "Auto",
                 IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = false,
-                RestaurantId = 2,
-                PreparationTime = 15
+                RestaurantId = 1,
+                PreparationTime = 20
             },
+
+            // Hogar
             new FoodItem
             {
                 Id = 4,
-                Name = "Tarjeta de Crédito",
-                Description = "Crédito hasta 6.000€ con pago aplazado, seguros de viaje y programa de puntos",
-                Price = 45.00m,
+                Name = "Seguro de Hogar Básico",
+                Description = "Continente y responsabilidad civil con asistencia de urgencias 24h",
+                Price = 12.00m,
                 ImageUrl = "",
-                Category = "Tarjetas",
+                Category = "Hogar",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
                 RestaurantId = 2,
                 PreparationTime = 15
             },
-
-            // Préstamos
             new FoodItem
             {
                 Id = 5,
-                Name = "Préstamo Personal",
-                Description = "Financia tus proyectos hasta 60.000€ con cuotas a tu medida y sin sorpresas",
-                Price = 180.00m,
+                Name = "Seguro de Hogar Completo",
+                Description = "Continente, contenido, daños por agua, robo y servicio de bricohogar incluido",
+                Price = 22.00m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Hogar",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 3,
-                PreparationTime = 25
+                RestaurantId = 2,
+                PreparationTime = 15
             },
+
+            // Vida
             new FoodItem
             {
                 Id = 6,
-                Name = "Préstamo Personal Preconcedido",
-                Description = "Hasta 30.000€ preconcedidos al instante, sin comisión de apertura y respuesta inmediata",
-                Price = 250.00m,
+                Name = "Seguro de Vida Riesgo",
+                Description = "Capital por fallecimiento e invalidez para proteger la economía de tu familia",
+                Price = 15.00m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Vida",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
@@ -101,11 +101,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 7,
-                Name = "Hipoteca",
-                Description = "Hipoteca a tipo fijo desde el 2,90% TIN con cuota estable toda la vida del préstamo",
-                Price = 950.00m,
+                Name = "Seguro de Vida Ahorro",
+                Description = "Protección más ahorro garantizado con rentabilidad y ventajas fiscales",
+                Price = 40.00m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Vida",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
@@ -113,15 +113,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 30
             },
 
-            // Inversión
+            // Salud
             new FoodItem
             {
                 Id = 8,
-                Name = "Plan de Pensiones",
-                Description = "Prepara tu jubilación con ventajas fiscales y aportaciones flexibles",
-                Price = 50.00m,
+                Name = "Seguro de Salud Básico",
+                Description = "Cuadro médico, especialistas y pruebas diagnósticas sin listas de espera",
+                Price = 35.00m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Salud",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -131,11 +131,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 9,
-                Name = "Fondos de Inversión",
-                Description = "Fondos gestionados e indexados para diversificar tu patrimonio con bajas comisiones",
-                Price = 100.00m,
+                Name = "Seguro de Salud Completo",
+                Description = "Cuadro médico amplio, hospitalización y videoconsulta 24h sin copagos",
+                Price = 55.00m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Salud",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
@@ -145,11 +145,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 10,
-                Name = "Acciones y ETFs",
-                Description = "Opera en las principales bolsas mundiales con comisiones ultrarreducidas",
-                Price = 0.00m,
+                Name = "Seguro Dental",
+                Description = "Limpiezas y revisiones incluidas con amplio cuadro dental y sin copagos",
+                Price = 12.00m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Salud",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = true,
@@ -157,15 +157,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 15
             },
 
-            // Ahorro
+            // Moto
             new FoodItem
             {
                 Id = 11,
-                Name = "Depósito",
-                Description = "Depósito a plazo garantizado al 3% TAE a 12 meses sin sorpresas",
-                Price = 1000.00m,
+                Name = "Seguro de Moto a Terceros",
+                Description = "RC obligatoria y voluntaria con defensa jurídica y asistencia en carretera 24h",
+                Price = 14.00m,
                 ImageUrl = "",
-                Category = "Ahorro",
+                Category = "Moto",
                 IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = true,
@@ -175,11 +175,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 12,
-                Name = "Cuenta de Ahorro Remunerada",
-                Description = "Cuenta de ahorro con un 2,5% TAE y disponibilidad inmediata de tu dinero",
-                Price = 0.00m,
+                Name = "Seguro de Moto Todo Riesgo",
+                Description = "Daños propios, robo e incendio con asistencia 24h desde el kilómetro 0",
+                Price = 28.00m,
                 ImageUrl = "",
-                Category = "Ahorro",
+                Category = "Moto",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
@@ -187,15 +187,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 10
             },
 
-            // Seguros
+            // Viaje
             new FoodItem
             {
                 Id = 13,
-                Name = "Seguro de Salud",
-                Description = "Cuadro médico completo, sin copagos y con acceso a videoconsulta 24h",
-                Price = 45.00m,
+                Name = "Seguro de Viaje",
+                Description = "Asistencia médica en el extranjero, equipaje y cancelación de viaje incluidas",
+                Price = 8.00m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Viaje",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
@@ -205,11 +205,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 14,
-                Name = "Seguro de Hogar",
-                Description = "Protege tu vivienda y su contenido con cobertura integral y asistencia 24/7",
-                Price = 18.00m,
+                Name = "Seguro de Mascotas",
+                Description = "Gastos veterinarios, responsabilidad civil y asistencia para tu mascota",
+                Price = 11.00m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Viaje",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -219,11 +219,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 15,
-                Name = "Seguro de Auto",
-                Description = "Seguro de coche a todo riesgo con asistencia en carretera incluida",
-                Price = 30.00m,
+                Name = "Seguro de Decesos",
+                Description = "Servicio funerario completo y tramitación con asesoramiento a la familia",
+                Price = 9.00m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Viaje",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
@@ -233,11 +233,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 16,
-                Name = "Seguro de Moto",
-                Description = "Seguro de moto con las mejores coberturas, defensa jurídica y asistencia 24h",
-                Price = 20.00m,
+                Name = "Seguro de Accidentes",
+                Description = "Indemnización por accidente, invalidez y asistencia sanitaria 24h",
+                Price = 13.00m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Viaje",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,

@@ -117,10 +117,10 @@ const CartPage: React.FC = () => {
             No tienes productos seleccionados
           </Typography>
           <Typography variant="body1" color="text.secondary" gutterBottom>
-            ¡Añade productos financieros para empezar!
+            ¡Añade seguros para empezar!
           </Typography>
           <Button variant="contained" onClick={() => navigate('/')} sx={{ mt: 2 }}>
-            Ver productos
+            Ver seguros
           </Button>
         </Box>
       </Container>
