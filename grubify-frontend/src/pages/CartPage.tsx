@@ -40,7 +40,7 @@ const CartPage: React.FC = () => {
       setCart(cartData);
       setError(null);
     } catch (err) {
-      setError('No se pudo cargar la solicitud. Inténtalo de nuevo más tarde.');
+      setError('No se pudo cargar la cesta. Inténtalo de nuevo más tarde.');
       console.error('Error fetching cart:', err);
     } finally {
       setLoading(false);
@@ -114,10 +114,10 @@ const CartPage: React.FC = () => {
         <Box textAlign="center" py={8}>
           <CartIcon sx={{ fontSize: 80, color: 'text.secondary', mb: 2 }} />
           <Typography variant="h4" gutterBottom>
-            No tienes productos seleccionados
+            Tu cesta está vacía
           </Typography>
           <Typography variant="body1" color="text.secondary" gutterBottom>
-            ¡Añade productos financieros para empezar!
+            ¡Añade prendas para empezar!
           </Typography>
           <Button variant="contained" onClick={() => navigate('/')} sx={{ mt: 2 }}>
             Ver productos
@@ -130,7 +130,7 @@ const CartPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Tu solicitud
+        Tu cesta
       </Typography>
 
       <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', md: 'row' } }}>
@@ -147,7 +147,7 @@ const CartPage: React.FC = () => {
                   onClick={clearCart}
                   disabled={cart.items.length === 0}
                 >
-                  Vaciar solicitud
+                  Vaciar cesta
                 </Button>
               </Box>
 
@@ -230,8 +230,8 @@ const CartPage: React.FC = () => {
               </Box>
               <Divider sx={{ my: 2 }} />
               <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                Tramitar tu solicitud no tiene coste. Un asesor revisará los productos
-                seleccionados y te contactará para completar la contratación.
+                Envío y devoluciones gratis en todos tus pedidos. Revisa tu cesta y
+                finaliza la compra cuando quieras.
               </Typography>
             </Box>
 
@@ -242,7 +242,7 @@ const CartPage: React.FC = () => {
               onClick={handleCheckout}
               sx={{ mb: 2 }}
             >
-              Tramitar solicitud
+              Finalizar compra
             </Button>
             
             <Button

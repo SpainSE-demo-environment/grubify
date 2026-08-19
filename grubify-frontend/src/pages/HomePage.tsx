@@ -26,12 +26,12 @@ import { getCategoryColor, getCategoryGradient, getCategoryIcon } from '../theme
 
 const cuisineTypes = [
   'Todos',
-  'Cuentas',
-  'Tarjetas',
-  'Préstamos',
-  'Inversión',
-  'Ahorro',
-  'Seguros',
+  'Camisetas',
+  'Pantalones',
+  'Vestidos',
+  'Calzado',
+  'Abrigos',
+  'Accesorios',
 ];
 
 const HomePage: React.FC = () => {
@@ -122,13 +122,13 @@ const HomePage: React.FC = () => {
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 45%, #06B6D4 100%)',
+          background: 'linear-gradient(135deg, #DB2777 0%, #9333EA 45%, #06B6D4 100%)',
           borderRadius: 4,
           color: 'white',
           p: { xs: 4, md: 7 },
           mb: 5,
           textAlign: 'center',
-          boxShadow: '0 20px 50px -20px rgba(79, 70, 229, 0.6)',
+          boxShadow: '0 20px 50px -20px rgba(147, 51, 234, 0.6)',
         }}
       >
         <Box
@@ -156,7 +156,7 @@ const HomePage: React.FC = () => {
         />
         <Box sx={{ position: 'relative', zIndex: 1 }}>
           <Chip
-            label="100% online · Sin comisiones"
+            label="Envío y devoluciones gratis"
             sx={{
               mb: 2,
               color: 'white',
@@ -166,10 +166,10 @@ const HomePage: React.FC = () => {
             }}
           />
           <Typography variant="h2" component="h1" gutterBottom>
-            Tu banca, simple y sin comisiones
+            Tu moda, a un clic
           </Typography>
           <Typography variant="h6" sx={{ mb: 4, opacity: 0.92, fontWeight: 400 }}>
-            Contrata cuentas, tarjetas, hipotecas e inversiones en minutos, 100% online
+            Descubre camisetas, pantalones, vestidos, calzado y accesorios de temporada
           </Typography>
 
           {/* Search Bar */}
@@ -205,7 +205,7 @@ const HomePage: React.FC = () => {
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
           {cuisineTypes.map((cuisine) => {
             const selected = selectedCuisine === cuisine;
-            const color = cuisine === 'Todos' ? '#4F46E5' : getCategoryColor(cuisine);
+            const color = cuisine === 'Todos' ? '#DB2777' : getCategoryColor(cuisine);
             return (
               <Chip
                 key={cuisine}
@@ -233,7 +233,7 @@ const HomePage: React.FC = () => {
       {/* Results Header */}
       <Box sx={{ mb: 3 }}>
         <Typography variant="h5" gutterBottom>
-          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestros productos'}
+          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestra colección'}
         </Typography>
         <Typography variant="body1" color="text.secondary">
           {filteredRestaurants.length} categoría{filteredRestaurants.length !== 1 ? 's' : ''} disponible{filteredRestaurants.length !== 1 ? 's' : ''}
@@ -356,7 +356,7 @@ const HomePage: React.FC = () => {
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <FeeIcon sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
                   <Typography variant="body2" color="text.secondary">
-                    {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} €` : 'Sin comisiones'}
+                    {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} €` : 'Envío gratis'}
                   </Typography>
                 </Box>
               </Box>

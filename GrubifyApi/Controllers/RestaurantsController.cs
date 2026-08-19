@@ -12,86 +12,86 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 1,
-                Name = "Cuentas",
-                Description = "Cuentas corrientes y de ahorro sin comisiones para tu día a día",
+                Name = "Camisetas",
+                Description = "Camisetas y tops de todas las tallas y estilos para tu día a día",
                 ImageUrl = "",
-                CuisineType = "Cuentas",
+                CuisineType = "Camisetas",
                 Rating = 4.8,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Madrid"
+                Address = "Tienda Gran Vía, Madrid"
             },
             new Restaurant
             {
                 Id = 2,
-                Name = "Tarjetas",
-                Description = "Tarjetas de débito y crédito con las mejores condiciones",
+                Name = "Pantalones",
+                Description = "Vaqueros, chinos y pantalones para cada ocasión",
                 ImageUrl = "",
-                CuisineType = "Tarjetas",
+                CuisineType = "Pantalones",
                 Rating = 4.7,
-                DeliveryTime = "Alta en 24-48h",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Barcelona"
+                Address = "Tienda Passeig de Gràcia, Barcelona"
             },
             new Restaurant
             {
                 Id = 3,
-                Name = "Préstamos",
-                Description = "Préstamos personales e hipotecas con asesoramiento experto",
+                Name = "Vestidos",
+                Description = "Vestidos de día, fiesta y básicos de temporada",
                 ImageUrl = "",
-                CuisineType = "Préstamos",
+                CuisineType = "Vestidos",
                 Rating = 4.6,
-                DeliveryTime = "Estudio en 48-72h",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Valencia"
+                Address = "Tienda Calle Colón, Valencia"
             },
             new Restaurant
             {
                 Id = 4,
-                Name = "Inversión",
-                Description = "Fondos, acciones y planes de pensiones para hacer crecer tu dinero",
+                Name = "Calzado",
+                Description = "Zapatillas, botas y zapatos con envío gratis",
                 ImageUrl = "",
-                CuisineType = "Inversión",
+                CuisineType = "Calzado",
                 Rating = 4.5,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Sevilla"
+                Address = "Tienda Calle Sierpes, Sevilla"
             },
             new Restaurant
             {
                 Id = 5,
-                Name = "Ahorro",
-                Description = "Depósitos y cuentas de ahorro para rentabilizar tu dinero con seguridad",
+                Name = "Abrigos",
+                Description = "Abrigos, chaquetas y prendas de abrigo para toda la temporada",
                 ImageUrl = "",
-                CuisineType = "Ahorro",
+                CuisineType = "Abrigos",
                 Rating = 4.6,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Zaragoza"
+                Address = "Tienda Paseo Independencia, Zaragoza"
             },
             new Restaurant
             {
                 Id = 6,
-                Name = "Seguros",
-                Description = "Seguros de salud, hogar, auto y moto para proteger lo que más importa",
+                Name = "Accesorios",
+                Description = "Bolsos, cinturones y complementos para completar tu look",
                 ImageUrl = "",
-                CuisineType = "Seguros",
+                CuisineType = "Accesorios",
                 Rating = 4.4,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Bilbao"
+                Address = "Tienda Gran Vía Don Diego, Bilbao"
             }
         };
 

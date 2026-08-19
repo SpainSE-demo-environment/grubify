@@ -9,15 +9,15 @@ namespace GrubifyApi.Controllers
     {
         private static readonly List<FoodItem> FoodItems = new()
         {
-            // Cuentas
+            // Camisetas
             new FoodItem
             {
                 Id = 1,
-                Name = "Cuenta Personal",
-                Description = "Cuenta corriente sin comisiones con tarjeta gratis, Bizum y app móvil",
-                Price = 0.00m,
+                Name = "Camiseta Básica",
+                Description = "Camiseta de algodón 100% orgánico, corte regular. Tallas S-XXL y varios colores",
+                Price = 12.99m,
                 ImageUrl = "",
-                Category = "Cuentas",
+                Category = "Camisetas",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -27,11 +27,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 2,
-                Name = "Cuenta de Ahorro",
-                Description = "Cuenta de ahorro remunerada con liquidez total y sin comisiones de mantenimiento",
-                Price = 0.00m,
+                Name = "Camiseta Oversize",
+                Description = "Camiseta oversize de punto grueso con estampado, unisex. Tallas S-XL",
+                Price = 19.99m,
                 ImageUrl = "",
-                Category = "Cuentas",
+                Category = "Camisetas",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
@@ -39,15 +39,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 15
             },
 
-            // Tarjetas
+            // Pantalones
             new FoodItem
             {
                 Id = 3,
-                Name = "Tarjeta de Débito",
-                Description = "Tarjeta de débito gratuita con pagos móviles y retiradas sin comisión",
-                Price = 0.00m,
+                Name = "Vaqueros Slim",
+                Description = "Vaqueros slim fit elásticos en denim azul. Tallas 36-46",
+                Price = 39.99m,
                 ImageUrl = "",
-                Category = "Tarjetas",
+                Category = "Pantalones",
                 IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = false,
@@ -57,11 +57,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 4,
-                Name = "Tarjeta de Crédito",
-                Description = "Crédito hasta 6.000€ con pago aplazado, seguros de viaje y programa de puntos",
-                Price = 45.00m,
+                Name = "Pantalón Chino",
+                Description = "Pantalón chino de algodón en corte recto, disponible en beige, azul y verde",
+                Price = 34.99m,
                 ImageUrl = "",
-                Category = "Tarjetas",
+                Category = "Pantalones",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
@@ -69,15 +69,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 15
             },
 
-            // Préstamos
+            // Vestidos
             new FoodItem
             {
                 Id = 5,
-                Name = "Préstamo Personal",
-                Description = "Financia tus proyectos hasta 60.000€ con cuotas a tu medida y sin sorpresas",
-                Price = 180.00m,
+                Name = "Vestido Midi",
+                Description = "Vestido midi de tejido fluido con estampado floral. Tallas XS-L",
+                Price = 45.99m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Vestidos",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
@@ -87,11 +87,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 6,
-                Name = "Préstamo Personal Preconcedido",
-                Description = "Hasta 30.000€ preconcedidos al instante, sin comisión de apertura y respuesta inmediata",
-                Price = 250.00m,
+                Name = "Vestido de Fiesta",
+                Description = "Vestido de fiesta largo con detalle de lentejuelas y espalda abierta",
+                Price = 79.99m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Vestidos",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
@@ -101,11 +101,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 7,
-                Name = "Hipoteca",
-                Description = "Hipoteca a tipo fijo desde el 2,90% TIN con cuota estable toda la vida del préstamo",
-                Price = 950.00m,
+                Name = "Vestido Camisero",
+                Description = "Vestido camisero de lino con cinturón, ideal para diario. Tallas XS-XL",
+                Price = 42.99m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Vestidos",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
@@ -113,15 +113,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 30
             },
 
-            // Inversión
+            // Calzado
             new FoodItem
             {
                 Id = 8,
-                Name = "Plan de Pensiones",
-                Description = "Prepara tu jubilación con ventajas fiscales y aportaciones flexibles",
-                Price = 50.00m,
+                Name = "Zapatillas Urbanas",
+                Description = "Zapatillas urbanas de piel sintética con suela cómoda. Tallas 36-45",
+                Price = 59.99m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Calzado",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -131,11 +131,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 9,
-                Name = "Fondos de Inversión",
-                Description = "Fondos gestionados e indexados para diversificar tu patrimonio con bajas comisiones",
-                Price = 100.00m,
+                Name = "Botas de Piel",
+                Description = "Botas de piel auténtica con forro cálido, ideales para el invierno",
+                Price = 89.99m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Calzado",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
@@ -145,11 +145,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 10,
-                Name = "Acciones y ETFs",
-                Description = "Opera en las principales bolsas mundiales con comisiones ultrarreducidas",
-                Price = 0.00m,
+                Name = "Bailarinas",
+                Description = "Bailarinas de ante en varios colores, cómodas y versátiles. Tallas 35-42",
+                Price = 35.99m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Calzado",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = true,
@@ -157,15 +157,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 15
             },
 
-            // Ahorro
+            // Abrigos
             new FoodItem
             {
                 Id = 11,
-                Name = "Depósito",
-                Description = "Depósito a plazo garantizado al 3% TAE a 12 meses sin sorpresas",
-                Price = 1000.00m,
+                Name = "Abrigo de Lana",
+                Description = "Abrigo largo de mezcla de lana con corte recto. Tallas S-XL",
+                Price = 119.99m,
                 ImageUrl = "",
-                Category = "Ahorro",
+                Category = "Abrigos",
                 IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = true,
@@ -175,11 +175,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 12,
-                Name = "Cuenta de Ahorro Remunerada",
-                Description = "Cuenta de ahorro con un 2,5% TAE y disponibilidad inmediata de tu dinero",
-                Price = 0.00m,
+                Name = "Chaqueta Vaquera",
+                Description = "Chaqueta vaquera clásica de denim con lavado medio. Tallas XS-XXL",
+                Price = 49.99m,
                 ImageUrl = "",
-                Category = "Ahorro",
+                Category = "Abrigos",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
@@ -187,15 +187,15 @@ namespace GrubifyApi.Controllers
                 PreparationTime = 10
             },
 
-            // Seguros
+            // Accesorios
             new FoodItem
             {
                 Id = 13,
-                Name = "Seguro de Salud",
-                Description = "Cuadro médico completo, sin copagos y con acceso a videoconsulta 24h",
-                Price = 45.00m,
+                Name = "Bolso Bandolera",
+                Description = "Bolso bandolera de piel sintética con correa ajustable, varios colores",
+                Price = 39.99m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Accesorios",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
@@ -205,11 +205,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 14,
-                Name = "Seguro de Hogar",
-                Description = "Protege tu vivienda y su contenido con cobertura integral y asistencia 24/7",
-                Price = 18.00m,
+                Name = "Cinturón de Piel",
+                Description = "Cinturón de piel auténtica con hebilla metálica. Tallas 90-110 cm",
+                Price = 24.99m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Accesorios",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -219,11 +219,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 15,
-                Name = "Seguro de Auto",
-                Description = "Seguro de coche a todo riesgo con asistencia en carretera incluida",
-                Price = 30.00m,
+                Name = "Bufanda de Punto",
+                Description = "Bufanda de punto suave y cálida, disponible en tonos lisos de temporada",
+                Price = 19.99m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Accesorios",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
@@ -233,11 +233,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 16,
-                Name = "Seguro de Moto",
-                Description = "Seguro de moto con las mejores coberturas, defensa jurídica y asistencia 24h",
-                Price = 20.00m,
+                Name = "Gafas de Sol",
+                Description = "Gafas de sol con protección UV400 y montura ligera de estilo retro",
+                Price = 29.99m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Accesorios",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,

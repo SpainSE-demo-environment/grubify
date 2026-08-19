@@ -1,11 +1,11 @@
 <!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
 
-# Bankify Retail Banking Portal
+# Dressify Retail Fashion Store
 
-This is a modern retail banking portal (Spanish UI) with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps. It is used for **Azure SRE Agent** demos.
+This is a modern retail fashion store (Spanish UI) with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps. It is used for **Azure SRE Agent** demos.
 
-> Rebranded from a food-delivery scaffold ("Grubify") to Bankify. The user-facing
-> brand, texts and catalog are banking; **internal C# class names, model properties
+> Rebranded from a food-delivery scaffold ("Grubify") to Dressify. The user-facing
+> brand, texts and catalog are fashion/retail; **internal C# class names, model properties
 > and API routes are intentionally unchanged** (e.g. `Restaurant`, `FoodItem`,
 > `/api/restaurants`, `/api/fooditems`) so the frontend↔API contract and telemetry
 > stay stable. Change only displayed values and frontend visuals — never rename
@@ -39,15 +39,15 @@ This is a modern retail banking portal (Spanish UI) with a React TypeScript fron
 - Keep user-facing text in Spanish
 
 ## API Endpoints (names unchanged from the original scaffold)
-- `/api/restaurants` - Product families (banking) management
-- `/api/fooditems` - Financial products management
-- `/api/cart` - Selected-products (application basket) operations
-- `/api/orders` - Application / contracting management
+- `/api/restaurants` - Product families (fashion) management
+- `/api/fooditems` - Fashion products management
+- `/api/cart` - Selected-products (shopping cart) operations
+- `/api/orders` - Order / checkout management
 
 ## UI Components
-- Modern, responsive design for a trustworthy online banking experience
-- Card-based layouts for product families and financial products (themed MUI icons, no photos)
-- Step-by-step contracting (checkout) process
-- Application status tracking
+- Modern, responsive design for a trustworthy online fashion shopping experience
+- Card-based layouts for product families and fashion products (themed MUI icons, no photos)
+- Step-by-step checkout process
+- Order status tracking
 
 When working on this project, prioritize user experience, maintain clean code architecture, and ensure proper error handling throughout the application.

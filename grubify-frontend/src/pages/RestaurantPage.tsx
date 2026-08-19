@@ -173,7 +173,7 @@ const RestaurantPage: React.FC = () => {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <FeeIcon sx={{ mr: 1, color: 'text.secondary' }} />
               <Typography variant="body1">
-                {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} € comisión` : 'Sin comisiones'}
+                {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} € de envío` : 'Envío gratis'}
               </Typography>
             </Box>
             <Chip label={restaurant.cuisineType} color="primary" />
@@ -250,7 +250,7 @@ const RestaurantPage: React.FC = () => {
                       disabled={!item.isAvailable}
                       fullWidth
                     >
-                      {item.isAvailable ? 'Contratar' : 'No disponible'}
+                      {item.isAvailable ? 'Añadir a la cesta' : 'No disponible'}
                     </Button>
                   </CardActions>
                 </Box>
@@ -263,7 +263,7 @@ const RestaurantPage: React.FC = () => {
 
       {/* Add to Cart Dialog */}
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>Contratar producto</DialogTitle>
+        <DialogTitle>Añadir a la cesta</DialogTitle>
         <DialogContent>
           {selectedItem && (
             <Box>
@@ -298,7 +298,7 @@ const RestaurantPage: React.FC = () => {
                 rows={3}
                 value={specialInstructions}
                 onChange={(e) => setSpecialInstructions(e.target.value)}
-                placeholder="p. ej., contactar por la mañana, dudas sobre condiciones, etc."
+                placeholder="p. ej., talla, color preferido, etc."
               />
             </Box>
           )}
@@ -306,7 +306,7 @@ const RestaurantPage: React.FC = () => {
         <DialogActions>
           <Button onClick={() => setDialogOpen(false)}>Cancelar</Button>
           <Button onClick={confirmAddToCart} variant="contained">
-            Añadir a la solicitud
+            Añadir a la cesta
           </Button>
         </DialogActions>
       </Dialog>

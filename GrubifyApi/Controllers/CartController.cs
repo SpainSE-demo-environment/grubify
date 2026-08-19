@@ -121,22 +121,22 @@ namespace GrubifyApi.Controllers
             // This is a simplified version - in production, inject the FoodItems service
             var foodItems = new List<FoodItem>
             {
-                new FoodItem { Id = 1, Name = "Cuenta Personal", Price = 0.00m, ImageUrl = "", RestaurantId = 1 },
-                new FoodItem { Id = 2, Name = "Cuenta de Ahorro", Price = 0.00m, ImageUrl = "", RestaurantId = 1 },
-                new FoodItem { Id = 3, Name = "Tarjeta de Débito", Price = 0.00m, ImageUrl = "", RestaurantId = 2 },
-                new FoodItem { Id = 4, Name = "Tarjeta de Crédito", Price = 45.00m, ImageUrl = "", RestaurantId = 2 },
-                new FoodItem { Id = 5, Name = "Préstamo Personal", Price = 180.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 6, Name = "Préstamo Personal Preconcedido", Price = 250.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 7, Name = "Hipoteca", Price = 950.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 8, Name = "Plan de Pensiones", Price = 50.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 9, Name = "Fondos de Inversión", Price = 100.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 10, Name = "Acciones y ETFs", Price = 0.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 11, Name = "Depósito", Price = 1000.00m, ImageUrl = "", RestaurantId = 5 },
-                new FoodItem { Id = 12, Name = "Cuenta de Ahorro Remunerada", Price = 0.00m, ImageUrl = "", RestaurantId = 5 },
-                new FoodItem { Id = 13, Name = "Seguro de Salud", Price = 45.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 14, Name = "Seguro de Hogar", Price = 18.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 15, Name = "Seguro de Auto", Price = 30.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 16, Name = "Seguro de Moto", Price = 20.00m, ImageUrl = "", RestaurantId = 6 }
+                new FoodItem { Id = 1, Name = "Camiseta Básica", Price = 12.99m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 2, Name = "Camiseta Oversize", Price = 19.99m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 3, Name = "Vaqueros Slim", Price = 39.99m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 4, Name = "Pantalón Chino", Price = 34.99m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 5, Name = "Vestido Midi", Price = 45.99m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 6, Name = "Vestido de Fiesta", Price = 79.99m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 7, Name = "Vestido Camisero", Price = 42.99m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 8, Name = "Zapatillas Urbanas", Price = 59.99m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 9, Name = "Botas de Piel", Price = 89.99m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 10, Name = "Bailarinas", Price = 35.99m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 11, Name = "Abrigo de Lana", Price = 119.99m, ImageUrl = "", RestaurantId = 5 },
+                new FoodItem { Id = 12, Name = "Chaqueta Vaquera", Price = 49.99m, ImageUrl = "", RestaurantId = 5 },
+                new FoodItem { Id = 13, Name = "Bolso Bandolera", Price = 39.99m, ImageUrl = "", RestaurantId = 6 },
+                new FoodItem { Id = 14, Name = "Cinturón de Piel", Price = 24.99m, ImageUrl = "", RestaurantId = 6 },
+                new FoodItem { Id = 15, Name = "Bufanda de Punto", Price = 19.99m, ImageUrl = "", RestaurantId = 6 },
+                new FoodItem { Id = 16, Name = "Gafas de Sol", Price = 29.99m, ImageUrl = "", RestaurantId = 6 }
             };
 
             return foodItems.FirstOrDefault(f => f.Id == foodItemId) ?? new FoodItem();
