@@ -129,7 +129,7 @@ namespace GrubifyApi.Controllers
         private string GetPaymentGatewayUrlV1()
         {
             // V1: Correct production payment gateway URL
-            return "https://payment-gateway-prod.medify.com/v1/process";
+            return "https://payment-gateway-prod.clinify.com/v1/process";
         }
 
         private string GetPaymentGatewayUrlV2()

@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# Create Sample Patient Issues for Medify App
+# Create Sample Patient Issues for Clinify App
 #
 # Creates 5 realistic patient-reported issues with [Customer Issue] prefix.
 # These simulate real user complaints — the issue-triager will classify,
@@ -52,7 +52,7 @@ echo ""
 
 create_issue \
   "[Customer Issue] App crashes when adding services to cart" \
-  "Hola, estoy intentando añadir servicios a mi cesta de citas en la app Medify pero no deja de fallar. Recibo un error del servidor después de añadir unos 5-6 servicios rápidamente. La página solo muestra un mensaje de error genérico.\\n\\nEsto empezó a pasar hoy sobre las 15:00. ¿Alguien puede revisarlo?"
+  "Hola, estoy intentando añadir servicios a mi cesta de citas en la app Clinify pero no deja de fallar. Recibo un error del servidor después de añadir unos 5-6 servicios rápidamente. La página solo muestra un mensaje de error genérico.\\n\\nEsto empezó a pasar hoy sobre las 15:00. ¿Alguien puede revisarlo?"
 
 create_issue \
   "[Customer Issue] Clinics page is loading very slowly" \
