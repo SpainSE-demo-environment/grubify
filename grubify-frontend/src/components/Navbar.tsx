@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
           }}
           onClick={handleLogoClick}
         >
-          Medify
+          Clinify
         </Typography>
 
         <Box sx={{ flexGrow: 1 }} />

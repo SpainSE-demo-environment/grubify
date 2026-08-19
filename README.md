@@ -1,8 +1,8 @@
-# Medify - Plataforma de Reserva de Citas Médicas
+# Clinify - Plataforma de Reserva de Citas Médicas
 
 Una aplicación moderna de reserva de citas médicas construida con un frontend React TypeScript y un backend .NET, diseñada para desplegarse en Azure Container Apps mediante Azure Developer CLI (azd).
 
-> **Nota:** La aplicación se presenta como **Medify** (dominio médico + UI en español). Los identificadores de despliegue (assembly `GrubifyApi`, carpetas, imágenes Docker `grubify-*`, grupos de recursos `*-grubify-*`, etc.) se mantienen como `grubify` a propósito, ya que el repositorio `azure-demo-environment` construye estas imágenes por IaC. Un rename profundo de infra/imágenes es un follow-up coordinado con `azure-demo-environment`.
+> **Nota:** La aplicación se presenta como **Clinify** (dominio médico + UI en español). Los identificadores de despliegue (assembly `GrubifyApi`, carpetas, imágenes Docker `grubify-*`, grupos de recursos `*-grubify-*`, etc.) se mantienen como `grubify` a propósito, ya que el repositorio `azure-demo-environment` construye estas imágenes por IaC. Un rename profundo de infra/imágenes es un follow-up coordinado con `azure-demo-environment`.
 
 ## 🏥 Características
 
@@ -21,11 +21,11 @@ Una aplicación moderna de reserva de citas médicas construida con un frontend 
 
 ## 🚀 Guía de Despliegue Completa
 
-Esta guía muestra cómo desplegar Medify con **ambas versiones del backend** (v1 con fuga de memoria, v2 con fallos de pago) para probar los escenarios de Azure SRE Agent.
+Esta guía muestra cómo desplegar Clinify con **ambas versiones del backend** (v1 con fuga de memoria, v2 con fallos de pago) para probar los escenarios de Azure SRE Agent.
 
 ## 📋 Requisitos Previos
 
-Antes de desplegar Medify, asegúrate de tener las siguientes herramientas instaladas y en ejecución:
+Antes de desplegar Clinify, asegúrate de tener las siguientes herramientas instaladas y en ejecución:
 
 ### Required Tools
 - **[Azure Developer CLI (azd)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd)** - Latest version

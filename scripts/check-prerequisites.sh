@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🔍 Checking Medify Deployment Prerequisites..."
+echo "🔍 Checking Clinify Deployment Prerequisites..."
 echo "============================================="
 
 EXIT_CODE=0

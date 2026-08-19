@@ -1,10 +1,10 @@
 <!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
 
-# Medify - Medical Appointment Booking App
+# Clinify - Medical Appointment Booking App
 
 This is a modern medical appointment booking application with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps.
 
-> Note: deployment identifiers (assembly `GrubifyApi`, folders, Docker images `grubify-*`) intentionally remain `grubify`; only the product domain and UI are rebranded to Medify.
+> Note: deployment identifiers (assembly `GrubifyApi`, folders, Docker images `grubify-*`) intentionally remain `grubify`; only the product domain and UI are rebranded to Clinify.
 
 ## Tech Stack
 - **Frontend**: React 18 with TypeScript, Material-UI, React Router
