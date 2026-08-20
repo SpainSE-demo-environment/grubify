@@ -14,7 +14,7 @@ import {
 import {
   Search as SearchIcon,
   ShoppingCart as ShoppingCartIcon,
-  AccountBalance as AccountBalanceIcon,
+  BoltRounded as BrandIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
@@ -84,8 +84,8 @@ const Navbar: React.FC = () => {
       position="sticky"
       elevation={0}
       sx={{
-        background: 'linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%)',
-        boxShadow: '0 4px 20px -8px rgba(79, 70, 229, 0.5)',
+        background: 'linear-gradient(90deg, #16A34A 0%, #65A30D 100%)',
+        boxShadow: '0 4px 20px -8px rgba(22, 163, 74, 0.5)',
       }}
     >
       <Toolbar>
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
           onClick={handleLogoClick}
           sx={{ mr: 2 }}
         >
-          <AccountBalanceIcon sx={{ fontSize: 28 }} />
+          <BrandIcon sx={{ fontSize: 28 }} />
         </IconButton>
         
         <Typography
@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
           }}
           onClick={handleLogoClick}
         >
-          Bankify
+          Voltify
         </Typography>
 
         <Box sx={{ flexGrow: 1 }} />
@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Buscar productos, cuentas, tarjetas..."
+              placeholder="Buscar tarifas, recarga, autoconsumo..."
               inputProps={{ 'aria-label': 'search' }}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

@@ -1,6 +1,6 @@
 {
-  "short_name": "Bankify",
-  "name": "Bankify - Banca online",
+  "short_name": "Voltify",
+  "name": "Voltify - Energía verde online",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#4F46E5",
+  "theme_color": "#16A34A",
   "background_color": "#ffffff"
 }

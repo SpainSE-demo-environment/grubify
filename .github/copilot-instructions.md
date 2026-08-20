@@ -1,11 +1,12 @@
 <!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
 
-# Bankify Retail Banking Portal
+# Voltify Green Energy Portal
 
-This is a modern retail banking portal (Spanish UI) with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps. It is used for **Azure SRE Agent** demos.
+This is a modern green-energy retail portal (Spanish UI) with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps. It is used for **Azure SRE Agent** demos.
 
-> Rebranded from a food-delivery scaffold ("Grubify") to Bankify. The user-facing
-> brand, texts and catalog are banking; **internal C# class names, model properties
+> Rebranded from a food-delivery scaffold ("Grubify") to Voltify. The user-facing
+> brand, texts and catalog are green energy (tarifas de luz y gas, recarga VE,
+> autoconsumo solar, movilidad); **internal C# class names, model properties
 > and API routes are intentionally unchanged** (e.g. `Restaurant`, `FoodItem`,
 > `/api/restaurants`, `/api/fooditems`) so the frontend↔API contract and telemetry
 > stay stable. Change only displayed values and frontend visuals — never rename
@@ -39,14 +40,14 @@ This is a modern retail banking portal (Spanish UI) with a React TypeScript fron
 - Keep user-facing text in Spanish
 
 ## API Endpoints (names unchanged from the original scaffold)
-- `/api/restaurants` - Product families (banking) management
-- `/api/fooditems` - Financial products management
+- `/api/restaurants` - Product families (energy) management
+- `/api/fooditems` - Energy products management
 - `/api/cart` - Selected-products (application basket) operations
 - `/api/orders` - Application / contracting management
 
 ## UI Components
-- Modern, responsive design for a trustworthy online banking experience
-- Card-based layouts for product families and financial products (themed MUI icons, no photos)
+- Modern, responsive design for a trustworthy online green-energy experience
+- Card-based layouts for product families and energy products (themed MUI icons, no photos)
 - Step-by-step contracting (checkout) process
 - Application status tracking
 

@@ -250,7 +250,9 @@ const RestaurantPage: React.FC = () => {
                       disabled={!item.isAvailable}
                       fullWidth
                     >
-                      {item.isAvailable ? 'Contratar' : 'No disponible'}
+                      {item.isAvailable
+                        ? (['Recarga VE', 'Movilidad'].includes(item.category) ? 'Reservar carga' : 'Contratar tarifa')
+                        : 'No disponible'}
                     </Button>
                   </CardActions>
                 </Box>

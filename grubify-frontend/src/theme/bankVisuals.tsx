@@ -1,209 +1,207 @@
 import React from 'react';
 import { Box, SvgIconProps } from '@mui/material';
 import {
-  AccountBalanceWalletRounded,
-  SavingsRounded,
-  CreditCardRounded,
-  CreditScoreRounded,
-  RequestQuoteRounded,
-  PriceCheckRounded,
-  HomeRounded,
-  HouseRounded,
-  BeachAccessRounded,
-  PieChartRounded,
-  ShowChartRounded,
-  TrendingUpRounded,
-  AccountBalanceRounded,
-  MedicalServicesRounded,
-  DirectionsCarRounded,
-  TwoWheelerRounded,
-  ShieldRounded,
+  BoltRounded,
+  ElectricBoltRounded,
+  WbSunnyRounded,
+  DarkModeRounded,
+  EvStationRounded,
+  ElectricalServicesRounded,
+  SolarPowerRounded,
+  BatteryChargingFullRounded,
+  LocalFireDepartmentRounded,
+  LocalGasStationRounded,
+  ElectricCarRounded,
+  PowerRounded,
+  HandymanRounded,
+  SupportAgentRounded,
+  EnergySavingsLeafRounded,
 } from '@mui/icons-material';
 
 type IconType = React.ComponentType<SvgIconProps>;
 
-// Solid brand color per financial category (used for chips, text, etc.)
+// Solid brand color per energy category (used for chips, text, etc.)
 export const categoryColors: Record<string, string> = {
-  Cuentas: '#4F46E5',
-  Tarjetas: '#DB2777',
-  Préstamos: '#EA580C',
-  Inversión: '#0891B2',
-  Ahorro: '#059669',
-  Seguros: '#0D9488',
+  Tarifas: '#F59E0B',
+  'Recarga VE': '#16A34A',
+  Autoconsumo: '#EAB308',
+  Gas: '#0EA5E9',
+  Movilidad: '#10B981',
+  Servicios: '#14B8A6',
 };
 
 // Two-tone gradient per category for the icon backgrounds
 const categoryGradients: Record<string, [string, string]> = {
-  Cuentas: ['#6366F1', '#4F46E5'],
-  Tarjetas: ['#EC4899', '#DB2777'],
-  Préstamos: ['#FB923C', '#EA580C'],
-  Inversión: ['#22D3EE', '#0891B2'],
-  Ahorro: ['#34D399', '#059669'],
-  Seguros: ['#2DD4BF', '#0D9488'],
+  Tarifas: ['#FBBF24', '#F59E0B'],
+  'Recarga VE': ['#22C55E', '#16A34A'],
+  Autoconsumo: ['#FDE047', '#EAB308'],
+  Gas: ['#38BDF8', '#0EA5E9'],
+  Movilidad: ['#34D399', '#10B981'],
+  Servicios: ['#2DD4BF', '#14B8A6'],
 };
 
 // Category shown per product (used when the API payload omits the category,
 // e.g. cart items resolved through the simplified helper)
 const productCategory: Record<string, string> = {
-  'Cuenta Personal': 'Cuentas',
-  'Cuenta de Ahorro': 'Cuentas',
-  'Tarjeta de Débito': 'Tarjetas',
-  'Tarjeta de Crédito': 'Tarjetas',
-  'Préstamo Personal': 'Préstamos',
-  'Préstamo Personal Preconcedido': 'Préstamos',
-  Hipoteca: 'Préstamos',
-  'Plan de Pensiones': 'Inversión',
-  'Fondos de Inversión': 'Inversión',
-  'Acciones y ETFs': 'Inversión',
-  Depósito: 'Ahorro',
-  'Cuenta de Ahorro Remunerada': 'Ahorro',
-  'Seguro de Salud': 'Seguros',
-  'Seguro de Hogar': 'Seguros',
-  'Seguro de Auto': 'Seguros',
-  'Seguro de Moto': 'Seguros',
+  'Tarifa Valle': 'Tarifas',
+  'Tarifa Solar': 'Tarifas',
+  'Tarifa Plana': 'Tarifas',
+  'Tarifa Nocturna': 'Tarifas',
+  'Recarga Rápida 50kW': 'Recarga VE',
+  'Recarga Ultrarrápida 150kW': 'Recarga VE',
+  'Recarga en Casa 7kW': 'Recarga VE',
+  'Placas Solares Residencial': 'Autoconsumo',
+  'Batería Virtual': 'Autoconsumo',
+  'Kit Solar Plug & Play': 'Autoconsumo',
+  'Tarifa Gas Hogar': 'Gas',
+  'Tarifa Gas Plana': 'Gas',
+  'Bono Recarga Ilimitada': 'Movilidad',
+  'Instalación Punto de Recarga': 'Movilidad',
+  'Mantenimiento Caldera': 'Servicios',
+  'Asistencia Energética 24h': 'Servicios',
 };
 
 // One themed (Rounded) icon per category
 const categoryIcons: Record<string, IconType> = {
-  Cuentas: AccountBalanceWalletRounded,
-  Tarjetas: CreditCardRounded,
-  Préstamos: RequestQuoteRounded,
-  Inversión: TrendingUpRounded,
-  Ahorro: SavingsRounded,
-  Seguros: ShieldRounded,
+  Tarifas: BoltRounded,
+  'Recarga VE': EvStationRounded,
+  Autoconsumo: SolarPowerRounded,
+  Gas: LocalFireDepartmentRounded,
+  Movilidad: ElectricCarRounded,
+  Servicios: HandymanRounded,
 };
 
 // One themed (Rounded) icon per product
 const productIcons: Record<string, IconType> = {
-  'Cuenta Personal': AccountBalanceWalletRounded,
-  'Cuenta de Ahorro': SavingsRounded,
-  'Tarjeta de Débito': CreditCardRounded,
-  'Tarjeta de Crédito': CreditScoreRounded,
-  'Préstamo Personal': RequestQuoteRounded,
-  'Préstamo Personal Preconcedido': PriceCheckRounded,
-  Hipoteca: HomeRounded,
-  'Plan de Pensiones': BeachAccessRounded,
-  'Fondos de Inversión': PieChartRounded,
-  'Acciones y ETFs': ShowChartRounded,
-  Depósito: AccountBalanceRounded,
-  'Cuenta de Ahorro Remunerada': SavingsRounded,
-  'Seguro de Salud': MedicalServicesRounded,
-  'Seguro de Hogar': HouseRounded,
-  'Seguro de Auto': DirectionsCarRounded,
-  'Seguro de Moto': TwoWheelerRounded,
+  'Tarifa Valle': BoltRounded,
+  'Tarifa Solar': WbSunnyRounded,
+  'Tarifa Plana': ElectricBoltRounded,
+  'Tarifa Nocturna': DarkModeRounded,
+  'Recarga Rápida 50kW': EvStationRounded,
+  'Recarga Ultrarrápida 150kW': BoltRounded,
+  'Recarga en Casa 7kW': ElectricalServicesRounded,
+  'Placas Solares Residencial': SolarPowerRounded,
+  'Batería Virtual': BatteryChargingFullRounded,
+  'Kit Solar Plug & Play': EnergySavingsLeafRounded,
+  'Tarifa Gas Hogar': LocalFireDepartmentRounded,
+  'Tarifa Gas Plana': LocalGasStationRounded,
+  'Bono Recarga Ilimitada': EvStationRounded,
+  'Instalación Punto de Recarga': PowerRounded,
+  'Mantenimiento Caldera': HandymanRounded,
+  'Asistencia Energética 24h': SupportAgentRounded,
 };
 
-// Banking-appropriate headline figure and feature tags per product.
-// This replaces the food-style "price" display: a loan shows a rate,
-// a card shows a credit limit, an insurance shows a monthly premium, etc.
+// Energy-appropriate headline figure and feature tags per product.
+// A tariff shows a €/kWh price or a flat monthly fee, a charging session
+// shows its power and €/kWh, a solar install shows an upfront amount, etc.
 export interface ProductMeta {
-  highlight: string; // headline figure (rate, amount, monthly fee, "Sin comisiones")
+  highlight: string; // headline figure (€/kWh, monthly fee, upfront amount)
   highlightLabel: string; // small caption above the headline
   badges: string[]; // up to two relevant feature tags
 }
 
 const productMeta: Record<string, ProductMeta> = {
-  'Cuenta Personal': {
-    highlight: 'Sin comisiones',
-    highlightLabel: 'Cuenta corriente',
-    badges: ['Sin comisiones', '100% online'],
+  'Tarifa Valle': {
+    highlight: '0,12 €/kWh',
+    highlightLabel: 'Precio valle',
+    badges: ['Discriminación horaria', 'Sin permanencia'],
   },
-  'Cuenta de Ahorro': {
-    highlight: '0,75%',
-    highlightLabel: 'TAE',
-    badges: ['Sin comisiones', 'Liquidez total'],
+  'Tarifa Solar': {
+    highlight: '0,10 €/kWh',
+    highlightLabel: 'Con excedentes',
+    badges: ['Ideal autoconsumo', 'Compensa excedentes'],
   },
-  'Tarjeta de Débito': {
-    highlight: '0 €',
-    highlightLabel: 'Cuota anual',
-    badges: ['Sin comisiones', 'Contactless'],
+  'Tarifa Plana': {
+    highlight: '55 €/mes',
+    highlightLabel: 'Cuota fija',
+    badges: ['Precio estable', '100% renovable'],
   },
-  'Tarjeta de Crédito': {
-    highlight: 'Hasta 6.000 €',
-    highlightLabel: 'Límite de crédito',
-    badges: ['Pago aplazado', 'Gratis 1er año'],
+  'Tarifa Nocturna': {
+    highlight: '0,09 €/kWh',
+    highlightLabel: 'Precio noche',
+    badges: ['Horas valle', 'Recarga tu VE de noche'],
   },
-  'Préstamo Personal': {
-    highlight: '6,95%',
-    highlightLabel: 'TIN desde',
-    badges: ['Hasta 60.000 €', 'Sin comisión de apertura'],
+  'Recarga Rápida 50kW': {
+    highlight: '0,45 €/kWh',
+    highlightLabel: '50 kW · DC',
+    badges: ['80% en 30 min', 'CCS / CHAdeMO'],
   },
-  'Préstamo Personal Preconcedido': {
-    highlight: 'Hasta 30.000 €',
-    highlightLabel: 'Preconcedido',
-    badges: ['Al instante', 'Sin papeleo'],
+  'Recarga Ultrarrápida 150kW': {
+    highlight: '0,55 €/kWh',
+    highlightLabel: '150 kW · DC',
+    badges: ['80% en 15 min', 'Alta potencia'],
   },
-  Hipoteca: {
-    highlight: '2,90%',
-    highlightLabel: 'TIN fijo',
-    badges: ['Hasta 30 años', 'Cuota estable'],
+  'Recarga en Casa 7kW': {
+    highlight: '0,18 €/kWh',
+    highlightLabel: '7,4 kW · AC',
+    badges: ['Wallbox incluido', 'Recarga nocturna'],
   },
-  'Plan de Pensiones': {
-    highlight: 'Desde 30 €/mes',
-    highlightLabel: 'Aportación',
-    badges: ['Ventajas fiscales', 'Aportación flexible'],
+  'Placas Solares Residencial': {
+    highlight: 'Desde 3.900 €',
+    highlightLabel: 'Instalación 3 kWp',
+    badges: ['Hasta 60% de ahorro', 'Legalización incluida'],
   },
-  'Fondos de Inversión': {
-    highlight: '+5,2%',
-    highlightLabel: 'Rentab. anual*',
-    badges: ['Gestión activa', 'Diversificado'],
+  'Batería Virtual': {
+    highlight: '0 €/mes',
+    highlightLabel: 'Tus excedentes',
+    badges: ['Sin baterías físicas', 'Energía 24h'],
   },
-  'Acciones y ETFs': {
-    highlight: '0 €',
-    highlightLabel: 'Comisión de custodia',
-    badges: ['Tiempo real', 'Bajas comisiones'],
+  'Kit Solar Plug & Play': {
+    highlight: '699 €',
+    highlightLabel: 'Kit 800 W',
+    badges: ['Autoinstalable', 'Enchufa y ahorra'],
   },
-  Depósito: {
-    highlight: '3,00%',
-    highlightLabel: 'TAE a 12 meses',
-    badges: ['Capital garantizado'],
+  'Tarifa Gas Hogar': {
+    highlight: '0,06 €/kWh',
+    highlightLabel: 'Gas natural',
+    badges: ['Sin permanencia', 'Factura clara'],
   },
-  'Cuenta de Ahorro Remunerada': {
-    highlight: '2,50%',
-    highlightLabel: 'TAE',
-    badges: ['Liquidez diaria', 'Sin permanencia'],
+  'Tarifa Gas Plana': {
+    highlight: '42 €/mes',
+    highlightLabel: 'Cuota fija gas',
+    badges: ['Precio estable', 'Todo incluido'],
   },
-  'Seguro de Salud': {
-    highlight: 'Desde 45 €/mes',
-    highlightLabel: 'Prima',
-    badges: ['Sin copagos', 'Videoconsulta 24h'],
+  'Bono Recarga Ilimitada': {
+    highlight: '39 €/mes',
+    highlightLabel: 'Red pública',
+    badges: ['Recargas ilimitadas', 'Miles de puntos'],
   },
-  'Seguro de Hogar': {
-    highlight: 'Desde 18 €/mes',
-    highlightLabel: 'Prima',
-    badges: ['Cobertura integral', 'Asistencia 24h'],
+  'Instalación Punto de Recarga': {
+    highlight: 'Desde 590 €',
+    highlightLabel: 'Wallbox 7,4 kW',
+    badges: ['Instalación incluida', 'Subvención Moves'],
   },
-  'Seguro de Auto': {
-    highlight: 'Desde 30 €/mes',
-    highlightLabel: 'Prima',
-    badges: ['Todo riesgo', 'Asistencia en carretera'],
+  'Mantenimiento Caldera': {
+    highlight: '6,90 €/mes',
+    highlightLabel: 'Plan mantenimiento',
+    badges: ['Revisión anual', 'Asistencia 24h'],
   },
-  'Seguro de Moto': {
-    highlight: 'Desde 20 €/mes',
-    highlightLabel: 'Prima',
-    badges: ['Defensa jurídica', 'Asistencia 24h'],
+  'Asistencia Energética 24h': {
+    highlight: '4,50 €/mes',
+    highlightLabel: 'Averías luz y gas',
+    badges: ['Técnico 24/7', 'Sin desplazamiento'],
   },
 };
 
 export const resolveCategory = (name: string, category?: string): string =>
-  (category && category.trim()) || productCategory[name] || 'Cuentas';
+  (category && category.trim()) || productCategory[name] || 'Tarifas';
 
 export const getProductMeta = (name: string): ProductMeta =>
-  productMeta[name] || { highlight: 'Sin comisiones', highlightLabel: '', badges: [] };
+  productMeta[name] || { highlight: 'Sin permanencia', highlightLabel: '', badges: [] };
 
 export const getCategoryColor = (category: string): string =>
-  categoryColors[category] || '#4F46E5';
+  categoryColors[category] || '#16A34A';
 
 export const getCategoryGradient = (category: string): string => {
-  const [from, to] = categoryGradients[category] || ['#6366F1', '#4F46E5'];
+  const [from, to] = categoryGradients[category] || ['#22C55E', '#16A34A'];
   return `linear-gradient(135deg, ${from} 0%, ${to} 100%)`;
 };
 
 export const getCategoryIcon = (cuisineType: string): IconType =>
-  categoryIcons[cuisineType] || AccountBalanceRounded;
+  categoryIcons[cuisineType] || BoltRounded;
 
 export const getProductIcon = (name: string, category?: string): IconType =>
-  productIcons[name] || categoryIcons[resolveCategory(name, category)] || AccountBalanceRounded;
+  productIcons[name] || categoryIcons[resolveCategory(name, category)] || BoltRounded;
 
 interface ProductIconBoxProps {
   name: string;

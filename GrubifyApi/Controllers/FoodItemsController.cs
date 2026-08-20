@@ -9,15 +9,15 @@ namespace GrubifyApi.Controllers
     {
         private static readonly List<FoodItem> FoodItems = new()
         {
-            // Cuentas
+            // Tarifas de Luz
             new FoodItem
             {
                 Id = 1,
-                Name = "Cuenta Personal",
-                Description = "Cuenta corriente sin comisiones con tarjeta gratis, Bizum y app móvil",
-                Price = 0.00m,
+                Name = "Tarifa Valle",
+                Description = "Tarifa con discriminación horaria: paga menos en las horas valle, sin permanencia",
+                Price = 0.12m,
                 ImageUrl = "",
-                Category = "Cuentas",
+                Category = "Tarifas",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -27,190 +27,204 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 2,
-                Name = "Cuenta de Ahorro",
-                Description = "Cuenta de ahorro remunerada con liquidez total y sin comisiones de mantenimiento",
-                Price = 0.00m,
+                Name = "Tarifa Solar",
+                Description = "Tarifa pensada para autoconsumo que compensa tus excedentes de energía solar",
+                Price = 0.10m,
                 ImageUrl = "",
-                Category = "Cuentas",
+                Category = "Tarifas",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
                 RestaurantId = 1,
                 PreparationTime = 15
             },
-
-            // Tarjetas
             new FoodItem
             {
                 Id = 3,
-                Name = "Tarjeta de Débito",
-                Description = "Tarjeta de débito gratuita con pagos móviles y retiradas sin comisión",
-                Price = 0.00m,
+                Name = "Tarifa Plana",
+                Description = "Cuota mensual fija con energía 100% renovable: siempre pagas lo mismo, sin sorpresas",
+                Price = 55.00m,
                 ImageUrl = "",
-                Category = "Tarjetas",
+                Category = "Tarifas",
                 IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = false,
-                RestaurantId = 2,
+                RestaurantId = 1,
                 PreparationTime = 15
             },
             new FoodItem
             {
                 Id = 4,
-                Name = "Tarjeta de Crédito",
-                Description = "Crédito hasta 6.000€ con pago aplazado, seguros de viaje y programa de puntos",
-                Price = 45.00m,
+                Name = "Tarifa Nocturna",
+                Description = "Precio reducido por la noche, ideal para recargar tu vehículo eléctrico en horas valle",
+                Price = 0.09m,
                 ImageUrl = "",
-                Category = "Tarjetas",
+                Category = "Tarifas",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
-                RestaurantId = 2,
+                RestaurantId = 1,
                 PreparationTime = 15
             },
 
-            // Préstamos
+            // Recarga VE
             new FoodItem
             {
                 Id = 5,
-                Name = "Préstamo Personal",
-                Description = "Financia tus proyectos hasta 60.000€ con cuotas a tu medida y sin sorpresas",
-                Price = 180.00m,
+                Name = "Recarga Rápida 50kW",
+                Description = "Sesión de recarga rápida en corriente continua de 50 kW: hasta el 80% en 30 minutos",
+                Price = 0.45m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Recarga VE",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 3,
+                RestaurantId = 2,
                 PreparationTime = 25
             },
             new FoodItem
             {
                 Id = 6,
-                Name = "Préstamo Personal Preconcedido",
-                Description = "Hasta 30.000€ preconcedidos al instante, sin comisión de apertura y respuesta inmediata",
-                Price = 250.00m,
+                Name = "Recarga Ultrarrápida 150kW",
+                Description = "Recarga ultrarrápida DC de 150 kW: recupera hasta el 80% de batería en solo 15 minutos",
+                Price = 0.55m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Recarga VE",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
-                RestaurantId = 3,
+                RestaurantId = 2,
                 PreparationTime = 20
             },
             new FoodItem
             {
                 Id = 7,
-                Name = "Hipoteca",
-                Description = "Hipoteca a tipo fijo desde el 2,90% TIN con cuota estable toda la vida del préstamo",
-                Price = 950.00m,
+                Name = "Recarga en Casa 7kW",
+                Description = "Punto de recarga doméstico de 7,4 kW en AC con wallbox incluido para cargar de noche",
+                Price = 0.18m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Recarga VE",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
-                RestaurantId = 3,
+                RestaurantId = 2,
                 PreparationTime = 30
             },
 
-            // Inversión
+            // Autoconsumo Solar
             new FoodItem
             {
                 Id = 8,
-                Name = "Plan de Pensiones",
-                Description = "Prepara tu jubilación con ventajas fiscales y aportaciones flexibles",
-                Price = 50.00m,
+                Name = "Placas Solares Residencial",
+                Description = "Instalación de autoconsumo de 3 kWp con legalización incluida y hasta un 60% de ahorro",
+                Price = 3900.00m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Autoconsumo",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 4,
+                RestaurantId = 3,
                 PreparationTime = 20
             },
             new FoodItem
             {
                 Id = 9,
-                Name = "Fondos de Inversión",
-                Description = "Fondos gestionados e indexados para diversificar tu patrimonio con bajas comisiones",
-                Price = 100.00m,
+                Name = "Batería Virtual",
+                Description = "Guarda el valor de tus excedentes solares y úsalo en tu factura las 24 horas, sin baterías físicas",
+                Price = 0.00m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Autoconsumo",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 4,
+                RestaurantId = 3,
                 PreparationTime = 15
             },
             new FoodItem
             {
                 Id = 10,
-                Name = "Acciones y ETFs",
-                Description = "Opera en las principales bolsas mundiales con comisiones ultrarreducidas",
-                Price = 0.00m,
+                Name = "Kit Solar Plug & Play",
+                Description = "Kit de autoconsumo de 800 W autoinstalable: enchufa, produce tu energía y empieza a ahorrar",
+                Price = 699.00m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Autoconsumo",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = true,
-                RestaurantId = 4,
+                RestaurantId = 3,
                 PreparationTime = 15
             },
 
-            // Ahorro
+            // Gas Natural
             new FoodItem
             {
                 Id = 11,
-                Name = "Depósito",
-                Description = "Depósito a plazo garantizado al 3% TAE a 12 meses sin sorpresas",
-                Price = 1000.00m,
+                Name = "Tarifa Gas Hogar",
+                Description = "Gas natural sin permanencia con un precio claro y una factura fácil de entender",
+                Price = 0.06m,
                 ImageUrl = "",
-                Category = "Ahorro",
+                Category = "Gas",
                 IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = true,
-                RestaurantId = 5,
+                RestaurantId = 4,
                 PreparationTime = 5
             },
             new FoodItem
             {
                 Id = 12,
-                Name = "Cuenta de Ahorro Remunerada",
-                Description = "Cuenta de ahorro con un 2,5% TAE y disponibilidad inmediata de tu dinero",
-                Price = 0.00m,
+                Name = "Tarifa Gas Plana",
+                Description = "Cuota mensual fija de gas natural: precio estable todo el año con todo incluido",
+                Price = 42.00m,
                 ImageUrl = "",
-                Category = "Ahorro",
+                Category = "Gas",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
-                RestaurantId = 5,
+                RestaurantId = 4,
                 PreparationTime = 10
             },
 
-            // Seguros
+            // Movilidad
             new FoodItem
             {
                 Id = 13,
-                Name = "Seguro de Salud",
-                Description = "Cuadro médico completo, sin copagos y con acceso a videoconsulta 24h",
-                Price = 45.00m,
+                Name = "Bono Recarga Ilimitada",
+                Description = "Recargas ilimitadas en miles de puntos de la red pública por una cuota mensual fija",
+                Price = 39.00m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Movilidad",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 6,
+                RestaurantId = 5,
                 PreparationTime = 15
             },
             new FoodItem
             {
                 Id = 14,
-                Name = "Seguro de Hogar",
-                Description = "Protege tu vivienda y su contenido con cobertura integral y asistencia 24/7",
-                Price = 18.00m,
+                Name = "Instalación Punto de Recarga",
+                Description = "Instalación de wallbox de 7,4 kW en tu plaza con gestión de la subvención Moves incluida",
+                Price = 590.00m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Movilidad",
                 IsVegetarian = true,
+                IsVegan = true,
+                IsSpicy = false,
+                RestaurantId = 5,
+                PreparationTime = 15
+            },
+
+            // Servicios
+            new FoodItem
+            {
+                Id = 15,
+                Name = "Mantenimiento Caldera",
+                Description = "Plan de mantenimiento con revisión anual de la caldera y asistencia 24h ante averías",
+                Price = 6.90m,
+                ImageUrl = "",
+                Category = "Servicios",
+                IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
                 RestaurantId = 6,
@@ -218,26 +232,12 @@ namespace GrubifyApi.Controllers
             },
             new FoodItem
             {
-                Id = 15,
-                Name = "Seguro de Auto",
-                Description = "Seguro de coche a todo riesgo con asistencia en carretera incluida",
-                Price = 30.00m,
-                ImageUrl = "",
-                Category = "Seguros",
-                IsVegetarian = false,
-                IsVegan = false,
-                IsSpicy = true,
-                RestaurantId = 6,
-                PreparationTime = 20
-            },
-            new FoodItem
-            {
                 Id = 16,
-                Name = "Seguro de Moto",
-                Description = "Seguro de moto con las mejores coberturas, defensa jurídica y asistencia 24h",
-                Price = 20.00m,
+                Name = "Asistencia Energética 24h",
+                Description = "Cobertura de averías de luz y gas con técnico 24/7 y sin coste de desplazamiento",
+                Price = 4.50m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Servicios",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,

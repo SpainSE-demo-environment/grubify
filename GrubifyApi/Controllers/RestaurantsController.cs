@@ -12,86 +12,86 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 1,
-                Name = "Cuentas",
-                Description = "Cuentas corrientes y de ahorro sin comisiones para tu día a día",
+                Name = "Tarifas de Luz",
+                Description = "Tarifas de luz 100% renovable, sin permanencia, para tu hogar y tu negocio",
                 ImageUrl = "",
-                CuisineType = "Cuentas",
+                CuisineType = "Tarifas",
                 Rating = 4.8,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Activación en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Madrid"
+                Address = "Comercializadora, Madrid"
             },
             new Restaurant
             {
                 Id = 2,
-                Name = "Tarjetas",
-                Description = "Tarjetas de débito y crédito con las mejores condiciones",
+                Name = "Recarga VE",
+                Description = "Red de recarga rápida y ultrarrápida para tu vehículo eléctrico",
                 ImageUrl = "",
-                CuisineType = "Tarjetas",
+                CuisineType = "Recarga VE",
                 Rating = 4.7,
-                DeliveryTime = "Alta en 24-48h",
+                DeliveryTime = "Disponible ahora",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Barcelona"
+                Address = "Red de recarga, Barcelona"
             },
             new Restaurant
             {
                 Id = 3,
-                Name = "Préstamos",
-                Description = "Préstamos personales e hipotecas con asesoramiento experto",
+                Name = "Autoconsumo Solar",
+                Description = "Placas solares y autoconsumo para producir y ahorrar con tu propia energía",
                 ImageUrl = "",
-                CuisineType = "Préstamos",
+                CuisineType = "Autoconsumo",
                 Rating = 4.6,
                 DeliveryTime = "Estudio en 48-72h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Valencia"
+                Address = "Instalaciones, Valencia"
             },
             new Restaurant
             {
                 Id = 4,
-                Name = "Inversión",
-                Description = "Fondos, acciones y planes de pensiones para hacer crecer tu dinero",
+                Name = "Gas Natural",
+                Description = "Tarifas de gas natural sin permanencia y con un precio claro",
                 ImageUrl = "",
-                CuisineType = "Inversión",
+                CuisineType = "Gas",
                 Rating = 4.5,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Activación en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Sevilla"
+                Address = "Comercializadora, Sevilla"
             },
             new Restaurant
             {
                 Id = 5,
-                Name = "Ahorro",
-                Description = "Depósitos y cuentas de ahorro para rentabilizar tu dinero con seguridad",
+                Name = "Movilidad",
+                Description = "Bonos de recarga e instalación de puntos para tu vehículo eléctrico",
                 ImageUrl = "",
-                CuisineType = "Ahorro",
+                CuisineType = "Movilidad",
                 Rating = 4.6,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Disponible ahora",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Zaragoza"
+                Address = "Movilidad, Zaragoza"
             },
             new Restaurant
             {
                 Id = 6,
-                Name = "Seguros",
-                Description = "Seguros de salud, hogar, auto y moto para proteger lo que más importa",
+                Name = "Servicios",
+                Description = "Mantenimiento y asistencia para tus instalaciones de luz y gas",
                 ImageUrl = "",
-                CuisineType = "Seguros",
+                CuisineType = "Servicios",
                 Rating = 4.4,
                 DeliveryTime = "Contratación inmediata",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Bilbao"
+                Address = "Servicios, Bilbao"
             }
         };
 
