@@ -26,12 +26,12 @@ import { getCategoryColor, getCategoryGradient, getCategoryIcon } from '../theme
 
 const cuisineTypes = [
   'Todos',
-  'Cuentas',
-  'Tarjetas',
-  'Préstamos',
-  'Inversión',
-  'Ahorro',
-  'Seguros',
+  'Móvil',
+  'Fibra',
+  'Convergente',
+  'Dispositivos',
+  'Datos',
+  'Servicios',
 ];
 
 const HomePage: React.FC = () => {
@@ -122,13 +122,13 @@ const HomePage: React.FC = () => {
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 45%, #06B6D4 100%)',
+          background: 'linear-gradient(135deg, #E6007E 0%, #B0005F 45%, #F97316 100%)',
           borderRadius: 4,
           color: 'white',
           p: { xs: 4, md: 7 },
           mb: 5,
           textAlign: 'center',
-          boxShadow: '0 20px 50px -20px rgba(79, 70, 229, 0.6)',
+          boxShadow: '0 20px 50px -20px rgba(230, 0, 126, 0.6)',
         }}
       >
         <Box
@@ -156,7 +156,7 @@ const HomePage: React.FC = () => {
         />
         <Box sx={{ position: 'relative', zIndex: 1 }}>
           <Chip
-            label="100% online · Sin comisiones"
+            label="100% online · Sin permanencia"
             sx={{
               mb: 2,
               color: 'white',
@@ -166,10 +166,10 @@ const HomePage: React.FC = () => {
             }}
           />
           <Typography variant="h2" component="h1" gutterBottom>
-            Tu banca, simple y sin comisiones
+            Tu conexión, rápida y sin permanencia
           </Typography>
           <Typography variant="h6" sx={{ mb: 4, opacity: 0.92, fontWeight: 400 }}>
-            Contrata cuentas, tarjetas, hipotecas e inversiones en minutos, 100% online
+            Contrata tarifas móviles, fibra, paquetes convergentes y dispositivos en minutos, 100% online
           </Typography>
 
           {/* Search Bar */}
@@ -205,7 +205,7 @@ const HomePage: React.FC = () => {
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
           {cuisineTypes.map((cuisine) => {
             const selected = selectedCuisine === cuisine;
-            const color = cuisine === 'Todos' ? '#4F46E5' : getCategoryColor(cuisine);
+            const color = cuisine === 'Todos' ? '#E6007E' : getCategoryColor(cuisine);
             return (
               <Chip
                 key={cuisine}

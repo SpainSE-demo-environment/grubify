@@ -16,14 +16,14 @@ import './App.css';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4F46E5', // Indigo
-      light: '#7C74F0',
-      dark: '#3730A3',
+      main: '#E6007E', // Magenta
+      light: '#F0499F',
+      dark: '#B0005F',
     },
     secondary: {
-      main: '#06B6D4', // Vivid cyan
-      light: '#22D3EE',
-      dark: '#0E7490',
+      main: '#F97316', // Vibrant orange
+      light: '#FB923C',
+      dark: '#C2410C',
     },
     success: {
       main: '#059669',
@@ -82,10 +82,10 @@ const theme = createTheme({
           boxShadow: 'none',
         },
         containedPrimary: {
-          background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+          background: 'linear-gradient(135deg, #E6007E 0%, #F97316 100%)',
           '&:hover': {
-            background: 'linear-gradient(135deg, #4338CA 0%, #6D28D9 100%)',
-            boxShadow: '0 8px 20px -6px rgba(79, 70, 229, 0.5)',
+            background: 'linear-gradient(135deg, #B0005F 0%, #C2410C 100%)',
+            boxShadow: '0 8px 20px -6px rgba(230, 0, 126, 0.5)',
           },
         },
       },
