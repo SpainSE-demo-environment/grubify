@@ -187,7 +187,7 @@ const ClinicPage: React.FC = () => {
             }}
           >
             {items.map((service) => (
-              <Card key={service.id} sx={{ display: 'flex', height: 200 }}>
+              <Card key={service.id} sx={{ display: 'flex', alignItems: 'stretch', minHeight: 200 }}>
                 <CardMedia
                   component="img"
                   sx={{ width: 150, objectFit: 'cover' }}
