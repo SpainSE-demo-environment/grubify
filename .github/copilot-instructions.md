@@ -1,15 +1,16 @@
 <!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
 
-# Bankify Retail Banking Portal
+# Grubify Food Delivery Portal
 
-This is a modern retail banking portal (Spanish UI) with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps. It is used for **Azure SRE Agent** demos.
+This is a modern food-delivery portal (Spanish UI) with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps. It is used for **Azure SRE Agent** demos.
 
-> Rebranded from a food-delivery scaffold ("Grubify") to Bankify. The user-facing
-> brand, texts and catalog are banking; **internal C# class names, model properties
-> and API routes are intentionally unchanged** (e.g. `Restaurant`, `FoodItem`,
-> `/api/restaurants`, `/api/fooditems`) so the frontend↔API contract and telemetry
-> stay stable. Change only displayed values and frontend visuals — never rename
-> classes, model properties or routes.
+> This vertical keeps the ORIGINAL food-delivery brand ("Grubify"). The user-facing
+> brand, texts and catalog are food (restaurants, dishes, warm theme, "Crear pedido"),
+> while it retains all the newer functionality and integration wiring from `main`.
+> **Internal C# class names, model properties and API routes are food-native and
+> unchanged** (e.g. `Restaurant`, `FoodItem`, `/api/restaurants`, `/api/fooditems`)
+> so the frontend↔API contract and telemetry stay stable. Change only displayed
+> values and frontend visuals — never rename classes, model properties or routes.
 
 ## Demo faults (do NOT "fix" these)
 - **Memory leak** in `CartController` (`static List<byte[]> RequestDataCache`,
@@ -38,16 +39,16 @@ This is a modern retail banking portal (Spanish UI) with a React TypeScript fron
 - Follow RESTful conventions for API endpoints
 - Keep user-facing text in Spanish
 
-## API Endpoints (names unchanged from the original scaffold)
-- `/api/restaurants` - Product families (banking) management
-- `/api/fooditems` - Financial products management
-- `/api/cart` - Selected-products (application basket) operations
-- `/api/orders` - Application / contracting management
+## API Endpoints
+- `/api/restaurants` - Restaurants management
+- `/api/fooditems` - Food items / menu management
+- `/api/cart` - Cart operations
+- `/api/orders` - Order management
 
 ## UI Components
-- Modern, responsive design for a trustworthy online banking experience
-- Card-based layouts for product families and financial products (themed MUI icons, no photos)
-- Step-by-step contracting (checkout) process
-- Application status tracking
+- Modern, responsive design for an appetizing food-delivery experience
+- Card-based layouts for restaurants and dishes (themed MUI icons, no photos)
+- Step-by-step checkout ("Crear pedido") process
+- Order status tracking
 
 When working on this project, prioritize user experience, maintain clean code architecture, and ensure proper error handling throughout the application.

@@ -18,21 +18,22 @@ import {
 } from '@mui/material';
 import {
   CheckCircle as CheckCircleIcon,
-  Assignment as AssignmentIcon,
-  VerifiedUser as VerifiedIcon,
+  Receipt as ReceiptIcon,
+  Restaurant as RestaurantIcon,
+  DeliveryDining as DeliveryIcon,
   Home as HomeIcon,
 } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Order, OrderStatus } from '../types';
 import { orderService } from '../services/api';
-import { ProductIconBox, getProductMeta } from '../theme/bankVisuals';
+import { ProductIconBox, getProductMeta } from '../theme/foodVisuals';
 
 const orderSteps = [
-  { label: 'Solicitud recibida', icon: <CheckCircleIcon />, status: OrderStatus.Placed },
-  { label: 'Solicitud confirmada', icon: <CheckCircleIcon />, status: OrderStatus.Confirmed },
-  { label: 'En revisión', icon: <AssignmentIcon />, status: OrderStatus.Preparing },
-  { label: 'En formalización', icon: <VerifiedIcon />, status: OrderStatus.OutForDelivery },
-  { label: 'Contratado', icon: <HomeIcon />, status: OrderStatus.Delivered },
+  { label: 'Pedido recibido', icon: <CheckCircleIcon />, status: OrderStatus.Placed },
+  { label: 'Pedido confirmado', icon: <ReceiptIcon />, status: OrderStatus.Confirmed },
+  { label: 'En preparación', icon: <RestaurantIcon />, status: OrderStatus.Preparing },
+  { label: 'En camino', icon: <DeliveryIcon />, status: OrderStatus.OutForDelivery },
+  { label: 'Entregado', icon: <HomeIcon />, status: OrderStatus.Delivered },
 ];
 
 const getStatusColor = (status: OrderStatus) => {
@@ -56,19 +57,19 @@ const getStatusColor = (status: OrderStatus) => {
 const getStatusText = (status: OrderStatus) => {
   switch (status) {
     case OrderStatus.Placed:
-      return 'Recibida';
+      return 'Recibido';
     case OrderStatus.Confirmed:
-      return 'Confirmada';
+      return 'Confirmado';
     case OrderStatus.Preparing:
-      return 'En revisión';
+      return 'En preparación';
     case OrderStatus.ReadyForPickup:
-      return 'Lista para formalizar';
+      return 'Listo';
     case OrderStatus.OutForDelivery:
-      return 'En formalización';
+      return 'En camino';
     case OrderStatus.Delivered:
-      return 'Contratada';
+      return 'Entregado';
     case OrderStatus.Cancelled:
-      return 'Cancelada';
+      return 'Cancelado';
     default:
       return 'Desconocido';
   }
@@ -98,7 +99,7 @@ const OrderTrackingPage: React.FC = () => {
       setOrder(orderData);
       setError(null);
     } catch (err) {
-      setError('No se pudieron cargar los detalles de la solicitud. Inténtalo de nuevo más tarde.');
+      setError('No se pudieron cargar los detalles del pedido. Inténtalo de nuevo más tarde.');
       console.error('Error fetching order:', err);
     } finally {
       setLoading(false);
@@ -111,12 +112,12 @@ const OrderTrackingPage: React.FC = () => {
 
   const getEstimatedDeliveryTime = (order: Order) => {
     if (order.status === OrderStatus.Delivered) {
-      return `Contratado a las ${new Date(order.deliveryTime || order.orderDate).toLocaleTimeString()}`;
+      return `Entregado a las ${new Date(order.deliveryTime || order.orderDate).toLocaleTimeString()}`;
     }
     
     const orderDate = new Date(order.orderDate);
     const estimatedTime = new Date(orderDate.getTime() + order.estimatedDeliveryTime * 60000);
-    return `Resolución estimada: ${estimatedTime.toLocaleTimeString()}`;
+    return `Entrega estimada: ${estimatedTime.toLocaleTimeString()}`;
   };
 
   if (loading) {
@@ -131,7 +132,7 @@ const OrderTrackingPage: React.FC = () => {
     return (
       <Container maxWidth="md">
         <Alert severity="error" sx={{ mt: 4 }}>
-          {error || 'Solicitud no encontrada'}
+          {error || 'Pedido no encontrado'}
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={() => navigate('/')}>
@@ -147,7 +148,7 @@ const OrderTrackingPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Estado de la solicitud
+        Estado del pedido
       </Typography>
 
       <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', lg: 'row' } }}>
@@ -157,7 +158,7 @@ const OrderTrackingPage: React.FC = () => {
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
                 <Typography variant="h5">
-                  Solicitud #{order.id}
+                  Pedido #{order.id}
                 </Typography>
                 <Chip
                   label={getStatusText(order.status)}
@@ -194,11 +195,11 @@ const OrderTrackingPage: React.FC = () => {
                     </StepLabel>
                     <StepContent>
                       <Typography variant="body2" color="text.secondary">
-                        {index === 0 && 'Tu solicitud se ha registrado correctamente.'}
-                        {index === 1 && 'La entidad ha confirmado tu solicitud.'}
-                        {index === 2 && 'Estamos revisando tu solicitud.'}
-                        {index === 3 && 'Tu producto está en proceso de formalización.'}
-                        {index === 4 && 'Tu producto ha sido contratado. ¡Gracias por confiar en Bankify!'}
+                        {index === 0 && 'Tu pedido se ha registrado correctamente.'}
+                        {index === 1 && 'El restaurante ha confirmado tu pedido.'}
+                        {index === 2 && 'El restaurante está preparando tu pedido.'}
+                        {index === 3 && 'Tu pedido está en camino.'}
+                        {index === 4 && 'Tu pedido ha sido entregado. ¡Gracias por pedir en Grubify!'}
                       </Typography>
                     </StepContent>
                   </Step>
@@ -211,7 +212,7 @@ const OrderTrackingPage: React.FC = () => {
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
-                Entidad
+                Restaurante
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {order.restaurant.name}
@@ -228,7 +229,7 @@ const OrderTrackingPage: React.FC = () => {
           {/* Delivery Address */}
           <Paper sx={{ p: 3, mb: 3 }}>
             <Typography variant="h6" gutterBottom>
-              Datos de contacto
+              Datos de entrega
             </Typography>
             <Typography variant="body2">
               {order.deliveryAddress}
@@ -241,7 +242,7 @@ const OrderTrackingPage: React.FC = () => {
           {/* Order Items */}
           <Paper sx={{ p: 3, mb: 3 }}>
             <Typography variant="h6" gutterBottom>
-              Productos seleccionados
+              Platos del pedido
             </Typography>
             {order.items.map((item) => (
               <Box key={item.id} sx={{ display: 'flex', gap: 2, mb: 2 }}>
@@ -277,16 +278,22 @@ const OrderTrackingPage: React.FC = () => {
             
             <Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="body2">Productos solicitados</Typography>
+                <Typography variant="body2">Subtotal</Typography>
                 <Typography variant="body2" fontWeight="bold">
-                  {order.items.reduce((n, i) => n + i.quantity, 0)}
+                  {`${order.items.reduce((s, i) => s + i.quantity * i.foodItem.price, 0).toFixed(2).replace('.', ',')} €`}
                 </Typography>
               </Box>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                <Typography variant="body2">Envío</Typography>
+                <Typography variant="body2" fontWeight="bold" color="secondary.main">Gratis</Typography>
+              </Box>
               <Divider sx={{ my: 2 }} />
-              <Typography variant="body2" color="text.secondary">
-                Solicitud registrada. Un asesor la revisará y te contactará para
-                formalizar la contratación.
-              </Typography>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography variant="subtitle1" fontWeight="bold">Total</Typography>
+                <Typography variant="subtitle1" fontWeight="bold">
+                  {`${order.items.reduce((s, i) => s + i.quantity * i.foodItem.price, 0).toFixed(2).replace('.', ',')} €`}
+                </Typography>
+              </Box>
             </Box>
           </Paper>
 
@@ -297,7 +304,7 @@ const OrderTrackingPage: React.FC = () => {
               fullWidth
               onClick={() => navigate('/')}
             >
-              Contratar de nuevo
+              Pedir de nuevo
             </Button>
             {order.status !== OrderStatus.Delivered && order.status !== OrderStatus.Cancelled && (
               <Button
@@ -309,7 +316,7 @@ const OrderTrackingPage: React.FC = () => {
                   console.log('Cancel order');
                 }}
               >
-                Cancelar solicitud
+                Cancelar pedido
               </Button>
             )}
           </Box>

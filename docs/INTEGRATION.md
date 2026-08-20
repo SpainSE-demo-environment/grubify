@@ -1,6 +1,6 @@
-# Bankify (fork de Grubify) — Integración con el Spoke ACA de azure-demo-environment
+# Grubify (vertical food) — Integración con el Spoke ACA de azure-demo-environment
 
-Este fork de [dm-chelupati/grubify](https://github.com/dm-chelupati/grubify) —rebrandeado a **Bankify**, un portal de banca minorista para demos del **Azure SRE Agent**— se despliega sobre la infraestructura **existente** del Spoke ACA creado por [azure-demo-environment](https://github.com/SpainSE-demo-environment/azure-demo-environment) (topología Hub & Spoke).
+Este fork de [dm-chelupati/grubify](https://github.com/dm-chelupati/grubify) —**Grubify**, un portal de comida a domicilio para demos del **Azure SRE Agent**— se despliega sobre la infraestructura **existente** del Spoke ACA creado por [azure-demo-environment](https://github.com/SpainSE-demo-environment/azure-demo-environment) (topología Hub & Spoke).
 
 > Los nombres internos de clases C#, propiedades de modelo y rutas de API (`/api/restaurants`, `/api/fooditems`, `/api/cart`, `/api/orders`) se mantienen: solo cambian marca, textos y catálogo mostrados.
 
@@ -18,7 +18,7 @@ Estos son los recursos existentes sobre los que se despliega la app (RG `rg-lab-
 | Container App — API | `ca-app-api-dev` | `Microsoft.App/containerApps` |
 | Container App — Frontend | `ca-app-frontend-dev` | `Microsoft.App/containerApps` |
 | Azure SRE Agent | `sre-aca-dev` | `Microsoft.App/agents` |
-| Alerta HTTP 5xx (API banca) | `alert-http5xx-banking-api` | `Microsoft.Insights/metricAlerts` |
+| Alerta HTTP 5xx (API) | `alert-http5xx-banking-api` | `Microsoft.Insights/metricAlerts` |
 
 > El nombre del ACR lleva sufijo aleatorio (`acrgrubify…`); confírmalo siempre con
 > `az acr list -g rg-lab-spoke-aca-dev --query "[].name" -o tsv`.
@@ -84,8 +84,8 @@ azd up
 │                                                                   │
 │  VNet vnet-spoke-aca-dev (10.10.0.0/16)                           │
 │  ├─ Container Apps Environment  cae-spoke-aca-dev                 │
-│  │   ├─ ca-app-api-dev        (Bankify API,      :8080)           │
-│  │   ├─ ca-app-frontend-dev   (Bankify Frontend, :80)            │
+│  │   ├─ ca-app-api-dev        (Grubify API,      :8080)           │
+│  │   ├─ ca-app-frontend-dev   (Grubify Frontend, :80)            │
 │  │   └─ ca-supplier-api-dev   (servicio auxiliar de la demo)      │
 │  ├─ Container Registry  acrgrubifyznl7cs3npn27k                   │
 │  │   └─ repos: app-api, app-frontend                             │
@@ -100,7 +100,7 @@ azd up
 
 ## Cambios de este fork respecto al repo original
 
-1. **Rebrand a Bankify**: UI en español y catálogo de productos financieros
+1. **Marca Grubify (food)**: UI en español y catálogo de restaurantes y platos
    (la iconografía es de Material-UI; ya **no** se usan imágenes de Unsplash).
 2. **infra/main.bicep**: lógica condicional para reutilizar RG/CAE/ACR existentes.
 3. **infra/core/host/container-apps-environment-ref.bicep**: módulo auxiliar para

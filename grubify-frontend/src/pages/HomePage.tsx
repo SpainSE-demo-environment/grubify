@@ -22,16 +22,15 @@ import {
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Restaurant } from '../types';
 import { restaurantService } from '../services/api';
-import { getCategoryColor, getCategoryGradient, getCategoryIcon } from '../theme/bankVisuals';
+import { getCategoryColor, getCategoryGradient, getCategoryIcon } from '../theme/foodVisuals';
 
 const cuisineTypes = [
   'Todos',
-  'Cuentas',
-  'Tarjetas',
-  'Préstamos',
-  'Inversión',
-  'Ahorro',
-  'Seguros',
+  'Italian',
+  'Japanese',
+  'Indian',
+  'American',
+  'Healthy',
 ];
 
 const HomePage: React.FC = () => {
@@ -59,7 +58,7 @@ const HomePage: React.FC = () => {
       setRestaurants(data);
       setError(null);
     } catch (err) {
-      setError('No se pudieron cargar los productos. Inténtalo de nuevo más tarde.');
+      setError('No se pudieron cargar los restaurantes. Inténtalo de nuevo más tarde.');
       console.error('Error fetching restaurants:', err);
     } finally {
       setLoading(false);
@@ -122,7 +121,7 @@ const HomePage: React.FC = () => {
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 45%, #06B6D4 100%)',
+          background: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 45%, #FFB347 100%)',
           borderRadius: 4,
           color: 'white',
           p: { xs: 4, md: 7 },
@@ -156,7 +155,7 @@ const HomePage: React.FC = () => {
         />
         <Box sx={{ position: 'relative', zIndex: 1 }}>
           <Chip
-            label="100% online · Sin comisiones"
+            label="Envío rápido · Comida a domicilio"
             sx={{
               mb: 2,
               color: 'white',
@@ -166,10 +165,10 @@ const HomePage: React.FC = () => {
             }}
           />
           <Typography variant="h2" component="h1" gutterBottom>
-            Tu banca, simple y sin comisiones
+            Tu comida favorita, a domicilio
           </Typography>
           <Typography variant="h6" sx={{ mb: 4, opacity: 0.92, fontWeight: 400 }}>
-            Contrata cuentas, tarjetas, hipotecas e inversiones en minutos, 100% online
+            Pide en tus restaurantes favoritos y recíbelo en minutos, calentito y en casa
           </Typography>
 
           {/* Search Bar */}
@@ -177,7 +176,7 @@ const HomePage: React.FC = () => {
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Buscar productos, categorías o servicios..."
+              placeholder="Buscar restaurantes, platos o tipos de cocina..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               InputProps={{
@@ -200,7 +199,7 @@ const HomePage: React.FC = () => {
       {/* Cuisine Filter */}
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" gutterBottom>
-          Explora por categoría
+          Explora por tipo de cocina
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
           {cuisineTypes.map((cuisine) => {
@@ -233,10 +232,10 @@ const HomePage: React.FC = () => {
       {/* Results Header */}
       <Box sx={{ mb: 3 }}>
         <Typography variant="h5" gutterBottom>
-          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestros productos'}
+          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestros restaurantes'}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          {filteredRestaurants.length} categoría{filteredRestaurants.length !== 1 ? 's' : ''} disponible{filteredRestaurants.length !== 1 ? 's' : ''}
+          {filteredRestaurants.length} restaurante{filteredRestaurants.length !== 1 ? 's' : ''} disponible{filteredRestaurants.length !== 1 ? 's' : ''}
         </Typography>
       </Box>
 
@@ -356,7 +355,7 @@ const HomePage: React.FC = () => {
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <FeeIcon sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
                   <Typography variant="body2" color="text.secondary">
-                    {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} €` : 'Sin comisiones'}
+                    {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} € envío` : 'Envío gratis'}
                   </Typography>
                 </Box>
               </Box>
@@ -371,7 +370,7 @@ const HomePage: React.FC = () => {
                   handleRestaurantClick(restaurant.id);
                 }}
               >
-                Ver productos
+                Ver carta
               </Button>
             </CardActions>
           </Card>
@@ -382,7 +381,7 @@ const HomePage: React.FC = () => {
       {filteredRestaurants.length === 0 && !loading && (
         <Box textAlign="center" py={8}>
           <Typography variant="h6" color="text.secondary" gutterBottom>
-            No se encontraron productos
+            No se encontraron restaurantes
           </Typography>
           <Typography variant="body1" color="text.secondary">
             Prueba a ajustar la búsqueda o los filtros

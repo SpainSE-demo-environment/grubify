@@ -11,7 +11,6 @@ import {
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel,
   Paper,
   Divider,
   Alert,
@@ -28,9 +27,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Cart, PlaceOrderRequest } from '../types';
 import { cartService, orderService } from '../services/api';
-import { getProductMeta } from '../theme/bankVisuals';
+import { getProductMeta } from '../theme/foodVisuals';
 
-const steps = ['Datos de contacto', 'Pago', 'Revisar y contratar'];
+const steps = ['Datos de entrega', 'Pago', 'Revisar pedido'];
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -71,7 +70,7 @@ const CheckoutPage: React.FC = () => {
       }
       setError(null);
     } catch (err) {
-      setError('No se pudo cargar la solicitud. Inténtalo de nuevo más tarde.');
+      setError('No se pudo cargar tu pedido. Inténtalo de nuevo más tarde.');
       console.error('Error fetching cart:', err);
     } finally {
       setLoading(false);
@@ -165,7 +164,7 @@ const CheckoutPage: React.FC = () => {
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={() => navigate('/cart')}>
-            Volver a la solicitud
+            Volver al carrito
           </Button>
         </Box>
       </Container>
@@ -193,7 +192,7 @@ const CheckoutPage: React.FC = () => {
               Error en el sistema de pagos
             </Typography>
             <Typography variant="h6" gutterBottom sx={{ mb: 3, color: 'text.secondary' }}>
-              No se ha podido tramitar tu solicitud
+              No se ha podido tramitar tu pedido
             </Typography>
             
             <Alert severity="error" sx={{ mb: 3, textAlign: 'left' }}>
@@ -229,7 +228,7 @@ const CheckoutPage: React.FC = () => {
                 onClick={() => navigate('/cart')}
                 sx={{ minWidth: 120 }}
               >
-                Volver a la solicitud
+                Volver al carrito
               </Button>
               <Button
                 variant="text"
@@ -251,7 +250,7 @@ const CheckoutPage: React.FC = () => {
         return (
           <Box sx={{ space: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Datos de contacto
+              Datos de entrega
             </Typography>
             <TextField
               fullWidth
@@ -337,7 +336,7 @@ const CheckoutPage: React.FC = () => {
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                       <CashIcon />
-                      Domiciliación bancaria
+                      Efectivo contra entrega
                     </Box>
                   }
                 />
@@ -392,13 +391,13 @@ const CheckoutPage: React.FC = () => {
         return (
           <Box sx={{ space: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Revisión de la solicitud
+              Revisión del pedido
             </Typography>
             
             {/* Delivery Info Review */}
             <Paper sx={{ p: 2, mb: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Datos de contacto
+                Datos de entrega
               </Typography>
               <Typography variant="body2">
                 {deliveryInfo.address}
@@ -424,14 +423,14 @@ const CheckoutPage: React.FC = () => {
               <Typography variant="body2">
                 {paymentMethod === 'credit-card' && 'Tarjeta de crédito/débito'}
                 {paymentMethod === 'digital-wallet' && 'Cartera digital'}
-                {paymentMethod === 'cash-on-delivery' && 'Domiciliación bancaria'}
+                {paymentMethod === 'cash-on-delivery' && 'Efectivo contra entrega'}
               </Typography>
             </Paper>
 
             {/* Order Items Review */}
             <Paper sx={{ p: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                Productos seleccionados
+                Platos del pedido
               </Typography>
               {cart?.items.map((item) => (
                 <Box key={item.id} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
@@ -455,7 +454,7 @@ const CheckoutPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Contratación
+        Finalizar pedido
       </Typography>
 
       <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
@@ -493,7 +492,7 @@ const CheckoutPage: React.FC = () => {
                       onClick={handlePlaceOrder}
                       disabled={submitting}
                     >
-                      {submitting ? <CircularProgress size={24} /> : 'Confirmar contratación'}
+                      {submitting ? <CircularProgress size={24} /> : 'Crear pedido'}
                     </Button>
                   ) : (
                     <Button
@@ -520,16 +519,22 @@ const CheckoutPage: React.FC = () => {
               
               <Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography>Productos seleccionados</Typography>
+                  <Typography>Subtotal</Typography>
                   <Typography fontWeight="bold">
-                    {cart.items.reduce((n, i) => n + i.quantity, 0)}
+                    {`${cart.items.reduce((s, i) => s + i.quantity * i.foodItem.price, 0).toFixed(2).replace('.', ',')} €`}
                   </Typography>
                 </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                  <Typography>Envío</Typography>
+                  <Typography fontWeight="bold" color="secondary.main">Gratis</Typography>
+                </Box>
                 <Divider sx={{ my: 2 }} />
-                <Typography variant="body2" color="text.secondary">
-                  Sin coste por tramitar. Un asesor validará tu solicitud y te
-                  contactará para formalizar la contratación.
-                </Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography variant="h6">Total</Typography>
+                  <Typography variant="h6" fontWeight="bold">
+                    {`${cart.items.reduce((s, i) => s + i.quantity * i.foodItem.price, 0).toFixed(2).replace('.', ',')} €`}
+                  </Typography>
+                </Box>
               </Box>
             </Paper>
           </Box>

@@ -19,9 +19,9 @@ import {
   ShoppingCart as CartIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { Cart, CartItem } from '../types';
+import { Cart } from '../types';
 import { cartService } from '../services/api';
-import { ProductIconBox, getProductMeta, getCategoryColor, resolveCategory } from '../theme/bankVisuals';
+import { ProductIconBox, getProductMeta, getCategoryColor, resolveCategory } from '../theme/foodVisuals';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const CartPage: React.FC = () => {
       setCart(cartData);
       setError(null);
     } catch (err) {
-      setError('No se pudo cargar la solicitud. Inténtalo de nuevo más tarde.');
+      setError('No se pudo cargar tu carrito. Inténtalo de nuevo más tarde.');
       console.error('Error fetching cart:', err);
     } finally {
       setLoading(false);
@@ -114,23 +114,25 @@ const CartPage: React.FC = () => {
         <Box textAlign="center" py={8}>
           <CartIcon sx={{ fontSize: 80, color: 'text.secondary', mb: 2 }} />
           <Typography variant="h4" gutterBottom>
-            No tienes productos seleccionados
+            Tu carrito está vacío
           </Typography>
           <Typography variant="body1" color="text.secondary" gutterBottom>
-            ¡Añade productos financieros para empezar!
+            ¡Añade platos de tus restaurantes favoritos para empezar!
           </Typography>
           <Button variant="contained" onClick={() => navigate('/')} sx={{ mt: 2 }}>
-            Ver productos
+            Ver restaurantes
           </Button>
         </Box>
       </Container>
     );
   }
 
+  const subtotal = cart.items.reduce((s, i) => s + i.quantity * i.foodItem.price, 0);
+
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Tu solicitud
+        Tu carrito
       </Typography>
 
       <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', md: 'row' } }}>
@@ -140,14 +142,14 @@ const CartPage: React.FC = () => {
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                 <Typography variant="h5">
-                  Productos ({cart.items.length})
+                  Platos ({cart.items.length})
                 </Typography>
                 <Button
                   color="error"
                   onClick={clearCart}
                   disabled={cart.items.length === 0}
                 >
-                  Vaciar solicitud
+                  Vaciar carrito
                 </Button>
               </Box>
 
@@ -223,16 +225,22 @@ const CartPage: React.FC = () => {
             
             <Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography>Productos seleccionados</Typography>
+                <Typography>Subtotal</Typography>
                 <Typography fontWeight="bold">
-                  {cart.items.reduce((n, i) => n + i.quantity, 0)}
+                  {`${subtotal.toFixed(2).replace('.', ',')} €`}
                 </Typography>
               </Box>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                <Typography>Envío</Typography>
+                <Typography fontWeight="bold" color="secondary.main">Gratis</Typography>
+              </Box>
               <Divider sx={{ my: 2 }} />
-              <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                Tramitar tu solicitud no tiene coste. Un asesor revisará los productos
-                seleccionados y te contactará para completar la contratación.
-              </Typography>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
+                <Typography variant="h6">Total</Typography>
+                <Typography variant="h6" fontWeight="bold">
+                  {`${subtotal.toFixed(2).replace('.', ',')} €`}
+                </Typography>
+              </Box>
             </Box>
 
             <Button
@@ -242,7 +250,7 @@ const CartPage: React.FC = () => {
               onClick={handleCheckout}
               sx={{ mb: 2 }}
             >
-              Tramitar solicitud
+              Ir a pagar
             </Button>
             
             <Button

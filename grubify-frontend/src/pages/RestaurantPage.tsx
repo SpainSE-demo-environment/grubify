@@ -27,7 +27,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { Restaurant, FoodItem } from '../types';
 import { restaurantService, foodItemService, cartService } from '../services/api';
-import { getCategoryColor, getCategoryGradient, getCategoryIcon, getProductMeta, resolveCategory, ProductIconBox } from '../theme/bankVisuals';
+import { getCategoryColor, getCategoryGradient, getCategoryIcon, getProductMeta, resolveCategory, ProductIconBox } from '../theme/foodVisuals';
 
 const RestaurantPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -58,7 +58,7 @@ const RestaurantPage: React.FC = () => {
       setMenuItems(menuData);
       setError(null);
     } catch (err) {
-      setError('No se pudo cargar la información del producto. Inténtalo de nuevo más tarde.');
+      setError('No se pudo cargar la información del restaurante. Inténtalo de nuevo más tarde.');
       console.error('Error fetching restaurant data:', err);
     } finally {
       setLoading(false);
@@ -108,7 +108,7 @@ const RestaurantPage: React.FC = () => {
     return (
       <Container maxWidth="md">
         <Alert severity="error" sx={{ mt: 4 }}>
-          {error || 'Producto no encontrado'}
+          {error || 'Restaurante no encontrado'}
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={() => navigate('/')}>
@@ -173,7 +173,7 @@ const RestaurantPage: React.FC = () => {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <FeeIcon sx={{ mr: 1, color: 'text.secondary' }} />
               <Typography variant="body1">
-                {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} € comisión` : 'Sin comisiones'}
+                {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} € de envío` : 'Envío gratis'}
               </Typography>
             </Box>
             <Chip label={restaurant.cuisineType} color="primary" />
@@ -250,7 +250,7 @@ const RestaurantPage: React.FC = () => {
                       disabled={!item.isAvailable}
                       fullWidth
                     >
-                      {item.isAvailable ? 'Contratar' : 'No disponible'}
+                      {item.isAvailable ? 'Añadir al pedido' : 'No disponible'}
                     </Button>
                   </CardActions>
                 </Box>
@@ -263,7 +263,7 @@ const RestaurantPage: React.FC = () => {
 
       {/* Add to Cart Dialog */}
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>Contratar producto</DialogTitle>
+        <DialogTitle>Añadir al pedido</DialogTitle>
         <DialogContent>
           {selectedItem && (
             <Box>
@@ -298,7 +298,7 @@ const RestaurantPage: React.FC = () => {
                 rows={3}
                 value={specialInstructions}
                 onChange={(e) => setSpecialInstructions(e.target.value)}
-                placeholder="p. ej., contactar por la mañana, dudas sobre condiciones, etc."
+                placeholder="p. ej., sin cebolla, punto de la carne, alergias, etc."
               />
             </Box>
           )}
@@ -306,7 +306,7 @@ const RestaurantPage: React.FC = () => {
         <DialogActions>
           <Button onClick={() => setDialogOpen(false)}>Cancelar</Button>
           <Button onClick={confirmAddToCart} variant="contained">
-            Añadir a la solicitud
+            Añadir al pedido
           </Button>
         </DialogActions>
       </Dialog>
