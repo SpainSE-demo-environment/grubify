@@ -12,50 +12,50 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 1,
-                Name = "Camisetas",
-                Description = "Camisetas y tops de todas las tallas y estilos para tu día a día",
+                Name = "Mujer",
+                Description = "Colección de mujer: vestidos, abrigos, pantalones y prendas de temporada",
                 ImageUrl = "",
-                CuisineType = "Camisetas",
+                CuisineType = "Mujer",
                 Rating = 4.8,
                 DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Tienda Gran Vía, Madrid"
+                Address = "Dressify · Nueva colección"
             },
             new Restaurant
             {
                 Id = 2,
-                Name = "Pantalones",
-                Description = "Vaqueros, chinos y pantalones para cada ocasión",
+                Name = "Hombre",
+                Description = "Colección de hombre: camisas, vaqueros, chaquetas y básicos",
                 ImageUrl = "",
-                CuisineType = "Pantalones",
+                CuisineType = "Hombre",
                 Rating = 4.7,
                 DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Tienda Passeig de Gràcia, Barcelona"
+                Address = "Dressify · Nueva colección"
             },
             new Restaurant
             {
                 Id = 3,
-                Name = "Vestidos",
-                Description = "Vestidos de día, fiesta y básicos de temporada",
+                Name = "Niño",
+                Description = "Moda infantil cómoda y resistente para niñas y niños",
                 ImageUrl = "",
-                CuisineType = "Vestidos",
+                CuisineType = "Niño",
                 Rating = 4.6,
                 DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Tienda Calle Colón, Valencia"
+                Address = "Dressify · Colección kids"
             },
             new Restaurant
             {
                 Id = 4,
                 Name = "Calzado",
-                Description = "Zapatillas, botas y zapatos con envío gratis",
+                Description = "Zapatillas, botas, bailarinas y sandalias para toda la familia",
                 ImageUrl = "",
                 CuisineType = "Calzado",
                 Rating = 4.5,
@@ -63,25 +63,11 @@ namespace GrubifyApi.Controllers
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Tienda Calle Sierpes, Sevilla"
+                Address = "Dressify · Zapatería"
             },
             new Restaurant
             {
                 Id = 5,
-                Name = "Abrigos",
-                Description = "Abrigos, chaquetas y prendas de abrigo para toda la temporada",
-                ImageUrl = "",
-                CuisineType = "Abrigos",
-                Rating = 4.6,
-                DeliveryTime = "Envío en 24-48h",
-                DeliveryFee = 0.00m,
-                MinimumOrder = 0.00m,
-                IsOpen = true,
-                Address = "Tienda Paseo Independencia, Zaragoza"
-            },
-            new Restaurant
-            {
-                Id = 6,
                 Name = "Accesorios",
                 Description = "Bolsos, cinturones y complementos para completar tu look",
                 ImageUrl = "",
@@ -91,7 +77,7 @@ namespace GrubifyApi.Controllers
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Tienda Gran Vía Don Diego, Bilbao"
+                Address = "Dressify · Complementos"
             }
         };
 

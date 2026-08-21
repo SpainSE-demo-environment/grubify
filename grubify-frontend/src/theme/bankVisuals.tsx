@@ -4,6 +4,8 @@ import {
   CheckroomRounded,
   DryCleaningRounded,
   WomanRounded,
+  ManRounded,
+  ChildCareRounded,
   StyleRounded,
   DirectionsRunRounded,
   HikingRounded,
@@ -15,75 +17,145 @@ import {
 
 type IconType = React.ComponentType<SvgIconProps>;
 
-// Solid brand color per fashion category (used for chips, text, etc.)
+// Solid brand color per section / garment category (used for chips, text, etc.)
 export const categoryColors: Record<string, string> = {
-  Camisetas: '#DB2777',
-  Pantalones: '#4F46E5',
+  // Secciones Dressify
+  Mujer: '#9B2242',
+  Hombre: '#334155',
+  'Niño': '#0E7490',
+  Calzado: '#8A5A2B',
+  Accesorios: '#B08422',
+  // Subcategorías de prenda
   Vestidos: '#9333EA',
-  Calzado: '#0891B2',
+  'Camisas y Blusas': '#2563EB',
+  Pantalones: '#4F46E5',
   Abrigos: '#B45309',
-  Accesorios: '#059669',
+  Faldas: '#DB2777',
+  Chaquetas: '#0F766E',
+  Sudaderas: '#EA580C',
+  Camisetas: '#059669',
+  Deportivo: '#0891B2',
+  Botas: '#7C2D12',
+  Plano: '#6D28D9',
+  'Tacón': '#BE123C',
+  Bolsos: '#0E9F6E',
+  Cinturones: '#92400E',
+  Complementos: '#B08422',
 };
 
-// Two-tone gradient per category for the icon backgrounds
+// Two-tone gradient per section / garment category for the icon backgrounds
 const categoryGradients: Record<string, [string, string]> = {
-  Camisetas: ['#F472B6', '#DB2777'],
-  Pantalones: ['#6366F1', '#4F46E5'],
+  // Secciones
+  Mujer: ['#C24D68', '#9B2242'],
+  Hombre: ['#64748B', '#334155'],
+  'Niño': ['#22D3EE', '#0E7490'],
+  Calzado: ['#B98B54', '#8A5A2B'],
+  Accesorios: ['#D9B44A', '#B08422'],
+  // Subcategorías
   Vestidos: ['#C084FC', '#9333EA'],
-  Calzado: ['#22D3EE', '#0891B2'],
+  'Camisas y Blusas': ['#60A5FA', '#2563EB'],
+  Pantalones: ['#6366F1', '#4F46E5'],
   Abrigos: ['#F59E0B', '#B45309'],
-  Accesorios: ['#34D399', '#059669'],
+  Faldas: ['#F472B6', '#DB2777'],
+  Chaquetas: ['#2DD4BF', '#0F766E'],
+  Sudaderas: ['#FB923C', '#EA580C'],
+  Camisetas: ['#34D399', '#059669'],
+  Deportivo: ['#22D3EE', '#0891B2'],
+  Botas: ['#B45309', '#7C2D12'],
+  Plano: ['#A78BFA', '#6D28D9'],
+  'Tacón': ['#FB7185', '#BE123C'],
+  Bolsos: ['#34D399', '#0E9F6E'],
+  Cinturones: ['#B45309', '#92400E'],
+  Complementos: ['#D9B44A', '#B08422'],
 };
 
 // Category shown per product (used when the API payload omits the category,
 // e.g. cart items resolved through the simplified helper)
 const productCategory: Record<string, string> = {
-  'Camiseta Básica': 'Camisetas',
-  'Camiseta Oversize': 'Camisetas',
-  'Vaqueros Slim': 'Pantalones',
+  'Vestido Midi Flores': 'Vestidos',
+  'Blusa Satinada': 'Camisas y Blusas',
+  'Vaquero Slim Tiro Alto': 'Pantalones',
+  'Abrigo Lana Espiga': 'Abrigos',
+  'Falda Plisada Midi': 'Faldas',
+  'Blazer Entallado': 'Chaquetas',
+  'Camisa Oxford': 'Camisas y Blusas',
+  'Vaquero Slim': 'Pantalones',
+  'Sudadera con Capucha': 'Sudaderas',
+  'Chaqueta Bomber': 'Chaquetas',
+  'Polo Piqué': 'Camisetas',
   'Pantalón Chino': 'Pantalones',
-  'Vestido Midi': 'Vestidos',
-  'Vestido de Fiesta': 'Vestidos',
-  'Vestido Camisero': 'Vestidos',
-  'Zapatillas Urbanas': 'Calzado',
-  'Botas de Piel': 'Calzado',
-  Bailarinas: 'Calzado',
-  'Abrigo de Lana': 'Abrigos',
-  'Chaqueta Vaquera': 'Abrigos',
-  'Bolso Bandolera': 'Accesorios',
-  'Cinturón de Piel': 'Accesorios',
-  'Bufanda de Punto': 'Accesorios',
-  'Gafas de Sol': 'Accesorios',
+  'Camiseta Estampada Niño': 'Camisetas',
+  'Pantalón Cargo Niño': 'Pantalones',
+  'Vestido Flores Niña': 'Vestidos',
+  'Sudadera Capucha Kids': 'Sudaderas',
+  'Chaqueta Acolchada Niño': 'Abrigos',
+  'Zapatilla Running': 'Deportivo',
+  'Bota Chelsea Piel': 'Botas',
+  'Bailarina Charol': 'Plano',
+  'Sandalia Tacón': 'Tacón',
+  'Mocasín Piel': 'Plano',
+  'Bolso Bandolera': 'Bolsos',
+  'Cinturón de Piel': 'Cinturones',
+  'Bufanda de Punto': 'Complementos',
+  'Gafas de Sol': 'Complementos',
+  'Gorro de Lana': 'Complementos',
 };
 
-// One themed (Rounded) icon per category
+// One themed (Rounded) icon per section / garment category
 const categoryIcons: Record<string, IconType> = {
-  Camisetas: CheckroomRounded,
-  Pantalones: DryCleaningRounded,
-  Vestidos: WomanRounded,
+  // Secciones
+  Mujer: WomanRounded,
+  Hombre: ManRounded,
+  'Niño': ChildCareRounded,
   Calzado: DirectionsRunRounded,
-  Abrigos: AcUnitRounded,
   Accesorios: ShoppingBagRounded,
+  // Subcategorías
+  Vestidos: WomanRounded,
+  'Camisas y Blusas': CheckroomRounded,
+  Pantalones: DryCleaningRounded,
+  Abrigos: AcUnitRounded,
+  Faldas: StyleRounded,
+  Chaquetas: CheckroomRounded,
+  Sudaderas: CheckroomRounded,
+  Camisetas: CheckroomRounded,
+  Deportivo: DirectionsRunRounded,
+  Botas: HikingRounded,
+  Plano: StyleRounded,
+  'Tacón': StyleRounded,
+  Bolsos: ShoppingBagRounded,
+  Cinturones: StyleRounded,
+  Complementos: ShoppingBagRounded,
 };
 
 // One themed (Rounded) icon per product
 const productIcons: Record<string, IconType> = {
-  'Camiseta Básica': CheckroomRounded,
-  'Camiseta Oversize': CheckroomRounded,
-  'Vaqueros Slim': DryCleaningRounded,
+  'Vestido Midi Flores': WomanRounded,
+  'Blusa Satinada': CheckroomRounded,
+  'Vaquero Slim Tiro Alto': DryCleaningRounded,
+  'Abrigo Lana Espiga': AcUnitRounded,
+  'Falda Plisada Midi': StyleRounded,
+  'Blazer Entallado': CheckroomRounded,
+  'Camisa Oxford': CheckroomRounded,
+  'Vaquero Slim': DryCleaningRounded,
+  'Sudadera con Capucha': CheckroomRounded,
+  'Chaqueta Bomber': CheckroomRounded,
+  'Polo Piqué': CheckroomRounded,
   'Pantalón Chino': DryCleaningRounded,
-  'Vestido Midi': WomanRounded,
-  'Vestido de Fiesta': StyleRounded,
-  'Vestido Camisero': WomanRounded,
-  'Zapatillas Urbanas': DirectionsRunRounded,
-  'Botas de Piel': HikingRounded,
-  Bailarinas: DirectionsRunRounded,
-  'Abrigo de Lana': AcUnitRounded,
-  'Chaqueta Vaquera': CheckroomRounded,
+  'Camiseta Estampada Niño': ChildCareRounded,
+  'Pantalón Cargo Niño': DryCleaningRounded,
+  'Vestido Flores Niña': ChildCareRounded,
+  'Sudadera Capucha Kids': ChildCareRounded,
+  'Chaqueta Acolchada Niño': AcUnitRounded,
+  'Zapatilla Running': DirectionsRunRounded,
+  'Bota Chelsea Piel': HikingRounded,
+  'Bailarina Charol': StyleRounded,
+  'Sandalia Tacón': StyleRounded,
+  'Mocasín Piel': HikingRounded,
   'Bolso Bandolera': ShoppingBagRounded,
   'Cinturón de Piel': StyleRounded,
   'Bufanda de Punto': AcUnitRounded,
   'Gafas de Sol': WbSunnyRounded,
+  'Gorro de Lana': AcUnitRounded,
 };
 
 // Retail headline (price) and feature tags per product. This drives the
@@ -95,65 +167,115 @@ export interface ProductMeta {
 }
 
 const productMeta: Record<string, ProductMeta> = {
-  'Camiseta Básica': {
-    highlight: '12,99 €',
+  'Vestido Midi Flores': {
+    highlight: '45,99 €',
     highlightLabel: 'Precio',
-    badges: ['Tallas S-XXL', 'Algodón orgánico'],
+    badges: ['Tallas XS-L', 'Estampado floral'],
   },
-  'Camiseta Oversize': {
-    highlight: '19,99 €',
+  'Blusa Satinada': {
+    highlight: '29,99 €',
     highlightLabel: 'Precio',
-    badges: ['Tallas S-XL', 'Unisex'],
+    badges: ['Tallas XS-XL', 'Tacto satinado'],
   },
-  'Vaqueros Slim': {
+  'Vaquero Slim Tiro Alto': {
     highlight: '39,99 €',
     highlightLabel: 'Precio',
-    badges: ['Tallas 36-46', 'Denim elástico'],
+    badges: ['Tallas 34-46', 'Tiro alto'],
+  },
+  'Abrigo Lana Espiga': {
+    highlight: '119,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Mezcla de lana', 'Tallas S-XL'],
+  },
+  'Falda Plisada Midi': {
+    highlight: '34,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas XS-L', 'Plisada'],
+  },
+  'Blazer Entallado': {
+    highlight: '59,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas XS-XL', 'Entallado'],
+  },
+  'Camisa Oxford': {
+    highlight: '29,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas S-XXL', 'Algodón Oxford'],
+  },
+  'Vaquero Slim': {
+    highlight: '39,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas 38-48', 'Denim elástico'],
+  },
+  'Sudadera con Capucha': {
+    highlight: '34,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas S-XXL', 'Felpa'],
+  },
+  'Chaqueta Bomber': {
+    highlight: '69,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas S-XL', 'Ligera'],
+  },
+  'Polo Piqué': {
+    highlight: '22,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas S-XXL', 'Punto piqué'],
   },
   'Pantalón Chino': {
     highlight: '34,99 €',
     highlightLabel: 'Precio',
     badges: ['3 colores', 'Corte recto'],
   },
-  'Vestido Midi': {
-    highlight: '45,99 €',
+  'Camiseta Estampada Niño': {
+    highlight: '9,99 €',
     highlightLabel: 'Precio',
-    badges: ['Tallas XS-L', 'Estampado floral'],
+    badges: ['3-14 años', 'Algodón'],
   },
-  'Vestido de Fiesta': {
-    highlight: '79,99 €',
+  'Pantalón Cargo Niño': {
+    highlight: '19,99 €',
     highlightLabel: 'Precio',
-    badges: ['Lentejuelas', 'Espalda abierta'],
+    badges: ['3-14 años', 'Cintura ajustable'],
   },
-  'Vestido Camisero': {
-    highlight: '42,99 €',
+  'Vestido Flores Niña': {
+    highlight: '24,99 €',
     highlightLabel: 'Precio',
-    badges: ['Lino', 'Tallas XS-XL'],
+    badges: ['3-12 años', 'Estampado flores'],
   },
-  'Zapatillas Urbanas': {
+  'Sudadera Capucha Kids': {
+    highlight: '19,99 €',
+    highlightLabel: 'Precio',
+    badges: ['3-14 años', 'Felpa suave'],
+  },
+  'Chaqueta Acolchada Niño': {
+    highlight: '39,99 €',
+    highlightLabel: 'Precio',
+    badges: ['3-14 años', 'Con capucha'],
+  },
+  'Zapatilla Running': {
     highlight: '59,99 €',
     highlightLabel: 'Precio',
-    badges: ['Tallas 36-45', 'Suela cómoda'],
+    badges: ['Tallas 36-46', 'Amortiguación'],
   },
-  'Botas de Piel': {
+  'Bota Chelsea Piel': {
     highlight: '89,99 €',
     highlightLabel: 'Precio',
-    badges: ['Piel auténtica', 'Forro cálido'],
+    badges: ['Tallas 39-45', 'Piel'],
   },
-  Bailarinas: {
+  'Bailarina Charol': {
     highlight: '35,99 €',
     highlightLabel: 'Precio',
-    badges: ['Tallas 35-42', 'Varios colores'],
+    badges: ['Tallas 35-42', 'Charol'],
   },
-  'Abrigo de Lana': {
-    highlight: '119,99 €',
+  'Sandalia Tacón': {
+    highlight: '45,99 €',
     highlightLabel: 'Precio',
-    badges: ['Mezcla de lana', 'Tallas S-XL'],
+    badges: ['Tallas 35-41', 'Tacón medio'],
   },
-  'Chaqueta Vaquera': {
-    highlight: '49,99 €',
+  'Mocasín Piel': {
+    highlight: '55,99 €',
     highlightLabel: 'Precio',
-    badges: ['Denim', 'Tallas XS-XXL'],
+    badges: ['Tallas 39-45', 'Piel'],
   },
   'Bolso Bandolera': {
     highlight: '39,99 €',
@@ -175,19 +297,24 @@ const productMeta: Record<string, ProductMeta> = {
     highlightLabel: 'Precio',
     badges: ['UV400', 'Montura ligera'],
   },
+  'Gorro de Lana': {
+    highlight: '15,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Talla única', 'Lana'],
+  },
 };
 
 export const resolveCategory = (name: string, category?: string): string =>
-  (category && category.trim()) || productCategory[name] || 'Camisetas';
+  (category && category.trim()) || productCategory[name] || 'Complementos';
 
 export const getProductMeta = (name: string): ProductMeta =>
   productMeta[name] || { highlight: 'Consultar precio', highlightLabel: '', badges: [] };
 
 export const getCategoryColor = (category: string): string =>
-  categoryColors[category] || '#4F46E5';
+  categoryColors[category] || '#9B2242';
 
 export const getCategoryGradient = (category: string): string => {
-  const [from, to] = categoryGradients[category] || ['#6366F1', '#4F46E5'];
+  const [from, to] = categoryGradients[category] || ['#C24D68', '#9B2242'];
   return `linear-gradient(135deg, ${from} 0%, ${to} 100%)`;
 };
 

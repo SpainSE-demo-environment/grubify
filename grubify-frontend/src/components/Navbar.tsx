@@ -84,8 +84,8 @@ const Navbar: React.FC = () => {
       position="sticky"
       elevation={0}
       sx={{
-        background: 'linear-gradient(90deg, #DB2777 0%, #9333EA 100%)',
-        boxShadow: '0 4px 20px -8px rgba(147, 51, 234, 0.5)',
+        background: 'linear-gradient(90deg, #5A1226 0%, #9B2242 100%)',
+        boxShadow: '0 4px 20px -8px rgba(155, 34, 66, 0.5)',
       }}
     >
       <Toolbar>
