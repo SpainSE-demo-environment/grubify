@@ -17,6 +17,6 @@ hooks:
   postdeploy:
     shell: pwsh
     run: |
-      echo "🏦 Bankify retail banking portal deployed successfully!"
+      echo "⚡ Voltify green energy portal deployed successfully!"
       echo "Frontend URL: $env:FRONTEND_URL"
       echo "API URL: $env:API_BASE_URL"

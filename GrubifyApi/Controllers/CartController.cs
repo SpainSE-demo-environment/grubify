@@ -121,22 +121,22 @@ namespace GrubifyApi.Controllers
             // This is a simplified version - in production, inject the FoodItems service
             var foodItems = new List<FoodItem>
             {
-                new FoodItem { Id = 1, Name = "Cuenta Personal", Price = 0.00m, ImageUrl = "", RestaurantId = 1 },
-                new FoodItem { Id = 2, Name = "Cuenta de Ahorro", Price = 0.00m, ImageUrl = "", RestaurantId = 1 },
-                new FoodItem { Id = 3, Name = "Tarjeta de Débito", Price = 0.00m, ImageUrl = "", RestaurantId = 2 },
-                new FoodItem { Id = 4, Name = "Tarjeta de Crédito", Price = 45.00m, ImageUrl = "", RestaurantId = 2 },
-                new FoodItem { Id = 5, Name = "Préstamo Personal", Price = 180.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 6, Name = "Préstamo Personal Preconcedido", Price = 250.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 7, Name = "Hipoteca", Price = 950.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 8, Name = "Plan de Pensiones", Price = 50.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 9, Name = "Fondos de Inversión", Price = 100.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 10, Name = "Acciones y ETFs", Price = 0.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 11, Name = "Depósito", Price = 1000.00m, ImageUrl = "", RestaurantId = 5 },
-                new FoodItem { Id = 12, Name = "Cuenta de Ahorro Remunerada", Price = 0.00m, ImageUrl = "", RestaurantId = 5 },
-                new FoodItem { Id = 13, Name = "Seguro de Salud", Price = 45.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 14, Name = "Seguro de Hogar", Price = 18.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 15, Name = "Seguro de Auto", Price = 30.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 16, Name = "Seguro de Moto", Price = 20.00m, ImageUrl = "", RestaurantId = 6 }
+                new FoodItem { Id = 1, Name = "Tarifa Valle", Price = 0.12m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 2, Name = "Tarifa Solar", Price = 0.10m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 3, Name = "Tarifa Plana", Price = 55.00m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 4, Name = "Tarifa Nocturna", Price = 0.09m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 5, Name = "Recarga Rápida 50kW", Price = 0.45m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 6, Name = "Recarga Ultrarrápida 150kW", Price = 0.55m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 7, Name = "Recarga en Casa 7kW", Price = 0.18m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 8, Name = "Placas Solares Residencial", Price = 3900.00m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 9, Name = "Batería Virtual", Price = 0.00m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 10, Name = "Kit Solar Plug & Play", Price = 699.00m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 11, Name = "Tarifa Gas Hogar", Price = 0.06m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 12, Name = "Tarifa Gas Plana", Price = 42.00m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 13, Name = "Bono Recarga Ilimitada", Price = 39.00m, ImageUrl = "", RestaurantId = 5 },
+                new FoodItem { Id = 14, Name = "Instalación Punto de Recarga", Price = 590.00m, ImageUrl = "", RestaurantId = 5 },
+                new FoodItem { Id = 15, Name = "Mantenimiento Caldera", Price = 6.90m, ImageUrl = "", RestaurantId = 6 },
+                new FoodItem { Id = 16, Name = "Asistencia Energética 24h", Price = 4.50m, ImageUrl = "", RestaurantId = 6 }
             };
 
             return foodItems.FirstOrDefault(f => f.Id == foodItemId) ?? new FoodItem();

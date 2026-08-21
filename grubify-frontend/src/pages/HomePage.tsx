@@ -26,12 +26,12 @@ import { getCategoryColor, getCategoryGradient, getCategoryIcon } from '../theme
 
 const cuisineTypes = [
   'Todos',
-  'Cuentas',
-  'Tarjetas',
-  'Préstamos',
-  'Inversión',
-  'Ahorro',
-  'Seguros',
+  'Tarifas',
+  'Recarga VE',
+  'Autoconsumo',
+  'Gas',
+  'Movilidad',
+  'Servicios',
 ];
 
 const HomePage: React.FC = () => {
@@ -122,13 +122,13 @@ const HomePage: React.FC = () => {
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 45%, #06B6D4 100%)',
+          background: 'linear-gradient(135deg, #16A34A 0%, #65A30D 45%, #EAB308 100%)',
           borderRadius: 4,
           color: 'white',
           p: { xs: 4, md: 7 },
           mb: 5,
           textAlign: 'center',
-          boxShadow: '0 20px 50px -20px rgba(79, 70, 229, 0.6)',
+          boxShadow: '0 20px 50px -20px rgba(22, 163, 74, 0.6)',
         }}
       >
         <Box
@@ -156,7 +156,7 @@ const HomePage: React.FC = () => {
         />
         <Box sx={{ position: 'relative', zIndex: 1 }}>
           <Chip
-            label="100% online · Sin comisiones"
+            label="100% online · Energía verde"
             sx={{
               mb: 2,
               color: 'white',
@@ -166,10 +166,10 @@ const HomePage: React.FC = () => {
             }}
           />
           <Typography variant="h2" component="h1" gutterBottom>
-            Tu banca, simple y sin comisiones
+            Tu energía, renovable y sin permanencia
           </Typography>
           <Typography variant="h6" sx={{ mb: 4, opacity: 0.92, fontWeight: 400 }}>
-            Contrata cuentas, tarjetas, hipotecas e inversiones en minutos, 100% online
+            Contrata tu tarifa de luz y gas, autoconsumo solar y recarga para tu vehículo eléctrico, 100% online
           </Typography>
 
           {/* Search Bar */}
@@ -205,7 +205,7 @@ const HomePage: React.FC = () => {
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
           {cuisineTypes.map((cuisine) => {
             const selected = selectedCuisine === cuisine;
-            const color = cuisine === 'Todos' ? '#4F46E5' : getCategoryColor(cuisine);
+            const color = cuisine === 'Todos' ? '#16A34A' : getCategoryColor(cuisine);
             return (
               <Chip
                 key={cuisine}
