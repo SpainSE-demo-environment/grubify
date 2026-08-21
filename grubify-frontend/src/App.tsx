@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 
 // Components
 import Navbar from './components/Navbar';
@@ -13,79 +13,124 @@ import CheckoutPage from './pages/CheckoutPage';
 import OrderTrackingPage from './pages/OrderTrackingPage';
 import './App.css';
 
+const HEADING_FONT = '"Jost", "Helvetica Neue", "Inter", Arial, sans-serif';
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#9B2242', // Garnet
-      light: '#C24D68',
-      dark: '#5A1226',
+      main: '#111111', // Negro
+      light: '#3A3A3A',
+      dark: '#000000',
+      contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#B08422', // Gold
-      light: '#D9B44A',
-      dark: '#8A6416',
+      main: '#8A8A8A', // Gris acento sutil
+      light: '#B5B5B5',
+      dark: '#5C5C5C',
     },
     success: {
-      main: '#059669',
+      main: '#1F1F1F',
     },
     warning: {
-      main: '#F59E0B',
+      main: '#8A8A8A',
     },
     background: {
-      default: '#F6F7FB',
+      default: '#FFFFFF',
       paper: '#FFFFFF',
     },
     text: {
-      primary: '#111827',
-      secondary: '#5B6472',
+      primary: '#111111',
+      secondary: '#6B6B6B',
     },
+    divider: 'rgba(17,17,17,0.12)',
   },
   typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Inter", "Helvetica Neue", "Arial", sans-serif',
     h1: {
-      fontSize: '3.25rem',
-      fontWeight: 800,
-      letterSpacing: '-0.02em',
+      fontFamily: HEADING_FONT,
+      fontSize: '3.5rem',
+      fontWeight: 300,
+      letterSpacing: '0.14em',
+      textTransform: 'uppercase',
     },
     h2: {
-      fontSize: '2.6rem',
-      fontWeight: 800,
-      letterSpacing: '-0.02em',
+      fontFamily: HEADING_FONT,
+      fontSize: '2.5rem',
+      fontWeight: 300,
+      letterSpacing: '0.14em',
+      textTransform: 'uppercase',
     },
     h3: {
-      fontSize: '2rem',
-      fontWeight: 700,
-      letterSpacing: '-0.01em',
+      fontFamily: HEADING_FONT,
+      fontSize: '1.9rem',
+      fontWeight: 300,
+      letterSpacing: '0.12em',
+      textTransform: 'uppercase',
+    },
+    h4: {
+      fontFamily: HEADING_FONT,
+      fontWeight: 400,
+      letterSpacing: '0.1em',
+      textTransform: 'uppercase',
     },
     h5: {
-      fontWeight: 700,
-      letterSpacing: '-0.01em',
+      fontFamily: HEADING_FONT,
+      fontWeight: 400,
+      letterSpacing: '0.08em',
     },
     h6: {
-      fontWeight: 700,
+      fontFamily: HEADING_FONT,
+      fontWeight: 400,
+      letterSpacing: '0.06em',
+    },
+    subtitle1: {
+      letterSpacing: '0.02em',
+    },
+    body2: {
+      letterSpacing: '0.01em',
     },
     button: {
-      fontWeight: 600,
-      textTransform: 'none',
+      fontWeight: 500,
+      letterSpacing: '0.16em',
+      textTransform: 'uppercase',
     },
   },
   shape: {
-    borderRadius: 14,
+    borderRadius: 0,
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: '#FFFFFF',
+        },
+      },
+    },
     MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+      },
       styleOverrides: {
         root: {
-          borderRadius: 12,
-          paddingTop: 10,
-          paddingBottom: 10,
+          borderRadius: 0,
+          paddingTop: 12,
+          paddingBottom: 12,
           boxShadow: 'none',
+          fontSize: '0.78rem',
         },
         containedPrimary: {
-          background: 'linear-gradient(135deg, #9B2242 0%, #7A1B34 100%)',
+          backgroundColor: '#111111',
+          color: '#FFFFFF',
           '&:hover': {
-            background: 'linear-gradient(135deg, #7A1B34 0%, #5A1226 100%)',
-            boxShadow: '0 8px 20px -6px rgba(155, 34, 66, 0.5)',
+            backgroundColor: '#000000',
+            boxShadow: 'none',
+          },
+        },
+        outlinedPrimary: {
+          borderColor: '#111111',
+          '&:hover': {
+            borderColor: '#000000',
+            backgroundColor: 'rgba(17,17,17,0.04)',
           },
         },
       },
@@ -93,22 +138,43 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 18,
-          boxShadow: '0 6px 24px -12px rgba(17, 24, 39, 0.18)',
+          borderRadius: 0,
+          boxShadow: 'none',
+          backgroundImage: 'none',
+          border: '1px solid rgba(17,17,17,0.10)',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: 'none',
+        },
+        rounded: {
+          borderRadius: 0,
         },
       },
     },
     MuiChip: {
       styleOverrides: {
         root: {
-          fontWeight: 600,
+          borderRadius: 0,
+          fontWeight: 500,
+          letterSpacing: '0.04em',
         },
       },
     },
-    MuiPaper: {
+    MuiOutlinedInput: {
       styleOverrides: {
-        rounded: {
-          borderRadius: 16,
+        root: {
+          borderRadius: 0,
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: 0,
         },
       },
     },
@@ -122,7 +188,7 @@ function App() {
       <Router>
         <div className="App">
           <Navbar />
-          <Container maxWidth="xl" sx={{ mt: 3, mb: 3 }}>
+          <Box sx={{ minHeight: '100vh', pb: 8 }}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/restaurant/:id" element={<RestaurantPage />} />
@@ -130,7 +196,7 @@ function App() {
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/order-tracking/:orderId" element={<OrderTrackingPage />} />
             </Routes>
-          </Container>
+          </Box>
         </div>
       </Router>
     </ThemeProvider>

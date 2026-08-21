@@ -2,29 +2,17 @@ import React, { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
-  Card,
-  CardContent,
-  CardActions,
   Button,
-  Chip,
-  Rating,
   Container,
   CircularProgress,
   Alert,
-  TextField,
-  InputAdornment,
 } from '@mui/material';
-import {
-  AccessTime as TimeIcon,
-  Payments as FeeIcon,
-  Search as SearchIcon,
-} from '@mui/icons-material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Restaurant } from '../types';
 import { restaurantService } from '../services/api';
-import { getCategoryColor, getCategoryGradient, getCategoryIcon } from '../theme/bankVisuals';
+import { getSectionImage, getHeroImage } from '../theme/bankVisuals';
 
-const cuisineTypes = [
+const sectionFilters = [
   'Todos',
   'Mujer',
   'Hombre',
@@ -40,16 +28,21 @@ const HomePage: React.FC = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedCuisine, setSelectedCuisine] = useState('Todos');
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
+  const [selectedSection, setSelectedSection] = useState(searchParams.get('section') || 'Todos');
+  const searchQuery = searchParams.get('search') || '';
 
   useEffect(() => {
     fetchRestaurants();
   }, []);
 
   useEffect(() => {
+    setSelectedSection(searchParams.get('section') || 'Todos');
+  }, [searchParams]);
+
+  useEffect(() => {
     filterRestaurants();
-  }, [restaurants, selectedCuisine, searchQuery]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restaurants, selectedSection, searchQuery]);
 
   const fetchRestaurants = async () => {
     try {
@@ -68,14 +61,12 @@ const HomePage: React.FC = () => {
   const filterRestaurants = () => {
     let filtered = restaurants;
 
-    // Filter by cuisine
-    if (selectedCuisine !== 'Todos') {
-      filtered = filtered.filter(restaurant => 
-        restaurant.cuisineType.toLowerCase() === selectedCuisine.toLowerCase()
+    if (selectedSection !== 'Todos') {
+      filtered = filtered.filter(restaurant =>
+        restaurant.cuisineType.toLowerCase() === selectedSection.toLowerCase()
       );
     }
 
-    // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter(restaurant =>
         restaurant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -94,7 +85,7 @@ const HomePage: React.FC = () => {
   if (loading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
-        <CircularProgress size={60} />
+        <CircularProgress size={48} sx={{ color: '#111' }} />
       </Box>
     );
   }
@@ -107,7 +98,7 @@ const HomePage: React.FC = () => {
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={fetchRestaurants}>
-              Reintentar
+            Reintentar
           </Button>
         </Box>
       </Container>
@@ -115,280 +106,238 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <Container maxWidth="xl">
-      {/* Hero Section */}
+    <Box>
+      {/* Hero / banner editorial a ancho completo */}
       <Box
         sx={{
           position: 'relative',
+          width: '100%',
+          height: { xs: 420, md: 560 },
           overflow: 'hidden',
-          background: 'linear-gradient(135deg, #5A1226 0%, #9B2242 45%, #B08422 100%)',
-          borderRadius: 4,
-          color: 'white',
-          p: { xs: 4, md: 7 },
-          mb: 5,
-          textAlign: 'center',
-          boxShadow: '0 20px 50px -20px rgba(155, 34, 66, 0.6)',
+          mb: { xs: 5, md: 8 },
         }}
       >
         <Box
+          component="img"
+          src={getHeroImage('nueva-coleccion-otono', 1800, 1000)}
+          alt="Nueva colección"
           sx={{
             position: 'absolute',
-            top: -80,
-            right: -60,
-            width: 260,
-            height: 260,
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.12)',
-            filter: 'blur(4px)',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
           }}
         />
         <Box
           sx={{
             position: 'absolute',
-            bottom: -100,
-            left: -40,
-            width: 220,
-            height: 220,
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.08)',
+            inset: 0,
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)',
           }}
         />
-        <Box sx={{ position: 'relative', zIndex: 1 }}>
-          <Chip
-            label="Envío y devoluciones gratis"
+        <Box
+          sx={{
+            position: 'relative',
+            zIndex: 1,
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            color: '#fff',
+            px: 3,
+          }}
+        >
+          <Typography
             sx={{
+              fontFamily: '"Jost", "Helvetica Neue", sans-serif',
+              fontWeight: 300,
+              letterSpacing: '0.3em',
+              textTransform: 'uppercase',
+              fontSize: '0.85rem',
               mb: 2,
-              color: 'white',
-              backgroundColor: 'rgba(255,255,255,0.18)',
-              backdropFilter: 'blur(6px)',
-              fontWeight: 600,
             }}
-          />
-          <Typography variant="h2" component="h1" gutterBottom>
-            Dressify, tu tienda de moda online
+          >
+            Otoño / Invierno
           </Typography>
-          <Typography variant="h6" sx={{ mb: 4, opacity: 0.92, fontWeight: 400 }}>
-            Moda para toda la familia: mujer, hombre, niño, calzado y accesorios de temporada
+          <Typography
+            variant="h1"
+            sx={{ fontSize: { xs: '2.4rem', md: '4rem' }, mb: 3 }}
+          >
+            Nueva Colección
           </Typography>
-
-          {/* Search Bar */}
-          <Box maxWidth="600px" mx="auto">
-            <TextField
-              fullWidth
-              variant="outlined"
-              placeholder="Buscar prendas, secciones o accesorios..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-                sx: {
-                  backgroundColor: 'white',
-                  borderRadius: 3,
-                  '& fieldset': { border: 'none' },
-                },
-              }}
-            />
-          </Box>
+          <Button
+            variant="contained"
+            onClick={() => {
+              const el = document.getElementById('secciones');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+            sx={{
+              backgroundColor: '#fff',
+              color: '#111',
+              px: 5,
+              '&:hover': { backgroundColor: '#111', color: '#fff' },
+            }}
+          >
+            Descubrir
+          </Button>
         </Box>
       </Box>
 
-      {/* Cuisine Filter */}
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h5" gutterBottom>
-          Explora por sección
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-          {cuisineTypes.map((cuisine) => {
-            const selected = selectedCuisine === cuisine;
-            const color = cuisine === 'Todos' ? '#9B2242' : getCategoryColor(cuisine);
+      <Container maxWidth="xl">
+        {/* Nav de secciones tipo menú */}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: { xs: 2, md: 4 },
+            mb: { xs: 4, md: 6 },
+          }}
+        >
+          {sectionFilters.map((section) => {
+            const selected = selectedSection === section;
             return (
-              <Chip
-                key={cuisine}
-                label={cuisine}
-                clickable
-                onClick={() => setSelectedCuisine(cuisine)}
+              <Box
+                key={section}
+                component="button"
+                onClick={() => setSelectedSection(section)}
                 sx={{
-                  mb: 1,
-                  px: 0.5,
-                  fontWeight: 600,
-                  color: selected ? '#fff' : color,
-                  backgroundColor: selected ? color : 'transparent',
-                  border: '1.5px solid',
-                  borderColor: color,
-                  '&:hover': {
-                    backgroundColor: selected ? color : `${color}18`,
-                  },
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontFamily: '"Jost", "Helvetica Neue", sans-serif',
+                  fontSize: { xs: '0.78rem', md: '0.85rem' },
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: '#111',
+                  pb: 0.75,
+                  borderBottom: '1px solid',
+                  borderColor: selected ? '#111' : 'transparent',
+                  opacity: selected ? 1 : 0.6,
+                  transition: 'opacity 0.2s ease, border-color 0.2s ease',
+                  '&:hover': { opacity: 1 },
                 }}
-              />
+              >
+                {section}
+              </Box>
             );
           })}
         </Box>
-      </Box>
 
-      {/* Results Header */}
-      <Box sx={{ mb: 3 }}>
-        <Typography variant="h5" gutterBottom>
-          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestras secciones'}
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {filteredRestaurants.length} sección{filteredRestaurants.length !== 1 ? 'es' : ''} disponible{filteredRestaurants.length !== 1 ? 's' : ''}
-        </Typography>
-      </Box>
-
-      {/* Restaurant Grid */}
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: {
-            xs: '1fr',
-            sm: 'repeat(2, 1fr)',
-            md: 'repeat(3, 1fr)',
-            lg: 'repeat(4, 1fr)',
-          },
-          gap: 3,
-        }}
-      >
-        {filteredRestaurants.map((restaurant) => {
-          const CategoryIcon = getCategoryIcon(restaurant.cuisineType);
-          return (
-          <Card
-            key={restaurant.id}
-            sx={{
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease-in-out',
-              '&:hover': {
-                transform: 'translateY(-6px)',
-                boxShadow: '0 22px 40px -18px rgba(79, 70, 229, 0.45)',
-              },
-              '&:hover .card-media': {
-                transform: 'scale(1.12)',
-              },
-            }}
-            onClick={() => handleRestaurantClick(restaurant.id)}
-          >
-            <Box
-              sx={{
-                position: 'relative',
-                height: 170,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-                background: getCategoryGradient(restaurant.cuisineType),
-              }}
-            >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: -40,
-                  right: -30,
-                  width: 150,
-                  height: 150,
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.14)',
-                }}
-              />
-              <Box
-                sx={{
-                  position: 'absolute',
-                  bottom: -50,
-                  left: -20,
-                  width: 120,
-                  height: 120,
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.10)',
-                }}
-              />
-              <CategoryIcon
-                className="card-media"
-                sx={{
-                  fontSize: 78,
-                  color: 'rgba(255,255,255,0.96)',
-                  position: 'relative',
-                  zIndex: 1,
-                  transition: 'transform 0.4s ease',
-                }}
-              />
-              <Chip
-                label={restaurant.cuisineType}
-                size="small"
-                sx={{
-                  position: 'absolute',
-                  top: 12,
-                  left: 12,
-                  color: getCategoryColor(restaurant.cuisineType),
-                  fontWeight: 700,
-                  backgroundColor: '#fff',
-                  zIndex: 2,
-                }}
-              />
-            </Box>
-            <CardContent sx={{ flexGrow: 1 }}>
-              <Typography variant="h6" component="h2" gutterBottom>
-                {restaurant.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                {restaurant.description}
-              </Typography>
-              
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                <Rating value={restaurant.rating} precision={0.1} readOnly size="small" />
-                <Typography variant="body2" sx={{ ml: 1 }}>
-                  {restaurant.rating.toFixed(1)}
-                </Typography>
-              </Box>
-              
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <TimeIcon sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
-                  <Typography variant="body2" color="text.secondary">
-                    {restaurant.deliveryTime}
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <FeeIcon sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
-                  <Typography variant="body2" color="text.secondary">
-                    {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} €` : 'Envío gratis'}
-                  </Typography>
-                </Box>
-              </Box>
-            </CardContent>
-            <CardActions sx={{ p: 2, pt: 0 }}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleRestaurantClick(restaurant.id);
-                }}
-              >
-                Ver productos
-              </Button>
-            </CardActions>
-          </Card>
-          );
-        })}
-      </Box>
-
-      {filteredRestaurants.length === 0 && !loading && (
-        <Box textAlign="center" py={8}>
-          <Typography variant="h6" color="text.secondary" gutterBottom>
-            No se encontraron secciones
+        {/* Encabezado editorial */}
+        <Box id="secciones" sx={{ mb: 4, textAlign: 'center' }}>
+          <Typography variant="h3" component="h1" sx={{ mb: 1 }}>
+            {searchQuery ? `Resultados para "${searchQuery}"` : 'Explora la tienda'}
           </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Prueba a ajustar la búsqueda o los filtros
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: '0.72rem' }}
+          >
+            {filteredRestaurants.length} secci{filteredRestaurants.length !== 1 ? 'ones' : 'ón'}
           </Typography>
         </Box>
-      )}
-    </Container>
+
+        {/* Grid galería de secciones */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: 'repeat(2, 1fr)',
+              md: 'repeat(3, 1fr)',
+              lg: 'repeat(4, 1fr)',
+            },
+            gap: { xs: 1.5, md: 3 },
+          }}
+        >
+          {filteredRestaurants.map((restaurant) => (
+            <Box
+              key={restaurant.id}
+              onClick={() => handleRestaurantClick(restaurant.id)}
+              sx={{ cursor: 'pointer' }}
+            >
+              <Box
+                className="dressify-image-frame"
+                sx={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '3 / 4',
+                  overflow: 'hidden',
+                  backgroundColor: '#F2F2F2',
+                }}
+              >
+                <Box
+                  component="img"
+                  src={getSectionImage(restaurant.cuisineType)}
+                  alt={restaurant.name}
+                  loading="lazy"
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                    transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+                    '.dressify-image-frame:hover &': { transform: 'scale(1.05)' },
+                  }}
+                />
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    justifyContent: 'center',
+                    p: 3,
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 55%)',
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: '#fff',
+                      fontFamily: '"Jost", "Helvetica Neue", sans-serif',
+                      fontWeight: 400,
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      fontSize: { xs: '0.9rem', md: '1.1rem' },
+                      textAlign: 'center',
+                    }}
+                  >
+                    {restaurant.name}
+                  </Typography>
+                </Box>
+              </Box>
+              <Box sx={{ mt: 1.5, textAlign: 'center' }}>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    fontSize: '0.68rem',
+                  }}
+                >
+                  {restaurant.cuisineType}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
+        </Box>
+
+        {filteredRestaurants.length === 0 && !loading && (
+          <Box textAlign="center" py={8}>
+            <Typography variant="h6" color="text.secondary" gutterBottom>
+              No se encontraron secciones
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              Prueba a ajustar la búsqueda o los filtros
+            </Typography>
+          </Box>
+        )}
+      </Container>
+    </Box>
   );
 };
 

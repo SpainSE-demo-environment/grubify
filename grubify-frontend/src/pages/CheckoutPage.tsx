@@ -453,7 +453,7 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Typography variant="h3" component="h1" gutterBottom>
         Finalizar compra
       </Typography>

@@ -21,7 +21,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Cart, CartItem } from '../types';
 import { cartService } from '../services/api';
-import { ProductIconBox, getProductMeta, getCategoryColor, resolveCategory } from '../theme/bankVisuals';
+import { ProductImage, getProductMeta } from '../theme/bankVisuals';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -128,7 +128,7 @@ const CartPage: React.FC = () => {
   }
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Typography variant="h3" component="h1" gutterBottom>
         Tu cesta
       </Typography>
@@ -153,17 +153,17 @@ const CartPage: React.FC = () => {
 
               {cart.items.map((item, index) => {
                 const meta = getProductMeta(item.foodItem.name);
-                const cat = getCategoryColor(resolveCategory(item.foodItem.name, item.foodItem.category));
                 return (
                 <Box key={item.id}>
                   <Box sx={{ display: 'flex', gap: 2, py: 2 }}>
-                    <ProductIconBox
-                      name={item.foodItem.name}
-                      category={item.foodItem.category}
-                      size={80}
-                      iconSize={38}
-                      radius={12}
-                    />
+                    <Box sx={{ width: 72, flexShrink: 0 }}>
+                      <ProductImage
+                        name={item.foodItem.name}
+                        id={item.foodItem.id}
+                        category={item.foodItem.category}
+                        zoomOnHover={false}
+                      />
+                    </Box>
                     <Box sx={{ flex: 1 }}>
                       <Typography variant="h6" gutterBottom>
                         {item.foodItem.name}
@@ -176,7 +176,7 @@ const CartPage: React.FC = () => {
                           Nota: {item.specialInstructions}
                         </Typography>
                       )}
-                      <Typography variant="subtitle1" sx={{ mt: 1, color: cat, fontWeight: 700 }}>
+                      <Typography variant="subtitle1" sx={{ mt: 1, color: '#111', fontWeight: 600 }}>
                         {meta.highlightLabel ? `${meta.highlightLabel}: ` : ''}{meta.highlight}
                       </Typography>
                     </Box>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, SvgIconProps } from '@mui/material';
+import { Box, SvgIconProps, Typography } from '@mui/material';
 import {
   CheckroomRounded,
   DryCleaningRounded,
@@ -323,6 +323,139 @@ export const getCategoryIcon = (cuisineType: string): IconType =>
 
 export const getProductIcon = (name: string, category?: string): IconType =>
   productIcons[name] || categoryIcons[resolveCategory(name, category)] || StorefrontRounded;
+
+// ---------------------------------------------------------------------------
+// Placeholder de imagen de moda (determinista por producto/seccion).
+// El catalogo no trae URLs de imagen reales, asi que generamos placeholders
+// verticales estables con picsum.photos usando un seed derivado del nombre.
+// No se incrustan marcas reales de terceros.
+// ---------------------------------------------------------------------------
+
+const slugify = (value: string): string =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+const PICSUM = 'https://picsum.photos/seed';
+
+// Imagen vertical (3:4) de producto. Seed estable por id (o nombre como fallback).
+export const getProductImage = (name: string, id?: number, width = 600, height = 800): string => {
+  const seed = `dressify-${id ?? ''}-${slugify(name)}`.replace(/-+/g, '-');
+  return `${PICSUM}/${seed}/${width}/${height}`;
+};
+
+// Imagen de campana / seccion.
+export const getSectionImage = (section: string, width = 800, height = 1000): string => {
+  const seed = `dressify-seccion-${slugify(section)}`;
+  return `${PICSUM}/${seed}/${width}/${height}`;
+};
+
+// Imagen de hero / banner a ancho completo.
+export const getHeroImage = (seedKey = 'nueva-coleccion', width = 1600, height = 900): string =>
+  `${PICSUM}/dressify-${slugify(seedKey)}/${width}/${height}`;
+
+interface ProductImageProps {
+  name: string;
+  id?: number;
+  category?: string;
+  ratio?: string; // aspect-ratio css, por defecto 3/4
+  zoomOnHover?: boolean;
+  overlayLabel?: string; // texto editorial superpuesto (para tiles de seccion)
+  height?: number | string;
+}
+
+// Imagen vertical de moda con zoom sutil en hover. Sustituye a las fotos reales.
+// Incluye un fallback al mosaico de icono tematico si la imagen no carga.
+export const ProductImage: React.FC<ProductImageProps> = ({
+  name,
+  id,
+  category,
+  ratio = '3 / 4',
+  zoomOnHover = true,
+  overlayLabel,
+  height,
+}) => {
+  const resolved = resolveCategory(name, category);
+  const Icon = getProductIcon(name, category);
+  const [failed, setFailed] = React.useState(false);
+
+  return (
+    <Box
+      className="dressify-image-frame"
+      sx={{
+        position: 'relative',
+        width: '100%',
+        height: height ?? 'auto',
+        aspectRatio: height ? undefined : ratio,
+        overflow: 'hidden',
+        backgroundColor: '#F2F2F2',
+      }}
+    >
+      {failed ? (
+        <Box
+          sx={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: getCategoryGradient(resolved),
+          }}
+        >
+          <Icon sx={{ fontSize: 72, color: 'rgba(255,255,255,0.9)' }} />
+        </Box>
+      ) : (
+        <Box
+          component="img"
+          src={getProductImage(name, id)}
+          alt={name}
+          loading="lazy"
+          onError={() => setFailed(true)}
+          className="dressify-image"
+          sx={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+            transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+            ...(zoomOnHover && {
+              '.dressify-image-frame:hover &': { transform: 'scale(1.05)' },
+            }),
+          }}
+        />
+      )}
+      {overlayLabel && (
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            p: 3,
+            background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 55%)',
+          }}
+        >
+          <Typography
+            sx={{
+              color: '#fff',
+              fontFamily: '"Jost", "Helvetica Neue", sans-serif',
+              fontWeight: 400,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              fontSize: '1.05rem',
+            }}
+          >
+            {overlayLabel}
+          </Typography>
+        </Box>
+      )}
+    </Box>
+  );
+};
 
 interface ProductIconBoxProps {
   name: string;

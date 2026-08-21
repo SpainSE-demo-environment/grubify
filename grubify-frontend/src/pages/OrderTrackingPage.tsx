@@ -25,7 +25,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { Order, OrderStatus } from '../types';
 import { orderService } from '../services/api';
-import { ProductIconBox, getProductMeta } from '../theme/bankVisuals';
+import { ProductImage, getProductMeta } from '../theme/bankVisuals';
 
 const orderSteps = [
   { label: 'Pedido recibido', icon: <CheckCircleIcon />, status: OrderStatus.Placed },
@@ -145,7 +145,7 @@ const OrderTrackingPage: React.FC = () => {
   const currentStepIndex = getCurrentStepIndex(order.status);
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Typography variant="h3" component="h1" gutterBottom>
         Estado del pedido
       </Typography>
@@ -245,13 +245,14 @@ const OrderTrackingPage: React.FC = () => {
             </Typography>
             {order.items.map((item) => (
               <Box key={item.id} sx={{ display: 'flex', gap: 2, mb: 2 }}>
-                <ProductIconBox
-                  name={item.foodItem.name}
-                  category={item.foodItem.category}
-                  size={50}
-                  iconSize={26}
-                  radius={10}
-                />
+                <Box sx={{ width: 50, flexShrink: 0 }}>
+                  <ProductImage
+                    name={item.foodItem.name}
+                    id={item.foodItem.id}
+                    category={item.foodItem.category}
+                    zoomOnHover={false}
+                  />
+                </Box>
                 <Box sx={{ flex: 1 }}>
                   <Typography variant="body2" fontWeight="bold">
                     {item.quantity}x {item.foodItem.name}

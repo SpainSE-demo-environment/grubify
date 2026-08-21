@@ -6,28 +6,34 @@ import {
   CircularProgress,
   Alert,
   Button,
-  Card,
-  CardContent,
-  CardActions,
-  Chip,
-  Rating,
   IconButton,
   TextField,
   Dialog,
-  DialogTitle,
   DialogContent,
-  DialogActions,
 } from '@mui/material';
 import {
   Add as AddIcon,
   Remove as RemoveIcon,
-  AccessTime as TimeIcon,
-  Payments as FeeIcon,
+  Close as CloseIcon,
 } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Restaurant, FoodItem } from '../types';
 import { restaurantService, foodItemService, cartService } from '../services/api';
-import { getCategoryColor, getCategoryGradient, getCategoryIcon, getProductMeta, resolveCategory, ProductIconBox } from '../theme/bankVisuals';
+import {
+  getProductMeta,
+  ProductImage,
+  getSectionImage,
+} from '../theme/bankVisuals';
+
+const clothingSizes = ['XS', 'S', 'M', 'L', 'XL'];
+const shoeSizes = ['36', '37', '38', '39', '40', '41', '42', '43', '44'];
+
+const getSizesFor = (section: string): string[] => {
+  const s = section.toLowerCase();
+  if (s === 'calzado') return shoeSizes;
+  if (s === 'accesorios') return ['Única'];
+  return clothingSizes;
+};
 
 const RestaurantPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,7 +45,9 @@ const RestaurantPage: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<FoodItem | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [specialInstructions, setSpecialInstructions] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [added, setAdded] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -69,44 +77,44 @@ const RestaurantPage: React.FC = () => {
     setSelectedItem(item);
     setQuantity(1);
     setSpecialInstructions('');
+    const sizes = getSizesFor(restaurant?.cuisineType || '');
+    setSelectedSize(sizes.length === 1 ? sizes[0] : '');
+    setAdded(false);
     setDialogOpen(true);
   };
 
   const confirmAddToCart = async () => {
     if (!selectedItem) return;
 
+    const sizeNote = selectedSize ? `Talla: ${selectedSize}` : '';
+    const combinedInstructions = [sizeNote, specialInstructions.trim()]
+      .filter(Boolean)
+      .join(' · ');
+
     try {
       await cartService.addItem('user123', {
         foodItemId: selectedItem.id,
         quantity,
-        specialInstructions,
+        specialInstructions: combinedInstructions,
       });
-      setDialogOpen(false);
-      // You might want to show a success message here
+      setAdded(true);
+      setTimeout(() => setDialogOpen(false), 900);
     } catch (err) {
       console.error('Error adding item to cart:', err);
     }
   };
 
-  const groupedMenuItems = menuItems.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = [];
-    }
-    acc[item.category].push(item);
-    return acc;
-  }, {} as Record<string, FoodItem[]>);
-
   if (loading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
-        <CircularProgress size={60} />
+        <CircularProgress size={48} sx={{ color: '#111' }} />
       </Box>
     );
   }
 
   if (error || !restaurant) {
     return (
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ mt: 4 }}>
         <Alert severity="error" sx={{ mt: 4 }}>
           {error || 'Producto no encontrado'}
         </Alert>
@@ -119,198 +127,294 @@ const RestaurantPage: React.FC = () => {
     );
   }
 
+  const sizes = getSizesFor(restaurant.cuisineType);
+  const dialogMeta = selectedItem ? getProductMeta(selectedItem.name) : null;
+
   return (
-    <Container maxWidth="xl">
-      {/* Restaurant Header */}
-      <Card sx={{ mb: 4 }}>
-        <Box sx={{ position: 'relative' }}>
-          <Box
+    <Box>
+      {/* Cabecera de sección editorial */}
+      <Box
+        sx={{
+          position: 'relative',
+          width: '100%',
+          height: { xs: 220, md: 320 },
+          overflow: 'hidden',
+          mb: { xs: 4, md: 6 },
+        }}
+      >
+        <Box
+          component="img"
+          src={getSectionImage(restaurant.cuisineType, 1800, 700)}
+          alt={restaurant.name}
+          sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5))',
+          }}
+        />
+        <Box
+          sx={{
+            position: 'relative',
+            zIndex: 1,
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            color: '#fff',
+            px: 3,
+          }}
+        >
+          <Typography
             sx={{
-              height: 260,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: getCategoryGradient(restaurant.cuisineType),
+              fontFamily: '"Jost", "Helvetica Neue", sans-serif',
+              fontWeight: 300,
+              letterSpacing: '0.28em',
+              textTransform: 'uppercase',
+              fontSize: '0.75rem',
+              mb: 1.5,
             }}
           >
-            {React.createElement(getCategoryIcon(restaurant.cuisineType), {
-              sx: { fontSize: 128, color: 'rgba(255,255,255,0.95)' },
-            })}
-          </Box>
-          <Box
-            sx={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
-              color: 'white',
-              p: 3,
-            }}
-          >
-            <Typography variant="h3" component="h1" gutterBottom>
-              {restaurant.name}
-            </Typography>
-            <Typography variant="h6" sx={{ opacity: 0.9 }}>
-              {restaurant.description}
-            </Typography>
-          </Box>
-        </Box>
-        <CardContent>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, alignItems: 'center' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Rating value={restaurant.rating} precision={0.1} readOnly />
-              <Typography variant="body1" sx={{ ml: 1 }}>
-                {restaurant.rating.toFixed(1)} valoración
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <TimeIcon sx={{ mr: 1, color: 'text.secondary' }} />
-              <Typography variant="body1">
-                {restaurant.deliveryTime}
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <FeeIcon sx={{ mr: 1, color: 'text.secondary' }} />
-              <Typography variant="body1">
-                {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} € de envío` : 'Envío gratis'}
-              </Typography>
-            </Box>
-            <Chip label={restaurant.cuisineType} color="primary" />
-          </Box>
-        </CardContent>
-      </Card>
-
-      {/* Menu Items */}
-      {Object.entries(groupedMenuItems).map(([category, items]) => (
-        <Box key={category} sx={{ mb: 4 }}>
-          <Typography variant="h4" component="h2" gutterBottom>
-            {category}
+            {restaurant.cuisineType}
           </Typography>
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: {
-                xs: '1fr',
-                md: 'repeat(2, 1fr)',
-              },
-              gap: 3,
-            }}
-          >
-            {items.map((item) => {
-              const cat = getCategoryColor(resolveCategory(item.name, item.category));
-              const meta = getProductMeta(item.name);
-              return (
-              <Card key={item.id} sx={{ display: 'flex', alignItems: 'stretch', minHeight: 200 }}>
-                <ProductIconBox
-                  name={item.name}
-                  category={item.category}
-                  size={150}
-                  iconSize={64}
-                  radius={0}
-                  fullHeight
-                />
-                <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                  <CardContent sx={{ flex: 1 }}>
-                    <Typography variant="h6" component="h3" gutterBottom>
-                      {item.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                      {item.description}
-                    </Typography>
-                    <Box sx={{ display: 'flex', gap: 1, mb: 2, flexWrap: 'wrap' }}>
-                      {meta.badges.map((badge) => (
-                        <Chip
-                          key={badge}
-                          label={badge}
-                          size="small"
-                          variant="outlined"
-                          sx={{ borderColor: cat, color: cat, fontWeight: 600 }}
-                        />
-                      ))}
-                    </Box>
-                    {meta.highlightLabel && (
-                      <Typography
-                        variant="caption"
-                        color="text.secondary"
-                        sx={{ textTransform: 'uppercase', letterSpacing: 0.5, display: 'block' }}
-                      >
-                        {meta.highlightLabel}
-                      </Typography>
-                    )}
-                    <Typography variant="h6" fontWeight="bold" sx={{ color: cat }}>
-                      {meta.highlight}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => handleAddToCart(item)}
-                      disabled={!item.isAvailable}
-                      fullWidth
-                    >
-                      {item.isAvailable ? 'Añadir a la cesta' : 'No disponible'}
-                    </Button>
-                  </CardActions>
-                </Box>
-              </Card>
-              );
-            })}
-          </Box>
+          <Typography variant="h2" component="h1" sx={{ fontSize: { xs: '1.8rem', md: '3rem' } }}>
+            {restaurant.name}
+          </Typography>
         </Box>
-      ))}
+      </Box>
 
-      {/* Add to Cart Dialog */}
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>Añadir a la cesta</DialogTitle>
-        <DialogContent>
-          {selectedItem && (
-            <Box>
-              <Typography variant="h6" gutterBottom>
-                {selectedItem.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" gutterBottom>
-                {selectedItem.description}
-              </Typography>
-              <Typography variant="caption" color="text.secondary" sx={{ textTransform: 'uppercase', letterSpacing: 0.5, display: 'block' }}>
-                {getProductMeta(selectedItem.name).highlightLabel}
-              </Typography>
-              <Typography variant="h6" gutterBottom sx={{ color: getCategoryColor(resolveCategory(selectedItem.name, selectedItem.category)), fontWeight: 'bold' }}>
-                {getProductMeta(selectedItem.name).highlight}
-              </Typography>
-              
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, my: 3 }}>
-                <Typography variant="body1">Unidades:</Typography>
-                <IconButton onClick={() => setQuantity(Math.max(1, quantity - 1))}>
-                  <RemoveIcon />
-                </IconButton>
-                <Typography variant="h6">{quantity}</Typography>
-                <IconButton onClick={() => setQuantity(quantity + 1)}>
-                  <AddIcon />
-                </IconButton>
+      <Container maxWidth="xl">
+        <Box sx={{ mb: 4, textAlign: 'center' }}>
+          <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 640, mx: 'auto' }}>
+            {restaurant.description}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ mt: 2, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: '0.68rem' }}
+          >
+            {menuItems.length} artículo{menuItems.length !== 1 ? 's' : ''}
+          </Typography>
+        </Box>
+
+        {/* Grid galería de productos */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: 'repeat(2, 1fr)',
+              md: 'repeat(3, 1fr)',
+              lg: 'repeat(4, 1fr)',
+            },
+            columnGap: { xs: 1.5, md: 3 },
+            rowGap: { xs: 4, md: 6 },
+          }}
+        >
+          {menuItems.map((item) => {
+            const meta = getProductMeta(item.name);
+            return (
+              <Box key={item.id}>
+                <Box
+                  className="dressify-image-frame"
+                  sx={{ position: 'relative', cursor: 'pointer' }}
+                  onClick={() => item.isAvailable && handleAddToCart(item)}
+                >
+                  <ProductImage name={item.name} id={item.id} category={item.category} />
+
+                  {/* Botón Añadir que aparece en hover */}
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      p: 1.5,
+                      opacity: { xs: 1, md: 0 },
+                      transform: { xs: 'none', md: 'translateY(8px)' },
+                      transition: 'opacity 0.25s ease, transform 0.25s ease',
+                      '.dressify-image-frame:hover &': {
+                        opacity: 1,
+                        transform: 'translateY(0)',
+                      },
+                    }}
+                  >
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      disabled={!item.isAvailable}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddToCart(item);
+                      }}
+                      sx={{
+                        backgroundColor: 'rgba(255,255,255,0.95)',
+                        color: '#111',
+                        fontSize: '0.68rem',
+                        py: 1,
+                        '&:hover': { backgroundColor: '#111', color: '#fff' },
+                      }}
+                    >
+                      {item.isAvailable ? 'Añadir' : 'Agotado'}
+                    </Button>
+                  </Box>
+                </Box>
+
+                {/* Nombre + precio */}
+                <Box sx={{ mt: 1.5, px: 0.5 }}>
+                  <Typography
+                    sx={{
+                      fontSize: '0.82rem',
+                      letterSpacing: '0.02em',
+                      color: '#111',
+                      mb: 0.5,
+                    }}
+                  >
+                    {item.name}
+                  </Typography>
+                  <Typography sx={{ fontSize: '0.82rem', color: '#111', fontWeight: 500 }}>
+                    {meta.highlight}
+                  </Typography>
+                </Box>
               </Box>
-              
-              <TextField
-                fullWidth
-                label="Comentarios (opcional)"
-                multiline
-                rows={3}
-                value={specialInstructions}
-                onChange={(e) => setSpecialInstructions(e.target.value)}
-                placeholder="p. ej., talla, color preferido, etc."
-              />
+            );
+          })}
+        </Box>
+      </Container>
+
+      {/* Detalle de producto */}
+      <Dialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogContent sx={{ p: 0 }}>
+          {selectedItem && dialogMeta && (
+            <Box sx={{ position: 'relative', display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
+              <IconButton
+                onClick={() => setDialogOpen(false)}
+                sx={{ position: 'absolute', top: 8, right: 8, zIndex: 2, color: '#111' }}
+                aria-label="cerrar"
+              >
+                <CloseIcon />
+              </IconButton>
+
+              {/* Imagen grande */}
+              <Box sx={{ width: { xs: '100%', md: '48%' } }}>
+                <ProductImage
+                  name={selectedItem.name}
+                  id={selectedItem.id}
+                  category={selectedItem.category}
+                  zoomOnHover={false}
+                />
+              </Box>
+
+              {/* Info */}
+              <Box sx={{ flex: 1, p: { xs: 3, md: 5 } }}>
+                <Typography variant="h5" component="h2" sx={{ mb: 1 }}>
+                  {selectedItem.name}
+                </Typography>
+                <Typography sx={{ fontSize: '1.1rem', fontWeight: 500, mb: 2 }}>
+                  {dialogMeta.highlight}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                  {selectedItem.description}
+                </Typography>
+
+                {/* Selector de tallas */}
+                <Typography
+                  variant="body2"
+                  sx={{ letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: '0.68rem', mb: 1.5 }}
+                >
+                  Talla
+                </Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
+                  {sizes.map((size) => {
+                    const active = selectedSize === size;
+                    return (
+                      <Box
+                        key={size}
+                        component="button"
+                        onClick={() => setSelectedSize(size)}
+                        sx={{
+                          minWidth: 46,
+                          height: 42,
+                          px: 1.5,
+                          cursor: 'pointer',
+                          background: active ? '#111' : '#fff',
+                          color: active ? '#fff' : '#111',
+                          border: '1px solid',
+                          borderColor: active ? '#111' : 'rgba(17,17,17,0.25)',
+                          fontSize: '0.8rem',
+                          letterSpacing: '0.04em',
+                          transition: 'all 0.15s ease',
+                          '&:hover': { borderColor: '#111' },
+                        }}
+                      >
+                        {size}
+                      </Box>
+                    );
+                  })}
+                </Box>
+
+                {/* Cantidad */}
+                <Typography
+                  variant="body2"
+                  sx={{ letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: '0.68rem', mb: 1 }}
+                >
+                  Unidades
+                </Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
+                  <IconButton
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    sx={{ border: '1px solid rgba(17,17,17,0.25)', borderRadius: 0 }}
+                  >
+                    <RemoveIcon fontSize="small" />
+                  </IconButton>
+                  <Typography sx={{ minWidth: 36, textAlign: 'center' }}>{quantity}</Typography>
+                  <IconButton
+                    onClick={() => setQuantity(quantity + 1)}
+                    sx={{ border: '1px solid rgba(17,17,17,0.25)', borderRadius: 0 }}
+                  >
+                    <AddIcon fontSize="small" />
+                  </IconButton>
+                </Box>
+
+                <TextField
+                  fullWidth
+                  label="Comentarios (opcional)"
+                  multiline
+                  rows={2}
+                  value={specialInstructions}
+                  onChange={(e) => setSpecialInstructions(e.target.value)}
+                  placeholder="p. ej., color preferido, etc."
+                  sx={{ mb: 3 }}
+                />
+
+                <Button
+                  fullWidth
+                  variant="contained"
+                  size="large"
+                  disabled={!selectedItem.isAvailable || (sizes.length > 1 && !selectedSize)}
+                  onClick={confirmAddToCart}
+                  sx={{ py: 1.6 }}
+                >
+                  {added
+                    ? '✓ Añadido'
+                    : sizes.length > 1 && !selectedSize
+                    ? 'Selecciona una talla'
+                    : 'Añadir a la cesta'}
+                </Button>
+              </Box>
             </Box>
           )}
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDialogOpen(false)}>Cancelar</Button>
-          <Button onClick={confirmAddToCart} variant="contained">
-            Añadir a la cesta
-          </Button>
-        </DialogActions>
       </Dialog>
-    </Container>
+    </Box>
   );
 };
 
