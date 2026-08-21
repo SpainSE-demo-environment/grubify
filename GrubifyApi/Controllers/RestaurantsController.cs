@@ -12,86 +12,72 @@ namespace GrubifyApi.Controllers
             new Restaurant
             {
                 Id = 1,
-                Name = "Cuentas",
-                Description = "Cuentas corrientes y de ahorro sin comisiones para tu día a día",
+                Name = "Mujer",
+                Description = "Colección de mujer: vestidos, abrigos, pantalones y prendas de temporada",
                 ImageUrl = "",
-                CuisineType = "Cuentas",
+                CuisineType = "Mujer",
                 Rating = 4.8,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Madrid"
+                Address = "Dressify · Nueva colección"
             },
             new Restaurant
             {
                 Id = 2,
-                Name = "Tarjetas",
-                Description = "Tarjetas de débito y crédito con las mejores condiciones",
+                Name = "Hombre",
+                Description = "Colección de hombre: camisas, vaqueros, chaquetas y básicos",
                 ImageUrl = "",
-                CuisineType = "Tarjetas",
+                CuisineType = "Hombre",
                 Rating = 4.7,
-                DeliveryTime = "Alta en 24-48h",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Barcelona"
+                Address = "Dressify · Nueva colección"
             },
             new Restaurant
             {
                 Id = 3,
-                Name = "Préstamos",
-                Description = "Préstamos personales e hipotecas con asesoramiento experto",
+                Name = "Niño",
+                Description = "Moda infantil cómoda y resistente para niñas y niños",
                 ImageUrl = "",
-                CuisineType = "Préstamos",
+                CuisineType = "Niño",
                 Rating = 4.6,
-                DeliveryTime = "Estudio en 48-72h",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Valencia"
+                Address = "Dressify · Colección kids"
             },
             new Restaurant
             {
                 Id = 4,
-                Name = "Inversión",
-                Description = "Fondos, acciones y planes de pensiones para hacer crecer tu dinero",
+                Name = "Calzado",
+                Description = "Zapatillas, botas, bailarinas y sandalias para toda la familia",
                 ImageUrl = "",
-                CuisineType = "Inversión",
+                CuisineType = "Calzado",
                 Rating = 4.5,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Sevilla"
+                Address = "Dressify · Zapatería"
             },
             new Restaurant
             {
                 Id = 5,
-                Name = "Ahorro",
-                Description = "Depósitos y cuentas de ahorro para rentabilizar tu dinero con seguridad",
+                Name = "Accesorios",
+                Description = "Bolsos, cinturones y complementos para completar tu look",
                 ImageUrl = "",
-                CuisineType = "Ahorro",
-                Rating = 4.6,
-                DeliveryTime = "Contratación inmediata",
-                DeliveryFee = 0.00m,
-                MinimumOrder = 0.00m,
-                IsOpen = true,
-                Address = "Oficina Central, Zaragoza"
-            },
-            new Restaurant
-            {
-                Id = 6,
-                Name = "Seguros",
-                Description = "Seguros de salud, hogar, auto y moto para proteger lo que más importa",
-                ImageUrl = "",
-                CuisineType = "Seguros",
+                CuisineType = "Accesorios",
                 Rating = 4.4,
-                DeliveryTime = "Contratación inmediata",
+                DeliveryTime = "Envío en 24-48h",
                 DeliveryFee = 0.00m,
                 MinimumOrder = 0.00m,
                 IsOpen = true,
-                Address = "Oficina Central, Bilbao"
+                Address = "Dressify · Complementos"
             }
         };
 

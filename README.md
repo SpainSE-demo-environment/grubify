@@ -1,12 +1,12 @@
-# Bankify - Portal de Banca Online
+# Dressify - Tienda de Moda Online
 
-A modern retail banking portal built with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps using Azure Developer CLI (azd). (Originally scaffolded as a food-delivery demo; rebranded to a Spanish retail-banking experience for Azure SRE Agent demos. Internal class names, model properties and API routes are unchanged.)
+A modern retail fashion store built with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps using Azure Developer CLI (azd). (Originally scaffolded as a food-delivery demo; rebranded to a Spanish retail-fashion experience for Azure SRE Agent demos. Internal class names, model properties and API routes are unchanged.)
 
-## 🏦 Features
+## 🛍️ Features
 
-- **Modern UI**: Beautiful, responsive design for a trustworthy online banking experience (Spanish UI)
-- **Real Banking Content**: Sample product families and financial products (cuentas, tarjetas, préstamos, inversión, ahorro, seguros) with themed Material-UI iconography
-- **Complete Onboarding Flow**: Browse products → Add to selection → Contract → Track application status
+- **Modern UI**: Beautiful, responsive design for a trustworthy online fashion shopping experience (Spanish UI)
+- **Real Fashion Content**: Sample product families and fashion products (camisetas, pantalones, vestidos, calzado, abrigos, accesorios) with themed Material-UI iconography
+- **Complete Shopping Flow**: Browse products → Add to cart → Checkout → Track order status
 - **Azure Container Apps**: Scalable, serverless container hosting
 - **Azure Developer CLI**: One-command deployment and management
 
@@ -19,7 +19,7 @@ A modern retail banking portal built with a React TypeScript frontend and .NET b
 
 ## 🚀 Complete Deployment Guide
 
-This guide shows how to deploy Bankify with **both backend versions** (v1 with memory leak, v2 with payment failures) for testing Azure SRE Agent scenarios.
+This guide shows how to deploy Dressify with **both backend versions** (v1 with memory leak, v2 with payment failures) for testing Azure SRE Agent scenarios.
 
 > **Nota (lab / demo del SRE Agent):** en el entorno `azure-demo-environment` la app
 > **no** se despliega con `azd up` creando infraestructura nueva, sino sobre el **Spoke
@@ -31,7 +31,7 @@ This guide shows how to deploy Bankify with **both backend versions** (v1 with m
 
 ## 📋 Prerequisites
 
-Before deploying Bankify, ensure you have the following tools installed and running:
+Before deploying Dressify, ensure you have the following tools installed and running:
 
 ### Required Tools
 - **[Azure Developer CLI (azd)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd)** - Latest version

@@ -9,240 +9,311 @@ namespace GrubifyApi.Controllers
     {
         private static readonly List<FoodItem> FoodItems = new()
         {
-            // Cuentas
+            // ===== Mujer (RestaurantId 1) =====
             new FoodItem
             {
                 Id = 1,
-                Name = "Cuenta Personal",
-                Description = "Cuenta corriente sin comisiones con tarjeta gratis, Bizum y app móvil",
-                Price = 0.00m,
+                Name = "Vestido Midi Flores",
+                Description = "Vestido midi de tejido fluido con estampado floral y manga corta. Tallas XS-L",
+                Price = 45.99m,
                 ImageUrl = "",
-                Category = "Cuentas",
-                IsVegetarian = true,
-                IsVegan = true,
-                IsSpicy = false,
+                Category = "Vestidos",
                 RestaurantId = 1,
-                PreparationTime = 15
+                PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 2,
-                Name = "Cuenta de Ahorro",
-                Description = "Cuenta de ahorro remunerada con liquidez total y sin comisiones de mantenimiento",
-                Price = 0.00m,
+                Name = "Blusa Satinada",
+                Description = "Blusa de tacto satinado con cuello camisero, ideal para diario u oficina. Tallas XS-XL",
+                Price = 29.99m,
                 ImageUrl = "",
-                Category = "Cuentas",
-                IsVegetarian = true,
-                IsVegan = true,
-                IsSpicy = true,
+                Category = "Camisas y Blusas",
                 RestaurantId = 1,
-                PreparationTime = 15
+                PreparationTime = 0
             },
-
-            // Tarjetas
             new FoodItem
             {
                 Id = 3,
-                Name = "Tarjeta de Débito",
-                Description = "Tarjeta de débito gratuita con pagos móviles y retiradas sin comisión",
-                Price = 0.00m,
+                Name = "Vaquero Slim Tiro Alto",
+                Description = "Vaquero slim de tiro alto en denim elástico azul medio. Tallas 34-46",
+                Price = 39.99m,
                 ImageUrl = "",
-                Category = "Tarjetas",
-                IsVegetarian = true,
-                IsVegan = false,
-                IsSpicy = false,
-                RestaurantId = 2,
-                PreparationTime = 15
+                Category = "Pantalones",
+                RestaurantId = 1,
+                PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 4,
-                Name = "Tarjeta de Crédito",
-                Description = "Crédito hasta 6.000€ con pago aplazado, seguros de viaje y programa de puntos",
-                Price = 45.00m,
+                Name = "Abrigo Lana Espiga",
+                Description = "Abrigo largo de mezcla de lana con patrón espiga y corte recto. Tallas S-XL",
+                Price = 119.99m,
                 ImageUrl = "",
-                Category = "Tarjetas",
-                IsVegetarian = false,
-                IsVegan = false,
-                IsSpicy = true,
-                RestaurantId = 2,
-                PreparationTime = 15
+                Category = "Abrigos",
+                RestaurantId = 1,
+                PreparationTime = 0
             },
-
-            // Préstamos
             new FoodItem
             {
                 Id = 5,
-                Name = "Préstamo Personal",
-                Description = "Financia tus proyectos hasta 60.000€ con cuotas a tu medida y sin sorpresas",
-                Price = 180.00m,
+                Name = "Falda Plisada Midi",
+                Description = "Falda midi plisada de vuelo con cintura elástica. Tallas XS-L",
+                Price = 34.99m,
                 ImageUrl = "",
-                Category = "Préstamos",
-                IsVegetarian = false,
-                IsVegan = true,
-                IsSpicy = false,
-                RestaurantId = 3,
-                PreparationTime = 25
+                Category = "Faldas",
+                RestaurantId = 1,
+                PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 6,
-                Name = "Préstamo Personal Preconcedido",
-                Description = "Hasta 30.000€ preconcedidos al instante, sin comisión de apertura y respuesta inmediata",
-                Price = 250.00m,
+                Name = "Blazer Entallado",
+                Description = "Blazer entallado con solapa y botonadura simple, perfecto para looks smart. Tallas XS-XL",
+                Price = 59.99m,
                 ImageUrl = "",
-                Category = "Préstamos",
-                IsVegetarian = true,
-                IsVegan = true,
-                IsSpicy = true,
-                RestaurantId = 3,
-                PreparationTime = 20
+                Category = "Chaquetas",
+                RestaurantId = 1,
+                PreparationTime = 0
             },
+
+            // ===== Hombre (RestaurantId 2) =====
             new FoodItem
             {
                 Id = 7,
-                Name = "Hipoteca",
-                Description = "Hipoteca a tipo fijo desde el 2,90% TIN con cuota estable toda la vida del préstamo",
-                Price = 950.00m,
+                Name = "Camisa Oxford",
+                Description = "Camisa Oxford de algodón con corte regular, versátil y resistente. Tallas S-XXL",
+                Price = 29.99m,
                 ImageUrl = "",
-                Category = "Préstamos",
-                IsVegetarian = false,
-                IsVegan = false,
-                IsSpicy = true,
-                RestaurantId = 3,
-                PreparationTime = 30
+                Category = "Camisas y Blusas",
+                RestaurantId = 2,
+                PreparationTime = 0
             },
-
-            // Inversión
             new FoodItem
             {
                 Id = 8,
-                Name = "Plan de Pensiones",
-                Description = "Prepara tu jubilación con ventajas fiscales y aportaciones flexibles",
-                Price = 50.00m,
+                Name = "Vaquero Slim",
+                Description = "Vaquero slim fit elástico en denim azul oscuro. Tallas 38-48",
+                Price = 39.99m,
                 ImageUrl = "",
-                Category = "Inversión",
-                IsVegetarian = true,
-                IsVegan = true,
-                IsSpicy = false,
-                RestaurantId = 4,
-                PreparationTime = 20
+                Category = "Pantalones",
+                RestaurantId = 2,
+                PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 9,
-                Name = "Fondos de Inversión",
-                Description = "Fondos gestionados e indexados para diversificar tu patrimonio con bajas comisiones",
-                Price = 100.00m,
+                Name = "Sudadera con Capucha",
+                Description = "Sudadera con capucha de felpa cepillada y bolsillo canguro. Tallas S-XXL",
+                Price = 34.99m,
                 ImageUrl = "",
-                Category = "Inversión",
-                IsVegetarian = false,
-                IsVegan = true,
-                IsSpicy = false,
-                RestaurantId = 4,
-                PreparationTime = 15
+                Category = "Sudaderas",
+                RestaurantId = 2,
+                PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 10,
-                Name = "Acciones y ETFs",
-                Description = "Opera en las principales bolsas mundiales con comisiones ultrarreducidas",
-                Price = 0.00m,
+                Name = "Chaqueta Bomber",
+                Description = "Chaqueta bomber ligera con cierre de cremallera y puños elásticos. Tallas S-XL",
+                Price = 69.99m,
                 ImageUrl = "",
-                Category = "Inversión",
-                IsVegetarian = false,
-                IsVegan = true,
-                IsSpicy = true,
-                RestaurantId = 4,
-                PreparationTime = 15
+                Category = "Chaquetas",
+                RestaurantId = 2,
+                PreparationTime = 0
             },
-
-            // Ahorro
             new FoodItem
             {
                 Id = 11,
-                Name = "Depósito",
-                Description = "Depósito a plazo garantizado al 3% TAE a 12 meses sin sorpresas",
-                Price = 1000.00m,
+                Name = "Polo Piqué",
+                Description = "Polo de punto piqué de algodón con cuello y puños en contraste. Tallas S-XXL",
+                Price = 22.99m,
                 ImageUrl = "",
-                Category = "Ahorro",
-                IsVegetarian = true,
-                IsVegan = false,
-                IsSpicy = true,
-                RestaurantId = 5,
-                PreparationTime = 5
+                Category = "Camisetas",
+                RestaurantId = 2,
+                PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 12,
-                Name = "Cuenta de Ahorro Remunerada",
-                Description = "Cuenta de ahorro con un 2,5% TAE y disponibilidad inmediata de tu dinero",
-                Price = 0.00m,
+                Name = "Pantalón Chino",
+                Description = "Pantalón chino de algodón en corte recto, disponible en beige, azul y verde. Tallas 38-48",
+                Price = 34.99m,
                 ImageUrl = "",
-                Category = "Ahorro",
-                IsVegetarian = true,
-                IsVegan = true,
-                IsSpicy = true,
-                RestaurantId = 5,
-                PreparationTime = 10
+                Category = "Pantalones",
+                RestaurantId = 2,
+                PreparationTime = 0
             },
 
-            // Seguros
+            // ===== Niño (RestaurantId 3) =====
             new FoodItem
             {
                 Id = 13,
-                Name = "Seguro de Salud",
-                Description = "Cuadro médico completo, sin copagos y con acceso a videoconsulta 24h",
-                Price = 45.00m,
+                Name = "Camiseta Estampada Niño",
+                Description = "Camiseta de algodón con estampado divertido, resistente a los lavados. Tallas 3-14 años",
+                Price = 9.99m,
                 ImageUrl = "",
-                Category = "Seguros",
-                IsVegetarian = false,
-                IsVegan = true,
-                IsSpicy = false,
-                RestaurantId = 6,
-                PreparationTime = 15
+                Category = "Camisetas",
+                RestaurantId = 3,
+                PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 14,
-                Name = "Seguro de Hogar",
-                Description = "Protege tu vivienda y su contenido con cobertura integral y asistencia 24/7",
-                Price = 18.00m,
+                Name = "Pantalón Cargo Niño",
+                Description = "Pantalón cargo de sarga con bolsillos laterales y cintura ajustable. Tallas 3-14 años",
+                Price = 19.99m,
                 ImageUrl = "",
-                Category = "Seguros",
-                IsVegetarian = true,
-                IsVegan = true,
-                IsSpicy = false,
-                RestaurantId = 6,
-                PreparationTime = 15
+                Category = "Pantalones",
+                RestaurantId = 3,
+                PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 15,
-                Name = "Seguro de Auto",
-                Description = "Seguro de coche a todo riesgo con asistencia en carretera incluida",
-                Price = 30.00m,
+                Name = "Vestido Flores Niña",
+                Description = "Vestido de algodón con estampado de flores y lazo trasero. Tallas 3-12 años",
+                Price = 24.99m,
                 ImageUrl = "",
-                Category = "Seguros",
-                IsVegetarian = false,
-                IsVegan = false,
-                IsSpicy = true,
-                RestaurantId = 6,
-                PreparationTime = 20
+                Category = "Vestidos",
+                RestaurantId = 3,
+                PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 16,
-                Name = "Seguro de Moto",
-                Description = "Seguro de moto con las mejores coberturas, defensa jurídica y asistencia 24h",
-                Price = 20.00m,
+                Name = "Sudadera Capucha Kids",
+                Description = "Sudadera con capucha de felpa suave y estampado frontal. Tallas 3-14 años",
+                Price = 19.99m,
                 ImageUrl = "",
-                Category = "Seguros",
-                IsVegetarian = false,
-                IsVegan = true,
-                IsSpicy = false,
-                RestaurantId = 6,
-                PreparationTime = 15
+                Category = "Sudaderas",
+                RestaurantId = 3,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 17,
+                Name = "Chaqueta Acolchada Niño",
+                Description = "Chaqueta acolchada ligera con capucha, cálida para el día a día. Tallas 3-14 años",
+                Price = 39.99m,
+                ImageUrl = "",
+                Category = "Abrigos",
+                RestaurantId = 3,
+                PreparationTime = 0
+            },
+
+            // ===== Calzado (RestaurantId 4) =====
+            new FoodItem
+            {
+                Id = 18,
+                Name = "Zapatilla Running",
+                Description = "Zapatilla running con amortiguación ligera y suela flexible. Tallas 36-46",
+                Price = 59.99m,
+                ImageUrl = "",
+                Category = "Deportivo",
+                RestaurantId = 4,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 19,
+                Name = "Bota Chelsea Piel",
+                Description = "Bota Chelsea de piel con elásticos laterales y suela de goma. Tallas 39-45",
+                Price = 89.99m,
+                ImageUrl = "",
+                Category = "Botas",
+                RestaurantId = 4,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 20,
+                Name = "Bailarina Charol",
+                Description = "Bailarina de charol con puntera redonda, cómoda y elegante. Tallas 35-42",
+                Price = 35.99m,
+                ImageUrl = "",
+                Category = "Plano",
+                RestaurantId = 4,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 21,
+                Name = "Sandalia Tacón",
+                Description = "Sandalia de tacón medio con tira ajustable al tobillo. Tallas 35-41",
+                Price = 45.99m,
+                ImageUrl = "",
+                Category = "Tacón",
+                RestaurantId = 4,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 22,
+                Name = "Mocasín Piel",
+                Description = "Mocasín de piel con acabado pulido, ideal para looks smart casual. Tallas 39-45",
+                Price = 55.99m,
+                ImageUrl = "",
+                Category = "Plano",
+                RestaurantId = 4,
+                PreparationTime = 0
+            },
+
+            // ===== Accesorios (RestaurantId 5) =====
+            new FoodItem
+            {
+                Id = 23,
+                Name = "Bolso Bandolera",
+                Description = "Bolso bandolera de piel sintética con correa ajustable, varios colores",
+                Price = 39.99m,
+                ImageUrl = "",
+                Category = "Bolsos",
+                RestaurantId = 5,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 24,
+                Name = "Cinturón de Piel",
+                Description = "Cinturón de piel auténtica con hebilla metálica. Tallas 90-110 cm",
+                Price = 24.99m,
+                ImageUrl = "",
+                Category = "Cinturones",
+                RestaurantId = 5,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 25,
+                Name = "Bufanda de Punto",
+                Description = "Bufanda de punto suave y cálida, disponible en tonos lisos de temporada",
+                Price = 19.99m,
+                ImageUrl = "",
+                Category = "Complementos",
+                RestaurantId = 5,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 26,
+                Name = "Gafas de Sol",
+                Description = "Gafas de sol con protección UV400 y montura ligera de estilo retro",
+                Price = 29.99m,
+                ImageUrl = "",
+                Category = "Complementos",
+                RestaurantId = 5,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 27,
+                Name = "Gorro de Lana",
+                Description = "Gorro de punto de lana con vuelta, cálido y suave. Talla única",
+                Price = 15.99m,
+                ImageUrl = "",
+                Category = "Complementos",
+                RestaurantId = 5,
+                PreparationTime = 0
             }
         };
 

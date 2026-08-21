@@ -26,12 +26,11 @@ import { getCategoryColor, getCategoryGradient, getCategoryIcon } from '../theme
 
 const cuisineTypes = [
   'Todos',
-  'Cuentas',
-  'Tarjetas',
-  'Préstamos',
-  'Inversión',
-  'Ahorro',
-  'Seguros',
+  'Mujer',
+  'Hombre',
+  'Niño',
+  'Calzado',
+  'Accesorios',
 ];
 
 const HomePage: React.FC = () => {
@@ -59,7 +58,7 @@ const HomePage: React.FC = () => {
       setRestaurants(data);
       setError(null);
     } catch (err) {
-      setError('No se pudieron cargar los productos. Inténtalo de nuevo más tarde.');
+      setError('No se pudieron cargar las secciones. Inténtalo de nuevo más tarde.');
       console.error('Error fetching restaurants:', err);
     } finally {
       setLoading(false);
@@ -122,13 +121,13 @@ const HomePage: React.FC = () => {
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 45%, #06B6D4 100%)',
+          background: 'linear-gradient(135deg, #5A1226 0%, #9B2242 45%, #B08422 100%)',
           borderRadius: 4,
           color: 'white',
           p: { xs: 4, md: 7 },
           mb: 5,
           textAlign: 'center',
-          boxShadow: '0 20px 50px -20px rgba(79, 70, 229, 0.6)',
+          boxShadow: '0 20px 50px -20px rgba(155, 34, 66, 0.6)',
         }}
       >
         <Box
@@ -156,7 +155,7 @@ const HomePage: React.FC = () => {
         />
         <Box sx={{ position: 'relative', zIndex: 1 }}>
           <Chip
-            label="100% online · Sin comisiones"
+            label="Envío y devoluciones gratis"
             sx={{
               mb: 2,
               color: 'white',
@@ -166,10 +165,10 @@ const HomePage: React.FC = () => {
             }}
           />
           <Typography variant="h2" component="h1" gutterBottom>
-            Tu banca, simple y sin comisiones
+            Dressify, tu tienda de moda online
           </Typography>
           <Typography variant="h6" sx={{ mb: 4, opacity: 0.92, fontWeight: 400 }}>
-            Contrata cuentas, tarjetas, hipotecas e inversiones en minutos, 100% online
+            Moda para toda la familia: mujer, hombre, niño, calzado y accesorios de temporada
           </Typography>
 
           {/* Search Bar */}
@@ -177,7 +176,7 @@ const HomePage: React.FC = () => {
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Buscar productos, categorías o servicios..."
+              placeholder="Buscar prendas, secciones o accesorios..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               InputProps={{
@@ -200,12 +199,12 @@ const HomePage: React.FC = () => {
       {/* Cuisine Filter */}
       <Box sx={{ mb: 4 }}>
         <Typography variant="h5" gutterBottom>
-          Explora por categoría
+          Explora por sección
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
           {cuisineTypes.map((cuisine) => {
             const selected = selectedCuisine === cuisine;
-            const color = cuisine === 'Todos' ? '#4F46E5' : getCategoryColor(cuisine);
+            const color = cuisine === 'Todos' ? '#9B2242' : getCategoryColor(cuisine);
             return (
               <Chip
                 key={cuisine}
@@ -233,10 +232,10 @@ const HomePage: React.FC = () => {
       {/* Results Header */}
       <Box sx={{ mb: 3 }}>
         <Typography variant="h5" gutterBottom>
-          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestros productos'}
+          {searchQuery ? `Resultados para "${searchQuery}"` : 'Nuestras secciones'}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          {filteredRestaurants.length} categoría{filteredRestaurants.length !== 1 ? 's' : ''} disponible{filteredRestaurants.length !== 1 ? 's' : ''}
+          {filteredRestaurants.length} sección{filteredRestaurants.length !== 1 ? 'es' : ''} disponible{filteredRestaurants.length !== 1 ? 's' : ''}
         </Typography>
       </Box>
 
@@ -356,7 +355,7 @@ const HomePage: React.FC = () => {
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <FeeIcon sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
                   <Typography variant="body2" color="text.secondary">
-                    {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} €` : 'Sin comisiones'}
+                    {restaurant.deliveryFee > 0 ? `${restaurant.deliveryFee.toFixed(2)} €` : 'Envío gratis'}
                   </Typography>
                 </Box>
               </Box>
@@ -382,7 +381,7 @@ const HomePage: React.FC = () => {
       {filteredRestaurants.length === 0 && !loading && (
         <Box textAlign="center" py={8}>
           <Typography variant="h6" color="text.secondary" gutterBottom>
-            No se encontraron productos
+            No se encontraron secciones
           </Typography>
           <Typography variant="body1" color="text.secondary">
             Prueba a ajustar la búsqueda o los filtros

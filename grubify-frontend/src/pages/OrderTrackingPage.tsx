@@ -28,11 +28,11 @@ import { orderService } from '../services/api';
 import { ProductIconBox, getProductMeta } from '../theme/bankVisuals';
 
 const orderSteps = [
-  { label: 'Solicitud recibida', icon: <CheckCircleIcon />, status: OrderStatus.Placed },
-  { label: 'Solicitud confirmada', icon: <CheckCircleIcon />, status: OrderStatus.Confirmed },
-  { label: 'En revisión', icon: <AssignmentIcon />, status: OrderStatus.Preparing },
-  { label: 'En formalización', icon: <VerifiedIcon />, status: OrderStatus.OutForDelivery },
-  { label: 'Contratado', icon: <HomeIcon />, status: OrderStatus.Delivered },
+  { label: 'Pedido recibido', icon: <CheckCircleIcon />, status: OrderStatus.Placed },
+  { label: 'Pedido confirmado', icon: <CheckCircleIcon />, status: OrderStatus.Confirmed },
+  { label: 'En preparación', icon: <AssignmentIcon />, status: OrderStatus.Preparing },
+  { label: 'En envío', icon: <VerifiedIcon />, status: OrderStatus.OutForDelivery },
+  { label: 'Entregado', icon: <HomeIcon />, status: OrderStatus.Delivered },
 ];
 
 const getStatusColor = (status: OrderStatus) => {
@@ -56,19 +56,19 @@ const getStatusColor = (status: OrderStatus) => {
 const getStatusText = (status: OrderStatus) => {
   switch (status) {
     case OrderStatus.Placed:
-      return 'Recibida';
+      return 'Recibido';
     case OrderStatus.Confirmed:
-      return 'Confirmada';
+      return 'Confirmado';
     case OrderStatus.Preparing:
-      return 'En revisión';
+      return 'En preparación';
     case OrderStatus.ReadyForPickup:
-      return 'Lista para formalizar';
+      return 'Listo para envío';
     case OrderStatus.OutForDelivery:
-      return 'En formalización';
+      return 'En reparto';
     case OrderStatus.Delivered:
-      return 'Contratada';
+      return 'Entregado';
     case OrderStatus.Cancelled:
-      return 'Cancelada';
+      return 'Cancelado';
     default:
       return 'Desconocido';
   }
@@ -98,7 +98,7 @@ const OrderTrackingPage: React.FC = () => {
       setOrder(orderData);
       setError(null);
     } catch (err) {
-      setError('No se pudieron cargar los detalles de la solicitud. Inténtalo de nuevo más tarde.');
+      setError('No se pudieron cargar los detalles del pedido. Inténtalo de nuevo más tarde.');
       console.error('Error fetching order:', err);
     } finally {
       setLoading(false);
@@ -111,12 +111,12 @@ const OrderTrackingPage: React.FC = () => {
 
   const getEstimatedDeliveryTime = (order: Order) => {
     if (order.status === OrderStatus.Delivered) {
-      return `Contratado a las ${new Date(order.deliveryTime || order.orderDate).toLocaleTimeString()}`;
+      return `Entregado a las ${new Date(order.deliveryTime || order.orderDate).toLocaleTimeString()}`;
     }
     
     const orderDate = new Date(order.orderDate);
     const estimatedTime = new Date(orderDate.getTime() + order.estimatedDeliveryTime * 60000);
-    return `Resolución estimada: ${estimatedTime.toLocaleTimeString()}`;
+    return `Entrega estimada: ${estimatedTime.toLocaleTimeString()}`;
   };
 
   if (loading) {
@@ -131,7 +131,7 @@ const OrderTrackingPage: React.FC = () => {
     return (
       <Container maxWidth="md">
         <Alert severity="error" sx={{ mt: 4 }}>
-          {error || 'Solicitud no encontrada'}
+          {error || 'Pedido no encontrado'}
         </Alert>
         <Box display="flex" justifyContent="center" mt={2}>
           <Button variant="contained" onClick={() => navigate('/')}>
@@ -147,7 +147,7 @@ const OrderTrackingPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" component="h1" gutterBottom>
-        Estado de la solicitud
+        Estado del pedido
       </Typography>
 
       <Box sx={{ display: 'flex', gap: 4, flexDirection: { xs: 'column', lg: 'row' } }}>
@@ -157,7 +157,7 @@ const OrderTrackingPage: React.FC = () => {
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
                 <Typography variant="h5">
-                  Solicitud #{order.id}
+                  Pedido #{order.id}
                 </Typography>
                 <Chip
                   label={getStatusText(order.status)}
@@ -194,11 +194,11 @@ const OrderTrackingPage: React.FC = () => {
                     </StepLabel>
                     <StepContent>
                       <Typography variant="body2" color="text.secondary">
-                        {index === 0 && 'Tu solicitud se ha registrado correctamente.'}
-                        {index === 1 && 'La entidad ha confirmado tu solicitud.'}
-                        {index === 2 && 'Estamos revisando tu solicitud.'}
-                        {index === 3 && 'Tu producto está en proceso de formalización.'}
-                        {index === 4 && 'Tu producto ha sido contratado. ¡Gracias por confiar en Bankify!'}
+                        {index === 0 && 'Tu pedido se ha registrado correctamente.'}
+                        {index === 1 && 'Hemos confirmado tu pedido.'}
+                        {index === 2 && 'Estamos preparando tu pedido.'}
+                        {index === 3 && 'Tu pedido está en camino.'}
+                        {index === 4 && 'Tu pedido ha sido entregado. ¡Gracias por comprar en Dressify!'}
                       </Typography>
                     </StepContent>
                   </Step>
@@ -211,7 +211,7 @@ const OrderTrackingPage: React.FC = () => {
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
-                Entidad
+                Tienda
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {order.restaurant.name}
@@ -228,7 +228,7 @@ const OrderTrackingPage: React.FC = () => {
           {/* Delivery Address */}
           <Paper sx={{ p: 3, mb: 3 }}>
             <Typography variant="h6" gutterBottom>
-              Datos de contacto
+              Datos de envío
             </Typography>
             <Typography variant="body2">
               {order.deliveryAddress}
@@ -241,7 +241,7 @@ const OrderTrackingPage: React.FC = () => {
           {/* Order Items */}
           <Paper sx={{ p: 3, mb: 3 }}>
             <Typography variant="h6" gutterBottom>
-              Productos seleccionados
+              Artículos del pedido
             </Typography>
             {order.items.map((item) => (
               <Box key={item.id} sx={{ display: 'flex', gap: 2, mb: 2 }}>
@@ -277,15 +277,14 @@ const OrderTrackingPage: React.FC = () => {
             
             <Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="body2">Productos solicitados</Typography>
+                <Typography variant="body2">Artículos</Typography>
                 <Typography variant="body2" fontWeight="bold">
                   {order.items.reduce((n, i) => n + i.quantity, 0)}
                 </Typography>
               </Box>
               <Divider sx={{ my: 2 }} />
               <Typography variant="body2" color="text.secondary">
-                Solicitud registrada. Un asesor la revisará y te contactará para
-                formalizar la contratación.
+                Pedido registrado. Te avisaremos por email cuando salga a reparto.
               </Typography>
             </Box>
           </Paper>
@@ -297,7 +296,7 @@ const OrderTrackingPage: React.FC = () => {
               fullWidth
               onClick={() => navigate('/')}
             >
-              Contratar de nuevo
+              Seguir comprando
             </Button>
             {order.status !== OrderStatus.Delivered && order.status !== OrderStatus.Cancelled && (
               <Button
@@ -309,7 +308,7 @@ const OrderTrackingPage: React.FC = () => {
                   console.log('Cancel order');
                 }}
               >
-                Cancelar solicitud
+                Cancelar pedido
               </Button>
             )}
           </Box>
