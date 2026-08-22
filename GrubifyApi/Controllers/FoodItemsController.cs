@@ -314,6 +314,169 @@ namespace GrubifyApi.Controllers
                 Category = "Complementos",
                 RestaurantId = 5,
                 PreparationTime = 0
+            },
+
+            // ===== Ampliación de catálogo =====
+            // ----- Mujer (RestaurantId 1) -----
+            new FoodItem
+            {
+                Id = 28,
+                Name = "Jersey de Punto",
+                Description = "Jersey de punto fino con cuello redondo y tacto suave, básico de fondo de armario. Tallas XS-XL",
+                Price = 35.99m,
+                ImageUrl = "",
+                Category = "Sudaderas",
+                RestaurantId = 1,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 29,
+                Name = "Camiseta Básica Mujer",
+                Description = "Camiseta básica de algodón orgánico con cuello redondo y corte regular. Tallas XS-XL",
+                Price = 12.99m,
+                ImageUrl = "",
+                Category = "Camisetas",
+                RestaurantId = 1,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 30,
+                Name = "Top de Tirantes",
+                Description = "Top de tirante fino en tejido ligero, ideal para combinar en capas. Tallas XS-L",
+                Price = 14.99m,
+                ImageUrl = "",
+                Category = "Camisetas",
+                RestaurantId = 1,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 31,
+                Name = "Gabardina Clásica",
+                Description = "Gabardina clásica de corte recto con cinturón y acabado repelente al agua. Tallas S-XL",
+                Price = 79.99m,
+                ImageUrl = "",
+                Category = "Abrigos",
+                RestaurantId = 1,
+                PreparationTime = 0
+            },
+
+            // ----- Hombre (RestaurantId 2) -----
+            new FoodItem
+            {
+                Id = 32,
+                Name = "Camiseta Básica Hombre",
+                Description = "Camiseta básica de algodón orgánico con cuello redondo, suave y resistente. Tallas S-XXL",
+                Price = 12.99m,
+                ImageUrl = "",
+                Category = "Camisetas",
+                RestaurantId = 2,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 33,
+                Name = "Jersey Cuello Redondo",
+                Description = "Jersey de punto medio con cuello redondo, cálido para media estación. Tallas S-XXL",
+                Price = 39.99m,
+                ImageUrl = "",
+                Category = "Sudaderas",
+                RestaurantId = 2,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 34,
+                Name = "Abrigo de Paño",
+                Description = "Abrigo de paño en mezcla de lana con solapa clásica y corte largo. Tallas S-XXL",
+                Price = 129.99m,
+                ImageUrl = "",
+                Category = "Abrigos",
+                RestaurantId = 2,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 35,
+                Name = "Cazadora Vaquera",
+                Description = "Cazadora vaquera de denim rígido con botones metálicos y bolsillos de pecho. Tallas S-XL",
+                Price = 49.99m,
+                ImageUrl = "",
+                Category = "Chaquetas",
+                RestaurantId = 2,
+                PreparationTime = 0
+            },
+
+            // ----- Calzado (RestaurantId 4) -----
+            new FoodItem
+            {
+                Id = 36,
+                Name = "Deportiva Blanca",
+                Description = "Zapatilla deportiva blanca de piel sintética con suela de goma, estilo minimalista. Tallas 36-46",
+                Price = 54.99m,
+                ImageUrl = "",
+                Category = "Deportivo",
+                RestaurantId = 4,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 37,
+                Name = "Zapato Náutico",
+                Description = "Zapato náutico de piel con cordón lateral y suela flexible antideslizante. Tallas 39-45",
+                Price = 49.99m,
+                ImageUrl = "",
+                Category = "Plano",
+                RestaurantId = 4,
+                PreparationTime = 0
+            },
+
+            // ----- Accesorios (RestaurantId 5) -----
+            new FoodItem
+            {
+                Id = 38,
+                Name = "Reloj Analógico",
+                Description = "Reloj analógico con caja de acero inoxidable y resistencia al agua 3ATM. Correa intercambiable",
+                Price = 59.99m,
+                ImageUrl = "",
+                Category = "Complementos",
+                RestaurantId = 5,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 39,
+                Name = "Cartera de Piel",
+                Description = "Cartera de piel auténtica con 8 ranuras para tarjetas y compartimento para billetes",
+                Price = 29.99m,
+                ImageUrl = "",
+                Category = "Complementos",
+                RestaurantId = 5,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 40,
+                Name = "Mochila Urbana",
+                Description = "Mochila urbana de 20 L con bolsillo acolchado para portátil y cierre de cremallera. Varios colores",
+                Price = 44.99m,
+                ImageUrl = "",
+                Category = "Bolsos",
+                RestaurantId = 5,
+                PreparationTime = 0
+            },
+            new FoodItem
+            {
+                Id = 41,
+                Name = "Sombrero de Fieltro",
+                Description = "Sombrero de fieltro de lana con ala media y cinta de grosgrén. Talla única",
+                Price = 29.99m,
+                ImageUrl = "",
+                Category = "Complementos",
+                RestaurantId = 5,
+                PreparationTime = 0
             }
         };
 

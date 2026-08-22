@@ -99,6 +99,21 @@ const productCategory: Record<string, string> = {
   'Bufanda de Punto': 'Complementos',
   'Gafas de Sol': 'Complementos',
   'Gorro de Lana': 'Complementos',
+  // Productos nuevos
+  'Jersey de Punto': 'Sudaderas',
+  'Camiseta Básica Mujer': 'Camisetas',
+  'Top de Tirantes': 'Camisetas',
+  'Gabardina Clásica': 'Abrigos',
+  'Camiseta Básica Hombre': 'Camisetas',
+  'Jersey Cuello Redondo': 'Sudaderas',
+  'Abrigo de Paño': 'Abrigos',
+  'Cazadora Vaquera': 'Chaquetas',
+  'Deportiva Blanca': 'Deportivo',
+  'Zapato Náutico': 'Plano',
+  'Reloj Analógico': 'Complementos',
+  'Cartera de Piel': 'Complementos',
+  'Mochila Urbana': 'Bolsos',
+  'Sombrero de Fieltro': 'Complementos',
 };
 
 // One themed (Rounded) icon per section / garment category
@@ -156,6 +171,21 @@ const productIcons: Record<string, IconType> = {
   'Bufanda de Punto': AcUnitRounded,
   'Gafas de Sol': WbSunnyRounded,
   'Gorro de Lana': AcUnitRounded,
+  // Productos nuevos
+  'Jersey de Punto': CheckroomRounded,
+  'Camiseta Básica Mujer': CheckroomRounded,
+  'Top de Tirantes': CheckroomRounded,
+  'Gabardina Clásica': AcUnitRounded,
+  'Camiseta Básica Hombre': CheckroomRounded,
+  'Jersey Cuello Redondo': CheckroomRounded,
+  'Abrigo de Paño': AcUnitRounded,
+  'Cazadora Vaquera': CheckroomRounded,
+  'Deportiva Blanca': DirectionsRunRounded,
+  'Zapato Náutico': HikingRounded,
+  'Reloj Analógico': StyleRounded,
+  'Cartera de Piel': ShoppingBagRounded,
+  'Mochila Urbana': ShoppingBagRounded,
+  'Sombrero de Fieltro': StyleRounded,
 };
 
 // Retail headline (price) and feature tags per product. This drives the
@@ -302,6 +332,77 @@ const productMeta: Record<string, ProductMeta> = {
     highlightLabel: 'Precio',
     badges: ['Talla única', 'Lana'],
   },
+  // ===== Productos nuevos (ampliacion de catalogo) =====
+  'Jersey de Punto': {
+    highlight: '35,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas XS-XL', 'Punto suave'],
+  },
+  'Camiseta Básica Mujer': {
+    highlight: '12,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas XS-XL', 'Algodón orgánico'],
+  },
+  'Top de Tirantes': {
+    highlight: '14,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas XS-L', 'Tirante fino'],
+  },
+  'Gabardina Clásica': {
+    highlight: '79,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas S-XL', 'Repelente al agua'],
+  },
+  'Camiseta Básica Hombre': {
+    highlight: '12,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas S-XXL', 'Algodón orgánico'],
+  },
+  'Jersey Cuello Redondo': {
+    highlight: '39,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas S-XXL', 'Punto medio'],
+  },
+  'Abrigo de Paño': {
+    highlight: '129,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas S-XXL', 'Mezcla de lana'],
+  },
+  'Cazadora Vaquera': {
+    highlight: '49,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas S-XL', 'Denim rígido'],
+  },
+  'Deportiva Blanca': {
+    highlight: '54,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas 36-46', 'Piel sintética'],
+  },
+  'Zapato Náutico': {
+    highlight: '49,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Tallas 39-45', 'Piel'],
+  },
+  'Reloj Analógico': {
+    highlight: '59,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Acero inoxidable', 'Sumergible 3ATM'],
+  },
+  'Cartera de Piel': {
+    highlight: '29,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Piel auténtica', '8 tarjetas'],
+  },
+  'Mochila Urbana': {
+    highlight: '44,99 €',
+    highlightLabel: 'Precio',
+    badges: ['20 L', 'Bolsillo portátil'],
+  },
+  'Sombrero de Fieltro': {
+    highlight: '29,99 €',
+    highlightLabel: 'Precio',
+    badges: ['Talla única', 'Fieltro de lana'],
+  },
 };
 
 export const resolveCategory = (name: string, category?: string): string =>
@@ -415,6 +516,21 @@ const productSection: Record<string, string> = {
   'Bufanda de Punto': 'Accesorios',
   'Gafas de Sol': 'Accesorios',
   'Gorro de Lana': 'Accesorios',
+  // Productos nuevos
+  'Jersey de Punto': 'Mujer',
+  'Camiseta Básica Mujer': 'Mujer',
+  'Top de Tirantes': 'Mujer',
+  'Gabardina Clásica': 'Mujer',
+  'Camiseta Básica Hombre': 'Hombre',
+  'Jersey Cuello Redondo': 'Hombre',
+  'Abrigo de Paño': 'Hombre',
+  'Cazadora Vaquera': 'Hombre',
+  'Deportiva Blanca': 'Calzado',
+  'Zapato Náutico': 'Calzado',
+  'Reloj Analógico': 'Accesorios',
+  'Cartera de Piel': 'Accesorios',
+  'Mochila Urbana': 'Accesorios',
+  'Sombrero de Fieltro': 'Accesorios',
 };
 
 // Mapa subcategoria -> seccion (fallback cuando solo se conoce la subcategoria).
@@ -461,7 +577,65 @@ const hashString = (value: string): number => {
 const buildUnsplashUrl = (photoId: string, width: number, height: number): string =>
   `https://images.unsplash.com/photo-${photoId}?w=${width}&h=${height}&fit=crop&auto=format&q=80`;
 
-// Imagen vertical (3:4) de producto: foto de moda del pool de su seccion,
+// Mapa determinista nombre-de-producto -> foto Unsplash CONCRETA que muestra
+// exactamente ese tipo de prenda/objeto (cinturon->cinturon, gafas->gafas,
+// zapatilla->zapatilla, etc.). Cuando no existe una foto 100% exacta se usa una
+// similar y coherente de la misma categoria. Todas las URLs (photo-<ID>) se han
+// verificado: HTTP 200 + content-type image/*. Fotos GRATUITAS de Unsplash
+// (sin premium_photo / plus.unsplash.com). Si un producto no tuviera entrada
+// aqui, getProductImage cae al pool por seccion (fallback).
+const productPhotoId: Record<string, string> = {
+  // ===== Mujer =====
+  'Vestido Midi Flores': '1572804013309-59a88b7e92f1',
+  'Blusa Satinada': '1564257631407-4deb1f99d992',
+  'Vaquero Slim Tiro Alto': '1541099649105-f69ad21f3246',
+  'Abrigo Lana Espiga': '1544022613-e87ca75a784a',
+  'Falda Plisada Midi': '1594633312681-425c7b97ccd1',
+  'Blazer Entallado': '1594938298603-c8148c4dae35',
+  // ===== Hombre =====
+  'Camisa Oxford': '1596755094514-f87e34085b2c',
+  'Vaquero Slim': '1542272604-787c3835535d',
+  'Sudadera con Capucha': '1556821840-3a63f95609a7',
+  'Chaqueta Bomber': '1551028719-00167b16eac5',
+  'Polo Piqué': '1586790170083-2f9ceadc732d',
+  'Pantalón Chino': '1473966968600-fa801b869a1a',
+  // ===== Niño =====
+  'Camiseta Estampada Niño': '1519238263530-99bdd11df2ea',
+  'Pantalón Cargo Niño': '1560506840-ec148e82a604',
+  'Vestido Flores Niña': '1518831959646-742c3a14ebf7',
+  'Sudadera Capucha Kids': '1503919545889-aef636e10ad4',
+  'Chaqueta Acolchada Niño': '1622290291468-a28f7a7dc6a8',
+  // ===== Calzado =====
+  'Zapatilla Running': '1600185365483-26d7a4cc7519',
+  'Bota Chelsea Piel': '1608256246200-53e635b5b65f',
+  'Bailarina Charol': '1596703263926-eb0762ee17e4',
+  'Sandalia Tacón': '1543163521-1bf539c55dd2',
+  'Mocasín Piel': '1533867617858-e7b97e060509',
+  // ===== Accesorios =====
+  'Bolso Bandolera': '1584917865442-de89df76afd3',
+  'Cinturón de Piel': '1624222247344-550fb60583dc',
+  'Bufanda de Punto': '1520903920243-00d872a2d1c9',
+  'Gafas de Sol': '1511499767150-a48a237f0083',
+  'Gorro de Lana': '1576871337622-98d48d1cf531',
+  // ===== Productos nuevos (ampliacion de catalogo) =====
+  'Jersey de Punto': '1576566588028-4147f3842f27',
+  'Camiseta Básica Mujer': '1521572163474-6864f9cf17ab',
+  'Top de Tirantes': '1485462537746-965f33f7f6a7',
+  'Gabardina Clásica': '1520006403909-838d6b92c22e',
+  'Camiseta Básica Hombre': '1583743814966-8936f5b7be1a',
+  'Jersey Cuello Redondo': '1434389677669-e08b4cac3105',
+  'Abrigo de Paño': '1608063615781-e2ef8c73d114',
+  'Cazadora Vaquera': '1601333144130-8cbb312386b6',
+  'Deportiva Blanca': '1595950653106-6c9ebd614d3a',
+  'Zapato Náutico': '1614252369475-531eba835eb1',
+  'Reloj Analógico': '1524592094714-0f0654e20314',
+  'Cartera de Piel': '1627123424574-724758594e93',
+  'Mochila Urbana': '1553062407-98eeb64c6a62',
+  'Sombrero de Fieltro': '1521369909029-2afed882baee',
+};
+
+// Imagen vertical (3:4) de producto: primero busca la foto ESPECIFICA del
+// producto (productPhotoId); si no existe, cae al pool de moda de su seccion,
 // estable por producto.
 export const getProductImage = (
   name: string,
@@ -470,6 +644,10 @@ export const getProductImage = (
   width = 600,
   height = 800,
 ): string => {
+  const specific = productPhotoId[name];
+  if (specific) {
+    return buildUnsplashUrl(specific, width, height);
+  }
   const resolved =
     section && unsplashPools[section] ? section : resolveSection(name, section);
   const pool = unsplashPools[resolved] || unsplashGeneral;
