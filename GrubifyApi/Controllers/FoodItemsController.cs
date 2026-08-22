@@ -68,12 +68,12 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 6,
-                Name = "Blazer Entallado",
-                Description = "Blazer entallado con solapa y botonadura simple, perfecto para looks smart. Tallas XS-XL",
-                Price = 59.99m,
+                Name = "Traje Tres Piezas",
+                Description = "Traje de tres piezas de corte entallado con americana, chaleco y pantalón a juego. Tallas 46-56",
+                Price = 149.99m,
                 ImageUrl = "",
                 Category = "Chaquetas",
-                RestaurantId = 1,
+                RestaurantId = 2,
                 PreparationTime = 0
             },
 
@@ -81,12 +81,12 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 7,
-                Name = "Camisa Oxford",
-                Description = "Camisa Oxford de algodón con corte regular, versátil y resistente. Tallas S-XXL",
+                Name = "Camisa Popelín Mujer",
+                Description = "Camisa de popelín de algodón con corte fluido, ideal para diario u oficina. Tallas XS-XL",
                 Price = 29.99m,
                 ImageUrl = "",
                 Category = "Camisas y Blusas",
-                RestaurantId = 2,
+                RestaurantId = 1,
                 PreparationTime = 0
             },
             new FoodItem
@@ -114,20 +114,20 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 10,
-                Name = "Chaqueta Bomber",
-                Description = "Chaqueta bomber ligera con cierre de cremallera y puños elásticos. Tallas S-XL",
-                Price = 69.99m,
+                Name = "Chaqueta de Cuero",
+                Description = "Chaqueta de cuero de corte entallado con cremallera y solapas. Tallas XS-XL",
+                Price = 89.99m,
                 ImageUrl = "",
                 Category = "Chaquetas",
-                RestaurantId = 2,
+                RestaurantId = 1,
                 PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 11,
-                Name = "Polo Piqué",
-                Description = "Polo de punto piqué de algodón con cuello y puños en contraste. Tallas S-XXL",
-                Price = 22.99m,
+                Name = "Camiseta Blanca",
+                Description = "Camiseta blanca de algodón de cuello redondo, básico esencial de fondo de armario. Tallas S-XXL",
+                Price = 14.99m,
                 ImageUrl = "",
                 Category = "Camisetas",
                 RestaurantId = 2,
@@ -149,30 +149,30 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 13,
-                Name = "Camiseta Estampada Niño",
-                Description = "Camiseta de algodón con estampado divertido, resistente a los lavados. Tallas 3-14 años",
-                Price = 9.99m,
+                Name = "Chaqueta de Punto Niño",
+                Description = "Chaqueta de punto para niño con botones y cuello redondo, cálida y suave. Tallas 3-14 años",
+                Price = 19.99m,
                 ImageUrl = "",
-                Category = "Camisetas",
+                Category = "Chaquetas",
                 RestaurantId = 3,
                 PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 14,
-                Name = "Pantalón Cargo Niño",
-                Description = "Pantalón cargo de sarga con bolsillos laterales y cintura ajustable. Tallas 3-14 años",
-                Price = 19.99m,
+                Name = "Conjunto Dos Piezas Niña",
+                Description = "Conjunto de dos piezas para niña con top y falda a juego. Tallas 3-12 años",
+                Price = 24.99m,
                 ImageUrl = "",
-                Category = "Pantalones",
+                Category = "Vestidos",
                 RestaurantId = 3,
                 PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 15,
-                Name = "Vestido Flores Niña",
-                Description = "Vestido de algodón con estampado de flores y lazo trasero. Tallas 3-12 años",
+                Name = "Vestido de Lunares Niña",
+                Description = "Vestido de algodón con estampado de lunares y lazo trasero. Tallas 3-12 años",
                 Price = 24.99m,
                 ImageUrl = "",
                 Category = "Vestidos",
@@ -182,22 +182,22 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 16,
-                Name = "Sudadera Capucha Kids",
-                Description = "Sudadera con capucha de felpa suave y estampado frontal. Tallas 3-14 años",
-                Price = 19.99m,
+                Name = "Abrigo con Capucha Kids",
+                Description = "Abrigo con capucha acolchado y cálido para el día a día. Tallas 3-14 años",
+                Price = 34.99m,
                 ImageUrl = "",
-                Category = "Sudaderas",
+                Category = "Abrigos",
                 RestaurantId = 3,
                 PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 17,
-                Name = "Chaqueta Acolchada Niño",
-                Description = "Chaqueta acolchada ligera con capucha, cálida para el día a día. Tallas 3-14 años",
-                Price = 39.99m,
+                Name = "Camiseta Blanca Niño",
+                Description = "Camiseta blanca de algodón de cuello redondo, resistente a los lavados. Tallas 3-14 años",
+                Price = 9.99m,
                 ImageUrl = "",
-                Category = "Abrigos",
+                Category = "Camisetas",
                 RestaurantId = 3,
                 PreparationTime = 0
             },
@@ -228,20 +228,20 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 20,
-                Name = "Bailarina Charol",
-                Description = "Bailarina de charol con puntera redonda, cómoda y elegante. Tallas 35-42",
-                Price = 35.99m,
+                Name = "Zapato de Tacón",
+                Description = "Zapato de tacón medio con puntera fina, elegante y versátil. Tallas 35-41",
+                Price = 45.99m,
                 ImageUrl = "",
-                Category = "Plano",
+                Category = "Tacón",
                 RestaurantId = 4,
                 PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 21,
-                Name = "Sandalia Tacón",
-                Description = "Sandalia de tacón medio con tira ajustable al tobillo. Tallas 35-41",
-                Price = 45.99m,
+                Name = "Zapato de Tacón Estampado",
+                Description = "Zapato de tacón con estampado de temporada y puntera redonda. Tallas 35-41",
+                Price = 49.99m,
                 ImageUrl = "",
                 Category = "Tacón",
                 RestaurantId = 4,
@@ -332,33 +332,33 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 29,
-                Name = "Camiseta Básica Mujer",
-                Description = "Camiseta básica de algodón orgánico con cuello redondo y corte regular. Tallas XS-XL",
+                Name = "Camiseta Blanca Hombre",
+                Description = "Camiseta blanca de algodón con cuello redondo y corte regular. Tallas S-XXL",
                 Price = 12.99m,
                 ImageUrl = "",
                 Category = "Camisetas",
-                RestaurantId = 1,
+                RestaurantId = 2,
                 PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 30,
-                Name = "Top de Tirantes",
-                Description = "Top de tirante fino en tejido ligero, ideal para combinar en capas. Tallas XS-L",
-                Price = 14.99m,
+                Name = "Abrigo Largo",
+                Description = "Abrigo largo de corte recto con solapa clásica, cálido y elegante. Tallas S-XL",
+                Price = 99.99m,
                 ImageUrl = "",
-                Category = "Camisetas",
+                Category = "Abrigos",
                 RestaurantId = 1,
                 PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 31,
-                Name = "Gabardina Clásica",
-                Description = "Gabardina clásica de corte recto con cinturón y acabado repelente al agua. Tallas S-XL",
-                Price = 79.99m,
+                Name = "Blusa Estampada",
+                Description = "Blusa de tejido fluido con estampado all-over y manga larga. Tallas XS-XL",
+                Price = 27.99m,
                 ImageUrl = "",
-                Category = "Abrigos",
+                Category = "Camisas y Blusas",
                 RestaurantId = 1,
                 PreparationTime = 0
             },
@@ -378,23 +378,23 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 33,
-                Name = "Jersey Cuello Redondo",
-                Description = "Jersey de punto medio con cuello redondo, cálido para media estación. Tallas S-XXL",
-                Price = 39.99m,
+                Name = "Poncho",
+                Description = "Poncho de punto amplio con flecos, cálido y envolvente. Talla única",
+                Price = 49.99m,
                 ImageUrl = "",
-                Category = "Sudaderas",
-                RestaurantId = 2,
+                Category = "Chaquetas",
+                RestaurantId = 1,
                 PreparationTime = 0
             },
             new FoodItem
             {
                 Id = 34,
-                Name = "Abrigo de Paño",
-                Description = "Abrigo de paño en mezcla de lana con solapa clásica y corte largo. Tallas S-XXL",
-                Price = 129.99m,
+                Name = "Cazadora de Piel",
+                Description = "Cazadora de piel de corte entallado con cierre de cremallera. Tallas XS-XL",
+                Price = 119.99m,
                 ImageUrl = "",
-                Category = "Abrigos",
-                RestaurantId = 2,
+                Category = "Chaquetas",
+                RestaurantId = 1,
                 PreparationTime = 0
             },
             new FoodItem
@@ -413,8 +413,8 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 36,
-                Name = "Deportiva Blanca",
-                Description = "Zapatilla deportiva blanca de piel sintética con suela de goma, estilo minimalista. Tallas 36-46",
+                Name = "Deportiva Multicolor",
+                Description = "Zapatilla deportiva multicolor con suela de goma y estilo urbano. Tallas 36-46",
                 Price = 54.99m,
                 ImageUrl = "",
                 Category = "Deportivo",
@@ -424,12 +424,12 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 37,
-                Name = "Zapato Náutico",
-                Description = "Zapato náutico de piel con cordón lateral y suela flexible antideslizante. Tallas 39-45",
-                Price = 49.99m,
+                Name = "Cazadora de Piel Hombre",
+                Description = "Cazadora de piel de corte clásico con cierre de cremallera y forro interior. Tallas S-XXL",
+                Price = 139.99m,
                 ImageUrl = "",
-                Category = "Plano",
-                RestaurantId = 4,
+                Category = "Chaquetas",
+                RestaurantId = 2,
                 PreparationTime = 0
             },
 
