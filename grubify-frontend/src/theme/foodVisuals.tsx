@@ -165,6 +165,48 @@ export const getCategoryIcon = (cuisineType: string): IconType =>
 export const getProductIcon = (name: string, category?: string): IconType =>
   productIcons[name] || categoryIcons[resolveCategory(name, category)] || RestaurantMenuRounded;
 
+// ---------------------------------------------------------------------------
+// Fotos reales de platos (Unsplash).
+// Se usan URLs directas y estables del CDN de Unsplash
+// (https://images.unsplash.com/photo-<ID>), bajo licencia Unsplash: uso
+// comercial libre y sin atribucion obligatoria. Cada plato recibe SIEMPRE la
+// misma foto (mapa determinista nombre -> ID). Si una imagen fallara al cargar,
+// ProductImage cae al mosaico de icono tematico (onError).
+// ---------------------------------------------------------------------------
+
+// Mapa nombre de plato -> ID de foto Unsplash (los 15 platos del catalogo food).
+const productPhotoId: Record<string, string> = {
+  'Margherita Pizza': '1604382354936-07c5d9983bd3',
+  'Chicken Alfredo': '1645112411341-6c4fd023714a',
+  'Caesar Salad': '1550304943-4f24f54ddde9',
+  'California Roll': '1579584425555-c3ce17fd4351',
+  'Spicy Tuna Roll': '1617196034796-73dfa7b1fd56',
+  'Chicken Teriyaki Bowl': '1546069901-ba9599a7e63c',
+  'Chicken Tikka Masala': '1565557623262-b51c2513a641',
+  'Vegetable Biryani': '1563379091339-03b21ab4a4f8',
+  'Garlic Naan': '1601050690597-df0568f70950',
+  'Classic Cheeseburger': '1568901346375-23c9450c58cd',
+  'Crispy Chicken Sandwich': '1606755962773-d324e0a13086',
+  'Sweet Potato Fries': '1604908176997-125f25cc6f3d',
+  'Quinoa Buddha Bowl': '1512621776951-a57141f2eefd',
+  'Acai Berry Smoothie': '1553530666-ba11a7da3888',
+  'Grilled Salmon Salad': '1467003909585-2f8a72700288',
+};
+
+// Construye una URL estable del CDN de Unsplash con recorte al tamano pedido.
+export const buildFoodImageUrl = (photoId: string, width: number, height: number): string =>
+  `https://images.unsplash.com/photo-${photoId}?w=${width}&h=${height}&fit=crop&auto=format&q=80`;
+
+// Devuelve la foto Unsplash del plato, o null si no hay foto asociada.
+export const getFoodImage = (
+  name: string,
+  width = 600,
+  height = 600,
+): string | null => {
+  const photoId = productPhotoId[name];
+  return photoId ? buildFoodImageUrl(photoId, width, height) : null;
+};
+
 interface ProductIconBoxProps {
   name: string;
   category?: string;
@@ -201,5 +243,61 @@ export const ProductIconBox: React.FC<ProductIconBoxProps> = ({
     >
       <Icon sx={{ fontSize: iconSize ?? Math.round(size * 0.5), color: '#fff' }} />
     </Box>
+  );
+};
+
+interface ProductImageProps {
+  name: string;
+  category?: string;
+  size?: number;
+  iconSize?: number;
+  radius?: number;
+  fullHeight?: boolean;
+}
+
+// Foto real del plato con recorte cover. Sustituye a ProductIconBox manteniendo
+// las mismas props/medidas. Si el plato no tiene foto o la imagen falla al
+// cargar (onError), cae al mosaico de icono tematico (ProductIconBox).
+export const ProductImage: React.FC<ProductImageProps> = ({
+  name,
+  category,
+  size = 80,
+  iconSize,
+  radius = 12,
+  fullHeight = false,
+}) => {
+  const [failed, setFailed] = React.useState(false);
+  const src = getFoodImage(name, size * 2, fullHeight ? size * 3 : size * 2);
+
+  if (!src || failed) {
+    return (
+      <ProductIconBox
+        name={name}
+        category={category}
+        size={size}
+        iconSize={iconSize}
+        radius={radius}
+        fullHeight={fullHeight}
+      />
+    );
+  }
+
+  return (
+    <Box
+      component="img"
+      src={src}
+      alt={name}
+      loading="lazy"
+      onError={() => setFailed(true)}
+      sx={{
+        width: size,
+        height: fullHeight ? '100%' : size,
+        minWidth: size,
+        borderRadius: `${radius}px`,
+        objectFit: 'cover',
+        display: 'block',
+        flexShrink: 0,
+      }}
+    />
   );
 };

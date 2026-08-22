@@ -27,7 +27,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { Restaurant, FoodItem } from '../types';
 import { restaurantService, foodItemService, cartService } from '../services/api';
-import { getCategoryColor, getCategoryGradient, getCategoryIcon, getProductMeta, resolveCategory, ProductIconBox } from '../theme/foodVisuals';
+import { getCategoryColor, getCategoryGradient, getCategoryIcon, getProductMeta, resolveCategory, ProductImage } from '../theme/foodVisuals';
 
 const RestaurantPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -202,7 +202,7 @@ const RestaurantPage: React.FC = () => {
               const meta = getProductMeta(item.name);
               return (
               <Card key={item.id} sx={{ display: 'flex', alignItems: 'stretch', minHeight: 200 }}>
-                <ProductIconBox
+                <ProductImage
                   name={item.name}
                   category={item.category}
                   size={150}
