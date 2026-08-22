@@ -178,19 +178,19 @@ export const getProductIcon = (name: string, category?: string): IconType =>
 const productPhotoId: Record<string, string> = {
   'Margherita Pizza': '1604382354936-07c5d9983bd3',
   'Chicken Alfredo': '1645112411341-6c4fd023714a',
-  'Caesar Salad': '1550304943-4f24f54ddde9',
+  'Caesar Salad': '1546793665-c74683f339c1',
   'California Roll': '1579584425555-c3ce17fd4351',
   'Spicy Tuna Roll': '1617196034796-73dfa7b1fd56',
-  'Chicken Teriyaki Bowl': '1546069901-ba9599a7e63c',
+  'Chicken Teriyaki Bowl': '1546069901-eacef0df6022',
   'Chicken Tikka Masala': '1565557623262-b51c2513a641',
   'Vegetable Biryani': '1563379091339-03b21ab4a4f8',
   'Garlic Naan': '1601050690597-df0568f70950',
   'Classic Cheeseburger': '1568901346375-23c9450c58cd',
   'Crispy Chicken Sandwich': '1606755962773-d324e0a13086',
-  'Sweet Potato Fries': '1604908176997-125f25cc6f3d',
+  'Sweet Potato Fries': '1573080496219-bb080dd4f877',
   'Quinoa Buddha Bowl': '1512621776951-a57141f2eefd',
   'Acai Berry Smoothie': '1553530666-ba11a7da3888',
-  'Grilled Salmon Salad': '1467003909585-2f8a72700288',
+  'Grilled Salmon Salad': '1540420773420-3366772f4999',
 };
 
 // Construye una URL estable del CDN de Unsplash con recorte al tamano pedido.
