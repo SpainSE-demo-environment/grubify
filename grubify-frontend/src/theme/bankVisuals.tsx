@@ -101,7 +101,6 @@ const productCategory: Record<string, string> = {
   'Camiseta Manga Larga Hombre': 'Camisetas',
   // Productos nuevos
   'Camiseta Estampada Mujer': 'Camisetas',
-  'Camiseta Blanca Hombre': 'Camisetas',
   'Abrigo Largo': 'Abrigos',
   'Blusa Estampada': 'Camisas y Blusas',
   'Camiseta Básica Hombre': 'Camisetas',
@@ -173,7 +172,6 @@ const productIcons: Record<string, IconType> = {
   'Camiseta Manga Larga Hombre': CheckroomRounded,
   // Productos nuevos
   'Camiseta Estampada Mujer': CheckroomRounded,
-  'Camiseta Blanca Hombre': CheckroomRounded,
   'Abrigo Largo': AcUnitRounded,
   'Blusa Estampada': CheckroomRounded,
   'Camiseta Básica Hombre': CheckroomRounded,
@@ -337,11 +335,6 @@ const productMeta: Record<string, ProductMeta> = {
     highlight: '19,99 €',
     highlightLabel: 'Precio',
     badges: ['Tallas XS-XL', 'Estampado original'],
-  },
-  'Camiseta Blanca Hombre': {
-    highlight: '12,99 €',
-    highlightLabel: 'Precio',
-    badges: ['Tallas S-XXL', 'Algodón'],
   },
   'Abrigo Largo': {
     highlight: '99,99 €',
@@ -518,7 +511,6 @@ const productSection: Record<string, string> = {
   'Camiseta Manga Larga Hombre': 'Hombre',
   // Productos nuevos
   'Camiseta Estampada Mujer': 'Mujer',
-  'Camiseta Blanca Hombre': 'Hombre',
   'Abrigo Largo': 'Mujer',
   'Blusa Estampada': 'Mujer',
   'Camiseta Básica Hombre': 'Hombre',
@@ -619,7 +611,6 @@ const productPhotoId: Record<string, string> = {
   'Camiseta Manga Larga Hombre': '1576871337622-98d48d1cf531',
   // ===== Productos nuevos (ampliacion de catalogo) =====
   'Camiseta Estampada Mujer': '1576566588028-4147f3842f27',
-  'Camiseta Blanca Hombre': '1521572163474-6864f9cf17ab',
   'Abrigo Largo': '1485462537746-965f33f7f6a7',
   'Blusa Estampada': '1520006403909-838d6b92c22e',
   'Camiseta Básica Hombre': '1583743814966-8936f5b7be1a',

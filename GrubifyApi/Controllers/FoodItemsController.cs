@@ -331,17 +331,6 @@ namespace GrubifyApi.Controllers
             },
             new FoodItem
             {
-                Id = 29,
-                Name = "Camiseta Blanca Hombre",
-                Description = "Camiseta blanca de algodón con cuello redondo y corte regular. Tallas S-XXL",
-                Price = 12.99m,
-                ImageUrl = "",
-                Category = "Camisetas",
-                RestaurantId = 2,
-                PreparationTime = 0
-            },
-            new FoodItem
-            {
                 Id = 30,
                 Name = "Abrigo Largo",
                 Description = "Abrigo largo de corte recto con solapa clásica, cálido y elegante. Tallas S-XL",
