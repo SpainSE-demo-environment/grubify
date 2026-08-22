@@ -250,7 +250,7 @@ const RestaurantPage: React.FC = () => {
                       disabled={!item.isAvailable}
                       fullWidth
                     >
-                      {item.isAvailable ? 'Contratar' : 'No disponible'}
+                      {item.isAvailable ? 'Contratar póliza' : 'No disponible'}
                     </Button>
                   </CardActions>
                 </Box>
@@ -263,7 +263,7 @@ const RestaurantPage: React.FC = () => {
 
       {/* Add to Cart Dialog */}
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>Contratar producto</DialogTitle>
+        <DialogTitle>Contratar póliza</DialogTitle>
         <DialogContent>
           {selectedItem && (
             <Box>

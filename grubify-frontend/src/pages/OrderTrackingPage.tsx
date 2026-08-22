@@ -198,7 +198,7 @@ const OrderTrackingPage: React.FC = () => {
                         {index === 1 && 'La entidad ha confirmado tu solicitud.'}
                         {index === 2 && 'Estamos revisando tu solicitud.'}
                         {index === 3 && 'Tu producto está en proceso de formalización.'}
-                        {index === 4 && 'Tu producto ha sido contratado. ¡Gracias por confiar en Bankify!'}
+                        {index === 4 && 'Tu póliza ha sido contratada. ¡Gracias por confiar en Coverfy!'}
                       </Typography>
                     </StepContent>
                   </Step>

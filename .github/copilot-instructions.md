@@ -1,11 +1,11 @@
 <!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
 
-# Bankify Retail Banking Portal
+# Coverfy Insurance Portal
 
-This is a modern retail banking portal (Spanish UI) with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps. It is used for **Azure SRE Agent** demos.
+This is a modern insurance portal (Spanish UI) with a React TypeScript frontend and .NET backend, designed for deployment to Azure Container Apps. It is used for **Azure SRE Agent** demos.
 
-> Rebranded from a food-delivery scaffold ("Grubify") to Bankify. The user-facing
-> brand, texts and catalog are banking; **internal C# class names, model properties
+> Rebranded from a food-delivery scaffold ("Grubify") to Coverfy. The user-facing
+> brand, texts and catalog are insurance; **internal C# class names, model properties
 > and API routes are intentionally unchanged** (e.g. `Restaurant`, `FoodItem`,
 > `/api/restaurants`, `/api/fooditems`) so the frontend↔API contract and telemetry
 > stay stable. Change only displayed values and frontend visuals — never rename
@@ -39,14 +39,14 @@ This is a modern retail banking portal (Spanish UI) with a React TypeScript fron
 - Keep user-facing text in Spanish
 
 ## API Endpoints (names unchanged from the original scaffold)
-- `/api/restaurants` - Product families (banking) management
-- `/api/fooditems` - Financial products management
-- `/api/cart` - Selected-products (application basket) operations
+- `/api/restaurants` - Insurance lines (families) management
+- `/api/fooditems` - Insurance policies management
+- `/api/cart` - Selected-policies (application basket) operations
 - `/api/orders` - Application / contracting management
 
 ## UI Components
-- Modern, responsive design for a trustworthy online banking experience
-- Card-based layouts for product families and financial products (themed MUI icons, no photos)
+- Modern, responsive design for a trustworthy online insurance experience
+- Card-based layouts for insurance lines and policies (themed MUI icons, no photos)
 - Step-by-step contracting (checkout) process
 - Application status tracking
 

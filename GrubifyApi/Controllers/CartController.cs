@@ -121,22 +121,22 @@ namespace GrubifyApi.Controllers
             // This is a simplified version - in production, inject the FoodItems service
             var foodItems = new List<FoodItem>
             {
-                new FoodItem { Id = 1, Name = "Cuenta Personal", Price = 0.00m, ImageUrl = "", RestaurantId = 1 },
-                new FoodItem { Id = 2, Name = "Cuenta de Ahorro", Price = 0.00m, ImageUrl = "", RestaurantId = 1 },
-                new FoodItem { Id = 3, Name = "Tarjeta de Débito", Price = 0.00m, ImageUrl = "", RestaurantId = 2 },
-                new FoodItem { Id = 4, Name = "Tarjeta de Crédito", Price = 45.00m, ImageUrl = "", RestaurantId = 2 },
-                new FoodItem { Id = 5, Name = "Préstamo Personal", Price = 180.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 6, Name = "Préstamo Personal Preconcedido", Price = 250.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 7, Name = "Hipoteca", Price = 950.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 8, Name = "Plan de Pensiones", Price = 50.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 9, Name = "Fondos de Inversión", Price = 100.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 10, Name = "Acciones y ETFs", Price = 0.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 11, Name = "Depósito", Price = 1000.00m, ImageUrl = "", RestaurantId = 5 },
-                new FoodItem { Id = 12, Name = "Cuenta de Ahorro Remunerada", Price = 0.00m, ImageUrl = "", RestaurantId = 5 },
-                new FoodItem { Id = 13, Name = "Seguro de Salud", Price = 45.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 14, Name = "Seguro de Hogar", Price = 18.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 15, Name = "Seguro de Auto", Price = 30.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 16, Name = "Seguro de Moto", Price = 20.00m, ImageUrl = "", RestaurantId = 6 }
+                new FoodItem { Id = 1, Name = "Seguro de Auto a Terceros", Price = 22.00m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 2, Name = "Seguro de Auto Terceros Ampliado", Price = 30.00m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 3, Name = "Seguro de Auto Todo Riesgo", Price = 45.00m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 4, Name = "Seguro de Hogar Básico", Price = 12.00m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 5, Name = "Seguro de Hogar Completo", Price = 22.00m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 6, Name = "Seguro de Vida Riesgo", Price = 15.00m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 7, Name = "Seguro de Vida Ahorro", Price = 40.00m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 8, Name = "Seguro de Salud Básico", Price = 35.00m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 9, Name = "Seguro de Salud Completo", Price = 55.00m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 10, Name = "Seguro Dental", Price = 12.00m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 11, Name = "Seguro de Moto a Terceros", Price = 14.00m, ImageUrl = "", RestaurantId = 5 },
+                new FoodItem { Id = 12, Name = "Seguro de Moto Todo Riesgo", Price = 28.00m, ImageUrl = "", RestaurantId = 5 },
+                new FoodItem { Id = 13, Name = "Seguro de Viaje", Price = 8.00m, ImageUrl = "", RestaurantId = 6 },
+                new FoodItem { Id = 14, Name = "Seguro de Mascotas", Price = 11.00m, ImageUrl = "", RestaurantId = 6 },
+                new FoodItem { Id = 15, Name = "Seguro de Decesos", Price = 9.00m, ImageUrl = "", RestaurantId = 6 },
+                new FoodItem { Id = 16, Name = "Seguro de Accidentes", Price = 13.00m, ImageUrl = "", RestaurantId = 6 }
             };
 
             return foodItems.FirstOrDefault(f => f.Id == foodItemId) ?? new FoodItem();
