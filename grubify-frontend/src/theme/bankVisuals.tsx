@@ -76,7 +76,7 @@ const productCategory: Record<string, string> = {
   'Blusa Satinada': 'Camisas y Blusas',
   'Vaquero Slim Tiro Alto': 'Pantalones',
   'Abrigo Lana Espiga': 'Abrigos',
-  'Falda Plisada Midi': 'Faldas',
+  'Pantalón Pitillo': 'Pantalones',
   'Traje Tres Piezas': 'Chaquetas',
   'Camisa Popelín Mujer': 'Camisas y Blusas',
   'Vaquero Slim': 'Pantalones',
@@ -94,13 +94,13 @@ const productCategory: Record<string, string> = {
   'Zapato de Tacón': 'Tacón',
   'Zapato de Tacón Estampado': 'Tacón',
   'Mocasín Piel': 'Plano',
-  'Bolso Bandolera': 'Bolsos',
+  'Bolso de Piel Rojo': 'Bolsos',
   'Cinturón de Piel': 'Cinturones',
   'Bufanda de Punto': 'Complementos',
   'Gafas de Sol': 'Complementos',
-  'Gorro de Lana': 'Complementos',
+  'Camiseta Manga Larga Hombre': 'Camisetas',
   // Productos nuevos
-  'Jersey de Punto': 'Sudaderas',
+  'Camiseta Estampada Mujer': 'Camisetas',
   'Camiseta Blanca Hombre': 'Camisetas',
   'Abrigo Largo': 'Abrigos',
   'Blusa Estampada': 'Camisas y Blusas',
@@ -113,7 +113,7 @@ const productCategory: Record<string, string> = {
   'Reloj Analógico': 'Complementos',
   'Cartera de Piel': 'Complementos',
   'Mochila Urbana': 'Bolsos',
-  'Sombrero de Fieltro': 'Complementos',
+  'Gorra Gris': 'Complementos',
 };
 
 // One themed (Rounded) icon per section / garment category
@@ -148,7 +148,7 @@ const productIcons: Record<string, IconType> = {
   'Blusa Satinada': CheckroomRounded,
   'Vaquero Slim Tiro Alto': DryCleaningRounded,
   'Abrigo Lana Espiga': AcUnitRounded,
-  'Falda Plisada Midi': StyleRounded,
+  'Pantalón Pitillo': DryCleaningRounded,
   'Traje Tres Piezas': CheckroomRounded,
   'Camisa Popelín Mujer': CheckroomRounded,
   'Vaquero Slim': DryCleaningRounded,
@@ -166,13 +166,13 @@ const productIcons: Record<string, IconType> = {
   'Zapato de Tacón': StyleRounded,
   'Zapato de Tacón Estampado': StyleRounded,
   'Mocasín Piel': HikingRounded,
-  'Bolso Bandolera': ShoppingBagRounded,
+  'Bolso de Piel Rojo': ShoppingBagRounded,
   'Cinturón de Piel': StyleRounded,
   'Bufanda de Punto': AcUnitRounded,
   'Gafas de Sol': WbSunnyRounded,
-  'Gorro de Lana': AcUnitRounded,
+  'Camiseta Manga Larga Hombre': CheckroomRounded,
   // Productos nuevos
-  'Jersey de Punto': CheckroomRounded,
+  'Camiseta Estampada Mujer': CheckroomRounded,
   'Camiseta Blanca Hombre': CheckroomRounded,
   'Abrigo Largo': AcUnitRounded,
   'Blusa Estampada': CheckroomRounded,
@@ -185,7 +185,7 @@ const productIcons: Record<string, IconType> = {
   'Reloj Analógico': StyleRounded,
   'Cartera de Piel': ShoppingBagRounded,
   'Mochila Urbana': ShoppingBagRounded,
-  'Sombrero de Fieltro': StyleRounded,
+  'Gorra Gris': StyleRounded,
 };
 
 // Retail headline (price) and feature tags per product. This drives the
@@ -217,10 +217,10 @@ const productMeta: Record<string, ProductMeta> = {
     highlightLabel: 'Precio',
     badges: ['Mezcla de lana', 'Tallas S-XL'],
   },
-  'Falda Plisada Midi': {
-    highlight: '34,99 €',
+  'Pantalón Pitillo': {
+    highlight: '35,99 €',
     highlightLabel: 'Precio',
-    badges: ['Tallas XS-L', 'Plisada'],
+    badges: ['Tallas 34-46', 'Corte pitillo'],
   },
   'Traje Tres Piezas': {
     highlight: '149,99 €',
@@ -307,10 +307,10 @@ const productMeta: Record<string, ProductMeta> = {
     highlightLabel: 'Precio',
     badges: ['Tallas 39-45', 'Piel'],
   },
-  'Bolso Bandolera': {
-    highlight: '39,99 €',
+  'Bolso de Piel Rojo': {
+    highlight: '59,99 €',
     highlightLabel: 'Precio',
-    badges: ['Correa ajustable', 'Varios colores'],
+    badges: ['Piel auténtica', 'Color rojo'],
   },
   'Cinturón de Piel': {
     highlight: '24,99 €',
@@ -327,16 +327,16 @@ const productMeta: Record<string, ProductMeta> = {
     highlightLabel: 'Precio',
     badges: ['UV400', 'Montura ligera'],
   },
-  'Gorro de Lana': {
-    highlight: '15,99 €',
+  'Camiseta Manga Larga Hombre': {
+    highlight: '16,99 €',
     highlightLabel: 'Precio',
-    badges: ['Talla única', 'Lana'],
+    badges: ['Tallas S-XXL', 'Manga larga'],
   },
   // ===== Productos nuevos (ampliacion de catalogo) =====
-  'Jersey de Punto': {
-    highlight: '35,99 €',
+  'Camiseta Estampada Mujer': {
+    highlight: '19,99 €',
     highlightLabel: 'Precio',
-    badges: ['Tallas XS-XL', 'Punto suave'],
+    badges: ['Tallas XS-XL', 'Estampado original'],
   },
   'Camiseta Blanca Hombre': {
     highlight: '12,99 €',
@@ -398,10 +398,10 @@ const productMeta: Record<string, ProductMeta> = {
     highlightLabel: 'Precio',
     badges: ['20 L', 'Bolsillo portátil'],
   },
-  'Sombrero de Fieltro': {
-    highlight: '29,99 €',
+  'Gorra Gris': {
+    highlight: '16,99 €',
     highlightLabel: 'Precio',
-    badges: ['Talla única', 'Fieltro de lana'],
+    badges: ['Talla única', 'Ajustable'],
   },
 };
 
@@ -493,7 +493,7 @@ const productSection: Record<string, string> = {
   'Blusa Satinada': 'Mujer',
   'Vaquero Slim Tiro Alto': 'Mujer',
   'Abrigo Lana Espiga': 'Mujer',
-  'Falda Plisada Midi': 'Mujer',
+  'Pantalón Pitillo': 'Mujer',
   'Traje Tres Piezas': 'Hombre',
   'Camisa Popelín Mujer': 'Mujer',
   'Vaquero Slim': 'Hombre',
@@ -511,13 +511,13 @@ const productSection: Record<string, string> = {
   'Zapato de Tacón': 'Calzado',
   'Zapato de Tacón Estampado': 'Calzado',
   'Mocasín Piel': 'Calzado',
-  'Bolso Bandolera': 'Accesorios',
+  'Bolso de Piel Rojo': 'Accesorios',
   'Cinturón de Piel': 'Accesorios',
   'Bufanda de Punto': 'Accesorios',
   'Gafas de Sol': 'Accesorios',
-  'Gorro de Lana': 'Accesorios',
+  'Camiseta Manga Larga Hombre': 'Hombre',
   // Productos nuevos
-  'Jersey de Punto': 'Mujer',
+  'Camiseta Estampada Mujer': 'Mujer',
   'Camiseta Blanca Hombre': 'Hombre',
   'Abrigo Largo': 'Mujer',
   'Blusa Estampada': 'Mujer',
@@ -530,7 +530,7 @@ const productSection: Record<string, string> = {
   'Reloj Analógico': 'Accesorios',
   'Cartera de Piel': 'Accesorios',
   'Mochila Urbana': 'Accesorios',
-  'Sombrero de Fieltro': 'Accesorios',
+  'Gorra Gris': 'Accesorios',
 };
 
 // Mapa subcategoria -> seccion (fallback cuando solo se conoce la subcategoria).
@@ -590,7 +590,7 @@ const productPhotoId: Record<string, string> = {
   'Blusa Satinada': '1564257631407-4deb1f99d992',
   'Vaquero Slim Tiro Alto': '1541099649105-f69ad21f3246',
   'Abrigo Lana Espiga': '1544022613-e87ca75a784a',
-  'Falda Plisada Midi': '1594633312681-425c7b97ccd1',
+  'Pantalón Pitillo': '1594633312681-425c7b97ccd1',
   'Traje Tres Piezas': '1594938298603-c8148c4dae35',
   // ===== Hombre =====
   'Camisa Popelín Mujer': '1596755094514-f87e34085b2c',
@@ -612,13 +612,13 @@ const productPhotoId: Record<string, string> = {
   'Zapato de Tacón Estampado': '1543163521-1bf539c55dd2',
   'Mocasín Piel': '1533867617858-e7b97e060509',
   // ===== Accesorios =====
-  'Bolso Bandolera': '1584917865442-de89df76afd3',
+  'Bolso de Piel Rojo': '1584917865442-de89df76afd3',
   'Cinturón de Piel': '1624222247344-550fb60583dc',
   'Bufanda de Punto': '1520903920243-00d872a2d1c9',
   'Gafas de Sol': '1511499767150-a48a237f0083',
-  'Gorro de Lana': '1576871337622-98d48d1cf531',
+  'Camiseta Manga Larga Hombre': '1576871337622-98d48d1cf531',
   // ===== Productos nuevos (ampliacion de catalogo) =====
-  'Jersey de Punto': '1576566588028-4147f3842f27',
+  'Camiseta Estampada Mujer': '1576566588028-4147f3842f27',
   'Camiseta Blanca Hombre': '1521572163474-6864f9cf17ab',
   'Abrigo Largo': '1485462537746-965f33f7f6a7',
   'Blusa Estampada': '1520006403909-838d6b92c22e',
@@ -631,7 +631,7 @@ const productPhotoId: Record<string, string> = {
   'Reloj Analógico': '1524592094714-0f0654e20314',
   'Cartera de Piel': '1627123424574-724758594e93',
   'Mochila Urbana': '1553062407-98eeb64c6a62',
-  'Sombrero de Fieltro': '1521369909029-2afed882baee',
+  'Gorra Gris': '1521369909029-2afed882baee',
 };
 
 // Imagen vertical (3:4) de producto: primero busca la foto ESPECIFICA del

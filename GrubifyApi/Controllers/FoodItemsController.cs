@@ -57,11 +57,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 5,
-                Name = "Falda Plisada Midi",
-                Description = "Falda midi plisada de vuelo con cintura elástica. Tallas XS-L",
-                Price = 34.99m,
+                Name = "Pantalón Pitillo",
+                Description = "Pantalón pitillo de tiro medio en tejido elástico con corte ajustado. Tallas 34-46",
+                Price = 35.99m,
                 ImageUrl = "",
-                Category = "Faldas",
+                Category = "Pantalones",
                 RestaurantId = 1,
                 PreparationTime = 0
             },
@@ -263,9 +263,9 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 23,
-                Name = "Bolso Bandolera",
-                Description = "Bolso bandolera de piel sintética con correa ajustable, varios colores",
-                Price = 39.99m,
+                Name = "Bolso de Piel Rojo",
+                Description = "Bolso de piel en color rojo con asas, acabado premium e interior forrado",
+                Price = 59.99m,
                 ImageUrl = "",
                 Category = "Bolsos",
                 RestaurantId = 5,
@@ -307,12 +307,12 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 27,
-                Name = "Gorro de Lana",
-                Description = "Gorro de punto de lana con vuelta, cálido y suave. Talla única",
-                Price = 15.99m,
+                Name = "Camiseta Manga Larga Hombre",
+                Description = "Camiseta de manga larga de algodón para hombre, tacto suave y corte regular. Tallas S-XXL",
+                Price = 16.99m,
                 ImageUrl = "",
-                Category = "Complementos",
-                RestaurantId = 5,
+                Category = "Camisetas",
+                RestaurantId = 2,
                 PreparationTime = 0
             },
 
@@ -321,11 +321,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 28,
-                Name = "Jersey de Punto",
-                Description = "Jersey de punto fino con cuello redondo y tacto suave, básico de fondo de armario. Tallas XS-XL",
-                Price = 35.99m,
+                Name = "Camiseta Estampada Mujer",
+                Description = "Camiseta de mujer con estampado original en algodón de tacto suave y corte relajado. Tallas XS-XL",
+                Price = 19.99m,
                 ImageUrl = "",
-                Category = "Sudaderas",
+                Category = "Camisetas",
                 RestaurantId = 1,
                 PreparationTime = 0
             },
@@ -470,9 +470,9 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 41,
-                Name = "Sombrero de Fieltro",
-                Description = "Sombrero de fieltro de lana con ala media y cinta de grosgrén. Talla única",
-                Price = 29.99m,
+                Name = "Gorra Gris",
+                Description = "Gorra gris de algodón con visera curvada y cierre ajustable trasero. Talla única",
+                Price = 16.99m,
                 ImageUrl = "",
                 Category = "Complementos",
                 RestaurantId = 5,
