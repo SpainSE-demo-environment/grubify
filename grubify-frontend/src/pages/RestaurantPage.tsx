@@ -201,7 +201,7 @@ const RestaurantPage: React.FC = () => {
               const cat = getCategoryColor(resolveCategory(item.name, item.category));
               const meta = getProductMeta(item.name);
               return (
-              <Card key={item.id} sx={{ display: 'flex', height: 200 }}>
+              <Card key={item.id} sx={{ display: 'flex', alignItems: 'stretch', minHeight: 200 }}>
                 <ProductIconBox
                   name={item.name}
                   category={item.category}
