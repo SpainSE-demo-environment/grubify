@@ -121,22 +121,22 @@ namespace GrubifyApi.Controllers
             // This is a simplified version - in production, inject the FoodItems service
             var foodItems = new List<FoodItem>
             {
-                new FoodItem { Id = 1, Name = "Cuenta Personal", Price = 0.00m, ImageUrl = "", RestaurantId = 1 },
-                new FoodItem { Id = 2, Name = "Cuenta de Ahorro", Price = 0.00m, ImageUrl = "", RestaurantId = 1 },
-                new FoodItem { Id = 3, Name = "Tarjeta de Débito", Price = 0.00m, ImageUrl = "", RestaurantId = 2 },
-                new FoodItem { Id = 4, Name = "Tarjeta de Crédito", Price = 45.00m, ImageUrl = "", RestaurantId = 2 },
-                new FoodItem { Id = 5, Name = "Préstamo Personal", Price = 180.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 6, Name = "Préstamo Personal Preconcedido", Price = 250.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 7, Name = "Hipoteca", Price = 950.00m, ImageUrl = "", RestaurantId = 3 },
-                new FoodItem { Id = 8, Name = "Plan de Pensiones", Price = 50.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 9, Name = "Fondos de Inversión", Price = 100.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 10, Name = "Acciones y ETFs", Price = 0.00m, ImageUrl = "", RestaurantId = 4 },
-                new FoodItem { Id = 11, Name = "Depósito", Price = 1000.00m, ImageUrl = "", RestaurantId = 5 },
-                new FoodItem { Id = 12, Name = "Cuenta de Ahorro Remunerada", Price = 0.00m, ImageUrl = "", RestaurantId = 5 },
-                new FoodItem { Id = 13, Name = "Seguro de Salud", Price = 45.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 14, Name = "Seguro de Hogar", Price = 18.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 15, Name = "Seguro de Auto", Price = 30.00m, ImageUrl = "", RestaurantId = 6 },
-                new FoodItem { Id = 16, Name = "Seguro de Moto", Price = 20.00m, ImageUrl = "", RestaurantId = 6 }
+                new FoodItem { Id = 1, Name = "Tarifa Móvil 5GB", Price = 5.99m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 2, Name = "Tarifa Móvil 20GB", Price = 9.99m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 3, Name = "Tarifa Móvil Ilimitada", Price = 19.99m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 4, Name = "Tarifa Móvil 100GB 5G", Price = 14.99m, ImageUrl = "", RestaurantId = 1 },
+                new FoodItem { Id = 5, Name = "Fibra 300 Mbps", Price = 25.99m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 6, Name = "Fibra 600 Mbps", Price = 30.99m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 7, Name = "Fibra 1 Gbps", Price = 39.99m, ImageUrl = "", RestaurantId = 2 },
+                new FoodItem { Id = 8, Name = "Combo Fibra 600 + Móvil 20GB", Price = 45.99m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 9, Name = "Combo Fibra 1Gb + Ilimitada", Price = 59.99m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 10, Name = "Combo Fibra 300 + Móvil 5GB", Price = 35.99m, ImageUrl = "", RestaurantId = 3 },
+                new FoodItem { Id = 11, Name = "Smartphone 5G a plazos", Price = 15.99m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 12, Name = "Router WiFi 6", Price = 59.99m, ImageUrl = "", RestaurantId = 4 },
+                new FoodItem { Id = 13, Name = "SIM Datos 50GB", Price = 12.99m, ImageUrl = "", RestaurantId = 5 },
+                new FoodItem { Id = 14, Name = "Roaming Internacional", Price = 9.99m, ImageUrl = "", RestaurantId = 5 },
+                new FoodItem { Id = 15, Name = "Pack TV y Streaming", Price = 12.99m, ImageUrl = "", RestaurantId = 6 },
+                new FoodItem { Id = 16, Name = "Seguro de Móvil", Price = 6.99m, ImageUrl = "", RestaurantId = 6 }
             };
 
             return foodItems.FirstOrDefault(f => f.Id == foodItemId) ?? new FoodItem();

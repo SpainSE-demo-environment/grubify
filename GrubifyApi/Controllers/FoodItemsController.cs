@@ -9,15 +9,15 @@ namespace GrubifyApi.Controllers
     {
         private static readonly List<FoodItem> FoodItems = new()
         {
-            // Cuentas
+            // Tarifas móviles
             new FoodItem
             {
                 Id = 1,
-                Name = "Cuenta Personal",
-                Description = "Cuenta corriente sin comisiones con tarjeta gratis, Bizum y app móvil",
-                Price = 0.00m,
+                Name = "Tarifa Móvil 5GB",
+                Description = "5 GB de datos en 4G/5G con llamadas ilimitadas y sin permanencia",
+                Price = 5.99m,
                 ImageUrl = "",
-                Category = "Cuentas",
+                Category = "Móvil",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
@@ -27,203 +27,203 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 2,
-                Name = "Cuenta de Ahorro",
-                Description = "Cuenta de ahorro remunerada con liquidez total y sin comisiones de mantenimiento",
-                Price = 0.00m,
+                Name = "Tarifa Móvil 20GB",
+                Description = "20 GB en la red 4G/5G con llamadas ilimitadas y roaming en la UE",
+                Price = 9.99m,
                 ImageUrl = "",
-                Category = "Cuentas",
+                Category = "Móvil",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
                 RestaurantId = 1,
                 PreparationTime = 15
             },
-
-            // Tarjetas
             new FoodItem
             {
                 Id = 3,
-                Name = "Tarjeta de Débito",
-                Description = "Tarjeta de débito gratuita con pagos móviles y retiradas sin comisión",
-                Price = 0.00m,
+                Name = "Tarifa Móvil Ilimitada",
+                Description = "Datos ilimitados en 5G y llamadas ilimitadas para no preocuparte por el consumo",
+                Price = 19.99m,
                 ImageUrl = "",
-                Category = "Tarjetas",
+                Category = "Móvil",
                 IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = false,
-                RestaurantId = 2,
+                RestaurantId = 1,
                 PreparationTime = 15
             },
             new FoodItem
             {
                 Id = 4,
-                Name = "Tarjeta de Crédito",
-                Description = "Crédito hasta 6.000€ con pago aplazado, seguros de viaje y programa de puntos",
-                Price = 45.00m,
+                Name = "Tarifa Móvil 100GB 5G",
+                Description = "100 GB en la red 5G con llamadas ilimitadas, ideal para teletrabajo y streaming",
+                Price = 14.99m,
                 ImageUrl = "",
-                Category = "Tarjetas",
+                Category = "Móvil",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
-                RestaurantId = 2,
+                RestaurantId = 1,
                 PreparationTime = 15
             },
 
-            // Préstamos
+            // Fibra y fijo
             new FoodItem
             {
                 Id = 5,
-                Name = "Préstamo Personal",
-                Description = "Financia tus proyectos hasta 60.000€ con cuotas a tu medida y sin sorpresas",
-                Price = 180.00m,
+                Name = "Fibra 300 Mbps",
+                Description = "Fibra simétrica de 300 Mbps con router WiFi 6 e instalación gratuita",
+                Price = 25.99m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Fibra",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 3,
+                RestaurantId = 2,
                 PreparationTime = 25
             },
             new FoodItem
             {
                 Id = 6,
-                Name = "Préstamo Personal Preconcedido",
-                Description = "Hasta 30.000€ preconcedidos al instante, sin comisión de apertura y respuesta inmediata",
-                Price = 250.00m,
+                Name = "Fibra 600 Mbps",
+                Description = "Fibra simétrica de 600 Mbps con router WiFi 6 y sin permanencia",
+                Price = 30.99m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Fibra",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
-                RestaurantId = 3,
+                RestaurantId = 2,
                 PreparationTime = 20
             },
             new FoodItem
             {
                 Id = 7,
-                Name = "Hipoteca",
-                Description = "Hipoteca a tipo fijo desde el 2,90% TIN con cuota estable toda la vida del préstamo",
-                Price = 950.00m,
+                Name = "Fibra 1 Gbps",
+                Description = "Fibra simétrica de 1 Gbps para el máximo rendimiento en tu hogar",
+                Price = 39.99m,
                 ImageUrl = "",
-                Category = "Préstamos",
+                Category = "Fibra",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
-                RestaurantId = 3,
+                RestaurantId = 2,
                 PreparationTime = 30
             },
 
-            // Inversión
+            // Paquetes convergentes
             new FoodItem
             {
                 Id = 8,
-                Name = "Plan de Pensiones",
-                Description = "Prepara tu jubilación con ventajas fiscales y aportaciones flexibles",
-                Price = 50.00m,
+                Name = "Combo Fibra 600 + Móvil 20GB",
+                Description = "Fibra 600 Mbps y una línea móvil con 20 GB y llamadas ilimitadas en un solo pack",
+                Price = 45.99m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Convergente",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 4,
+                RestaurantId = 3,
                 PreparationTime = 20
             },
             new FoodItem
             {
                 Id = 9,
-                Name = "Fondos de Inversión",
-                Description = "Fondos gestionados e indexados para diversificar tu patrimonio con bajas comisiones",
-                Price = 100.00m,
+                Name = "Combo Fibra 1Gb + Ilimitada",
+                Description = "Fibra 1 Gbps y línea móvil con datos ilimitados 5G para el máximo rendimiento",
+                Price = 59.99m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Convergente",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 4,
+                RestaurantId = 3,
                 PreparationTime = 15
             },
             new FoodItem
             {
                 Id = 10,
-                Name = "Acciones y ETFs",
-                Description = "Opera en las principales bolsas mundiales con comisiones ultrarreducidas",
-                Price = 0.00m,
+                Name = "Combo Fibra 300 + Móvil 5GB",
+                Description = "Fibra 300 Mbps y una línea móvil con 5 GB al mejor precio, sin permanencia",
+                Price = 35.99m,
                 ImageUrl = "",
-                Category = "Inversión",
+                Category = "Convergente",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = true,
-                RestaurantId = 4,
+                RestaurantId = 3,
                 PreparationTime = 15
             },
 
-            // Ahorro
+            // Móviles y dispositivos
             new FoodItem
             {
                 Id = 11,
-                Name = "Depósito",
-                Description = "Depósito a plazo garantizado al 3% TAE a 12 meses sin sorpresas",
-                Price = 1000.00m,
+                Name = "Smartphone 5G a plazos",
+                Description = "Últimos smartphones 5G financiados a 24 meses sin intereses al contratar tu tarifa",
+                Price = 15.99m,
                 ImageUrl = "",
-                Category = "Ahorro",
+                Category = "Dispositivos",
                 IsVegetarian = true,
                 IsVegan = false,
                 IsSpicy = true,
-                RestaurantId = 5,
+                RestaurantId = 4,
                 PreparationTime = 5
             },
             new FoodItem
             {
                 Id = 12,
-                Name = "Cuenta de Ahorro Remunerada",
-                Description = "Cuenta de ahorro con un 2,5% TAE y disponibilidad inmediata de tu dinero",
-                Price = 0.00m,
+                Name = "Router WiFi 6",
+                Description = "Router WiFi 6 de alto rendimiento y amplia cobertura para todo tu hogar",
+                Price = 59.99m,
                 ImageUrl = "",
-                Category = "Ahorro",
+                Category = "Dispositivos",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = true,
-                RestaurantId = 5,
+                RestaurantId = 4,
                 PreparationTime = 10
             },
 
-            // Seguros
+            // Internet móvil / datos
             new FoodItem
             {
                 Id = 13,
-                Name = "Seguro de Salud",
-                Description = "Cuadro médico completo, sin copagos y con acceso a videoconsulta 24h",
-                Price = 45.00m,
+                Name = "SIM Datos 50GB",
+                Description = "SIM solo datos con 50 GB en la red 5G para tu tablet, portátil o segundo dispositivo",
+                Price = 12.99m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Datos",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 6,
+                RestaurantId = 5,
                 PreparationTime = 15
             },
             new FoodItem
             {
                 Id = 14,
-                Name = "Seguro de Hogar",
-                Description = "Protege tu vivienda y su contenido con cobertura integral y asistencia 24/7",
-                Price = 18.00m,
+                Name = "Roaming Internacional",
+                Description = "Navega y llama en la UE y destinos internacionales usando tus GB y minutos",
+                Price = 9.99m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Datos",
                 IsVegetarian = true,
                 IsVegan = true,
                 IsSpicy = false,
-                RestaurantId = 6,
+                RestaurantId = 5,
                 PreparationTime = 15
             },
+
+            // Servicios adicionales
             new FoodItem
             {
                 Id = 15,
-                Name = "Seguro de Auto",
-                Description = "Seguro de coche a todo riesgo con asistencia en carretera incluida",
-                Price = 30.00m,
+                Name = "Pack TV y Streaming",
+                Description = "Cientos de canales y las mejores plataformas de streaming en un solo pack",
+                Price = 12.99m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Servicios",
                 IsVegetarian = false,
                 IsVegan = false,
                 IsSpicy = true,
@@ -233,11 +233,11 @@ namespace GrubifyApi.Controllers
             new FoodItem
             {
                 Id = 16,
-                Name = "Seguro de Moto",
-                Description = "Seguro de moto con las mejores coberturas, defensa jurídica y asistencia 24h",
-                Price = 20.00m,
+                Name = "Seguro de Móvil",
+                Description = "Protege tu móvil ante roturas, robo y averías con asistencia y sustitución 24h",
+                Price = 6.99m,
                 ImageUrl = "",
-                Category = "Seguros",
+                Category = "Servicios",
                 IsVegetarian = false,
                 IsVegan = true,
                 IsSpicy = false,

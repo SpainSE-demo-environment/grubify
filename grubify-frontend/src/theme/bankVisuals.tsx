@@ -1,209 +1,206 @@
 import React from 'react';
 import { Box, SvgIconProps } from '@mui/material';
 import {
-  AccountBalanceWalletRounded,
-  SavingsRounded,
-  CreditCardRounded,
-  CreditScoreRounded,
-  RequestQuoteRounded,
-  PriceCheckRounded,
-  HomeRounded,
-  HouseRounded,
-  BeachAccessRounded,
-  PieChartRounded,
-  ShowChartRounded,
-  TrendingUpRounded,
-  AccountBalanceRounded,
-  MedicalServicesRounded,
-  DirectionsCarRounded,
-  TwoWheelerRounded,
-  ShieldRounded,
+  SmartphoneRounded,
+  PhoneAndroidRounded,
+  SignalCellularAltRounded,
+  SimCardRounded,
+  RouterRounded,
+  WifiRounded,
+  DevicesRounded,
+  DevicesOtherRounded,
+  DataUsageRounded,
+  SettingsInputAntennaRounded,
+  PublicRounded,
+  LiveTvRounded,
+  SecurityRounded,
+  SupportAgentRounded,
 } from '@mui/icons-material';
 
 type IconType = React.ComponentType<SvgIconProps>;
 
-// Solid brand color per financial category (used for chips, text, etc.)
+// Solid brand color per telco category (used for chips, text, etc.)
 export const categoryColors: Record<string, string> = {
-  Cuentas: '#4F46E5',
-  Tarjetas: '#DB2777',
-  Préstamos: '#EA580C',
-  Inversión: '#0891B2',
-  Ahorro: '#059669',
-  Seguros: '#0D9488',
+  Móvil: '#E6007E',
+  Fibra: '#7C3AED',
+  Convergente: '#F97316',
+  Dispositivos: '#0EA5E9',
+  Datos: '#DB2777',
+  Servicios: '#14B8A6',
 };
 
 // Two-tone gradient per category for the icon backgrounds
 const categoryGradients: Record<string, [string, string]> = {
-  Cuentas: ['#6366F1', '#4F46E5'],
-  Tarjetas: ['#EC4899', '#DB2777'],
-  Préstamos: ['#FB923C', '#EA580C'],
-  Inversión: ['#22D3EE', '#0891B2'],
-  Ahorro: ['#34D399', '#059669'],
-  Seguros: ['#2DD4BF', '#0D9488'],
+  Móvil: ['#F0499F', '#E6007E'],
+  Fibra: ['#A78BFA', '#7C3AED'],
+  Convergente: ['#FB923C', '#F97316'],
+  Dispositivos: ['#38BDF8', '#0EA5E9'],
+  Datos: ['#EC4899', '#DB2777'],
+  Servicios: ['#2DD4BF', '#14B8A6'],
 };
 
 // Category shown per product (used when the API payload omits the category,
 // e.g. cart items resolved through the simplified helper)
 const productCategory: Record<string, string> = {
-  'Cuenta Personal': 'Cuentas',
-  'Cuenta de Ahorro': 'Cuentas',
-  'Tarjeta de Débito': 'Tarjetas',
-  'Tarjeta de Crédito': 'Tarjetas',
-  'Préstamo Personal': 'Préstamos',
-  'Préstamo Personal Preconcedido': 'Préstamos',
-  Hipoteca: 'Préstamos',
-  'Plan de Pensiones': 'Inversión',
-  'Fondos de Inversión': 'Inversión',
-  'Acciones y ETFs': 'Inversión',
-  Depósito: 'Ahorro',
-  'Cuenta de Ahorro Remunerada': 'Ahorro',
-  'Seguro de Salud': 'Seguros',
-  'Seguro de Hogar': 'Seguros',
-  'Seguro de Auto': 'Seguros',
-  'Seguro de Moto': 'Seguros',
+  'Tarifa Móvil 5GB': 'Móvil',
+  'Tarifa Móvil 20GB': 'Móvil',
+  'Tarifa Móvil Ilimitada': 'Móvil',
+  'Tarifa Móvil 100GB 5G': 'Móvil',
+  'Fibra 300 Mbps': 'Fibra',
+  'Fibra 600 Mbps': 'Fibra',
+  'Fibra 1 Gbps': 'Fibra',
+  'Combo Fibra 600 + Móvil 20GB': 'Convergente',
+  'Combo Fibra 1Gb + Ilimitada': 'Convergente',
+  'Combo Fibra 300 + Móvil 5GB': 'Convergente',
+  'Smartphone 5G a plazos': 'Dispositivos',
+  'Router WiFi 6': 'Dispositivos',
+  'SIM Datos 50GB': 'Datos',
+  'Roaming Internacional': 'Datos',
+  'Pack TV y Streaming': 'Servicios',
+  'Seguro de Móvil': 'Servicios',
 };
 
 // One themed (Rounded) icon per category
 const categoryIcons: Record<string, IconType> = {
-  Cuentas: AccountBalanceWalletRounded,
-  Tarjetas: CreditCardRounded,
-  Préstamos: RequestQuoteRounded,
-  Inversión: TrendingUpRounded,
-  Ahorro: SavingsRounded,
-  Seguros: ShieldRounded,
+  Móvil: SmartphoneRounded,
+  Fibra: RouterRounded,
+  Convergente: DevicesRounded,
+  Dispositivos: PhoneAndroidRounded,
+  Datos: SignalCellularAltRounded,
+  Servicios: SupportAgentRounded,
 };
 
 // One themed (Rounded) icon per product
 const productIcons: Record<string, IconType> = {
-  'Cuenta Personal': AccountBalanceWalletRounded,
-  'Cuenta de Ahorro': SavingsRounded,
-  'Tarjeta de Débito': CreditCardRounded,
-  'Tarjeta de Crédito': CreditScoreRounded,
-  'Préstamo Personal': RequestQuoteRounded,
-  'Préstamo Personal Preconcedido': PriceCheckRounded,
-  Hipoteca: HomeRounded,
-  'Plan de Pensiones': BeachAccessRounded,
-  'Fondos de Inversión': PieChartRounded,
-  'Acciones y ETFs': ShowChartRounded,
-  Depósito: AccountBalanceRounded,
-  'Cuenta de Ahorro Remunerada': SavingsRounded,
-  'Seguro de Salud': MedicalServicesRounded,
-  'Seguro de Hogar': HouseRounded,
-  'Seguro de Auto': DirectionsCarRounded,
-  'Seguro de Moto': TwoWheelerRounded,
+  'Tarifa Móvil 5GB': SignalCellularAltRounded,
+  'Tarifa Móvil 20GB': SmartphoneRounded,
+  'Tarifa Móvil Ilimitada': DataUsageRounded,
+  'Tarifa Móvil 100GB 5G': SettingsInputAntennaRounded,
+  'Fibra 300 Mbps': WifiRounded,
+  'Fibra 600 Mbps': RouterRounded,
+  'Fibra 1 Gbps': RouterRounded,
+  'Combo Fibra 600 + Móvil 20GB': DevicesRounded,
+  'Combo Fibra 1Gb + Ilimitada': DevicesRounded,
+  'Combo Fibra 300 + Móvil 5GB': DevicesOtherRounded,
+  'Smartphone 5G a plazos': PhoneAndroidRounded,
+  'Router WiFi 6': RouterRounded,
+  'SIM Datos 50GB': SimCardRounded,
+  'Roaming Internacional': PublicRounded,
+  'Pack TV y Streaming': LiveTvRounded,
+  'Seguro de Móvil': SecurityRounded,
 };
 
-// Banking-appropriate headline figure and feature tags per product.
-// This replaces the food-style "price" display: a loan shows a rate,
-// a card shows a credit limit, an insurance shows a monthly premium, etc.
+// Telco-appropriate headline figure and feature tags per product.
+// A mobile plan shows its monthly fee, a fibre plan shows its speed,
+// a device shows an instalment or upfront amount, etc.
 export interface ProductMeta {
-  highlight: string; // headline figure (rate, amount, monthly fee, "Sin comisiones")
+  highlight: string; // headline figure (monthly fee, upfront amount, speed)
   highlightLabel: string; // small caption above the headline
   badges: string[]; // up to two relevant feature tags
 }
 
 const productMeta: Record<string, ProductMeta> = {
-  'Cuenta Personal': {
-    highlight: 'Sin comisiones',
-    highlightLabel: 'Cuenta corriente',
-    badges: ['Sin comisiones', '100% online'],
+  'Tarifa Móvil 5GB': {
+    highlight: '5,99 €/mes',
+    highlightLabel: '5 GB',
+    badges: ['Llamadas ilimitadas', 'Sin permanencia'],
   },
-  'Cuenta de Ahorro': {
-    highlight: '0,75%',
-    highlightLabel: 'TAE',
-    badges: ['Sin comisiones', 'Liquidez total'],
+  'Tarifa Móvil 20GB': {
+    highlight: '9,99 €/mes',
+    highlightLabel: '20 GB · 5G',
+    badges: ['Llamadas ilimitadas', 'Roaming UE'],
   },
-  'Tarjeta de Débito': {
-    highlight: '0 €',
-    highlightLabel: 'Cuota anual',
-    badges: ['Sin comisiones', 'Contactless'],
+  'Tarifa Móvil Ilimitada': {
+    highlight: '19,99 €/mes',
+    highlightLabel: 'Datos ilimitados',
+    badges: ['Red 5G', 'Llamadas ilimitadas'],
   },
-  'Tarjeta de Crédito': {
-    highlight: 'Hasta 6.000 €',
-    highlightLabel: 'Límite de crédito',
-    badges: ['Pago aplazado', 'Gratis 1er año'],
+  'Tarifa Móvil 100GB 5G': {
+    highlight: '14,99 €/mes',
+    highlightLabel: '100 GB · 5G',
+    badges: ['Red 5G', 'Llamadas ilimitadas'],
   },
-  'Préstamo Personal': {
-    highlight: '6,95%',
-    highlightLabel: 'TIN desde',
-    badges: ['Hasta 60.000 €', 'Sin comisión de apertura'],
+  'Fibra 300 Mbps': {
+    highlight: '25,99 €/mes',
+    highlightLabel: '300 Mbps simétrica',
+    badges: ['Router WiFi 6', 'Instalación gratis'],
   },
-  'Préstamo Personal Preconcedido': {
-    highlight: 'Hasta 30.000 €',
-    highlightLabel: 'Preconcedido',
-    badges: ['Al instante', 'Sin papeleo'],
+  'Fibra 600 Mbps': {
+    highlight: '30,99 €/mes',
+    highlightLabel: '600 Mbps simétrica',
+    badges: ['Router WiFi 6', 'Sin permanencia'],
   },
-  Hipoteca: {
-    highlight: '2,90%',
-    highlightLabel: 'TIN fijo',
-    badges: ['Hasta 30 años', 'Cuota estable'],
+  'Fibra 1 Gbps': {
+    highlight: '39,99 €/mes',
+    highlightLabel: '1 Gbps simétrica',
+    badges: ['Máxima velocidad', 'Router WiFi 6'],
   },
-  'Plan de Pensiones': {
-    highlight: 'Desde 30 €/mes',
-    highlightLabel: 'Aportación',
-    badges: ['Ventajas fiscales', 'Aportación flexible'],
+  'Combo Fibra 600 + Móvil 20GB': {
+    highlight: '45,99 €/mes',
+    highlightLabel: 'Fibra 600 + 20 GB',
+    badges: ['Todo en uno', 'Llamadas ilimitadas'],
   },
-  'Fondos de Inversión': {
-    highlight: '+5,2%',
-    highlightLabel: 'Rentab. anual*',
-    badges: ['Gestión activa', 'Diversificado'],
+  'Combo Fibra 1Gb + Ilimitada': {
+    highlight: '59,99 €/mes',
+    highlightLabel: 'Fibra 1 Gb + ilimitado',
+    badges: ['Máxima potencia', 'Datos ilimitados'],
   },
-  'Acciones y ETFs': {
-    highlight: '0 €',
-    highlightLabel: 'Comisión de custodia',
-    badges: ['Tiempo real', 'Bajas comisiones'],
+  'Combo Fibra 300 + Móvil 5GB': {
+    highlight: '35,99 €/mes',
+    highlightLabel: 'Fibra 300 + 5 GB',
+    badges: ['Precio ajustado', 'Sin permanencia'],
   },
-  Depósito: {
-    highlight: '3,00%',
-    highlightLabel: 'TAE a 12 meses',
-    badges: ['Capital garantizado'],
+  'Smartphone 5G a plazos': {
+    highlight: 'Desde 15,99 €/mes',
+    highlightLabel: 'A 24 meses',
+    badges: ['Sin intereses', 'Red 5G'],
   },
-  'Cuenta de Ahorro Remunerada': {
-    highlight: '2,50%',
-    highlightLabel: 'TAE',
-    badges: ['Liquidez diaria', 'Sin permanencia'],
+  'Router WiFi 6': {
+    highlight: '59,99 €',
+    highlightLabel: 'Pago único',
+    badges: ['WiFi 6', 'Alta cobertura'],
   },
-  'Seguro de Salud': {
-    highlight: 'Desde 45 €/mes',
-    highlightLabel: 'Prima',
-    badges: ['Sin copagos', 'Videoconsulta 24h'],
+  'SIM Datos 50GB': {
+    highlight: '12,99 €/mes',
+    highlightLabel: '50 GB solo datos',
+    badges: ['Para tablet/portátil', 'Red 5G'],
   },
-  'Seguro de Hogar': {
-    highlight: 'Desde 18 €/mes',
-    highlightLabel: 'Prima',
-    badges: ['Cobertura integral', 'Asistencia 24h'],
+  'Roaming Internacional': {
+    highlight: '9,99 €/mes',
+    highlightLabel: 'Roaming',
+    badges: ['UE incluida', 'Destinos internacionales'],
   },
-  'Seguro de Auto': {
-    highlight: 'Desde 30 €/mes',
-    highlightLabel: 'Prima',
-    badges: ['Todo riesgo', 'Asistencia en carretera'],
+  'Pack TV y Streaming': {
+    highlight: '12,99 €/mes',
+    highlightLabel: 'TV + streaming',
+    badges: ['Cientos de canales', 'Plataformas incluidas'],
   },
-  'Seguro de Moto': {
-    highlight: 'Desde 20 €/mes',
-    highlightLabel: 'Prima',
-    badges: ['Defensa jurídica', 'Asistencia 24h'],
+  'Seguro de Móvil': {
+    highlight: '6,99 €/mes',
+    highlightLabel: 'Protección',
+    badges: ['Roturas y robo', 'Asistencia 24h'],
   },
 };
 
 export const resolveCategory = (name: string, category?: string): string =>
-  (category && category.trim()) || productCategory[name] || 'Cuentas';
+  (category && category.trim()) || productCategory[name] || 'Móvil';
 
 export const getProductMeta = (name: string): ProductMeta =>
-  productMeta[name] || { highlight: 'Sin comisiones', highlightLabel: '', badges: [] };
+  productMeta[name] || { highlight: 'Sin permanencia', highlightLabel: '', badges: [] };
 
 export const getCategoryColor = (category: string): string =>
-  categoryColors[category] || '#4F46E5';
+  categoryColors[category] || '#E6007E';
 
 export const getCategoryGradient = (category: string): string => {
-  const [from, to] = categoryGradients[category] || ['#6366F1', '#4F46E5'];
+  const [from, to] = categoryGradients[category] || ['#F0499F', '#E6007E'];
   return `linear-gradient(135deg, ${from} 0%, ${to} 100%)`;
 };
 
 export const getCategoryIcon = (cuisineType: string): IconType =>
-  categoryIcons[cuisineType] || AccountBalanceRounded;
+  categoryIcons[cuisineType] || SmartphoneRounded;
 
 export const getProductIcon = (name: string, category?: string): IconType =>
-  productIcons[name] || categoryIcons[resolveCategory(name, category)] || AccountBalanceRounded;
+  productIcons[name] || categoryIcons[resolveCategory(name, category)] || SmartphoneRounded;
 
 interface ProductIconBoxProps {
   name: string;
